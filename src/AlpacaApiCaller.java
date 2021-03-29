@@ -478,11 +478,11 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		return getJsonObject(response.body(), AssetsPojo.class);
 	}
 	@SuppressWarnings("static-access")
-	protected TimeframePojo[] getTimeFrame(String symbol, String startTime, String endTime, String timeframe) throws IOException, InterruptedException {
+	protected TimeframePojo getTimeframe(String symbol, String startTime, String endTime, String timeframe) throws IOException, InterruptedException {
 		HttpClient client = HttpClient.newHttpClient();
 		// Create HTTP request object
 		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(realtimeUrl + activeVersion + "/stocks/" + symbol + "/bar?start=" + startTime + "&end=" + endTime + "&timeframe=" + timeframe))
+				.uri(URI.create(realtimeUrl + activeVersion + "/stocks/" + symbol + "/bars?start=" + startTime + "&end=" + endTime + "&timeframe=" + timeframe))
 				.GET()
 				.header(alpacaKey, alpacaKeyValue)
 				.header(headerContentType, headerContentTypeValue)
@@ -492,7 +492,7 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
 
-		return getJsonObjectArray(response.body(), TimeframePojo[].class);
+		return getJsonObject(response.body(), TimeframePojo.class);
 	}
 	@SuppressWarnings("static-access")
 	protected AssetsPojo[] getAssets() throws IOException, InterruptedException {
@@ -528,6 +528,7 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 	protected <T> T getJsonObject(String jsonString, Class objectClass) throws JsonParseException, JsonMappingException, IOException{
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
 		T  responseObject = (T) mapper.readValue(jsonString,  objectClass);
 		return responseObject;
 	}
