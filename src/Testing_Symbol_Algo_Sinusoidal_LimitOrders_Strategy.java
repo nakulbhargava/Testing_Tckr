@@ -144,30 +144,29 @@ public class Testing_Symbol_Algo_Sinusoidal_LimitOrders_Strategy {
 
 	public static Double returnCurrentPrice() throws IOException, InterruptedException {
 		Double currentPrice = 0.00;
-		if(buyFraction)
+		//		if(buyFraction)
+		//		{
+		OrdersPojo placeBuyOrder = alpacaAccount.buySymbolQuantity(symbol, pointZeroOneFactor);
+		OrdersPojo placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
+		while (!"filled".equals(placedBuyOrder.getStatus()))
 		{
-			OrdersPojo placeBuyOrder = alpacaAccount.buySymbolQuantity(symbol, pointZeroOneFactor);
-			OrdersPojo placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
-			while (!"filled".equals(placedBuyOrder.getStatus()))
-			{
-				placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
-			}
-			currentPrice = Double.valueOf(placedBuyOrder.getFilled_avg_price());
-			buyFraction = false;
-			return currentPrice;
+			placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
 		}
-		else
+		currentPrice = Double.valueOf(placedBuyOrder.getFilled_avg_price());
+		//			buyFraction = false;
+		//			return currentPrice;
+		//		}
+		//		else
+		//		{
+		OrdersPojo placeSellOrder = alpacaAccount.sellSymbolQuantity(symbol, pointZeroOneFactor);
+		OrdersPojo placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
+		while (!"filled".equals(placedSellOrder.getStatus()))
 		{
-			OrdersPojo placeSellOrder = alpacaAccount.sellSymbolQuantity(symbol, pointZeroOneFactor);
-			OrdersPojo placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
-			while (!"filled".equals(placedSellOrder.getStatus()))
-			{
-				placedSellOrder = alpacaAccount.getOrderDetails(placedSellOrder.getId());
-			}
-			currentPrice = Double.valueOf(placedSellOrder.getFilled_avg_price());
-			buyFraction = true;
-			return currentPrice;
+			placedSellOrder = alpacaAccount.getOrderDetails(placedSellOrder.getId());
 		}
+		currentPrice = Double.valueOf(placedSellOrder.getFilled_avg_price());
+		//			buyFraction = true;
+		return currentPrice;
 	}
 
 	public static void followUpTrendWave() throws IOException, InterruptedException {
@@ -314,7 +313,7 @@ public class Testing_Symbol_Algo_Sinusoidal_LimitOrders_Strategy {
 						Thread.sleep(100);
 						buyAllOpenPositions = alpacaAccount.getOrderDetails(buyAllOpenPositions.getId());
 					}
-					buyFraction = false;
+					//buyFraction = false;
 					//Return after closing all positions for up-trend
 					return;
 				}
