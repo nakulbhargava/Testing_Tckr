@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TimeframePojo {
 
+	//Time Format: "2021-03-24T13:30:00Z"
 	private String time;
 	private String openPrice;
 	private String highPrice;
