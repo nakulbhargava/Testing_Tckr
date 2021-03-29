@@ -29,7 +29,7 @@ public class Testing_Symbol_Algo_Sinusoidal_LimitOrders_Strategy {
 	private static final String positionsEndpoint = "/positions";
 	private static final String assetsEndpoint = "/assets";
 	private static final String clockEndpoint = "/clock";
-	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,25);
+	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,55);
 	//private boolean isRealTimeTrading = false;
 	static boolean buyFraction = true;
 	static Double qty = 10.00;
@@ -43,7 +43,7 @@ public class Testing_Symbol_Algo_Sinusoidal_LimitOrders_Strategy {
 	static Double onePointOneFactor = 1.001;
 	static Double pointFourFactor = .996;
 	static boolean timeToSell = false;
-	static String symbol = "ARKK";
+	static String symbol = "GSX";
 	static AlpacaApiCaller alpacaAccount;
 	static OrdersPojo placeBuyOrder;
 	static OrdersPojo placedBuyOrder;
