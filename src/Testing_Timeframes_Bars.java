@@ -53,7 +53,7 @@ public class Testing_Timeframes_Bars {
 		FileOutputStream fo = new FileOutputStream(file);
 
 		AssetsPojo assets = alpacaAccount.getAssetSymbol(symbol);
-		TimeframePojo timeframe = alpacaAccount.getTimeframe(assets.getSymbol(), "2021-03-26", "2021-03-26", "1Day");
+		TimeframePojo timeframe = alpacaAccount.getTimeframe(assets.getSymbol(), "2021-03-29", "2021-03-29", "1Day");
 		BarsPojo bars = timeframe.getBars()[0];
 		Double highLowPercent = (Double.valueOf(bars.getHighPrice()) - Double.valueOf(bars.getLowPrice()))*100/Double.valueOf(bars.getClosePrice());
 		DecimalFormat df = new DecimalFormat("#.##");

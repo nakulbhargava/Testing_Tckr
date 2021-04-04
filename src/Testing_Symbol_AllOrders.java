@@ -42,7 +42,7 @@ public class Testing_Symbol_AllOrders {
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 
-		String symbol = "ARKK";
+		String symbol = "GSX";
 		Double initialPriceToBuy = 2.00;
 		Double priceToBuy = initialPriceToBuy;
 		Double priceToSell = 0.00;
@@ -86,7 +86,7 @@ public class Testing_Symbol_AllOrders {
 				totalPrice = totalPrice + Double.valueOf(orders[i].getFilled_avg_price())*Double.valueOf(orders[i].getFilled_qty());
 			}
 		}
-		pw.write("Total Completed Sell Orders" + "\t" + "Symbol" + "\t" + "Total Sell Qunatity" + "\t" + "Total Sell Price"+ "\n");
+		pw.write("Total Completed Sell Orders" + "\t" + "Symbol" + "\t" + "Total Sell Quantity" + "\t" + "Total Sell Price"+ "\n");
 		pw.write(datList + "\t\t\t" + symbol + "\t" + totalQuantity + "\t\t" + totalPrice + "\n");
 		//		File fileTrue = new File("C:\\Users\\nakul\\Documents\\outputTrueAssets - " + localTime + ".txt");
 		//		PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));

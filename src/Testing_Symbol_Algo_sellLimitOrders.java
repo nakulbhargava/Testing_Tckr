@@ -50,7 +50,7 @@ public class Testing_Symbol_Algo_sellLimitOrders {
 	static Double onePointFourFactor = 1.004;
 	static Double pointEightFactor = .992;
 	static boolean timeToSell = false;
-	static String symbol = "ARKK";
+	static String symbol = "GSX";
 	static AlpacaApiCaller alpacaAccount;
 
 	public static void main(String[] args) throws IOException, InterruptedException {

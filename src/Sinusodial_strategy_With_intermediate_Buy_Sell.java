@@ -34,15 +34,15 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 	static boolean buyFraction = true;
 	static Double qty = 10.00;
 	static Double maxQty = (qty*10) + 1;
-	static Double shortQty = 0.00;
+	static Double stopLossPrice = 0.00;
 	static Double pointZeroOneFactor = qty/1000;
-	static Double pointOneFactor = 0.999;
+	static Double buyProfitFactor = 0.999;
 	//static Double pointTwoFactor = .998;
-	static Double onePointFourFactor = 1.004;
-	static Double onePointOneFactor = 1.001;
-	static Double pointFourFactor = .996;
+	static Double shortStopLossFactor = 1.003;
+	static Double sellProfitFactor = 1.001;
+	static Double stopLossFactor = .997;
 	static boolean timeToSell = false;
-	static String symbol = "GSX";
+	static String symbol = "RUN";
 	static AlpacaApiCaller alpacaAccount;
 	static OrdersPojo placeBuyOrder;
 	static OrdersPojo placedBuyOrder;
@@ -55,8 +55,7 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 	static FileOutputStream fo;
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
-	static OrdersPojo lastShortedOrder = null;
-
+	static boolean firstTimeTrading = true;
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
@@ -66,11 +65,42 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 		fo = new FileOutputStream(file);
 
 		if(alpacaAccount.getClock().isIs_open()) {
-			followUpTrendWave();
+			do {
+				boolean isUpTrend = isUpTrend();
+				if(isUpTrend) {
+					followUpTrendWave();
+				}
+				if(!isUpTrend) {
+					followDownTrendWave();
+				}
+			}while(LocalDateTime.now().isBefore(marketCloseTime));
 			pw.close();
 		}
 	}
-
+	//Valid values -1,0,1
+	public static boolean isUpTrend() throws IOException, InterruptedException {
+		Double testPrice = returnCurrentPrice();
+		Double localMaxima = testPrice;
+		Double localMinima = testPrice;
+		do {
+			Thread.sleep(30000);
+			Double currentPrice = returnCurrentPrice();
+//			if ( currentPrice > localMaxima) {
+//				localMaxima = currentPrice;
+//			}
+//			if ( currentPrice < localMinima) {
+//				localMinima = currentPrice;
+//			}
+			if (testPrice*stopLossFactor > currentPrice)
+			{
+				return false;
+			}
+			if ( testPrice*shortStopLossFactor < currentPrice)
+			{
+				return true;
+			}
+		}while(true);
+	}
 	public static Double returnCurrentPrice() throws IOException, InterruptedException {
 		Double currentPrice = 0.00;
 		OrdersPojo placeBuyOrder = alpacaAccount.buySymbolQuantity(symbol, pointZeroOneFactor);
@@ -89,22 +119,27 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 		currentPrice = Double.valueOf(placedSellOrder.getFilled_avg_price());
 		return currentPrice;
 	}
-
 	public static void followUpTrendWave() throws IOException, InterruptedException {
 		do {
 			PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
-			if (maxQty.compareTo(Double.valueOf(openPosition.getQty() == null? "0":openPosition.getQty())-shortQty) > 0) {	
+			if (maxQty.compareTo(Double.valueOf(openPosition.getQty() == null? "0":openPosition.getQty())) > 0) {	
 				placeBuyOrderWithLimitSell(symbol, qty);
+				secondsCounter = 0;
 			}
 			else 
 			{
-				Thread.sleep(1000);
+				if (secondsCounter < 60) {
+					Thread.sleep(1000);
+					secondsCounter++;
+					continue;
+				}
+				secondsCounter = 0;
 				PositionsPojo openBuyPosition = alpacaAccount.getSymbolPosition(symbol);
-				Double stopLossPrice = lastBuyOrderPrice*pointFourFactor;
+				Double stopLossPrice = lastBuyOrderPrice*stopLossFactor;
 				pw.write("Last Buy Price: " + lastBuyOrderPrice + "\t" + "Stop Loss Price: "+ stopLossPrice + 
 						"\t" + "Current Price: " + openBuyPosition.getCurrent_price() + 
 						"\t" + LocalDateTime.now().toString() + "\n");
-				if (stopLossPrice.compareTo(Double.valueOf(openBuyPosition.getCurrent_price()))>0) {
+				if (openBuyPosition.getCurrent_price() != null && stopLossPrice.compareTo(Double.valueOf(openBuyPosition.getCurrent_price()))>0) {
 					//Cancel all the open Orders for the symbol
 					OrdersPojo[] openSymbolOrders = alpacaAccount.getSymbolOpenOrders(symbol);
 					for(OrdersPojo openSymbolOrder:openSymbolOrders) {
@@ -113,6 +148,7 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 								"\t" + openSymbolOrder.getStatus() + "\t" + LocalDateTime.now().toString() + "\n");
 						OrdersPojo canceledOrder = alpacaAccount.getOrderDetails(openSymbolOrder.getId());
 						while(!"canceled".equals(canceledOrder.getStatus())) {
+							if("filled".equals(canceledOrder.getStatus())) break;
 							canceledOrder = alpacaAccount.getOrderDetails(openSymbolOrder.getId());
 							pw.write("Delete Order Not yet completed: " + canceledOrder.getSymbol() + "\t" + canceledOrder.getQty()+ "\t" + canceledOrder.getId() + 
 									"\t" + canceledOrder.getStatus() + "\t" + LocalDateTime.now().toString() + "\n");
@@ -125,35 +161,33 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 						Thread.sleep(100);
 						sellAllOpenPositions = alpacaAccount.getOrderDetails(sellAllOpenPositions.getId());
 					}
-					followDownTrendWave();
-				}
-				else {
-					//If the StopLossPrice is not hit then short sell temporary
-					if(lastShortedOrder == null || "filled".equals(lastShortedOrder.getStatus())) {
-						lastShortedOrder = placeSellOrderWithLimitBuy(symbol, qty);						
-					}
-					lastShortedOrder = alpacaAccount.getOrderDetails(lastShortedOrder.getId());
-					if("filled".equals(lastShortedOrder.getStatus())) shortQty = 0.00;
-					else shortQty = qty;
+					return;
 				}
 			}
-		}while(LocalDateTime.now().isBefore(marketCloseTime));
+		}while(true);
+
 	}
 	public static void followDownTrendWave() throws IOException, InterruptedException {
 		do {
 			PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
-			if (maxQty.compareTo(Double.valueOf(openPosition.getQty() == null? "0":openPosition.getQty())-shortQty) > 0) {	
+			if (maxQty.compareTo(Double.valueOf(openPosition.getQty() == null? "0":openPosition.getQty())*-1) > 0) {	
 				placeSellOrderWithLimitBuy(symbol, qty);
+				secondsCounter = 0;
 			}
 			else 
 			{
-				Thread.sleep(1000);
+				if (secondsCounter < 60) {
+					Thread.sleep(1000);
+					secondsCounter++;
+					continue;
+				}
+				secondsCounter = 0;
 				PositionsPojo openSellPosition = alpacaAccount.getSymbolPosition(symbol);
-				Double stopLossPrice = lastSellOrderPrice*onePointFourFactor;
-				pw.write("Last Buy Price: " + lastBuyOrderPrice + "\t" + "Stop Loss Price: "+ stopLossPrice + 
+				Double stopLossPrice = lastSellOrderPrice*shortStopLossFactor;
+				pw.write("Last Sell Price: " + lastSellOrderPrice + "\t" + "Stop Loss Price: "+ stopLossPrice + 
 						"\t" + "Current Price: " + openSellPosition.getCurrent_price() + 
 						"\t" + LocalDateTime.now().toString() + "\n");
-				if (stopLossPrice.compareTo(Double.valueOf(openSellPosition.getCurrent_price()))<0) {
+				if (openSellPosition.getCurrent_price() != null && stopLossPrice.compareTo(Double.valueOf(openSellPosition.getCurrent_price()))<0) {
 					//Cancel all the open Orders for the symbol
 					OrdersPojo[] openSymbolOrders = alpacaAccount.getSymbolOpenOrders(symbol);
 					for(OrdersPojo openSymbolOrder:openSymbolOrders) {
@@ -162,13 +196,14 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 								"\t" + openSymbolOrder.getStatus() + "\t" + LocalDateTime.now().toString() + "\n");
 						OrdersPojo canceledOrder = alpacaAccount.getOrderDetails(openSymbolOrder.getId());
 						while(!"canceled".equals(canceledOrder.getStatus())) {
+							if("filled".equals(canceledOrder.getStatus())) break;
 							canceledOrder = alpacaAccount.getOrderDetails(openSymbolOrder.getId());
 							pw.write("Delete Order Not yet completed: " + canceledOrder.getSymbol() + "\t" + canceledOrder.getQty()+ "\t" + canceledOrder.getId() + 
 									"\t" + canceledOrder.getStatus() + "\t" + LocalDateTime.now().toString() + "\n");
 						}
 					} 
-
-					OrdersPojo buyAllOpenPositions = alpacaAccount.buySymbolQuantity(symbol, Double.valueOf(openSellPosition.getQty()));
+					openSellPosition = alpacaAccount.getSymbolPosition(symbol);
+					OrdersPojo buyAllOpenPositions = alpacaAccount.buySymbolQuantity(symbol, Double.valueOf(openSellPosition.getQty())*-1);
 					while (buyAllOpenPositions.getStatus() !=null && !"filled".equals(buyAllOpenPositions.getStatus()))
 					{
 						Thread.sleep(100);
@@ -178,21 +213,13 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 					//Return after closing all positions for up-trend
 					return;
 				}
-				else {
-					//If the StopLossPrice is not hit then short buy temporary
-					if(lastShortedOrder == null || "filled".equals(lastShortedOrder.getStatus())) {
-						lastShortedOrder = placeBuyOrderWithLimitSell(symbol, qty);						
-					}
-					lastShortedOrder = alpacaAccount.getOrderDetails(lastShortedOrder.getId());
-					if("filled".equals(lastShortedOrder.getStatus())) shortQty = 0.00;
-					else shortQty = qty;
-				}
 			}
-		}while(LocalDateTime.now().isBefore(marketCloseTime));
+		}while(true);
 	}
-	
+
 	public static OrdersPojo placeSellOrderWithLimitBuy(String symbol, Double qty) throws IOException, InterruptedException {
 		placeSellOrder = alpacaAccount.sellSymbolQuantity(symbol, qty);
+		if(null == placeSellOrder.getId()) return null;
 		placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
 		pw.write("Short Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
 				"\t" + placedSellOrder.getSide() + "\t" + placedSellOrder.getFilled_avg_price() + 
@@ -202,17 +229,18 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 			Thread.sleep(100);
 			placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
 		}
-		lastSellOrderPrice = Double.valueOf(placedBuyOrder.getFilled_avg_price());;
-		placeBuyOrder = alpacaAccount.buySymbolLimitOrder(symbol, qty,  lastSellOrderPrice*pointOneFactor);
+		lastSellOrderPrice = Double.valueOf(placedSellOrder.getFilled_avg_price());;
+		placeBuyOrder = alpacaAccount.buySymbolLimitOrder(symbol, qty,  lastSellOrderPrice*buyProfitFactor);
 		placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
 		pw.write("Buy Order Executed with following Details: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 				"\t" + placedBuyOrder.getSide() + "\t" + placedBuyOrder.getFilled_avg_price() + 
 				"\t" + LocalDateTime.now().toString() + "\n");
 		return placedBuyOrder;
 	}
-	
+
 	public static OrdersPojo placeBuyOrderWithLimitSell(String symbol, Double qty) throws IOException, InterruptedException {
 		placeBuyOrder = alpacaAccount.buySymbolQuantity(symbol, qty);
+		if(null == placeBuyOrder.getId()) return null;
 		placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
 		pw.write("Buy Order Executed with following Details: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 				"\t" + placedBuyOrder.getSide() + "\t" + placedBuyOrder.getFilled_avg_price() + 
@@ -224,11 +252,11 @@ public class Sinusodial_strategy_With_intermediate_Buy_Sell {
 
 		}
 		lastBuyOrderPrice = Double.valueOf(placedBuyOrder.getFilled_avg_price());
-		placeSellOrder = alpacaAccount.sellSymbolLimitOrder(symbol, qty,  lastBuyOrderPrice*onePointOneFactor);
+		placeSellOrder = alpacaAccount.sellSymbolLimitOrder(symbol, qty,  lastBuyOrderPrice*sellProfitFactor);
 		placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
 		pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
 				"\t" + placedSellOrder.getSide() + "\t" + placedSellOrder.getFilled_avg_price() + 
 				"\t" + LocalDateTime.now().toString() + "\n");
-		return placedBuyOrder;
+		return placeSellOrder;
 	}
 }
