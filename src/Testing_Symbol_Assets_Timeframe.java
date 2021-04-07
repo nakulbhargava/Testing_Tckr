@@ -95,7 +95,7 @@ public class Testing_Symbol_Assets_Timeframe {
 				BarsPojo bars = timeframe.getBars()[0];
 				Double highLowPercent = (Double.valueOf(bars.getHighPrice()) - Double.valueOf(bars.getLowPrice()))*100/Double.valueOf(bars.getClosePrice());
 				DecimalFormat df = new DecimalFormat("#.##");
-				if(highLowPercent.compareTo(5.00)>0)
+				if(highLowPercent.compareTo(3.00)>0)
 				{
 					pw1.write(assets[i].getExchange() + "\t\t" + assets[i].getSymbol() + "\t"
 							+ assets[i].isFractionable() + "\t\t" + assets[i].isShortable() + "\t\t" 

@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 import alpacaPojo.OrdersPojo;
 import alpacaPojo.PositionsPojo;
 
-public class Sinusodial_Strategy_Final {
+public class Sinusodial_Strategy_Final{
 
 	private static final String alpacaKey = "APCA-API-KEY-ID";
 	private static final String secretId = "APCA-API-SECRET-KEY";
-	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
+	private static final String alpacaKeyValue = "PKN9AR7BFFZXH5X3MP6H";
+	private static final String secretIdValue = "daalp83963QKdcmOqI7iaqBwkdZxFRdFAmcijLZH";
 	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
 	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
 	private static final String headerContentType = "Content-Type";
@@ -33,12 +33,14 @@ public class Sinusodial_Strategy_Final {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
 	static Double qty = 10.00;
-	static Double stopLossPrice = 0.00;
+	//static Double stopLossPrice = 0.00;
 	static Double pointZeroOneFactor = qty/1000;
 	static Double buyProfitFactor = 0.999;
-	static Double shortStopLossFactor = 1.004;
+	static Double shortStopLossFactor = 1.009;
 	static Double sellProfitFactor = 1.001;
-	static Double stopLossFactor = .996;
+	static Double stopLossFactor = .991;
+	static Double upTrendFactor = 1.0025;
+	static Double downTrendFactor = .9975;
 
 	static String symbol = "GME";
 	
@@ -78,11 +80,11 @@ public class Sinusodial_Strategy_Final {
 		Double testPrice = returnCurrentPrice();
 
 		do {
-			Thread.sleep(30000);
+			Thread.sleep(10000);
 			currentPrice = returnCurrentPrice();
-			if (testPrice*stopLossFactor > currentPrice)
+			if (testPrice*downTrendFactor > currentPrice)
 				return false;
-			if ( testPrice*shortStopLossFactor < currentPrice)
+			if ( testPrice*upTrendFactor < currentPrice)
 				return true;
 		}while(LocalDateTime.now().isBefore(marketCloseTime));
 		return false;
@@ -107,30 +109,29 @@ public class Sinusodial_Strategy_Final {
 		return currentPrice;
 	}
 	public static void followUpTrendWave() throws IOException, InterruptedException {
+		PositionsPojo openPosition;
+		Double filledBuyPrice = 0.00;
 		while(LocalDateTime.now().isBefore(marketCloseTime)) {
-			PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
-			Double filledBuyPrice = 0.00;
+			openPosition = alpacaAccount.getSymbolPosition(symbol);
 			if (openPosition.getQty() == null) {	
 				OrdersPojo buyOrder = placeBuyOrder(symbol, qty);
+				if(buyOrder == null)continue;
+				
 				localMaxima = Double.valueOf(buyOrder.getFilled_avg_price());
 				filledBuyPrice = Double.valueOf(buyOrder.getFilled_avg_price());
-				for(secondsCounter = 0; secondsCounter<60; secondsCounter ++) {
-					currentPrice = Double.valueOf(openPosition.getCurrent_price());
-					if(localMaxima.compareTo(currentPrice) < 0)
-						localMaxima = currentPrice;
-					Thread.sleep(1000);
-				}
 			}
 			else 
 			{
-				currentPrice = Double.valueOf(openPosition.getCurrent_price());
+				Thread.sleep(1000);
+				currentPrice = returnCurrentPrice();
 				if(localMaxima.compareTo(currentPrice) < 0)
 					localMaxima = currentPrice;
 				Double stopLossPrice = localMaxima*stopLossFactor;
+				Double takeProfitPrice = filledBuyPrice*sellProfitFactor;
 				pw.write("Last Buy Price: " + filledBuyPrice + "\t" + "Stop Loss Price: "+ stopLossPrice + 
 						"\t" + "Current Price: " + openPosition.getCurrent_price() + 
 						"\t" + LocalDateTime.now().toString() + "\n");
-				if (stopLossPrice.compareTo(currentPrice)>0 || filledBuyPrice.compareTo(currentPrice) > 0) {
+				if (stopLossPrice.compareTo(currentPrice)>0 || (takeProfitPrice.compareTo(currentPrice) > 0 && currentPrice.compareTo(filledBuyPrice) > 0)) {
 					OrdersPojo sellAllOpenPositions = alpacaAccount.sellSymbolQuantity(symbol, Double.valueOf(openPosition.getQty()));
 					while (sellAllOpenPositions.getStatus() !=null && !"filled".equals(sellAllOpenPositions.getStatus()))
 					{
@@ -144,30 +145,32 @@ public class Sinusodial_Strategy_Final {
 		}
 	}
 	public static void followDownTrendWave() throws IOException, InterruptedException {
+		PositionsPojo openPosition;
+		Double filledSellPrice = 0.00;
+		
 		while(LocalDateTime.now().isBefore(marketCloseTime)) {
-			PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
-			Double filledSellPrice = 0.00;
+			openPosition = alpacaAccount.getSymbolPosition(symbol);
 			if (openPosition.getQty() == null) {	
 				OrdersPojo sellOrder = placeSellOrder(symbol, qty);
+				if(sellOrder == null) continue;
+				
 				filledSellPrice = Double.valueOf(sellOrder.getFilled_avg_price());
 				localMinima = Double.valueOf(sellOrder.getFilled_avg_price());
-				for(secondsCounter = 0; secondsCounter<60; secondsCounter ++) {
-					currentPrice = Double.valueOf(openPosition.getCurrent_price());
-					if(localMinima.compareTo(currentPrice) > 0) 
-						localMinima = currentPrice;
-					Thread.sleep(1000);
-				}
 			}
 			else 
 			{
+				Thread.sleep(1000);
+				openPosition = alpacaAccount.getSymbolPosition(symbol);
+				if(openPosition.getQty() == null) continue;
 				currentPrice = Double.valueOf(openPosition.getCurrent_price());
 				if(localMinima.compareTo(currentPrice) > 0)
 					localMinima = currentPrice;
 				Double stopLossPrice = localMinima*shortStopLossFactor;
+				Double takeProfitPrice = filledSellPrice*buyProfitFactor;
 				pw.write("Last Sell Price: " + filledSellPrice + "\t" + "Stop Loss Price: "+ stopLossPrice + 
 						"\t" + "Current Price: " + openPosition.getCurrent_price() + 
 						"\t" + LocalDateTime.now().toString() + "\n");
-				if (stopLossPrice.compareTo(currentPrice)<0 || filledSellPrice.compareTo(currentPrice) < 0) {
+				if (stopLossPrice.compareTo(currentPrice)<0 || (takeProfitPrice.compareTo(currentPrice) < 0 && currentPrice.compareTo(filledSellPrice) < 0)) {
 					OrdersPojo buyAllOpenPositions = alpacaAccount.buySymbolQuantity(symbol, Double.valueOf(openPosition.getQty())*-1);
 					while (buyAllOpenPositions.getStatus() !=null && !"filled".equals(buyAllOpenPositions.getStatus()))
 					{
