@@ -98,6 +98,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 				.build();
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
+		if(response.statusCode() != 200) {
+			System.out.println("Buy Error:" + response.body()); 
+		}
 		return getJsonObject(response.body(), OrdersPojo.class);
 	}
 	

@@ -90,7 +90,7 @@ public class Testing_Symbol_Assets_Timeframe {
 				+ "\t" + "Close" + "\t" + "HIGH" + "\t" + "LOW" + "\t"+ "HL%" + "\t" + "Volume"+ "\n");
 		for (int i = 0; i < assetTotalList; i++){
 			if("active".equals(assets[i].getStatus()) && assets[i].isFractionable() && assets[i].isMarginable() && assets[i].isShortable() && assets[i].isEasy_to_borrow() && assets[i].isTradable()) {
-				TimeframePojo timeframe = alpacaAccount.getTimeframe(assets[i].getSymbol(), "2021-03-30", "2021-03-30", "1Day");
+				TimeframePojo timeframe = alpacaAccount.getTimeframe(assets[i].getSymbol(), "2021-04-14", "2021-04-14", "1Day");
 				if (timeframe.getBars() == null || timeframe.getBars().length == 0) continue;
 				BarsPojo bars = timeframe.getBars()[0];
 				Double highLowPercent = (Double.valueOf(bars.getHighPrice()) - Double.valueOf(bars.getLowPrice()))*100/Double.valueOf(bars.getClosePrice());

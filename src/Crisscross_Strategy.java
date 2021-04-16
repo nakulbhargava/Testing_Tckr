@@ -41,13 +41,13 @@ public class Crisscross_Strategy {
 	static Double pointZeroOneFactor = qty/1000;
 	//static Double buyProfitFactor = 0.9995;
 	static Double onePointOneFactor = 1.001;
-	static Double shortStopLossFactor = 1.004;
+	static Double shortStopLossFactor = 1.005;
 	//static Double sellProfitFactor = 1.0005;
-	static Double stopLossFactor = .996;
-	static Double upTrendFactor = 1.002;
-	static Double downTrendFactor = .998;
+	static Double stopLossFactor = .995;
+	static Double upTrendFactor = 1.001;
+	static Double downTrendFactor = .999;
 
-	static String symbol = "GSX";
+	static String symbol = "DAL";
 
 	static AlpacaApiCaller alpacaAccount;
 	static int secondsCounter = 0;
@@ -64,6 +64,7 @@ public class Crisscross_Strategy {
 	static OrdersPojo placedSellOrder;
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
+	static boolean justFreeCurrentPosition = false;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -77,12 +78,12 @@ public class Crisscross_Strategy {
 			do {
 				boolean isUpTrend = isUpTrend();
 				if(isUpTrend) {
-					//followUpTrendWave();
-					followDownTrendWave();
+					followUpTrendWave();
+//					followDownTrendWave();
 				}
 				if(!isUpTrend && LocalDateTime.now().isBefore(marketCloseTime)) {
-					//followDownTrendWave();
-					followUpTrendWave();
+					followDownTrendWave();
+//					followUpTrendWave();
 				}
 			}while(LocalDateTime.now().isBefore(marketCloseTime));
 			pw.close();
@@ -93,7 +94,7 @@ public class Crisscross_Strategy {
 		Double testPrice = returnCurrentPrice();
 
 		do {
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 			currentPrice = returnCurrentPrice();
 			//If there is an open position then factors to considered should be stop loss else we can have shorter factors to determine uptrend/downtrend
 			PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
@@ -103,17 +104,23 @@ public class Crisscross_Strategy {
 				Double stopLossPrice = stopLossFactor*avgEntryPrice;
 				Double stopLossShortPrice = shortStopLossFactor*avgEntryPrice;
 				if (stopLossPrice.compareTo(currentPrice) > 0) {
+					justFreeCurrentPosition = true;
 					return false;
 				}
 				if (stopLossShortPrice.compareTo(currentPrice) < 0) {
+					justFreeCurrentPosition = true;
 					return true;
 				}
 				continue;
 			}
-			if (testPrice*downTrendFactor > currentPrice)
+			if (testPrice*downTrendFactor > currentPrice) {
+				justFreeCurrentPosition = false;
 				return false;
-			if ( testPrice*upTrendFactor < currentPrice)
+			}
+			if ( testPrice*upTrendFactor < currentPrice) {
+				justFreeCurrentPosition = false;
 				return true;
+			}
 		}while(LocalDateTime.now().isBefore(marketCloseTime));
 		return false;
 	}
@@ -136,23 +143,23 @@ public class Crisscross_Strategy {
 			}
 			PositionsPojo openSellPosition = alpacaAccount.getSymbolPosition(symbol);
 			if(openSellPosition != null) {
-//				OrdersPojo buyAllOpenPositions = alpacaAccount.buySymbolQuantity(symbol, Double.valueOf(openSellPosition.getQty())*-1);
-//				while (buyAllOpenPositions.getStatus() !=null && !"filled".equals(buyAllOpenPositions.getStatus()))
-//				{
-//					Thread.sleep(100);
-//					buyAllOpenPositions = alpacaAccount.getOrderDetails(buyAllOpenPositions.getId());
-//				}
-				OrdersPojo sellAllOpenPositions = alpacaAccount.sellSymbolQuantity(symbol, Double.valueOf(openSellPosition.getQty()));
-				while (sellAllOpenPositions.getStatus() !=null && !"filled".equals(sellAllOpenPositions.getStatus()))
+				OrdersPojo buyAllOpenPositions = alpacaAccount.buySymbolQuantity(symbol, Double.valueOf(openSellPosition.getQty())*-1);
+				while (buyAllOpenPositions.getStatus() !=null && !"filled".equals(buyAllOpenPositions.getStatus()))
 				{
 					Thread.sleep(100);
-					sellAllOpenPositions = alpacaAccount.getOrderDetails(sellAllOpenPositions.getId());
+					buyAllOpenPositions = alpacaAccount.getOrderDetails(buyAllOpenPositions.getId());
 				}
+//				OrdersPojo sellAllOpenPositions = alpacaAccount.sellSymbolQuantity(symbol, Double.valueOf(openSellPosition.getQty()));
+//				while (sellAllOpenPositions.getStatus() !=null && !"filled".equals(sellAllOpenPositions.getStatus()))
+//				{
+//					Thread.sleep(100);
+//					sellAllOpenPositions = alpacaAccount.getOrderDetails(sellAllOpenPositions.getId());
+//				}
 			}
 		}
 		//Open Position has to be null at this point
 		openPosition = alpacaAccount.getSymbolPosition(symbol);
-		if(openPosition.getQty() == null) {
+		if(openPosition.getQty() == null && !justFreeCurrentPosition) {
 			for( int i = 0; i< maxQty.intValue(); i = i + qty.intValue()) {
 				OrdersPojo order = null;
 				do{
@@ -180,23 +187,23 @@ public class Crisscross_Strategy {
 			}
 			PositionsPojo openBuyPosition = alpacaAccount.getSymbolPosition(symbol);
 			if (openBuyPosition.getQty() != null) {
-//				OrdersPojo sellAllOpenPositions = alpacaAccount.sellSymbolQuantity(symbol, Double.valueOf(openBuyPosition.getQty()));
-//				while (sellAllOpenPositions.getStatus() !=null && !"filled".equals(sellAllOpenPositions.getStatus()))
-//				{
-//					Thread.sleep(100);
-//					sellAllOpenPositions = alpacaAccount.getOrderDetails(sellAllOpenPositions.getId());
-//				}
-				OrdersPojo buyAllOpenPositions = alpacaAccount.buySymbolQuantity(symbol, Double.valueOf(openBuyPosition.getQty())*-1);
-				while (buyAllOpenPositions.getStatus() !=null && !"filled".equals(buyAllOpenPositions.getStatus()))
+				OrdersPojo sellAllOpenPositions = alpacaAccount.sellSymbolQuantity(symbol, Double.valueOf(openBuyPosition.getQty()));
+				while (sellAllOpenPositions.getStatus() !=null && !"filled".equals(sellAllOpenPositions.getStatus()))
 				{
 					Thread.sleep(100);
-					buyAllOpenPositions = alpacaAccount.getOrderDetails(buyAllOpenPositions.getId());
+					sellAllOpenPositions = alpacaAccount.getOrderDetails(sellAllOpenPositions.getId());
 				}
+//				OrdersPojo buyAllOpenPositions = alpacaAccount.buySymbolQuantity(symbol, Double.valueOf(openBuyPosition.getQty())*-1);
+//				while (buyAllOpenPositions.getStatus() !=null && !"filled".equals(buyAllOpenPositions.getStatus()))
+//				{
+//					Thread.sleep(100);
+//					buyAllOpenPositions = alpacaAccount.getOrderDetails(buyAllOpenPositions.getId());
+//				}
 			}
 		}
 
 		//Open Position has to be null at this point
-		if(openPosition.getQty() == null) {
+		if(openPosition.getQty() == null && !justFreeCurrentPosition) {
 			for( int i = 0; i< maxQty.intValue(); i = i + qty.intValue()) {
 				OrdersPojo order = null;
 				do{
@@ -221,10 +228,13 @@ public class Crisscross_Strategy {
 		}
 		currentPrice = Double.valueOf(placedBuyOrder.getFilled_avg_price());
 		OrdersPojo placeSellOrder = alpacaAccount.sellSymbolQuantity(symbol, pointZeroOneFactor);
+		while (placeSellOrder.getId() == null) {
+			placeSellOrder = alpacaAccount.sellSymbolQuantity(symbol, pointZeroOneFactor);
+		}
 		OrdersPojo placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
 		while (!"filled".equals(placedSellOrder.getStatus()))
 		{
-			placedSellOrder = alpacaAccount.getOrderDetails(placedSellOrder.getId());
+			placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
 		}
 		currentPrice = Double.valueOf(placedSellOrder.getFilled_avg_price());
 		return currentPrice;
