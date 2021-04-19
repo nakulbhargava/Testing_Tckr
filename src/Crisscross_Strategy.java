@@ -117,7 +117,7 @@ public class Crisscross_Strategy {
 				justFreeCurrentPosition = false;
 				return false;
 			}
-			if ( testPrice*upTrendFactor < currentPrice) {
+			if ( testPrice*upTrendFactor <= currentPrice) {
 				justFreeCurrentPosition = false;
 				return true;
 			}
