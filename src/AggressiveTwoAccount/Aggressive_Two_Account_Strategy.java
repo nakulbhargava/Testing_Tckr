@@ -32,7 +32,7 @@ public class Aggressive_Two_Account_Strategy {
 	private static final String positionsEndpoint = "/positions";
 	private static final String assetsEndpoint = "/assets";
 	private static final String clockEndpoint = "/clock";
-	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
+	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,45);
 
 	static Double qty = 2.00;
 	static Double maxQty = 35*qty;
@@ -42,7 +42,7 @@ public class Aggressive_Two_Account_Strategy {
 	static Double onePointTwoFactor = 1.002;
 	static Double onePointOneFactor = 1.001;
 	static int agressiveBuyQuantity = 1, agressiveSellQuantity = 1;
-	static int maxDoubleUp = 64;
+	static int maxDoubleUp = 32;
 
 	static String symbol = "SNAP";
 	static AlpacaApiCaller alpacaAccount, alpacaAccount2;
@@ -62,7 +62,7 @@ public class Aggressive_Two_Account_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	
-	static Double openingBalance = 0.00, openingBalance2 = 0.00, exitProfitValue = 51.0;
+	static Double openingBalance = 0.00, openingBalance2 = 0.00, exitProfitValue = 30.0;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -198,6 +198,8 @@ public class Aggressive_Two_Account_Strategy {
 					System.out.println("Buying All Open Positions" + "\n");
 				}
 			}
+			openingBalance = Double.valueOf(alpacaAccount.getAccountDetails().getEquity());
+			openingBalance2 = Double.valueOf(alpacaAccount2.getAccountDetails().getEquity());
 		}
 		
 		//Cancel All orders in account one and sell everything
@@ -237,20 +239,23 @@ public class Aggressive_Two_Account_Strategy {
 		Double equityAccount1 = 0.00, equityAccount2 = 0.00;
 		equityAccount1 = Double.valueOf(alpacaAccount.getAccountDetails().getEquity());
 		equityAccount2 = Double.valueOf(alpacaAccount2.getAccountDetails().getEquity());
-		PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
-		PositionsPojo openPosition2 = alpacaAccount2.getSymbolPosition(symbol);
+//		PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
+//		PositionsPojo openPosition2 = alpacaAccount2.getSymbolPosition(symbol);
+//		
+//		Double netMarketBuy = 0.00, netMarketSell = 0.00;
+//		if (openPosition.getQty() != null) {
+//			netMarketBuy = Double.valueOf(openPosition.getQty())*Double.valueOf(openPosition.getCurrent_price());
+//		}	
+//		if (openPosition2.getQty() != null) {
+//			netMarketSell = Double.valueOf(openPosition.getQty())*Double.valueOf(openPosition.getCurrent_price());
+//		}
 		
-		Double netMarketBuy = 0.00, netMarketSell = 0.00;
-		if (openPosition.getQty() != null) {
-			netMarketBuy = Double.valueOf(openPosition.getQty())*Double.valueOf(openPosition.getCurrent_price());
-		}	
-		if (openPosition2.getQty() != null) {
-			netMarketSell = Double.valueOf(openPosition.getQty())*Double.valueOf(openPosition.getCurrent_price());
-		}
+		profitAccount1 = equityAccount1 - openingBalance;
+		profitAccount2 = equityAccount2 - openingBalance2;
+		Double netProfit = profitAccount1 + profitAccount2;
+		System.out.println("Profit so far: "+ netProfit + "\tat: "+ LocalDateTime.now().toString() + "\n");
+		pw.write("Profit so far: "+ netProfit + "\tat: "+ LocalDateTime.now().toString() + "\n");
 		
-		profitAccount1 = equityAccount1 - openingBalance - netMarketBuy;
-		profitAccount2 = equityAccount2 - openingBalance2 + netMarketSell;
-			
-		return profitAccount1 + profitAccount2;
+		return netProfit;
 	}
 }

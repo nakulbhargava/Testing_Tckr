@@ -179,6 +179,8 @@ public class Two_Account_Paper_Real {
 										"\t" + LocalDateTime.now().toString() + "\n");
 							}
 							totalLoss = (int) (totalLoss + 1000 - 1000*pointTwoFactor);
+							pw.write("Account 2 - Total Loss: " + totalLoss + "\n");
+							System.out.println("Account 2 - Total Loss: " + totalLoss + "\n");
 						}
 					}
 				}

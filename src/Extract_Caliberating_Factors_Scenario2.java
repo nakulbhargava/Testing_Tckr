@@ -20,7 +20,7 @@ import java.util.List;
  * Below program deals with scenario1
  */
 public class Extract_Caliberating_Factors_Scenario2 {
-	static Double profitMultiplier = 1.003;
+	static Double profitMultiplier = 1.002;
 	static boolean profitMet = false;
 	public static void main(String[] args) {
 		Extract_Caliberating_Factors_Scenario2 demo = new Extract_Caliberating_Factors_Scenario2();
@@ -28,15 +28,15 @@ public class Extract_Caliberating_Factors_Scenario2 {
 		
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
 		//we can assume that a stock price wont be changed by 0.5 times and hence exitAt count is 500
-//		for (int i = 0 ; i < 10; i++)
-//		{
-//			for(int j = 1; j < 50; j=j+1) {
-//				Double entryMultiplier = 1 + Double.valueOf(i)/1000;
-//				Double exitMultiplier = 1 - Double.valueOf(j)/1000;
-//				returnMultiplierProfitLoss(ticker, entryMultiplier, exitMultiplier);
-//			}
-//		}
-		returnMultiplierProfitLoss(ticker, 1.00, .999);
+		for (int i = 0 ; i < 10; i++)
+		{
+			for(int j = 1; j < 50; j=j+1) {
+				Double entryMultiplier = 1 + Double.valueOf(i)/1000;
+				Double exitMultiplier = 1 - Double.valueOf(j)/1000;
+				returnMultiplierProfitLoss(ticker, entryMultiplier, exitMultiplier);
+			}
+		}
+//		returnMultiplierProfitLoss(ticker, 1.00, .999);
 	} 
 
 	private List<String> readFileAsList() {
@@ -122,7 +122,7 @@ public class Extract_Caliberating_Factors_Scenario2 {
 			currentFactor = maxima/Double.valueOf(ticker.get(entryAt));
 			allfactors.add(currentFactor);
 			totalCount++;
-			System.out.println(totalCount + "\t" + i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + maxima + "\t" + currentFactor);
+//			System.out.println(totalCount + "\t" + i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + maxima + "\t" + currentFactor);
 //			if (currentFactor < profitMultiplier && exitAt == tickerLength - 1 )
 //				break;
 				//System.out.println(totalCount + "\t" + i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + minima + "\t" + currentFactor);

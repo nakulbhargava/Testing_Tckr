@@ -15,8 +15,19 @@ public class Crisscross_Strategy {
 
 	private static final String alpacaKey = "APCA-API-KEY-ID";
 	private static final String secretId = "APCA-API-SECRET-KEY";
-	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
+	
+	//Nakul
+//	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
+//	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
+	
+	//Vaishali
+//	private static final String alpacaKeyValue = "PKN9AR7BFFZXH5X3MP6H";
+//	private static final String secretIdValue = "daalp83963QKdcmOqI7iaqBwkdZxFRdFAmcijLZH";
+	
+	//Distorted
+	private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
+	private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
+	
 	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
 	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
 	private static final String headerContentType = "Content-Type";
@@ -36,18 +47,18 @@ public class Crisscross_Strategy {
 
 	static Double qty = 10.00;
 	static Double maxQty = qty*10;
-	static Double pointOneFactor = 0.999;
+	static Double pointOneFactor = 0.998;
 	static Double stopLossPrice = 0.00;
 	static Double pointZeroOneFactor = qty/1000;
 	//static Double buyProfitFactor = 0.9995;
-	static Double onePointOneFactor = 1.001;
-	static Double shortStopLossFactor = 1.005;
+	static Double onePointOneFactor = 1.002;
+	static Double shortStopLossFactor = 1.001;
 	//static Double sellProfitFactor = 1.0005;
-	static Double stopLossFactor = .995;
-	static Double upTrendFactor = 1.001;
+	static Double stopLossFactor = .999;
+	static Double upTrendFactor = 1.0005;
 	static Double downTrendFactor = .999;
 
-	static String symbol = "DAL";
+	static String symbol = "SNAP";
 
 	static AlpacaApiCaller alpacaAccount;
 	static int secondsCounter = 0;
@@ -65,6 +76,7 @@ public class Crisscross_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	static boolean justFreeCurrentPosition = false;
+	static boolean returningFromUpTrend = true;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -128,7 +140,7 @@ public class Crisscross_Strategy {
 	public static void followUpTrendWave() throws IOException, InterruptedException {
 		PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
 		OrdersPojo[] openSymbolOrders = alpacaAccount.getSymbolOpenOrders(symbol);
-		if(openPosition.getQty() != null) {
+		if(openPosition.getQty() != null && !returningFromUpTrend) {
 			for(OrdersPojo openSymbolOrder:openSymbolOrders) {
 				alpacaAccount.deleteOrder(openSymbolOrder.getId());
 				pw.write("Delete Order Executed with following Details: " + openSymbolOrder.getSymbol() + "\t" + openSymbolOrder.getQty()+ "\t" + openSymbolOrder.getId() + 
@@ -157,13 +169,14 @@ public class Crisscross_Strategy {
 //				}
 			}
 		}
-		//Open Position has to be null at this point
+		//Open Position has to be null at this point if we came here from down-trend
 		openPosition = alpacaAccount.getSymbolPosition(symbol);
 		if(openPosition.getQty() == null && !justFreeCurrentPosition) {
 			for( int i = 0; i< maxQty.intValue(); i = i + qty.intValue()) {
 				OrdersPojo order = null;
 				do{
 					order = placeBuyOrderWithLimitSell(symbol, qty);
+					returningFromUpTrend = true;
 				}
 				while (order == null);			
 			}
@@ -172,7 +185,7 @@ public class Crisscross_Strategy {
 	public static void followDownTrendWave() throws IOException, InterruptedException {
 		PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
 		OrdersPojo[] openSymbolOrders = alpacaAccount.getSymbolOpenOrders(symbol);
-		if(openPosition.getQty() != null) {
+		if(openPosition.getQty() != null && returningFromUpTrend) {
 			for(OrdersPojo openSymbolOrder:openSymbolOrders) {
 				alpacaAccount.deleteOrder(openSymbolOrder.getId());
 				pw.write("Delete Order Executed with following Details: " + openSymbolOrder.getSymbol() + "\t" + openSymbolOrder.getQty()+ "\t" + openSymbolOrder.getId() + 
@@ -202,12 +215,13 @@ public class Crisscross_Strategy {
 			}
 		}
 
-		//Open Position has to be null at this point
+		//Open Position has to be null at this point if we are returning from up-trend
 		if(openPosition.getQty() == null && !justFreeCurrentPosition) {
 			for( int i = 0; i< maxQty.intValue(); i = i + qty.intValue()) {
 				OrdersPojo order = null;
 				do{
 					order = placeSellOrderWithLimitBuy(symbol, qty);
+					returningFromUpTrend = false;
 				}
 				while (order == null);			
 			}
