@@ -112,7 +112,7 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 				+ "    \"qty\": \""+ qty + "\",\r\n"
 				+ "    \"side\": \"buy\",\r\n"
 				+ "    \"type\": \"limit\",\r\n"
-				+ "    \"time_in_force\": \"day\",\r\n"
+				+ "    \"time_in_force\": \"gtc\",\r\n"
 				+ "    \"limit_price\": \"" + price + "\"\r\n"
 				+ "}";
 		HttpRequest request = HttpRequest.newBuilder()
@@ -243,7 +243,7 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 				+ "    \"qty\": \""+ qty + "\",\r\n"
 				+ "    \"side\": \"sell\",\r\n"
 				+ "    \"type\": \"limit\",\r\n"
-				+ "    \"time_in_force\": \"day\",\r\n"
+				+ "    \"time_in_force\": \"gtc\",\r\n"
 				+ "    \"limit_price\": \"" + price + "\"\r\n"
 				+ "}";
 		HttpRequest request = HttpRequest.newBuilder()

@@ -36,11 +36,12 @@ public class Aggressive_Two_Account_Strategy {
 
 	static Double qty = 2.00;
 	static Double maxQty = 35*qty;
-	static Double pointZeroOneFactor = qty/1000;
-	static Double pointOneFactor = 0.999;
-	static Double pointTwoFactor = 0.998;
-	static Double onePointTwoFactor = 1.002;
-	static Double onePointOneFactor = 1.001;
+	
+	static Double buyFactor = 0.997;
+	static Double sellFactor = 1.003;
+	static Double agressiveSellFactor = 1.001;
+	static Double agressiveBuyFactor = 0.999;
+	static Double aggressiveBuyCompareFactor = 1.025, agressiveSellCompareFactor = .9975;
 	static int agressiveBuyQuantity = 1, agressiveSellQuantity = 1;
 	static int maxDoubleUp = 32;
 
@@ -62,7 +63,7 @@ public class Aggressive_Two_Account_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	
-	static Double openingBalance = 0.00, openingBalance2 = 0.00, exitProfitValue = 30.0;
+	static Double openingBalance = 0.00, openingBalance2 = 0.00, exitProfitValue = 21.0, exitLossValue = 50.0;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -82,9 +83,9 @@ public class Aggressive_Two_Account_Strategy {
 		openingBalance2 = Double.valueOf(alpacaAccount2.getAccountDetails().getEquity());
 		if(alpacaAccount.getClock().isIs_open()) {
 			while(LocalDateTime.now().isBefore(marketCloseTime)) {
-				Thread.sleep(15000);
+				Thread.sleep(18000);
 				netProfit = calculateNetProfit();
-				if(netProfit.compareTo(exitProfitValue) > 0) {
+				if(netProfit.compareTo(exitProfitValue) > 0 || netProfit.compareTo(exitLossValue*-1) < 0) {
 					System.out.println("Net profit is coming out to be more than Set Profit Value so freeing all positions." + "\n");
 					pw.write("Net profit is coming out to be more than Set Profit Value so freeing all positions." + "\n");
 					freeAllPositions();
@@ -92,21 +93,27 @@ public class Aggressive_Two_Account_Strategy {
 				//Sell in One account and sell in another
 				openPosition2 = alpacaAccount2.getSymbolPosition(symbol);
 				currentPrice = Double.valueOf(openPosition2.getQty() == null? "0.0":openPosition2.getCurrent_price());
-				if (currentPrice.compareTo(0.0) != 0 && currentPrice.compareTo(lastSellOrderPrice*onePointOneFactor) > 0) {
-					followDownTrendWave(qty*agressiveSellQuantity, pointOneFactor);
+				if (currentPrice.compareTo(0.0) != 0 && currentPrice.compareTo(lastSellOrderPrice*aggressiveBuyCompareFactor) > 0) {
+					followDownTrendWave(qty*agressiveSellQuantity, agressiveBuyFactor);
 					agressiveSellQuantity = agressiveSellQuantity*2;
 					if (agressiveSellQuantity == maxDoubleUp) agressiveSellQuantity = 1;
-				}
-				followUpTrendWave(qty, onePointTwoFactor);
-				Thread.sleep(15000);
-				openPosition = alpacaAccount.getSymbolPosition(symbol);
-				currentPrice = Double.valueOf(openPosition.getQty() == null? "0.0":openPosition.getCurrent_price());
-				if (currentPrice.compareTo(0.0) != 0 && currentPrice.compareTo(lastBuyOrderPrice*pointOneFactor) < 0) {
-					followUpTrendWave(qty*agressiveBuyQuantity, onePointOneFactor);
+					followUpTrendWave(qty*agressiveBuyQuantity, agressiveSellFactor);
 					agressiveBuyQuantity = agressiveBuyQuantity*2;
 					if (agressiveBuyQuantity == maxDoubleUp) agressiveBuyQuantity = 1;
 				}
-				followDownTrendWave(qty, pointTwoFactor);
+				else followUpTrendWave(qty, sellFactor);
+				Thread.sleep(18000);
+				openPosition = alpacaAccount.getSymbolPosition(symbol);
+				currentPrice = Double.valueOf(openPosition.getQty() == null? "0.0":openPosition.getCurrent_price());
+				if (currentPrice.compareTo(0.0) != 0 && currentPrice.compareTo(lastBuyOrderPrice*agressiveSellCompareFactor) < 0) {
+					followUpTrendWave(qty*agressiveBuyQuantity, agressiveSellFactor);
+					agressiveBuyQuantity = agressiveBuyQuantity*2;
+					if (agressiveBuyQuantity == maxDoubleUp) agressiveBuyQuantity = 1;
+					followDownTrendWave(qty*agressiveSellQuantity, agressiveBuyFactor);
+					agressiveSellQuantity = agressiveSellQuantity*2;
+					if (agressiveSellQuantity == maxDoubleUp) agressiveSellQuantity = 1;
+				}
+				else followDownTrendWave(qty, buyFactor);
 				pw.close();
 			}
 		}
@@ -198,8 +205,6 @@ public class Aggressive_Two_Account_Strategy {
 					System.out.println("Buying All Open Positions" + "\n");
 				}
 			}
-			openingBalance = Double.valueOf(alpacaAccount.getAccountDetails().getEquity());
-			openingBalance2 = Double.valueOf(alpacaAccount2.getAccountDetails().getEquity());
 		}
 		
 		//Cancel All orders in account one and sell everything
@@ -233,6 +238,8 @@ public class Aggressive_Two_Account_Strategy {
 				}
 			}
 		}
+		openingBalance = Double.valueOf(alpacaAccount.getAccountDetails().getEquity());
+		openingBalance2 = Double.valueOf(alpacaAccount2.getAccountDetails().getEquity());
 	}
 	public static Double calculateNetProfit() throws IOException, InterruptedException {
 		Double profitAccount1 = 0.00, profitAccount2 = 0.00;
@@ -253,8 +260,8 @@ public class Aggressive_Two_Account_Strategy {
 		profitAccount1 = equityAccount1 - openingBalance;
 		profitAccount2 = equityAccount2 - openingBalance2;
 		Double netProfit = profitAccount1 + profitAccount2;
-		System.out.println("Profit so far: "+ netProfit + "\tat: "+ LocalDateTime.now().toString() + "\n");
-		pw.write("Profit so far: "+ netProfit + "\tat: "+ LocalDateTime.now().toString() + "\n");
+		System.out.println("Profit so far: "+ profitAccount1 + " + " + profitAccount2 + " = " + netProfit + " at: "+ LocalDateTime.now().toString() + "\n");
+		pw.write("Profit so far: "+ profitAccount1 + "+" + profitAccount2 + " = " + netProfit + " at: "+ LocalDateTime.now().toString() + "\n");
 		
 		return netProfit;
 	}

@@ -85,8 +85,10 @@ public class Two_Account_Paper_Real {
 	public static void followDownTrendWave() throws IOException, InterruptedException {
 		do {
 			PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
-			if (maxQty.compareTo(Double.valueOf(openPosition.getQty() == null? "0":openPosition.getQty())*-1) > 0) {	
-				placeSellOrder = alpacaAccount.sellSymbolQuantity(symbol, qty);
+			PositionsPojo openPosition2 = alpacaAccount2.getSymbolPosition(symbol);
+			if (qty.compareTo(Double.valueOf(openPosition.getQty() == null? "0":openPosition.getQty())*-1) > 0
+					&& maxQty.compareTo(Double.valueOf(openPosition2.getQty() == null? "0":openPosition2.getQty())) > 0) {	
+				placeSellOrder = alpacaAccount.sellSymbolQuantity(symbol, qty/10);
 				placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
 				pw.write("Account 1 - Short Sell Order Executed: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
 						"\t" + placedSellOrder.getSide() + "\t" + placedSellOrder.getFilled_avg_price() + 
@@ -100,7 +102,7 @@ public class Two_Account_Paper_Real {
 					placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
 				}
 				lastSellOrderPrice = Double.valueOf(placedSellOrder.getFilled_avg_price());;
-				placeBuyOrder = alpacaAccount.buySymbolLimitOrder(symbol, qty,  lastSellOrderPrice*pointOneFactor);
+				placeBuyOrder = alpacaAccount.buySymbolLimitOrder(symbol, qty/10,  lastSellOrderPrice*pointOneFactor);
 				placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
 				pw.write("Account 1 - Buy Order Executed: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 						"\t" + placedBuyOrder.getSide() + "\t" + placedBuyOrder.getFilled_avg_price() + 
@@ -113,16 +115,16 @@ public class Two_Account_Paper_Real {
 			{
 
 				//If its moving up then its time to buy in account2
-				PositionsPojo openPosition2 = alpacaAccount2.getSymbolPosition(symbol);
+				//openPosition2 = alpacaAccount2.getSymbolPosition(symbol);
 				Double currentQty = Double.valueOf(openPosition2.getQty() == null? "0.00":openPosition2.getQty());
-				Double currentTrendPrice = Double.valueOf(openPosition.getCurrent_price())*pointOneFactor;
+				Double currentTrendPrice = Double.valueOf(openPosition.getCurrent_price()==null?"0.00":openPosition.getCurrent_price())*pointOneFactor;
 				if(currentTrendPrice.compareTo(lastSellOrderPrice) < 0 && currentQty.compareTo(0.00) == 0) {
 					Thread.sleep(1000);
 					continue;
 				}
 				if (maxQty.compareTo(currentQty) > 0 && isNewCycle) {	
 					//priceToBuy = returnCurrentPrice();
-					placeBuyOrder2 = alpacaAccount2.buySymbolQuantity(symbol, maxQty);
+					placeBuyOrder2 = alpacaAccount2.buySymbolQuantity(symbol, qty/5);
 					if (placeBuyOrder2.getId() == null) continue;
 					placedBuyOrder2 = alpacaAccount2.getOrderDetails(placeBuyOrder2.getId());
 					pw.write("Account 2 - Buy Order Executed: " + placedBuyOrder2.getSymbol() + "\t" + placedBuyOrder2.getQty()+ "\t" + placedBuyOrder2.getId() + 
@@ -148,45 +150,44 @@ public class Two_Account_Paper_Real {
 							"\t" + LocalDateTime.now().toString() + "\n");
 					isNewCycle = false;
 				}
-				else 
-				{
-					//To Introduce - Release the position in second account if the trend is changing again at the average filled price
-					Double currentPrice = Double.valueOf(openPosition.getCurrent_price());
-					if(currentPrice.compareTo(lastBuyOrderPrice2*pointTwoFactor) < 0) {
-						OrdersPojo[] openSymbolOrders = alpacaAccount2.getSymbolOpenOrders(symbol);
-						if(openPosition2.getQty() != null) {
-							for(OrdersPojo openSymbolOrder:openSymbolOrders) {
-								alpacaAccount2.deleteOrder(openSymbolOrder.getId());
-								pw.write("Account 2 - Delete Order Executed: " + openSymbolOrder.getSymbol() + "\t" + openSymbolOrder.getQty()+ "\t" + openSymbolOrder.getId() + 
-										"\t" + openSymbolOrder.getStatus() + "\t" + LocalDateTime.now().toString() + "\n");
-								OrdersPojo canceledOrder = alpacaAccount2.getOrderDetails(openSymbolOrder.getId());
-								while(!"canceled".equals(canceledOrder.getStatus())) {
-									if("filled".equals(canceledOrder.getStatus())) break;
-									canceledOrder = alpacaAccount2.getOrderDetails(openSymbolOrder.getId());
-									pw.write("Delete Order Not yet completed: " + canceledOrder.getSymbol() + "\t" + canceledOrder.getQty()+ "\t" + canceledOrder.getId() + 
-											"\t" + canceledOrder.getStatus() + "\t" + LocalDateTime.now().toString() + "\n");
-								}
-							}
-							openPosition2 = alpacaAccount2.getSymbolPosition(symbol);
-							if(openPosition2.getQty() != null) {
-								placeSellOrder2 = alpacaAccount2.sellSymbolQuantity(symbol, Double.valueOf(openPosition2.getQty()));
-								placedSellOrder2 = alpacaAccount2.getOrderDetails(placeSellOrder2.getId());
-								pw.write("Account 2 - Sell Order Executed: " + placedSellOrder2.getSymbol() + "\t" + placedSellOrder2.getQty()+ "\t" + placedSellOrder2.getId() + 
-										"\t" + placedSellOrder2.getSide() + "\t" + placedSellOrder2.getFilled_avg_price() + 
-										"\t" + LocalDateTime.now().toString() + "\n");
-								System.out.println("Account 2 - Sell Order Executed: " + placedSellOrder2.getSymbol() + "\t" + placedSellOrder2.getQty()+ "\t" + placedSellOrder2.getId() + 
-										"\t" + placedSellOrder2.getSide() + "\t" + placedSellOrder2.getFilled_avg_price() + 
-										"\t" + LocalDateTime.now().toString() + "\n");
-							}
-							totalLoss = (int) (totalLoss + 1000 - 1000*pointTwoFactor);
-							pw.write("Account 2 - Total Loss: " + totalLoss + "\n");
-							System.out.println("Account 2 - Total Loss: " + totalLoss + "\n");
-						}
-					}
-				}
+//				else 
+//				{
+//					//To Introduce - Release the position in second account if the trend is changing again at the average filled price
+//					Double currentPrice = Double.valueOf(openPosition2.getCurrent_price());
+//					if(currentPrice.compareTo(lastBuyOrderPrice2*pointTwoFactor) < 0) {
+//						OrdersPojo[] openSymbolOrders = alpacaAccount2.getSymbolOpenOrders(symbol);
+//						if(openPosition2.getQty() != null) {
+//							for(OrdersPojo openSymbolOrder:openSymbolOrders) {
+//								alpacaAccount2.deleteOrder(openSymbolOrder.getId());
+//								pw.write("Account 2 - Delete Order Executed: " + openSymbolOrder.getSymbol() + "\t" + openSymbolOrder.getQty()+ "\t" + openSymbolOrder.getId() + 
+//										"\t" + openSymbolOrder.getStatus() + "\t" + LocalDateTime.now().toString() + "\n");
+//								OrdersPojo canceledOrder = alpacaAccount2.getOrderDetails(openSymbolOrder.getId());
+//								while(!"canceled".equals(canceledOrder.getStatus())) {
+//									if("filled".equals(canceledOrder.getStatus())) break;
+//									canceledOrder = alpacaAccount2.getOrderDetails(openSymbolOrder.getId());
+//									pw.write("Delete Order Not yet completed: " + canceledOrder.getSymbol() + "\t" + canceledOrder.getQty()+ "\t" + canceledOrder.getId() + 
+//											"\t" + canceledOrder.getStatus() + "\t" + LocalDateTime.now().toString() + "\n");
+//								}
+//							}
+//							openPosition2 = alpacaAccount2.getSymbolPosition(symbol);
+//							if(openPosition2.getQty() != null) {
+//								placeSellOrder2 = alpacaAccount2.sellSymbolQuantity(symbol, Double.valueOf(openPosition2.getQty()));
+//								placedSellOrder2 = alpacaAccount2.getOrderDetails(placeSellOrder2.getId());
+//								pw.write("Account 2 - Sell Order Executed: " + placedSellOrder2.getSymbol() + "\t" + placedSellOrder2.getQty()+ "\t" + placedSellOrder2.getId() + 
+//										"\t" + placedSellOrder2.getSide() + "\t" + placedSellOrder2.getFilled_avg_price() + 
+//										"\t" + LocalDateTime.now().toString() + "\n");
+//								System.out.println("Account 2 - Sell Order Executed: " + placedSellOrder2.getSymbol() + "\t" + placedSellOrder2.getQty()+ "\t" + placedSellOrder2.getId() + 
+//										"\t" + placedSellOrder2.getSide() + "\t" + placedSellOrder2.getFilled_avg_price() + 
+//										"\t" + LocalDateTime.now().toString() + "\n");
+//							}
+//							totalLoss = (int) (totalLoss + 1000 - 1000*pointTwoFactor);
+//							pw.write("Account 2 - Total Loss: " + totalLoss + "\n");
+//							System.out.println("Account 2 - Total Loss: " + totalLoss + "\n");
+//						}
+//					}
+//				}
 
-				currentTrendPrice = Double.valueOf(openPosition.getCurrent_price())*pointOneFactor;
-				if(currentTrendPrice.compareTo(lastSellOrderPrice) < 0) {
+				if(openPosition.getQty() == null) {
 					Thread.sleep(1000);
 					continue;
 				}
