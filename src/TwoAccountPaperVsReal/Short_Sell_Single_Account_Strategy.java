@@ -46,8 +46,8 @@ public class Short_Sell_Single_Account_Strategy {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
-	static Double qty = 2.0;
-	static Double maxQty = 100.0;
+	static Double qty = 1.0;
+	static Double maxQty = 1000.0;
 
 	static Double pointZeroOneFactor = maxQty/10000;
 	static Double profitFactor = .981;
@@ -99,12 +99,12 @@ public class Short_Sell_Single_Account_Strategy {
 			currentPrice = returnCurrentPrice();
 			if (testPrice*downTrendFactor > currentPrice) {
 				pw.write("Returning Downtrend to short sell - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
-				System.out.println("Returning Downtrend to short sell - Initial Price: " + testPrice + " Current Price: " + currentPrice + LocalDateTime.now().toString());
+				System.out.println("Returning Downtrend to short sell - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
 				return true;
 			}
 			if ( testPrice*upTrendFactor < currentPrice) {
 				pw.write("Returning Uptrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + LocalDateTime.now().toString() + "\n");
-				System.out.println("Returning Uptrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + LocalDateTime.now().toString());
+				System.out.println("Returning Uptrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
 				return false;
 			}
 		}while(LocalDateTime.now().isBefore(marketCloseTime));

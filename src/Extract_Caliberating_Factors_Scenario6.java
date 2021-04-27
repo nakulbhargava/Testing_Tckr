@@ -20,19 +20,21 @@ import java.util.List;
  * Below program deals with scenario1
  */
 public class Extract_Caliberating_Factors_Scenario6 {
-	static Double profitMultiplier = 1.001;
-	static boolean profitMet = false;
+//	static Double profitMultiplier = 1.001;
+//	static boolean profitMet = false;
 	static Double totalLoss = 0.00, totalProfit = 0.00;
 	static Double upTrendMultiplier = 1.0005;
+	static int maxShares = 1000;
+	static Double maxProfit = 0.0;
 	public static void main(String[] args) {
 		Extract_Caliberating_Factors_Scenario6 demo = new Extract_Caliberating_Factors_Scenario6();
 		List<String> ticker = demo.readFileAsList();
 		
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
 		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
-		for (int i = 5 ; i < 25; i=i+5)
+		for (int i = 5 ; i < 40; i=i+5)
 		{
-			for(int j = 1; j < 40; j=j+1) {
+			for(int j = 1; j < 100; j=j+2) {
 				Double entryMultiplier = 1 - Double.valueOf(i)/10000;
 				Double exitMultiplier = 1 - Double.valueOf(j)/1000;
 				returnMultiplierProfitLoss(ticker, entryMultiplier, exitMultiplier);
@@ -40,10 +42,11 @@ public class Extract_Caliberating_Factors_Scenario6 {
 			}
 		}
 //		returnMultiplierProfitLoss(ticker, .999, .95);
+		System.out.println("Max Profit: " + maxProfit);
 	} 
 
 	private List<String> readFileAsList() {
-		String fileName = "/SNAP.txt";
+		String fileName = "/test/US1.ZI_210419_210423.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();
@@ -91,12 +94,15 @@ public class Extract_Caliberating_Factors_Scenario6 {
 		int tickerLength = ticker.size();
 //		Double entryPoint, exitPoint;
 		List<Integer> repeatEntry = new ArrayList<Integer>();
+		List<Integer> exitPositions = new ArrayList<Integer>();
+		int releaseQuantity = 0;
 		int entryAt = 1, exitAt = 1;
 		int upTrendAt = 1;
+		int maxCount = 0;
 //		Double minima = 0.00;
 //		List<Double> allfactors = new ArrayList<Double>();
 //		Double currentFactor = 0.00;
-//		int totalCount = 0;
+		int totalCount = 0;
 		
 		for(int i = 1; i < tickerLength; i++) {
 			entryAt = returnLowerMultiplierPosition(ticker, i, entryMultiplier);
@@ -110,8 +116,20 @@ public class Extract_Caliberating_Factors_Scenario6 {
 				continue;
 			}
 			else {
-				
+				for (int j = i+1; j <= entryAt; j++) {
+					for(int exitPosition : exitPositions) {
+						if ( exitPosition == j) 
+							releaseQuantity++;
+					}
+				}
+				totalCount = totalCount - releaseQuantity;
+//				System.out.println(i + "\t" + entryAt + "\t" + totalCount + "\t" + releaseQuantity);
+				releaseQuantity = 0;
+
 				i = entryAt;
+				if(totalCount >= maxShares) {
+					continue;
+				}
 			}
 			if(repeatEntry.contains(entryAt)) continue;
 			repeatEntry.add(entryAt);
@@ -122,15 +140,19 @@ public class Extract_Caliberating_Factors_Scenario6 {
 			}
 			else {
 				totalProfit = totalProfit + Double.valueOf(ticker.get(entryAt))*(1 - exitMultiplier);
+				exitPositions.add(exitAt);
 			}
-			
-
-//			System.out.println(entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit);
+			totalCount++;
+			if (totalCount > maxCount) maxCount = totalCount;
+//			System.out.println(entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount);
 		}
 
 		Double netProfit = totalProfit - totalLoss;
 		//Double netProfit = profitCount*0.001 - lossCount*0.004;
-		System.out.println(entryMultiplier + "\t" + exitMultiplier + "\t" +  "NetProfit:" + "\t" + netProfit);
+		Double profitPerShare = netProfit/maxCount;
+		if (profitPerShare.compareTo(maxProfit) > 0) maxProfit = profitPerShare;
+		
+		System.out.println(entryMultiplier + "\t" + exitMultiplier + "\t" +  "NetProfit:" + "\t" + netProfit + "\tTotal Count: " + totalCount + "\tMax Count: " + maxCount + "\tProfitPerShare: " + profitPerShare);
 		return 0.00;
 	}
 }

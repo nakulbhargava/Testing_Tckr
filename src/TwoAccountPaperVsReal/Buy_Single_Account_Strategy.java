@@ -46,16 +46,16 @@ public class Buy_Single_Account_Strategy {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
-	static Double qty = 2.0;
+	static Double qty = 1.0;
 	static Double maxQty = 100.0;
 
 	static Double pointZeroOneFactor = maxQty/10000;
-	static Double profitFactor = 1.038;
+	static Double profitFactor = 1.03;
 
-	static Double upTrendFactor = 1.001;
+	static Double upTrendFactor = 1.0025;
 	static Double downTrendFactor = .9995;
 
-	static String symbol = "SNAP";
+	static String symbol = "ZI";
 
 	static AlpacaApiCaller alpacaAccount;
 	static int secondsCounter = 0;
@@ -101,12 +101,12 @@ public class Buy_Single_Account_Strategy {
 			currentPrice = returnCurrentPrice();
 			if (testPrice*downTrendFactor > currentPrice) {
 				pw.write("Returning Downtrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
-				System.out.println("Returning Downtrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + LocalDateTime.now().toString());
+				System.out.println("Returning Downtrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
 				return false;
 			}
 			if ( testPrice*upTrendFactor < currentPrice) {
 				pw.write("Returning Uptrend to Buy - Initial Price: " + testPrice + " Current Price: " + currentPrice + LocalDateTime.now().toString() + "\n");
-				System.out.println("Returning Uptrend to Buy - Initial Price: " + testPrice + " Current Price: " + currentPrice + LocalDateTime.now().toString());
+				System.out.println("Returning Uptrend to Buy - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
 				return true;
 			}
 		}while(LocalDateTime.now().isBefore(marketCloseTime));
