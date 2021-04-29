@@ -47,15 +47,16 @@ public class Buy_Single_Account_Strategy {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
 	static Double qty = 1.0;
-	static Double maxQty = 100.0;
+	static Double maxQty = 400.0;
 
 	static Double pointZeroOneFactor = maxQty/10000;
-	static Double profitFactor = 1.03;
-
-	static Double upTrendFactor = 1.0025;
+	
+	//Below to be extracted from Extract Calibrating factor 5
+	static Double profitFactor = 1.043;
+	static Double upTrendFactor = 1.0015;
 	static Double downTrendFactor = .9995;
 
-	static String symbol = "ZI";
+	static String symbol = "SNAP";
 
 	static AlpacaApiCaller alpacaAccount;
 	static int secondsCounter = 0;
@@ -71,6 +72,8 @@ public class Buy_Single_Account_Strategy {
 	static OrdersPojo placedSellOrder;
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
+	//Below value to be driven from ExtractingHighLowTimeframe
+	static Double stableHighPrice = 62.9;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -85,7 +88,7 @@ public class Buy_Single_Account_Strategy {
 				boolean isUpTrend = isUpTrend();
 				PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
 				Double currentQty = Double.valueOf(openPosition.getQty() == null? "0.00":openPosition.getQty());
-				if(isUpTrend && maxQty.compareTo(currentQty) > 0) {
+				if(isUpTrend && maxQty.compareTo(currentQty) > 0 && returnCurrentPrice().compareTo(stableHighPrice) < 0) {
 					placeBuyOrderWithLimitSell(symbol, qty);
 				}
 			}while(LocalDateTime.now().isBefore(marketCloseTime));
@@ -97,7 +100,7 @@ public class Buy_Single_Account_Strategy {
 		Double testPrice = returnCurrentPrice();
 
 		do {
-			Thread.sleep(2000);
+			Thread.sleep(1500);
 			currentPrice = returnCurrentPrice();
 			if (testPrice*downTrendFactor > currentPrice) {
 				pw.write("Returning Downtrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");

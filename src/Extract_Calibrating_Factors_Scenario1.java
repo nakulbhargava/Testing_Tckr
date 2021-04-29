@@ -19,25 +19,24 @@ import java.util.List;
  * 
  * Below program deals with scenario1
  */
-public class Extract_Caliberating_Factors_Scenario3 {
-	static Double profitMultiplier = 1.002;
+public class Extract_Calibrating_Factors_Scenario1 {
+	static Double profitMultiplier = 1.001;
 	static boolean profitMet = false;
 	public static void main(String[] args) {
-		Extract_Caliberating_Factors_Scenario3 demo = new Extract_Caliberating_Factors_Scenario3();
+		Extract_Calibrating_Factors_Scenario1 demo = new Extract_Calibrating_Factors_Scenario1();
 		List<String> ticker = demo.readFileAsList();
 		
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
-		//we can assume that a stock price wont be changed by 0.5 times and hence exitAt count is 500
-		for (int i = 0 ; i < 5; i++)
-		{
-			for(int j = 1; j < 50; j=j+1) {
-				Double entryMultiplier = 1 - Double.valueOf(i)/1000;
-				Double exitMultiplier = 1 - Double.valueOf(j)/1000;
-				returnMultiplierProfitLoss(ticker, entryMultiplier, exitMultiplier);
-			}
-		}
-//		returnMultiplierProfitLoss(ticker, 1.0, .999);
-//		returnMultiplierProfitLoss(ticker, 1.0, .998);
+		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
+//		for (int i = 0 ; i < 10; i++)
+//		{
+//			for(int j = 1; j < 50; j=j+1) {
+//				Double entryMultiplier = 1 + Double.valueOf(i)/1000;
+//				Double exitMultiplier = 1 + Double.valueOf(j)/1000;
+//				returnMultiplierProfitLoss(ticker, entryMultiplier, exitMultiplier);
+//			}
+//		}
+		returnMultiplierProfitLoss(ticker, 1.00, 1.001);
 	} 
 
 	private List<String> readFileAsList() {
@@ -73,44 +72,32 @@ public class Extract_Caliberating_Factors_Scenario3 {
 		return -1;
 	}
 	
-	private static int returnLowerMultiplierPosition (List<String> ticks, int position, Double multiplier) {
-		int ticksLength = ticks.size();
-		Double startingValue = Double.valueOf(ticks.get(position));
-		Double currentValue;
-		for (int i = position; i < ticksLength; i++) {
-			currentValue = Double.valueOf(ticks.get(i));
-			if(currentValue.compareTo(startingValue*multiplier) < 0 || currentValue.compareTo(startingValue*multiplier) == 0 ){
-				return i;
-			}
-		}
-		return -1;
-	}
 	private static Double returnMultiplierProfitLoss(List<String> ticker, Double entryMultiplier, Double exitMultiplier) {
 		int tickerLength = ticker.size();
 		Double entryPoint, exitPoint;
 		List<Integer> repeatEntry = new ArrayList<Integer>();
 		int entryAt = 1, exitAt = 1;
-		Double maxima = 0.00;
+		Double minima = 0.00;
 		List<Double> allfactors = new ArrayList<Double>();
 		Double currentFactor = 0.00;
 		int totalCount = 0;
 		
 		for(int i = 1; i < tickerLength; i++) {
-			entryAt = returnLowerMultiplierPosition(ticker, i, entryMultiplier);
+			entryAt = returnMultiplierPosition(ticker, i, entryMultiplier);
 			if (entryAt < 0) {
 				//System.out.println("Multiplier:" + entryMultiplier + " doesnot exist for position: " + i + " with value: " + ticker.get(i) + "\n");
 				continue;
 			}
 			if(repeatEntry.contains(entryAt)) continue;
 			repeatEntry.add(entryAt);
-			exitAt = returnLowerMultiplierPosition(ticker, entryAt, exitMultiplier);
+			exitAt = returnMultiplierPosition(ticker, entryAt, exitMultiplier);
 			if (exitAt < 0)exitAt = tickerLength - 1;
-			maxima = Double.valueOf(ticker.get(entryAt));
+			minima = Double.valueOf(ticker.get(entryAt));
 			for (int k = entryAt; k < exitAt; k++)
 			{
-				Double currentMaxvalue = maxima*profitMultiplier;
-				if (currentMaxvalue.compareTo(Double.valueOf(ticker.get(k))) < 0) {
-					maxima = Double.valueOf(ticker.get(k));
+				Double currentvalue = Double.valueOf(ticker.get(k))*profitMultiplier;
+				if ((currentvalue.compareTo(minima)) < 0) {
+					minima = Double.valueOf(ticker.get(k));
 					i=k;
 					profitMet = true;
 					break;
@@ -120,26 +107,27 @@ public class Extract_Caliberating_Factors_Scenario3 {
 				i=exitAt;
 			}
 			profitMet = false;
-			currentFactor = maxima/Double.valueOf(ticker.get(entryAt));
+			currentFactor = Double.valueOf(ticker.get(entryAt))/minima;
 			allfactors.add(currentFactor);
 			totalCount++;
-//			System.out.println(totalCount + "\t" + i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + maxima + "\t" + currentFactor);
+			System.out.println(totalCount + "\t" + i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + minima + "\t" + currentFactor);
 //			if (currentFactor < profitMultiplier && exitAt == tickerLength - 1 )
 //				break;
 				//System.out.println(totalCount + "\t" + i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + minima + "\t" + currentFactor);
 		}
 		int profitCount = 0, lossCount = 0;
 		Double minfactor = allfactors.get(0);
+		allfactors.remove(allfactors.size()-1);
 		for(Double factor:allfactors) {
-			if (factor.floatValue() >= profitMultiplier) {
+			if (factor.floatValue() != 1) {
 				profitCount++;
 			}
 			else {
-				//System.out.println(lossCount + "\t" + factor + "\n");
+//				System.out.println(lossCount + "\t" + factor + "\n");
 				lossCount++;
 			}
 		}
-		Double netProfit = profitCount*(profitMultiplier - 1) - lossCount*(1 - exitMultiplier);
+		Double netProfit = profitCount*(profitMultiplier - 1) - lossCount*(exitMultiplier - 1);
 		//Double netProfit = profitCount*0.001 - lossCount*0.004;
 		System.out.println(entryMultiplier + "\t" + exitMultiplier + "\t" + totalCount + "\t" +  "NetProfit:" + "\t" + netProfit);
 		return 0.00;

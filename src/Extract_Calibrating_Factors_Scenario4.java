@@ -19,24 +19,24 @@ import java.util.List;
  * 
  * Below program deals with scenario1
  */
-public class Extract_Caliberating_Factors_Scenario1 {
-	static Double profitMultiplier = 1.001;
+public class Extract_Calibrating_Factors_Scenario4 {
+	static Double profitMultiplier = 1.002;
 	static boolean profitMet = false;
 	public static void main(String[] args) {
-		Extract_Caliberating_Factors_Scenario1 demo = new Extract_Caliberating_Factors_Scenario1();
+		Extract_Calibrating_Factors_Scenario4 demo = new Extract_Calibrating_Factors_Scenario4();
 		List<String> ticker = demo.readFileAsList();
 		
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
-		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
-//		for (int i = 0 ; i < 10; i++)
-//		{
-//			for(int j = 1; j < 50; j=j+1) {
-//				Double entryMultiplier = 1 + Double.valueOf(i)/1000;
-//				Double exitMultiplier = 1 + Double.valueOf(j)/1000;
-//				returnMultiplierProfitLoss(ticker, entryMultiplier, exitMultiplier);
-//			}
-//		}
-		returnMultiplierProfitLoss(ticker, 1.00, 1.001);
+		//we can assume that a stock price wont be changed by 0.5 times and hence exitAt count is 500
+		for (int i = 0 ; i < 5; i++)
+		{
+			for(int j = 1; j < 40; j=j+1) {
+				Double entryMultiplier = 1 - Double.valueOf(i)/1000;
+				Double exitMultiplier = 1 + Double.valueOf(j)/1000;
+				returnMultiplierProfitLoss(ticker, entryMultiplier, exitMultiplier);
+			}
+		}
+//		returnMultiplierProfitLoss(ticker, 1.0, 1.001);
 	} 
 
 	private List<String> readFileAsList() {
@@ -72,6 +72,18 @@ public class Extract_Caliberating_Factors_Scenario1 {
 		return -1;
 	}
 	
+	private static int returnLowerMultiplierPosition (List<String> ticks, int position, Double multiplier) {
+		int ticksLength = ticks.size();
+		Double startingValue = Double.valueOf(ticks.get(position));
+		Double currentValue;
+		for (int i = position; i < ticksLength; i++) {
+			currentValue = Double.valueOf(ticks.get(i));
+			if(currentValue.compareTo(startingValue*multiplier) < 0 || currentValue.compareTo(startingValue*multiplier) == 0){
+				return i;
+			}
+		}
+		return -1;
+	}
 	private static Double returnMultiplierProfitLoss(List<String> ticker, Double entryMultiplier, Double exitMultiplier) {
 		int tickerLength = ticker.size();
 		Double entryPoint, exitPoint;
@@ -83,7 +95,7 @@ public class Extract_Caliberating_Factors_Scenario1 {
 		int totalCount = 0;
 		
 		for(int i = 1; i < tickerLength; i++) {
-			entryAt = returnMultiplierPosition(ticker, i, entryMultiplier);
+			entryAt = returnLowerMultiplierPosition(ticker, i, entryMultiplier);
 			if (entryAt < 0) {
 				//System.out.println("Multiplier:" + entryMultiplier + " doesnot exist for position: " + i + " with value: " + ticker.get(i) + "\n");
 				continue;
@@ -110,7 +122,7 @@ public class Extract_Caliberating_Factors_Scenario1 {
 			currentFactor = Double.valueOf(ticker.get(entryAt))/minima;
 			allfactors.add(currentFactor);
 			totalCount++;
-			System.out.println(totalCount + "\t" + i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + minima + "\t" + currentFactor);
+//			System.out.println(totalCount + "\t" + i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + minima + "\t" + currentFactor);
 //			if (currentFactor < profitMultiplier && exitAt == tickerLength - 1 )
 //				break;
 				//System.out.println(totalCount + "\t" + i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + minima + "\t" + currentFactor);

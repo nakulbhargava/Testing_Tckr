@@ -47,11 +47,12 @@ public class Short_Sell_Single_Account_Strategy {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
 	static Double qty = 1.0;
-	static Double maxQty = 1000.0;
+	static Double maxQty = 50.0;
 
 	static Double pointZeroOneFactor = maxQty/10000;
+	
+	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = .981;
-
 	static Double upTrendFactor = 1.0005;
 	static Double downTrendFactor = .999;
 
@@ -69,6 +70,8 @@ public class Short_Sell_Single_Account_Strategy {
 	static OrdersPojo placedSellOrder;
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
+	//Below value to be driven from ExtractingHighLowTimeframe
+	static Double stableLowPrice = 54.09;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -82,8 +85,8 @@ public class Short_Sell_Single_Account_Strategy {
 			do {
 				boolean isDownTrend = isDownTrend();
 				PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
-				Double currentQty = Double.valueOf(openPosition.getQty() == null? "0.00":openPosition.getQty());
-				if(isDownTrend && maxQty.compareTo(currentQty) > 0) {
+				Double currentQty = Double.valueOf(openPosition.getQty() == null? "0.00":openPosition.getQty())*-1.0;
+				if(isDownTrend && maxQty.compareTo(currentQty) > 0 && returnCurrentPrice().compareTo(stableLowPrice) > 0) {
 					placeSellOrderWithLimitBuy(symbol, qty);
 				}
 			}while(LocalDateTime.now().isBefore(marketCloseTime));
