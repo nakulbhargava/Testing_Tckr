@@ -19,10 +19,10 @@ import java.util.List;
  * Scenario4: Entry 1 low and stopLoss/exitAt 2 higher than entry 1, Make profit by short selling at 1
  * 
  * Other scenarios to consider:
- * high high: entry 1 at high and exit 2 at higher, stoploss/exitAt some point lower than 1
- * low low: entry 1 at low and exit 2 at lower, stoploss/exitAt some point higher than 1
+ * Scenario 5: high high: entry 1 at high and exit 2 at higher, downtrend at some point lower than 1 to do nothing
+ * Scenario 6: low low: entry 1 at low and exit 2 at lower, uptrend some point higher than 1 to do nothing
  * 
- * Below program deals with scenario1
+ * Below program deals with scenario5
  */
 public class Extract_Calibrating_Factors_Scenario5 {
 	//	static Double profitMultiplier = 1.001;
@@ -45,17 +45,17 @@ public class Extract_Calibrating_Factors_Scenario5 {
 
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
 		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
-		for (int i = 5 ; i < 40; i=i+5)
-		{
-			for(int j = 10; j < 100; j=j+3) {
-				Double entryMultiplier = 1 + Double.valueOf(i)/10000;
-				Double exitMultiplier = 1 + Double.valueOf(j)/1000;
-				returnMultiplierProfitLoss(ticker, entryMultiplier, exitMultiplier);
-				totalLoss = 0.00; totalProfit = 0.00;
-			}
-		}
+				for (int i = 5 ; i < 40; i=i+5)
+				{
+					for(int j = 10; j < 100; j=j+3) {
+						Double entryMultiplier = 1 + Double.valueOf(i)/10000;
+						Double exitMultiplier = 1 + Double.valueOf(j)/1000;
+						returnMultiplierProfitLoss(ticker, entryMultiplier, exitMultiplier);
+						totalLoss = 0.00; totalProfit = 0.00;
+					}
+				}
 
-		//				returnMultiplierProfitLoss(ticker, 1.0005, 1.01);
+//		returnMultiplierProfitLoss(ticker, 1.0005, 1.01);
 		System.out.println("Max Profit: " + maxProfit);
 		pw.write("Max Profit: " + maxProfit);
 	} 
@@ -140,8 +140,8 @@ public class Extract_Calibrating_Factors_Scenario5 {
 					}
 				}
 				totalCount = totalCount - releaseQuantity;
-//				System.out.println(i + "\t" + ticker.get(i) + "\tEntryAt: " + entryAt + "\t" + ticker.get(entryAt) + "\t" + totalCount + "\t" + releaseQuantity);
-				//				pw.write(i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + totalCount + "\t" + releaseQuantity + "\n");
+//								System.out.println(i + "\t" + ticker.get(i) + "\tEntryAt: " + entryAt + "\t" + ticker.get(entryAt) + "\t" + totalCount + "\t" + releaseQuantity);
+//								pw.write(i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + totalCount + "\t" + releaseQuantity + "\n");
 				releaseQuantity = 0;
 				i = downTrendAt;
 				continue;
@@ -160,7 +160,7 @@ public class Extract_Calibrating_Factors_Scenario5 {
 					}
 				}
 				totalCount = totalCount - releaseQuantity;
-//				System.out.println(i + "\t" + ticker.get(i) + "\tEntryAt: " + entryAt + "\t" + ticker.get(entryAt) + "\t" + totalCount + "\t" + releaseQuantity);
+//								System.out.println(i + "\t" + ticker.get(i) + "\tEntryAt: " + entryAt + "\t" + ticker.get(entryAt) + "\t" + totalCount + "\t" + releaseQuantity);
 				//				pw.write(i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + totalCount + "\t" + releaseQuantity + "\n");
 				releaseQuantity = 0;
 				i = entryAt;
@@ -182,8 +182,8 @@ public class Extract_Calibrating_Factors_Scenario5 {
 			}
 			totalCount++;
 			if (totalCount > maxCount) maxCount = totalCount;
-//			System.out.println("EntryAt: " + entryAt + "\t" + ticker.get(entryAt) + "\tExitAt: " + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount);
-			//			pw.write(entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount + "\n");
+//						System.out.println("EntryAt: " + entryAt + "\t" + ticker.get(entryAt) + "\tExitAt: " + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount);
+//						pw.write(entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount + "\n");
 		}
 
 		Double netProfit = totalProfit + totalLoss;

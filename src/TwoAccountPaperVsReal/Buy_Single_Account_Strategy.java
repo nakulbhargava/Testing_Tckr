@@ -47,7 +47,7 @@ public class Buy_Single_Account_Strategy {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
 	static Double qty = 1.0;
-	static Double maxQty = 400.0;
+	static Double maxQty = 1000.0;
 
 	static Double pointZeroOneFactor = maxQty/10000;
 	
@@ -73,7 +73,7 @@ public class Buy_Single_Account_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 62.9;
+	static Double stableHighPrice = 61.6;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -108,7 +108,7 @@ public class Buy_Single_Account_Strategy {
 				return false;
 			}
 			if ( testPrice*upTrendFactor < currentPrice) {
-				pw.write("Returning Uptrend to Buy - Initial Price: " + testPrice + " Current Price: " + currentPrice + LocalDateTime.now().toString() + "\n");
+				pw.write("Returning Uptrend to Buy - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
 				System.out.println("Returning Uptrend to Buy - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
 				return true;
 			}

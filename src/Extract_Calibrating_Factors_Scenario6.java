@@ -14,10 +14,10 @@ import java.util.List;
  * Scenario4: Entry 1 low and stopLoss/exitAt 2 higher than entry 1, Make profit by short selling at 1
  * 
  * Other scenarios to consider:
- * high high: entry 1 at high and exit 2 at higher, stoploss/exitAt some point lower than 1
- * low low: entry 1 at low and exit 2 at lower, stoploss/exitAt some point higher than 1
+ * Scenario 5: high high: entry 1 at high and exit 2 at higher, downtrend at some point lower than 1 to do nothing
+ * Scenario 6: low low: entry 1 at low and exit 2 at lower, uptrend some point higher than 1 to do nothing
  * 
- * Below program deals with scenario1
+ * Below program deals with scenario6
  */
 public class Extract_Calibrating_Factors_Scenario6 {
 //	static Double profitMultiplier = 1.001;
