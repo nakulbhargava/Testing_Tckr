@@ -54,7 +54,7 @@ public class Buy_Single_Account_Strategy {
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.043;
 	static Double upTrendFactor = 1.0015;
-	static Double downTrendFactor = .9995;
+	static Double downTrendFactor = .995;
 
 	static String symbol = "SNAP";
 
@@ -98,10 +98,11 @@ public class Buy_Single_Account_Strategy {
 
 	public static boolean isUpTrend() throws IOException, InterruptedException {
 		Double testPrice = returnCurrentPrice();
-
+		pw.write("Returning Downtrend to do nothing - Initial Price: " + testPrice + "\n");
 		do {
 			Thread.sleep(1500);
 			currentPrice = returnCurrentPrice();
+			pw.write("Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
 			if (testPrice*downTrendFactor > currentPrice) {
 				pw.write("Returning Downtrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
 				System.out.println("Returning Downtrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());

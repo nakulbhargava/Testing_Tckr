@@ -73,9 +73,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + accountEndpoint))
 				.GET()
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString()); 
@@ -129,9 +129,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint))
 				.POST(HttpRequest.BodyPublishers.ofString(requestBody))
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
@@ -174,9 +174,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint))
 				.POST(HttpRequest.BodyPublishers.ofString(requestBody))
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
@@ -242,9 +242,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint))
 				.POST(HttpRequest.BodyPublishers.ofString(requestBody))
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
@@ -324,9 +324,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint))
 				.POST(HttpRequest.BodyPublishers.ofString(requestBody))
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
@@ -366,9 +366,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint))
 				.POST(HttpRequest.BodyPublishers.ofString(requestBody))
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
@@ -433,9 +433,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint + "/" + orderId))
 				.GET()
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		// Send HTTP request
 		HttpResponse<String> response = client.send(request,
@@ -520,9 +520,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint + "?status=all&limit=500"))
 				.GET()
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		// Send HTTP request
 		HttpResponse<String> response = client.send(request,
@@ -554,9 +554,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint + "?status=open&symbol="+symbol))
 				.GET()
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		// Send HTTP request
 		HttpResponse<String> response = client.send(request,
@@ -656,9 +656,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + positionsEndpoint + "/" + symbol))
 				.GET()
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		// Send HTTP request
 		HttpResponse<String> response = client.send(request,

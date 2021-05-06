@@ -37,7 +37,7 @@ public class Extract_Calibrating_Factors_Scenario7 {
 	static int releaseQuantity = 0, totalCount = 0, totalReleaseQuantity = 0;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 
-	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.SNAP_210405_210409_" + stableHighPrice + " - " + localTime + ".txt");
+	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.SNAP_210101_210427_" + stableHighPrice + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
 	public static void main(String[] args) throws FileNotFoundException {
@@ -50,7 +50,7 @@ public class Extract_Calibrating_Factors_Scenario7 {
 		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
 		for (int i = 5 ; i < 40; i=i+5)
 		{
-			for(int j = 10; j < 100; j=j+3) {
+			for(int j = 10; j < 101; j=j+5) {
 				entryMultiplier = 1 + Double.valueOf(i)/10000;
 				exitMultiplier = 1 + Double.valueOf(j)/1000;
 				returnMultiplierProfitLoss();
@@ -64,7 +64,7 @@ public class Extract_Calibrating_Factors_Scenario7 {
 	} 
 
 	private List<String> readFileAsList() {
-		String fileName = "/test/US1.SNAP_210405_210409.txt";
+		String fileName = "/test/US1.SNAP_210101_210427.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();

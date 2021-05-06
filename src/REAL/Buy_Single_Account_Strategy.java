@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import alpacaPojo.OrdersPojo;
@@ -45,9 +46,9 @@ public class Buy_Single_Account_Strategy {
 	private static final String positionsEndpoint = "/positions";
 	private static final String assetsEndpoint = "/assets";
 	private static final String clockEndpoint = "/clock";
-	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(10,00);
+	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
-	static Double qty = 0.05;
+	static Double qty = 0.1;
 	static Double maxQty = 50.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
@@ -55,7 +56,7 @@ public class Buy_Single_Account_Strategy {
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.043;
 	static Double upTrendFactor = 1.001;
-	static Double downTrendFactor = .9995;
+	static Double downTrendFactor = .995;
 
 	static String symbol = "SNAP";
 
@@ -74,7 +75,7 @@ public class Buy_Single_Account_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 61.0;
+	static Double stableHighPrice = 59.6;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 
@@ -95,18 +96,36 @@ public class Buy_Single_Account_Strategy {
 					placeRealBuyOrder(symbol, qty);
 				}
 			}while(LocalDateTime.now().isBefore(marketCloseTime));
-//			PositionsPojo openPosition = alpacaAccount.getRealSymbolPosition(symbol);
-//			//Double sellQty = Double.valueOf(openPosition.getQty() == null? "0.00":openPosition.getQty());
-//			Double filledAveragePrice = Double.valueOf(openPosition.getAvg_entry_price());
+			
+			System.out.println("List of Buy Orders: " + filledBuyPrices.toString());
+			pw.write("List of Buy Orders: " + filledBuyPrices.toString() + "\n");			
+			Double totalBuyStockForTheDay = Double.valueOf(filledBuyPrices.size())*qty;
+			int wholeNumber = totalBuyStockForTheDay.intValue();
+			Double filledAveragePrice = 0.0;
+
 			for (Double filledBuyPrice: filledBuyPrices) {
-				placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, qty,  20.0 + filledBuyPrice*profitFactor);
-				Thread.sleep(100);
-				placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
-				pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
-						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
-				System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
-						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
+				filledAveragePrice = filledAveragePrice + filledBuyPrice;
 			}
+			filledAveragePrice = filledAveragePrice/filledBuyPrices.size();
+			
+			System.out.println("Trying to place Sell Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor);
+			pw.write("Trying to place Sell Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor + "\n");
+			placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, Double.valueOf(wholeNumber), filledAveragePrice*profitFactor);
+			Thread.sleep(100);
+			placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
+			pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+					"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
+			System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+					"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
+//			for (Double filledBuyPrice: filledBuyPrices) {
+//				placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, qty, filledBuyPrice*profitFactor);
+//				Thread.sleep(100);
+//				placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
+//				pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+//						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
+//				System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+//						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
+//			}
 			pw.close();
 		}
 	}
@@ -115,16 +134,18 @@ public class Buy_Single_Account_Strategy {
 		Double testPrice = returnCurrentPrice();
 
 		do {
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 			currentPrice = returnCurrentPrice();
+			System.out.println("Initial Price: \t" + testPrice + "\tCurrent Price: \t" + currentPrice + "\t" + LocalDateTime.now().toString());
+			pw.write("Initial Price: " + testPrice + "Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
 			if (testPrice*downTrendFactor > currentPrice) {
-				pw.write("Returning Downtrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
-				System.out.println("Returning Downtrend to do nothing - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
+				pw.write("Returning Downtrend to do nothing - Initial Price: \t" + testPrice + "\t Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
+				System.out.println("Returning Downtrend to do nothing - Initial Price: \t" + testPrice + "\t Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
 				return false;
 			}
 			if ( testPrice*upTrendFactor < currentPrice) {
-				pw.write("Returning Uptrend to Buy - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
-				System.out.println("Returning Uptrend to Buy - Initial Price: " + testPrice + " Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
+				pw.write("Returning Uptrend to Buy - Initial Price: \t" + testPrice + " \tCurrent Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
+				System.out.println("Returning Uptrend to Buy - Initial Price: \t" + testPrice + "\t Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
 				return true;
 			}
 		}while(LocalDateTime.now().isBefore(marketCloseTime));
