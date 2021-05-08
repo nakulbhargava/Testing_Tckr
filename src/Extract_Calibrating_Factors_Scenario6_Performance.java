@@ -25,8 +25,8 @@ import java.util.List;
  * Below program deals with scenario6
  */
 public class Extract_Calibrating_Factors_Scenario6_Performance {
-//	static Double profitMultiplier = 1.001;
-//	static boolean profitMet = false;
+	//	static Double profitMultiplier = 1.001;
+	//	static boolean profitMet = false;
 	static Double totalLoss = 0.00, totalProfit = 0.00;
 	static Double upTrendMultiplier = 1.0005;
 	static int maxShares = 10;
@@ -35,31 +35,34 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 	static List<String> ticker = null;
 	static Double entryMultiplier = 0.9995;
 	static Double exitMultiplier = .997;
-	static int releaseQuantity = 0, totalCount = 0;
+	static int releaseQuantity = 0, totalCount = 0, totalReleaseQuantity = 0;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 
 	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.SNAP_210405_210409_" + stableLowPrice + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
-	
+
 	public static void main(String[] args) throws FileNotFoundException {
 		pw = new PrintWriter(new FileOutputStream(fileTrue));
 		fo = new FileOutputStream(fileTrue);
 		Extract_Calibrating_Factors_Scenario6_Performance demo = new Extract_Calibrating_Factors_Scenario6_Performance();
 		ticker = demo.readFileAsList();
-		
+
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
 		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
-		for (int i = 5 ; i < 40; i=i+5)
-		{
-			for(int j = 1; j < 100; j=j+2) {
-				entryMultiplier = 1 - Double.valueOf(i)/10000;
-				exitMultiplier = 1 - Double.valueOf(j)/1000;
-				returnMultiplierProfitLoss();
-				totalLoss = 0.00; totalProfit = 0.00; releaseQuantity = 0; totalCount = 0;
+		for(int k =1 ; k < 11; k++) {
+			for (int i = 5 ; i < 40; i=i+5)
+			{
+				for(int j = 1; j < 100; j=j+6) {
+					entryMultiplier = 1 - Double.valueOf(i)/10000;
+					exitMultiplier = 1 - Double.valueOf(j)/1000;
+					returnMultiplierProfitLoss();
+					totalLoss = 0.00; totalProfit = 0.00; releaseQuantity = 0; totalCount = 0;totalReleaseQuantity = 0; stableLowPrice = 0.0;
+				}
 			}
+			upTrendMultiplier = upTrendMultiplier + 0.001;
 		}
-//		returnMultiplierProfitLoss();
+		//		returnMultiplierProfitLoss();
 		System.out.println("Max Profit: " + maxProfit);
 		pw.write("Max Profit: " + maxProfit);
 	} 
@@ -72,10 +75,13 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 			List<String> lines = Files.readAllLines(Paths.get(uri),
 					Charset.defaultCharset());
 			List<String> ticker = new ArrayList();
-
+			String priceToCompare = "0.0";
 			for (String line : lines) {
 				List<String> splitLine = Arrays.asList(line.split(",", -1));
-				ticker.add(splitLine.get(3));
+				if(!priceToCompare.equals(splitLine.get(3))) {
+					ticker.add(splitLine.get(3));
+					priceToCompare = splitLine.get(3);
+				}
 			}
 			return ticker;
 		} catch (Exception e) {
@@ -116,18 +122,18 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 		if(!exitPositionMet) positions.setExitPosition(-1);
 		if(!uptrendPositionMet) positions.setUptrendPosition(-1);
 		return positions;
-		
-//		Double startingValue = Double.valueOf(ticker.get(position));
-//		Double currentValue;
-//		for (int i = position; i < ticksLength; i++) {
-//			currentValue = Double.valueOf(ticks.get(i));
-//			if(currentValue.compareTo(startingValue*multiplier) > 0 || currentValue.compareTo(startingValue*multiplier) == 0){
-//				return i;
-//			}
-//		}
-//		return -1;
+
+		//		Double startingValue = Double.valueOf(ticker.get(position));
+		//		Double currentValue;
+		//		for (int i = position; i < ticksLength; i++) {
+		//			currentValue = Double.valueOf(ticks.get(i));
+		//			if(currentValue.compareTo(startingValue*multiplier) > 0 || currentValue.compareTo(startingValue*multiplier) == 0){
+		//				return i;
+		//			}
+		//		}
+		//		return -1;
 	}
-	
+
 	private static void returnMultiplierProfitLoss() {
 		int tickerLength = ticker.size();
 
@@ -137,7 +143,7 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 		int upTrendAt = 1;
 		int maxCount = 0;
 		Boolean firstLossReceived = false;
-		
+
 		for(int i = 1; i < tickerLength; i++) {
 			Positions position = returnMultiplierPosition(i);
 			entryAt = position.getEntryPosition();
@@ -150,19 +156,19 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 
 			if(upTrendAt < entryAt && upTrendAt != -1) {
 				exitPositions = calculateTotalCount(i, upTrendAt, exitPositions);
-				i = upTrendAt;
+				i = upTrendAt-1;
 				continue;
 			}
 			else {
 				exitPositions = calculateTotalCount(i, entryAt, exitPositions);
-				i = entryAt;
+				i = entryAt-1;
 				if(totalCount >= maxShares || Double.valueOf(ticker.get(i)).compareTo(stableLowPrice) < 0) {
 					continue;
 				}
 			}
 			if(repeatEntry.contains(entryAt)) continue;
 			repeatEntry.add(entryAt);
-			
+
 			if (exitAt < 0) {
 				exitAt = tickerLength - 1;
 				if(!firstLossReceived) {
@@ -177,24 +183,25 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 			}
 			totalCount++;
 			if (totalCount > maxCount) maxCount = totalCount;
-//			System.out.println(entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount);
+			//			System.out.println(entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount);
 		}
 
 		Double netProfit = totalProfit - totalLoss;
 		//Double netProfit = profitCount*0.001 - lossCount*0.004;
 		Double profitPerShare = netProfit/maxCount;
 		if (profitPerShare.compareTo(maxProfit) > 0) maxProfit = profitPerShare;
-		
-		System.out.println(entryMultiplier + "\t" + exitMultiplier + "\t" +  "NetProfit:" + "\t" + netProfit + "\tTotal Count: " + totalCount + "\tMax Count: " + maxCount + "\tProfitPerShare: " + profitPerShare + "\tProfitStopper: " + stableLowPrice);
-		pw.write(entryMultiplier + "\t" + exitMultiplier + "\t" +  "NetProfit:" + "\t" + netProfit + "\tTotal Count: " + totalCount + "\tMax Count: " + maxCount + "\tProfitPerShare: " + profitPerShare + "\tProfitStopper: " + stableLowPrice + "\n");
+
+		System.out.println(upTrendMultiplier + "\t" + entryMultiplier + "\t" + exitMultiplier + "\t" +  "NetProfit:" + "\t" + netProfit + "\tTotal Count: " + totalCount + "\tMax Count: " + maxCount + "\tReleased Shares: " + totalReleaseQuantity + "\tProfitPerShare: " + profitPerShare + "\tProfitStopper: " + stableLowPrice);
+		pw.write(upTrendMultiplier + "\t" + entryMultiplier + "\t" + exitMultiplier + "\t" +  "NetProfit:" + "\t" + netProfit + "\tTotal Count: " + totalCount + "\tMax Count: " + maxCount + "\tReleased Shares: " + totalReleaseQuantity + "\tProfitPerShare: " + profitPerShare + "\tProfitStopper: " + stableLowPrice + "\n");
 	}
 	public static List<Double> calculateTotalCount(int initialPosition, int finalPosition, List<Double> exitPositions) {
-		for (int j = initialPosition; j <= finalPosition; j++) {
+		for (int j = initialPosition; j < finalPosition; j++) {
 			int jsQuantity = 0;
 			for(Double exitPosition : exitPositions) {
 				if ( exitPosition.intValue() == j) {
 					jsQuantity++;
 					releaseQuantity++;
+					totalReleaseQuantity++;
 				}	
 			}
 			for(int k=0; k < jsQuantity; k++) {
@@ -202,12 +209,12 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 			}
 		}
 		totalCount = totalCount - releaseQuantity;
-//		System.out.println(initialPosition + "\t" + ticker.get(initialPosition) + "\tEntryAt: " + finalPosition + "\t" + ticker.get(finalPosition) + "\t" + totalCount + "\t" + releaseQuantity);
+		//		System.out.println(initialPosition + "\t" + ticker.get(initialPosition) + "\tEntryAt: " + finalPosition + "\t" + ticker.get(finalPosition) + "\t" + totalCount + "\t" + releaseQuantity);
 		//				pw.write(i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + totalCount + "\t" + releaseQuantity + "\n");
 		releaseQuantity = 0;
 		return exitPositions;
 	}
-	
+
 	public class Positions{
 		int entryPosition;
 		int uptrendPosition;

@@ -55,8 +55,8 @@ public class Buy_Single_Account_Strategy {
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.043;
-	static Double upTrendFactor = 1.001;
-	static Double downTrendFactor = .995;
+	static Double upTrendFactor = 1.0005;
+	static Double downTrendFactor = .9955;
 
 	static String symbol = "SNAP";
 
@@ -75,25 +75,32 @@ public class Buy_Single_Account_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 59.6;
+	static Double stableHighPrice = 54.7;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
-
+	static List<Double> potentialBuyPrices = new ArrayList<Double>();
+	static Double nextDayPotentialStablePrice = 0.0;
+	static Double maxStockPrice = 0.0, minStockPrice = 100.0;
+	static Double maxPlacedOrder = 0.0;
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
-		pw = new PrintWriter(new FileOutputStream(file));
-		fo = new FileOutputStream(file);
+		pw = new PrintWriter(new FileOutputStream(file), true);
+		fo = new FileOutputStream(file, true);
 
 		if(alpacaAccount.getClock().isIs_open()) {
 			do {
 				boolean isUpTrend = isUpTrend();
 				PositionsPojo openPosition = alpacaAccount.getRealSymbolPosition(symbol);
 				Double currentQty = Double.valueOf(openPosition.getQty() == null? "0.00":openPosition.getQty());
-				if(isUpTrend && maxQty.compareTo(currentQty) > 0 && returnCurrentPrice().compareTo(stableHighPrice) < 0) {
+				Double currentPrice = returnCurrentPrice();
+				if(isUpTrend && maxQty.compareTo(currentQty) > 0 && currentPrice.compareTo(stableHighPrice) < 0) {
 					placeRealBuyOrder(symbol, qty);
+				}
+				if(isUpTrend) {
+					potentialBuyPrices.add(currentPrice);
 				}
 			}while(LocalDateTime.now().isBefore(marketCloseTime));
 			
@@ -105,9 +112,19 @@ public class Buy_Single_Account_Strategy {
 
 			for (Double filledBuyPrice: filledBuyPrices) {
 				filledAveragePrice = filledAveragePrice + filledBuyPrice;
+				if(filledBuyPrice.compareTo(maxPlacedOrder) > 0) {
+					maxPlacedOrder = filledBuyPrice;
+				}
 			}
-			filledAveragePrice = filledAveragePrice/filledBuyPrices.size();
 			
+			Double potentialAverageBuyPrice = 0.0;
+			for (Double potentialBuyPrice: potentialBuyPrices) {
+				potentialAverageBuyPrice = potentialAverageBuyPrice + potentialBuyPrice;
+			}	
+			potentialAverageBuyPrice = potentialAverageBuyPrice/potentialBuyPrices.size();
+			filledAveragePrice = filledAveragePrice/filledBuyPrices.size();
+			System.out.println("Max Placed Buy Order Price: " + maxPlacedOrder + "\tAverageFilledPrice: " + filledAveragePrice + "\tFor Stocks: " + filledBuyPrices.size() + "\n");
+			pw.write("Max Placed Buy Order Price: " + maxPlacedOrder + "\tAverageFilledPrice: " + filledAveragePrice + "\tFor Stocks: " + filledBuyPrices.size() + "\n");	
 			System.out.println("Trying to place Sell Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor);
 			pw.write("Trying to place Sell Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor + "\n");
 			placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, Double.valueOf(wholeNumber), filledAveragePrice*profitFactor);
@@ -126,25 +143,41 @@ public class Buy_Single_Account_Strategy {
 //				System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
 //						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
 //			}
+			nextDayPotentialStablePrice = (maxStockPrice + maxStockPrice/profitFactor + minStockPrice + minStockPrice*profitFactor)/4;
+			System.out.println("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "MinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice);
+			pw.write("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "MinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice + "\n");
+			System.out.println("Another Potential Stable High Price: " + potentialAverageBuyPrice);
+			pw.write("Another Potential Stable High Price: " + potentialAverageBuyPrice + "\n");	
 			pw.close();
 		}
 	}
 
 	public static boolean isUpTrend() throws IOException, InterruptedException {
 		Double testPrice = returnCurrentPrice();
-
+		if(testPrice.compareTo(maxStockPrice) > 0) {
+			maxStockPrice = testPrice;
+		}
+		if(testPrice.compareTo(minStockPrice) < 0) {
+			minStockPrice = testPrice;
+		}
 		do {
 			Thread.sleep(2000);
 			currentPrice = returnCurrentPrice();
+			if(currentPrice.compareTo(maxStockPrice) > 0) {
+				maxStockPrice = currentPrice;
+			}
+			if(currentPrice.compareTo(minStockPrice) < 0) {
+				minStockPrice = currentPrice;
+			}
 			System.out.println("Initial Price: \t" + testPrice + "\tCurrent Price: \t" + currentPrice + "\t" + LocalDateTime.now().toString());
-			pw.write("Initial Price: " + testPrice + "Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
+			pw.write("Initial Price: " + testPrice + "\tCurrent Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
 			if (testPrice*downTrendFactor > currentPrice) {
-				pw.write("Returning Downtrend to do nothing - Initial Price: \t" + testPrice + "\t Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
+				pw.write("Returning Downtrend to do nothing - Initial Price: " + testPrice + "\t Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
 				System.out.println("Returning Downtrend to do nothing - Initial Price: \t" + testPrice + "\t Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
 				return false;
 			}
 			if ( testPrice*upTrendFactor < currentPrice) {
-				pw.write("Returning Uptrend to Buy - Initial Price: \t" + testPrice + " \tCurrent Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
+				pw.write("Returning Uptrend to Buy - Initial Price: " + testPrice + " \tCurrent Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
 				System.out.println("Returning Uptrend to Buy - Initial Price: \t" + testPrice + "\t Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
 				return true;
 			}
@@ -193,7 +226,7 @@ public class Buy_Single_Account_Strategy {
 			placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
 
 		}
-		pw.write("Buy Order filled: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
+		pw.write("Buy Order filled at: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 				"\t" + placedBuyOrder.getFilled_avg_price() + "\t" + LocalDateTime.now().toString() + "\n");
 		System.out.println("Buy Order filled: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 				"\t" + placedBuyOrder.getFilled_avg_price() + "\t" + LocalDateTime.now().toString());
