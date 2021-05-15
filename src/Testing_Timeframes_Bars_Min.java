@@ -47,7 +47,7 @@ public class Testing_Timeframes_Bars_Min {
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 
-		String symbol = "ABNB";
+		String symbol = "MRO";
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
 
 		File file = new File("C:\\Users\\nakul\\Documents\\outputTimeframe - " + localTime + ".txt");
@@ -55,7 +55,7 @@ public class Testing_Timeframes_Bars_Min {
 		FileOutputStream fo = new FileOutputStream(file);
 
 		//AssetsPojo assets = alpacaAccount.getAssetSymbol(symbol);
-		TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, "2021-04-05", "2021-04-05", "1Min");
+		TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, "2021-01-01", "2021-05-15", "1Day");
 		BarsPojo bars[] = timeframe.getBars();
 		//Double highLowPercent = (Double.valueOf(bars.getHighPrice()) - Double.valueOf(bars.getLowPrice()))*100/Double.valueOf(bars.getClosePrice());
 		DecimalFormat df = new DecimalFormat("#.##");

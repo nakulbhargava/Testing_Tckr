@@ -28,8 +28,8 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 	//	static Double profitMultiplier = 1.001;
 	//	static boolean profitMet = false;
 	static Double totalLoss = 0.00, totalProfit = 0.00;
-	static Double downTrendMultiplier = 0.998;
-	static int maxShares = 1000;
+	static Double downTrendMultiplier = 0.999;
+	static int maxShares = 100000;
 	static Double maxProfit = 0.0;
 	static Double stableHighPrice = 200.00;
 	static List<String> ticker = null;
@@ -38,7 +38,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 	static int releaseQuantity = 0, totalCount = 0, totalReleaseQuantity = 0;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 
-	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\SNAP_210101_210506" + " - " + localTime + ".txt");
+	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.CCL_210101_210515" + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
 	public static void main(String[] args) throws FileNotFoundException {
@@ -52,7 +52,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 				for(int k =1 ; k < 7; k++) {
 					for (int i = 5 ; i < 15; i=i+5)
 					{
-						for(int j = 10; j < 60; j=j+6) {
+						for(int j = 4; j < 60; j=j+6) {
 							entryMultiplier = 1 + Double.valueOf(i)/10000;
 							exitMultiplier = 1 + Double.valueOf(j)/1000;
 							returnMultiplierProfitLoss();
@@ -69,7 +69,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 	} 
 
 	private List<String> readFileAsList() {
-		String fileName = "/test/SNAP_210101_210506.txt";
+		String fileName = "/test/US1.CCL_210101_210515.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();
