@@ -28,8 +28,8 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 	//	static Double profitMultiplier = 1.001;
 	//	static boolean profitMet = false;
 	static Double totalLoss = 0.00, totalProfit = 0.00;
-	static Double upTrendMultiplier = 1.0005;
-	static int maxShares = 10;
+	static Double upTrendMultiplier = 1.001;
+	static int maxShares = 100000;
 	static Double maxProfit = 0.0;
 	static Double stableLowPrice = 0.0;
 	static List<String> ticker = null;
@@ -38,7 +38,7 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 	static int releaseQuantity = 0, totalCount = 0, totalReleaseQuantity = 0;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 
-	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.SNAP_210405_210409_" + stableLowPrice + " - " + localTime + ".txt");
+	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.AAPL_210101_210510_" + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
 
@@ -51,7 +51,7 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
 		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
 		for(int k =1 ; k < 11; k++) {
-			for (int i = 5 ; i < 40; i=i+5)
+			for (int i = 5 ; i < 20; i=i+5)
 			{
 				for(int j = 1; j < 100; j=j+6) {
 					entryMultiplier = 1 - Double.valueOf(i)/10000;
@@ -62,13 +62,14 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 			}
 			upTrendMultiplier = upTrendMultiplier + 0.001;
 		}
-		//		returnMultiplierProfitLoss();
+//				returnMultiplierProfitLoss();
 		System.out.println("Max Profit: " + maxProfit);
 		pw.write("Max Profit: " + maxProfit);
+		pw.close();
 	} 
 
 	private List<String> readFileAsList() {
-		String fileName = "/test/US1.SNAP_210405_210409.txt";
+		String fileName = "/test/US1.AAPL_210101_210510.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();
@@ -82,6 +83,7 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 					ticker.add(splitLine.get(3));
 					priceToCompare = splitLine.get(3);
 				}
+//				ticker.add(splitLine.get(3));
 			}
 			return ticker;
 		} catch (Exception e) {
@@ -183,7 +185,7 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 			}
 			totalCount++;
 			if (totalCount > maxCount) maxCount = totalCount;
-			//			System.out.println(entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount);
+//						System.out.println(entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount);
 		}
 
 		Double netProfit = totalProfit - totalLoss;
@@ -209,7 +211,7 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 			}
 		}
 		totalCount = totalCount - releaseQuantity;
-		//		System.out.println(initialPosition + "\t" + ticker.get(initialPosition) + "\tEntryAt: " + finalPosition + "\t" + ticker.get(finalPosition) + "\t" + totalCount + "\t" + releaseQuantity);
+//				System.out.println(initialPosition + "\t" + ticker.get(initialPosition) + "\tEntryAt: " + finalPosition + "\t" + ticker.get(finalPosition) + "\t" + totalCount + "\t" + releaseQuantity);
 		//				pw.write(i + "\t" + ticker.get(i) + "\t" + entryAt + "\t" + ticker.get(entryAt) + "\t" + totalCount + "\t" + releaseQuantity + "\n");
 		releaseQuantity = 0;
 		return exitPositions;

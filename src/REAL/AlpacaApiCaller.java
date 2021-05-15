@@ -330,6 +330,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 				.build();
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
+		System.out.println(response.body());
+		System.out.println(response.statusCode());
+		System.out.println(response.request());
 		return getJsonObject(response.body(), OrdersPojo.class);
 	}
 	protected OrdersPojo sellSymbolLimitOrder(String symbol, Double qty, Double price) throws IOException, InterruptedException {

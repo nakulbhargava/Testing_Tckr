@@ -48,14 +48,14 @@ public class Buy_Single_Account_Strategy {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
-	static Double qty = 0.1;
-	static Double maxQty = 50.0;
+	static Double qty = 0.05;
+	static Double maxQty = 57.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
 
 	//Below to be extracted from Extract Calibrating factor 5
-	static Double profitFactor = 1.043;
-	static Double upTrendFactor = 1.0005;
+	static Double profitFactor = 1.051;
+	static Double upTrendFactor = 1.001;
 	static Double downTrendFactor = .9955;
 
 	static String symbol = "SNAP";
@@ -75,7 +75,7 @@ public class Buy_Single_Account_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 54.7;
+	static Double stableHighPrice = 52.98;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 	static List<Double> potentialBuyPrices = new ArrayList<Double>();
@@ -144,8 +144,8 @@ public class Buy_Single_Account_Strategy {
 //						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
 //			}
 			nextDayPotentialStablePrice = (maxStockPrice + maxStockPrice/profitFactor + minStockPrice + minStockPrice*profitFactor)/4;
-			System.out.println("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "MinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice);
-			pw.write("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "MinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice + "\n");
+			System.out.println("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "\tMinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice);
+			pw.write("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "\tMinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice + "\n");
 			System.out.println("Another Potential Stable High Price: " + potentialAverageBuyPrice);
 			pw.write("Another Potential Stable High Price: " + potentialAverageBuyPrice + "\n");	
 			pw.close();
@@ -161,7 +161,7 @@ public class Buy_Single_Account_Strategy {
 			minStockPrice = testPrice;
 		}
 		do {
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			currentPrice = returnCurrentPrice();
 			if(currentPrice.compareTo(maxStockPrice) > 0) {
 				maxStockPrice = currentPrice;
