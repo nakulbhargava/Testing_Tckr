@@ -48,7 +48,7 @@ public class Buy_Single_Account_Strategy_AMWL {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
-	static Double qty = 0.5;
+	static Double qty = 0.2;
 	static Double maxQty = 100.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
@@ -75,7 +75,7 @@ public class Buy_Single_Account_Strategy_AMWL {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 52.98;
+	static Double stableHighPrice = 11.3;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 	static List<Double> potentialBuyPrices = new ArrayList<Double>();

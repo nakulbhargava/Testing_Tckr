@@ -38,7 +38,7 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 	static int releaseQuantity = 0, totalCount = 0, totalReleaseQuantity = 0;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 
-	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.AAPL_210101_210510_" + " - " + localTime + ".txt");
+	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.CCL_20210301_Monthly" + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
 
@@ -50,10 +50,10 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
 		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
-		for(int k =1 ; k < 11; k++) {
+		for(int k =1 ; k < 7; k++) {
 			for (int i = 5 ; i < 20; i=i+5)
 			{
-				for(int j = 1; j < 100; j=j+6) {
+				for(int j = 4; j < 90; j=j+6) {
 					entryMultiplier = 1 - Double.valueOf(i)/10000;
 					exitMultiplier = 1 - Double.valueOf(j)/1000;
 					returnMultiplierProfitLoss();
@@ -69,7 +69,7 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 	} 
 
 	private List<String> readFileAsList() {
-		String fileName = "/test/US1.AAPL_210101_210510.txt";
+		String fileName = "/test/US1.CCL_20210301_Monthly.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();
@@ -151,14 +151,17 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 			entryAt = position.getEntryPosition();
 			exitAt = position.getExitPosition();
 			upTrendAt = position.getUptrendPosition();
-			if (entryAt < 0) {
-				//System.out.println("Multiplier:" + entryMultiplier + " doesnot exist for position: " + i + " with value: " + ticker.get(i) + "\n");
+			
+			if((upTrendAt < entryAt && upTrendAt != -1) || (upTrendAt > 0 && entryAt < 0)) {
+				exitPositions = calculateTotalCount(i, upTrendAt, exitPositions);
+//				System.out.println("Uptrend Met First for position:" + i + "\twith value: " + ticker.get(i) + "\tat: " + upTrendAt + "\twith value: "+ ticker.get(upTrendAt));
+//				pw.write("Uptrend Met First for position:" + i + "\twith value: " + ticker.get(i) + "\tat: " + upTrendAt + "\twith value: "+ ticker.get(upTrendAt) + "\n");
+
+				i = upTrendAt-1;
 				continue;
 			}
-
-			if(upTrendAt < entryAt && upTrendAt != -1) {
-				exitPositions = calculateTotalCount(i, upTrendAt, exitPositions);
-				i = upTrendAt-1;
+			if (entryAt < 0) {
+				//System.out.println("Multiplier:" + entryMultiplier + " doesnot exist for position: " + i + " with value: " + ticker.get(i) + "\n");
 				continue;
 			}
 			else {

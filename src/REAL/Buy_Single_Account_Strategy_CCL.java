@@ -48,13 +48,13 @@ public class Buy_Single_Account_Strategy_CCL {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
-	static Double qty = 0.05;
+	static Double qty = 0.1;
 	static Double maxQty = 57.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
 
 	//Below to be extracted from Extract Calibrating factor 5
-	static Double profitFactor = 1.051;
+	static Double profitFactor = 1.08;
 	static Double upTrendFactor = 1.001;
 	static Double downTrendFactor = .9955;
 
@@ -75,7 +75,7 @@ public class Buy_Single_Account_Strategy_CCL {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 52.98;
+	static Double stableHighPrice = 26.5;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 	static List<Double> potentialBuyPrices = new ArrayList<Double>();

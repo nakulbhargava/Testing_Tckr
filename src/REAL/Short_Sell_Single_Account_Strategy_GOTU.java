@@ -50,12 +50,12 @@ public class Short_Sell_Single_Account_Strategy_GOTU {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
 	static Double qty = 1.0;
-	static Double maxQty = 10.0;
+	static Double maxQty = 15.0;
 
 	static Double pointZeroOneFactor = maxQty/10000;
 
 	//Below to be extracted from Extract Calibrating factor 5
-	static Double profitFactor = .969;
+	static Double profitFactor = .939;
 	static Double upTrendFactor = 1.004;
 	static Double downTrendFactor = .999;
 
@@ -163,7 +163,7 @@ public class Short_Sell_Single_Account_Strategy_GOTU {
 			minStockPrice = testPrice;
 		}
 		do {
-			Thread.sleep(660000);
+			Thread.sleep(460000);
 			currentPrice = returnCurrentPrice();
 			if(currentPrice.compareTo(maxStockPrice) > 0) {
 				maxStockPrice = currentPrice;

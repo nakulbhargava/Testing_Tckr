@@ -33,12 +33,12 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 	static Double maxProfit = 0.0;
 	static Double stableHighPrice = 200.00;
 	static List<String> ticker = null;
-	static Double entryMultiplier = 1.0005;
-	static Double exitMultiplier = 1.043;
+	static Double entryMultiplier = 1.001;
+	static Double exitMultiplier = 1.003;
 	static int releaseQuantity = 0, totalCount = 0, totalReleaseQuantity = 0;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 
-	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.CCL_210101_210515" + " - " + localTime + ".txt");
+	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.CCL_20210301_Monthly" + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
 	public static void main(String[] args) throws FileNotFoundException {
@@ -46,21 +46,21 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 		fo = new FileOutputStream(fileTrue, true);
 		Extract_Calibrating_Factors_Scenario5_Performance demo = new Extract_Calibrating_Factors_Scenario5_Performance();
 		ticker = demo.readFileAsList();
-//		System.out.println(exitMultiplier.intValue());
+		//		System.out.println(exitMultiplier.intValue());
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
 		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
-				for(int k =1 ; k < 7; k++) {
-					for (int i = 5 ; i < 15; i=i+5)
-					{
-						for(int j = 4; j < 60; j=j+6) {
-							entryMultiplier = 1 + Double.valueOf(i)/10000;
-							exitMultiplier = 1 + Double.valueOf(j)/1000;
-							returnMultiplierProfitLoss();
-							totalLoss = 0.00; totalProfit = 0.00; releaseQuantity = 0; totalCount = 0; totalReleaseQuantity = 0; stableHighPrice = 200.00;
+						for(int k =1 ; k < 7; k++) {
+							for (int i = 5 ; i < 20; i=i+5)
+							{
+								for(int j = 4; j < 90; j=j+6) {
+									entryMultiplier = 1 + Double.valueOf(i)/10000;
+									exitMultiplier = 1 + Double.valueOf(j)/1000;
+									returnMultiplierProfitLoss();
+									totalLoss = 0.00; totalProfit = 0.00; releaseQuantity = 0; totalCount = 0; totalReleaseQuantity = 0; stableHighPrice = 200.00;
+								}
+							}
+							downTrendMultiplier = downTrendMultiplier - 0.001;
 						}
-					}
-					downTrendMultiplier = downTrendMultiplier - 0.001;
-				}
 
 //		returnMultiplierProfitLoss();
 		System.out.println("Max Profit: " + maxProfit);
@@ -69,7 +69,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 	} 
 
 	private List<String> readFileAsList() {
-		String fileName = "/test/US1.CCL_210101_210515.txt";
+		String fileName = "/test/US1.CCL_20210301_Monthly.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();
@@ -83,7 +83,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 					ticker.add(splitLine.get(3));
 					priceToCompare = splitLine.get(3);
 				}
-//								ticker.add(splitLine.get(3));
+				//								ticker.add(splitLine.get(3));
 			}
 			return ticker;
 		} catch (Exception e) {
@@ -138,23 +138,25 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 		int maxCount = 0;
 		int evalPos = 0;
 
-		for(int i = 1; i < tickerLength; i++) {
+		for(int i = 1; i < tickerLength-1; i++) {
 			Positions position = returnMultiplierPositions(i);
 			entryAt = position.getEntryPosition();
 			exitAt = position.getExitPosition();
 			downTrendAt = position.getDowntrendPosition();
 			evalPos = i;
-			if (entryAt < 0) {
-//												System.out.println("Multiplier:" + entryMultiplier + " doesnot exist for position: " + i + " with value: " + ticker.get(i));
-//												pw.write("Multiplier:" + entryMultiplier + " doesnot exist for position: " + i + " with value: " + ticker.get(i) + "\n");
-				continue;
-			}
-			if(downTrendAt < entryAt && downTrendAt != -1) {
+
+			if((downTrendAt < entryAt || (downTrendAt > 0 && entryAt < 0)) && downTrendAt != -1) {
 				exitPositions = calculateTotalCount(i, downTrendAt, exitPositions);
-//												System.out.println("DownTrend Met First for position:" + i + "\twith value: " + ticker.get(i) + "\tat: " + downTrendAt + "\twith value: "+ ticker.get(downTrendAt));
-//								pw.write("DownTrend Met First for position:" + i + "\twith value: " + ticker.get(i) + "\tat: " + downTrendAt + "\twith value: "+ ticker.get(downTrendAt) + "\n");
+//				System.out.println(i + "\t" + downTrendAt);
+//				System.out.println("DownTrend Met First for position:" + i + "\twith value: " + ticker.get(i) + "\tat: " + downTrendAt + "\twith value: "+ ticker.get(downTrendAt));
+//				pw.write("DownTrend Met First for position:" + i + "\twith value: " + ticker.get(i) + "\tat: " + downTrendAt + "\twith value: "+ ticker.get(downTrendAt) + "\n");
 
 				i = downTrendAt-1;
+				continue;
+			}
+			if (entryAt < 0) {
+//				System.out.println("Multiplier:" + entryMultiplier + " doesnot exist for position: " + i + " with value: " + ticker.get(i));
+//				pw.write("Multiplier:" + entryMultiplier + " doesnot exist for position: " + i + " with value: " + ticker.get(i) + "\n");
 				continue;
 			}
 			else {
@@ -183,7 +185,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 			}
 			totalCount++;
 			if (totalCount > maxCount) maxCount = totalCount;
-//			System.out.println(ticker.get(entryAt) + "\t" + ticker.get(exitAt));
+			//			System.out.println(ticker.get(entryAt) + "\t" + ticker.get(exitAt));
 //			System.out.println("Initial Pos: " + evalPos + "\t" + ticker.get(evalPos) + "\tEntryAt: " + entryAt + "\t" + ticker.get(entryAt) + "\tExitAt: " + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount);
 //			pw.write("Initial Pos: " + evalPos + "\t" + ticker.get(evalPos) + "\tEntryAt: " + entryAt + "\t" + ticker.get(entryAt) + "\t" + exitAt + "\t" + ticker.get(exitAt) + "\t" + totalLoss + "\t" + totalProfit + "\t" + totalCount + "\n");
 		}

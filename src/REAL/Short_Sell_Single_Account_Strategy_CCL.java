@@ -50,13 +50,13 @@ public class Short_Sell_Single_Account_Strategy_CCL {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
 	static Double qty = 1.0;
-	static Double maxQty = 10.0;
+	static Double maxQty = 20.0;
 
 	static Double pointZeroOneFactor = maxQty/10000;
 
 	//Below to be extracted from Extract Calibrating factor 5
-	static Double profitFactor = .969;
-	static Double upTrendFactor = 1.004;
+	static Double profitFactor = .92;
+	static Double upTrendFactor = 1.006;
 	static Double downTrendFactor = .999;
 
 	static String symbol = "CCL";
@@ -76,7 +76,7 @@ public class Short_Sell_Single_Account_Strategy_CCL {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 52.9;
+	static Double stableLowPrice = 25.9;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	
