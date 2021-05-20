@@ -251,6 +251,7 @@ public class Buy_Single_Account_Strategy_UBER {
 		if (placedBuyOrder.getId() == null) return null;
 		while (!"filled".equals(placedBuyOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
 

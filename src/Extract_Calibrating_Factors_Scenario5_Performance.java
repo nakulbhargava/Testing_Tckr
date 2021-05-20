@@ -34,11 +34,11 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 	static Double stableHighPrice = 200.00;
 	static List<String> ticker = null;
 	static Double entryMultiplier = 1.001;
-	static Double exitMultiplier = 1.003;
+	static Double exitMultiplier = 1.08;
 	static int releaseQuantity = 0, totalCount = 0, totalReleaseQuantity = 0;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 
-	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.CCL_20210301_Monthly" + " - " + localTime + ".txt");
+	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.MRO_210101_210515" + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
 	public static void main(String[] args) throws FileNotFoundException {
@@ -69,7 +69,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 	} 
 
 	private List<String> readFileAsList() {
-		String fileName = "/test/US1.CCL_20210301_Monthly.txt";
+		String fileName = "/test/US1.MRO_210101_210515.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();

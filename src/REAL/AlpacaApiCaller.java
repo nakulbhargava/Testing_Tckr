@@ -137,6 +137,7 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 				HttpResponse.BodyHandlers.ofString());
 		if(response.statusCode() != 200) {
 			System.out.println("Buy Error:" + response.body()); 
+			return null;
 		}
 		return getJsonObject(response.body(), OrdersPojo.class);
 	}
@@ -330,9 +331,13 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 				.build();
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
-		System.out.println(response.body());
-		System.out.println(response.statusCode());
-		System.out.println(response.request());
+//		System.out.println(response.body());
+//		System.out.println(response.statusCode());
+//		System.out.println(response.request());
+		if(response.statusCode() != 200) {
+			System.out.println("Sell Error:" + response.body()); 
+			return null;
+		}
 		return getJsonObject(response.body(), OrdersPojo.class);
 	}
 	protected OrdersPojo sellSymbolLimitOrder(String symbol, Double qty, Double price) throws IOException, InterruptedException {
@@ -443,7 +448,10 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		// Send HTTP request
 		HttpResponse<String> response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
-
+		if(response.statusCode() != 200) {
+			System.out.println("Buy Error:" + response.body()); 
+			return null;
+		}
 		return getJsonObject(response.body(), OrdersPojo.class);
 	}
 	@SuppressWarnings("static-access")

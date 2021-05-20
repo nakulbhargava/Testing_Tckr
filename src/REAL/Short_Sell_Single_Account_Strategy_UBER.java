@@ -253,6 +253,7 @@ public class Short_Sell_Single_Account_Strategy_UBER {
 		if (placedSellOrder.getId() == null) return null;
 		while (!"filled".equals(placedSellOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
 

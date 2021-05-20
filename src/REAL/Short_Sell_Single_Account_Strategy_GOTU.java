@@ -50,7 +50,7 @@ public class Short_Sell_Single_Account_Strategy_GOTU {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
 	static Double qty = 1.0;
-	static Double maxQty = 15.0;
+	static Double maxQty = 40.0;
 
 	static Double pointZeroOneFactor = maxQty/10000;
 
@@ -76,7 +76,7 @@ public class Short_Sell_Single_Account_Strategy_GOTU {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 52.9;
+	static Double stableLowPrice = 23.5;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	
@@ -253,6 +253,7 @@ public class Short_Sell_Single_Account_Strategy_GOTU {
 		if (placedSellOrder.getId() == null) return null;
 		while (!"filled".equals(placedSellOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
 

@@ -20,16 +20,16 @@ public class Buy_Single_Account_Strategy {
 	private static final String secretId = "APCA-API-SECRET-KEY";
 
 	//Nakul
-	//	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-	//	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
+		private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
+		private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
 
 	//Vaishali
 	//	private static final String alpacaKeyValue = "PKN9AR7BFFZXH5X3MP6H";
 	//	private static final String secretIdValue = "daalp83963QKdcmOqI7iaqBwkdZxFRdFAmcijLZH";
 
 	//Distorted
-	private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
-	private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
+//	private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
+//	private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
 
 	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
 	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
@@ -75,7 +75,7 @@ public class Buy_Single_Account_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 52.98;
+	static Double stableHighPrice = 53.16;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 	static List<Double> potentialBuyPrices = new ArrayList<Double>();
@@ -243,6 +243,7 @@ public class Buy_Single_Account_Strategy {
 
 	public static OrdersPojo placeRealBuyOrder(String symbol, Double qty) throws IOException, InterruptedException {
 		placeBuyOrder = alpacaAccount.buyRealSymbolQuantity(symbol, qty);
+		if (placeBuyOrder == null) return null;
 		placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
 		pw.write("Trying to Buy Order: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 				"\t" + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
@@ -250,7 +251,8 @@ public class Buy_Single_Account_Strategy {
 				"\t" + currentPrice + "\t" + LocalDateTime.now().toString());
 		if (placedBuyOrder.getId() == null) return null;
 		while (!"filled".equals(placedBuyOrder.getStatus()))
-		{		
+		{	
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
 

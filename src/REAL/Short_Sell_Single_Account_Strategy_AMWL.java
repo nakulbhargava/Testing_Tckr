@@ -20,16 +20,16 @@ public class Short_Sell_Single_Account_Strategy_AMWL {
 	private static final String secretId = "APCA-API-SECRET-KEY";
 
 	//Nakul
-//	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-//	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
+	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
+	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
 
 	//Vaishali
 	//	private static final String alpacaKeyValue = "PKN9AR7BFFZXH5X3MP6H";
 	//	private static final String secretIdValue = "daalp83963QKdcmOqI7iaqBwkdZxFRdFAmcijLZH";
 
 	//Distorted
-		private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
-		private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
+//		private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
+//		private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
 
 	//V
 	private static final String alpacaKeyRealTime = "AK9ZHVFUWYEX1FZHA8BR";
@@ -76,7 +76,7 @@ public class Short_Sell_Single_Account_Strategy_AMWL {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 11.0;
+	static Double stableLowPrice = 11.96;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	
@@ -163,7 +163,7 @@ public class Short_Sell_Single_Account_Strategy_AMWL {
 			minStockPrice = testPrice;
 		}
 		do {
-			Thread.sleep(360000);
+			Thread.sleep(160000);
 			currentPrice = returnCurrentPrice();
 			if(currentPrice.compareTo(maxStockPrice) > 0) {
 				maxStockPrice = currentPrice;
@@ -245,6 +245,7 @@ public class Short_Sell_Single_Account_Strategy_AMWL {
 	}
 	public static OrdersPojo placeRealSellOrder(String symbol, Double qty) throws IOException, InterruptedException {
 		placeSellOrder = alpacaAccount.sellRealSymbolQuantity(symbol, qty);
+		if (placeSellOrder == null) return null;
 		placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
 		pw.write("Trying to Sell Order: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
 				"\t" + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
@@ -253,6 +254,7 @@ public class Short_Sell_Single_Account_Strategy_AMWL {
 		if (placedSellOrder.getId() == null) return null;
 		while (!"filled".equals(placedSellOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
 

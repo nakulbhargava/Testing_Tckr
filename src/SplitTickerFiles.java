@@ -30,7 +30,7 @@ public class SplitTickerFiles {
 	} 
 
 	private void readAndWriteFileAsList() {
-		String fileName = "/test/US1.CCL_210101_210515.txt";
+		String fileName = "/test/US1.MRO_210101_210515.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();

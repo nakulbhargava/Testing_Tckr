@@ -33,12 +33,12 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 	static Double maxProfit = 0.0;
 	static Double stableLowPrice = 0.0;
 	static List<String> ticker = null;
-	static Double entryMultiplier = 0.9995;
-	static Double exitMultiplier = .997;
+	static Double entryMultiplier = 0.999;
+	static Double exitMultiplier = .92;
 	static int releaseQuantity = 0, totalCount = 0, totalReleaseQuantity = 0;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 
-	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.CCL_20210301_Monthly" + " - " + localTime + ".txt");
+	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\US1.MRO_210101_210515" + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
 
@@ -69,7 +69,7 @@ public class Extract_Calibrating_Factors_Scenario6_Performance {
 	} 
 
 	private List<String> readFileAsList() {
-		String fileName = "/test/US1.CCL_20210301_Monthly.txt";
+		String fileName = "/test/US1.MRO_210101_210515.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();

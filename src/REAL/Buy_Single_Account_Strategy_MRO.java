@@ -48,8 +48,8 @@ public class Buy_Single_Account_Strategy_MRO {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
-	static Double qty = 0.5;
-	static Double maxQty = 57.0;
+	static Double qty = 0.2;
+	static Double maxQty = 75.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
 
@@ -222,6 +222,7 @@ public class Buy_Single_Account_Strategy_MRO {
 		if (placedBuyOrder.getId() == null) return null;
 		while (!"filled".equals(placedBuyOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
 
@@ -243,6 +244,7 @@ public class Buy_Single_Account_Strategy_MRO {
 
 	public static OrdersPojo placeRealBuyOrder(String symbol, Double qty) throws IOException, InterruptedException {
 		placeBuyOrder = alpacaAccount.buyRealSymbolQuantity(symbol, qty);
+		if (placeBuyOrder == null) return null;
 		placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
 		pw.write("Trying to Buy Order: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 				"\t" + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
@@ -251,6 +253,7 @@ public class Buy_Single_Account_Strategy_MRO {
 		if (placedBuyOrder.getId() == null) return null;
 		while (!"filled".equals(placedBuyOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
 

@@ -58,7 +58,7 @@ public class Buy_Single_Account_Strategy_GAP {
 	static Double upTrendFactor = 1.001;
 	static Double downTrendFactor = .9955;
 
-	static String symbol = "GAP";
+	static String symbol = "GPS";
 
 	static AlpacaApiCaller alpacaAccount;
 	static int secondsCounter = 0;
@@ -75,7 +75,7 @@ public class Buy_Single_Account_Strategy_GAP {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 52.98;
+	static Double stableHighPrice = 33.69;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 	static List<Double> potentialBuyPrices = new ArrayList<Double>();
@@ -222,6 +222,7 @@ public class Buy_Single_Account_Strategy_GAP {
 		if (placedBuyOrder.getId() == null) return null;
 		while (!"filled".equals(placedBuyOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
 
@@ -243,6 +244,7 @@ public class Buy_Single_Account_Strategy_GAP {
 
 	public static OrdersPojo placeRealBuyOrder(String symbol, Double qty) throws IOException, InterruptedException {
 		placeBuyOrder = alpacaAccount.buyRealSymbolQuantity(symbol, qty);
+		if (placeBuyOrder == null) return null;
 		placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
 		pw.write("Trying to Buy Order: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 				"\t" + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
@@ -251,6 +253,7 @@ public class Buy_Single_Account_Strategy_GAP {
 		if (placedBuyOrder.getId() == null) return null;
 		while (!"filled".equals(placedBuyOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
 

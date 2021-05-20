@@ -20,16 +20,16 @@ public class Buy_Single_Account_Strategy_CCL {
 	private static final String secretId = "APCA-API-SECRET-KEY";
 
 	//Nakul
-	//	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-	//	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
+		private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
+		private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
 
 	//Vaishali
 	//	private static final String alpacaKeyValue = "PKN9AR7BFFZXH5X3MP6H";
 	//	private static final String secretIdValue = "daalp83963QKdcmOqI7iaqBwkdZxFRdFAmcijLZH";
 
 	//Distorted
-	private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
-	private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
+//	private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
+//	private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
 
 	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
 	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
@@ -48,7 +48,7 @@ public class Buy_Single_Account_Strategy_CCL {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
-	static Double qty = 0.1;
+	static Double qty = 0.2;
 	static Double maxQty = 57.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
@@ -75,7 +75,7 @@ public class Buy_Single_Account_Strategy_CCL {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 26.5;
+	static Double stableHighPrice = 28.25;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 	static List<Double> potentialBuyPrices = new ArrayList<Double>();
@@ -251,6 +251,7 @@ public class Buy_Single_Account_Strategy_CCL {
 		if (placedBuyOrder.getId() == null) return null;
 		while (!"filled".equals(placedBuyOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
 

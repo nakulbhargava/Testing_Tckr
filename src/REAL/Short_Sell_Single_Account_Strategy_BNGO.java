@@ -24,12 +24,12 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 //	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
 
 	//Vaishali
-	//	private static final String alpacaKeyValue = "PKN9AR7BFFZXH5X3MP6H";
-	//	private static final String secretIdValue = "daalp83963QKdcmOqI7iaqBwkdZxFRdFAmcijLZH";
+		private static final String alpacaKeyValue = "PKN9AR7BFFZXH5X3MP6H";
+		private static final String secretIdValue = "daalp83963QKdcmOqI7iaqBwkdZxFRdFAmcijLZH";
 
 	//Distorted
-		private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
-		private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
+//		private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
+//		private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
 
 	//V
 	private static final String alpacaKeyRealTime = "AK9ZHVFUWYEX1FZHA8BR";
@@ -50,7 +50,7 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
 
 	static Double qty = 1.0;
-	static Double maxQty = 100.0;
+	static Double maxQty = 140.0;
 
 	static Double pointZeroOneFactor = maxQty/10000;
 
@@ -76,7 +76,7 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 4.95;
+	static Double stableLowPrice = 5.2;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	
@@ -163,7 +163,7 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 			minStockPrice = testPrice;
 		}
 		do {
-			Thread.sleep(60000);
+			Thread.sleep(120000);
 			currentPrice = returnCurrentPrice();
 			if(currentPrice.compareTo(maxStockPrice) > 0) {
 				maxStockPrice = currentPrice;
@@ -253,6 +253,7 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 		if (placedSellOrder.getId() == null) return null;
 		while (!"filled".equals(placedSellOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
 

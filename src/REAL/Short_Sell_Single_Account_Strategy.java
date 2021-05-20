@@ -76,7 +76,7 @@ public class Short_Sell_Single_Account_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 52.9;
+	static Double stableLowPrice = 52.27;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	
@@ -253,6 +253,7 @@ public class Short_Sell_Single_Account_Strategy {
 		if (placedSellOrder.getId() == null) return null;
 		while (!"filled".equals(placedSellOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
 

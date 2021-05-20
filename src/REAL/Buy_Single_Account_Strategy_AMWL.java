@@ -48,7 +48,7 @@ public class Buy_Single_Account_Strategy_AMWL {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
-	static Double qty = 0.2;
+	static Double qty = 0.5;
 	static Double maxQty = 100.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
@@ -251,6 +251,7 @@ public class Buy_Single_Account_Strategy_AMWL {
 		if (placedBuyOrder.getId() == null) return null;
 		while (!"filled".equals(placedBuyOrder.getStatus()))
 		{		
+			if(!alpacaAccount.getClock().isIs_open()) return null;
 			Thread.sleep(100);
 			placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
 

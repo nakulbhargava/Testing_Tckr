@@ -44,13 +44,7 @@ public class Testing_Symbol_Asset_Timeframe {
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 
-		String symbol = "ARKK";
-		Double initialPriceToBuy = 2.00;
-		Double priceToBuy = initialPriceToBuy;
-		Double priceToSell = 0.00;
-		OrdersPojo placeOrder;
-		OrdersPojo placedOrder;
-		Double sellQty = 0.00;
+		String symbol = "BNGO";
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 		AssetsPojo asset = alpacaAccount.getAssetSymbol(symbol);
 
@@ -74,13 +68,18 @@ public class Testing_Symbol_Asset_Timeframe {
 				+ "\t" + "Close" + "\t" + "HIGH" + "\t" + "LOW" + "\t"+ "HL%" + "\t" + "Volume"+ "\n");
 
 		if("active".equals(asset.getStatus()) && asset.isFractionable() && asset.isMarginable() && asset.isShortable() && asset.isEasy_to_borrow() && asset.isTradable()) {
-			TimeframePojo timeframe = alpacaAccount.getTimeframe(asset.getSymbol(), "2021-04-26", "2021-04-26", "1Day");
+			TimeframePojo timeframe = alpacaAccount.getTimeframe(asset.getSymbol(), "2021-05-17", "2021-05-17", "1Day");
 			BarsPojo bars = timeframe.getBars()[0];
 			Double highLowPercent = (Double.valueOf(bars.getHighPrice()) - Double.valueOf(bars.getLowPrice()))*100/Double.valueOf(bars.getClosePrice());
 			DecimalFormat df = new DecimalFormat("#.##");
-			if(highLowPercent.compareTo(3.00)>0)
+//			if(highLowPercent.compareTo(3.00)>0)
 			{
 				pw1.write(asset.getExchange() + "\t\t" + asset.getSymbol() + "\t" + asset.getName() + "\t"
+						+ asset.isFractionable() + "\t\t" + asset.isShortable() + "\t\t" 
+						+ asset.isTradable()  + "\t\t" + bars.getTime() + "\t" 
+						+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 
+						+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\n");
+				System.out.println(asset.getExchange() + "\t\t" + asset.getSymbol() + "\t" + asset.getName() + "\t"
 						+ asset.isFractionable() + "\t\t" + asset.isShortable() + "\t\t" 
 						+ asset.isTradable()  + "\t\t" + bars.getTime() + "\t" 
 						+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 
