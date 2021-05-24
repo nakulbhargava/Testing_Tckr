@@ -6,9 +6,8 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import alpacaPojo.AssetsPojo;
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.OrdersPojo;
-import alpacaPojo.PositionsPojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 

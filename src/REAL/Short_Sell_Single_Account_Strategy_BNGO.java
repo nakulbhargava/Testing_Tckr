@@ -1,7 +1,6 @@
 package REAL;
 
 import java.io.File;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,44 +9,44 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.OrdersPojo;
 import alpacaPojo.PositionsPojo;
 
 //This is enhanced lazy limit strategy
 public class Short_Sell_Single_Account_Strategy_BNGO {
 
-	private static final String alpacaKey = "APCA-API-KEY-ID";
-	private static final String secretId = "APCA-API-SECRET-KEY";
+	private static final String alpacaKey = ConfigConstants.alpacaKey;
+	private static final String secretId = ConfigConstants.secretId;
 
 	//Nakul
-//	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-//	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
+	//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
+	//		private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
 
 	//Vaishali
-		private static final String alpacaKeyValue = "PKN9AR7BFFZXH5X3MP6H";
-		private static final String secretIdValue = "daalp83963QKdcmOqI7iaqBwkdZxFRdFAmcijLZH";
+	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
+	private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
 
 	//Distorted
-//		private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
-//		private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
+	//	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
+	//	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
 
-	//V
-	private static final String alpacaKeyRealTime = "AK9ZHVFUWYEX1FZHA8BR";
-	private static final String secretIdRealTime = "D1vIlMOdotpYB5uU4laEEICTxJTzlihtc42Wq85S";
-	private static final String headerContentType = "Content-Type";
-	private static final String headerContentTypeValue = "application/json";
-	private static final String paperUrl = "https://paper-api.alpaca.markets";
-	private static final String realtimeUrl = "https://api.alpaca.markets";
-	private static final String activeVersion = "/v2";
-	private static final String inactiveVersion = "/v1";
-	private static final String ordersEndpoint = "/orders";
-	private static final String accountEndpoint = "/account";
-	private static final String lastQuoteEndpoint = "/last_quote/stocks";
-	private static final String lastTradeEndpoint = "/last/stocks";
-	private static final String positionsEndpoint = "/positions";
-	private static final String assetsEndpoint = "/assets";
-	private static final String clockEndpoint = "/clock";
-	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
+	private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeVaishali;
+	private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeVaishali;
+	private static final String headerContentType = ConfigConstants.headerContentType;
+	private static final String headerContentTypeValue = ConfigConstants.headerContentTypeValue;
+	private static final String paperUrl = ConfigConstants.paperUrl;
+	private static final String realtimeUrl = ConfigConstants.realtimeUrl;
+	private static final String activeVersion = ConfigConstants.activeVersion;
+	private static final String inactiveVersion = ConfigConstants.inactiveVersion;
+	private static final String ordersEndpoint = ConfigConstants.ordersEndpoint;
+	private static final String accountEndpoint = ConfigConstants.accountEndpoint;
+	private static final String lastQuoteEndpoint = ConfigConstants.lastQuoteEndpoint;
+	private static final String lastTradeEndpoint = ConfigConstants.lastTradeEndpoint;
+	private static final String positionsEndpoint = ConfigConstants.positionsEndpoint;
+	private static final String assetsEndpoint = ConfigConstants.assetsEndpoint;
+	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
+	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
 	static Double qty = 1.0;
 	static Double maxQty = 140.0;
@@ -65,8 +64,8 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
 	static File file = new File("C:\\Users\\nakul\\Documents\\output - " + symbol + " - " + localTime + ".txt");
 	static PrintWriter pw; 
-	
-	
+
+
 	static FileOutputStream fo;
 	static Double currentPrice = 0.00;
 	static OrdersPojo placeBuyOrder;
@@ -76,7 +75,7 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 5.2;
+	static Double stableLowPrice = 5.6;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	
@@ -105,7 +104,7 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 				if(isDownTrend) {
 					potentialSellPrices.add(currentPrice);
 				}
-//				Thread.sleep(1500000);
+				//				Thread.sleep(1500000);
 			}while(LocalDateTime.now().isBefore(marketCloseTime));
 			System.out.println("List of Sell Orders: " + filledSellPrices.toString());
 			pw.write("List of Sell Orders: " + filledSellPrices.toString() + "\n");			
@@ -126,7 +125,7 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 				System.out.println("Buy Order Executed with following Details: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 						"\t" + placedBuyOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
 			}
-			
+
 			Double potentialAverageSellPrice = 0.0;
 			for (Double potentialSellPrice: potentialSellPrices) {
 				potentialAverageSellPrice = potentialAverageSellPrice + potentialSellPrice;
@@ -135,15 +134,15 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 			filledAveragePrice = filledAveragePrice/potentialSellPrices.size();
 			System.out.println("Min Placed Sell Order Price: " + minPlacedOrder + "\tAverageFilledPrice: " + filledAveragePrice + "\tFor Stocks: " + filledSellPrices.size() + "\n");
 			pw.write("Min Placed Sell Order Price: " + minPlacedOrder + "\tAverageFilledPrice: " + filledAveragePrice + "\tFor Stocks: " + filledSellPrices.size() + "\n");	
-//			System.out.println("Trying to place Buy Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor);
-//			pw.write("Trying to place Buy Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor + "\n");
-//			placeBuyOrder = alpacaAccount.buyRealSymbolLimitOrder(symbol, Double.valueOf(wholeNumber), filledAveragePrice*profitFactor);
-//			Thread.sleep(100);
-//			placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
-//			pw.write("Buy Order Executed with following Details: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
-//					"\t" + placedBuyOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
-//			System.out.println("Buy Order Executed with following Details: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
-//					"\t" + placedBuyOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
+			//			System.out.println("Trying to place Buy Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor);
+			//			pw.write("Trying to place Buy Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor + "\n");
+			//			placeBuyOrder = alpacaAccount.buyRealSymbolLimitOrder(symbol, Double.valueOf(wholeNumber), filledAveragePrice*profitFactor);
+			//			Thread.sleep(100);
+			//			placedBuyOrder = alpacaAccount.getRealOrderDetails(placeBuyOrder.getId());
+			//			pw.write("Buy Order Executed with following Details: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
+			//					"\t" + placedBuyOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
+			//			System.out.println("Buy Order Executed with following Details: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
+			//					"\t" + placedBuyOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
 			nextDayPotentialStablePrice = (maxStockPrice + maxStockPrice/profitFactor + minStockPrice + minStockPrice*profitFactor)/4;
 			System.out.println("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "MinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice);
 			pw.write("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "MinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice + "\n");

@@ -4,13 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
-import alpacaPojo.AccountsPojo;
-import alpacaPojo.AssetsPojo;
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.LastQuotePojo;
 import alpacaPojo.LastTradePojo;
-import alpacaPojo.OrdersPojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 

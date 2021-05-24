@@ -6,10 +6,9 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.AssetsPojo;
 import alpacaPojo.BarsPojo;
-import alpacaPojo.OrdersPojo;
-import alpacaPojo.PositionsPojo;
 import alpacaPojo.TimeframePojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;

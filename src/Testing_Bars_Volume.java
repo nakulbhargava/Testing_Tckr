@@ -5,14 +5,10 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
-import alpacaPojo.AccountsPojo;
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.AssetsPojo;
 import alpacaPojo.BarsPojo;
-import alpacaPojo.LastQuotePojo;
-import alpacaPojo.LastTradePojo;
-import alpacaPojo.OrdersPojo;
 import alpacaPojo.TimeframePojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;

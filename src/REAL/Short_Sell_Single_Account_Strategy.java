@@ -1,7 +1,6 @@
 package REAL;
 
 import java.io.File;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.OrdersPojo;
 import alpacaPojo.PositionsPojo;
 
@@ -76,7 +76,7 @@ public class Short_Sell_Single_Account_Strategy {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 52.27;
+	static Double stableLowPrice = 54.27;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	
@@ -163,7 +163,7 @@ public class Short_Sell_Single_Account_Strategy {
 			minStockPrice = testPrice;
 		}
 		do {
-			Thread.sleep(660000);
+			Thread.sleep(460000);
 			currentPrice = returnCurrentPrice();
 			if(currentPrice.compareTo(maxStockPrice) > 0) {
 				maxStockPrice = currentPrice;

@@ -1,7 +1,6 @@
 package REAL;
 
 import java.io.File;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.OrdersPojo;
 import alpacaPojo.PositionsPojo;
 
@@ -163,7 +163,7 @@ public class Short_Sell_Single_Account_Strategy_XPEV {
 			minStockPrice = testPrice;
 		}
 		do {
-			Thread.sleep(660000);
+			Thread.sleep(160000);
 			currentPrice = returnCurrentPrice();
 			if(currentPrice.compareTo(maxStockPrice) > 0) {
 				maxStockPrice = currentPrice;

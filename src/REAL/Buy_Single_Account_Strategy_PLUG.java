@@ -7,48 +7,48 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.OrdersPojo;
 import alpacaPojo.PositionsPojo;
 
 //This is enhanced lazy limit strategy
 public class Buy_Single_Account_Strategy_PLUG {
 
-	private static final String alpacaKey = "APCA-API-KEY-ID";
-	private static final String secretId = "APCA-API-SECRET-KEY";
+	private static final String alpacaKey = ConfigConstants.alpacaKey;
+	private static final String secretId = ConfigConstants.secretId;
 
 	//Nakul
-	//	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-	//	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
+//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
+//		private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
 
 	//Vaishali
-	//	private static final String alpacaKeyValue = "PKN9AR7BFFZXH5X3MP6H";
-	//	private static final String secretIdValue = "daalp83963QKdcmOqI7iaqBwkdZxFRdFAmcijLZH";
+//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
+//		private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
 
 	//Distorted
-	private static final String alpacaKeyValue = "PKW027OGK8HX515NRG66";
-	private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
+	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
+	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
 
-	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
-	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
-	private static final String headerContentType = "Content-Type";
-	private static final String headerContentTypeValue = "application/json";
-	private static final String paperUrl = "https://paper-api.alpaca.markets";
-	private static final String realtimeUrl = "https://api.alpaca.markets";
-	private static final String activeVersion = "/v2";
-	private static final String inactiveVersion = "/v1";
-	private static final String ordersEndpoint = "/orders";
-	private static final String accountEndpoint = "/account";
-	private static final String lastQuoteEndpoint = "/last_quote/stocks";
-	private static final String lastTradeEndpoint = "/last/stocks";
-	private static final String positionsEndpoint = "/positions";
-	private static final String assetsEndpoint = "/assets";
-	private static final String clockEndpoint = "/clock";
+	private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeNakul;
+	private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeNakul;
+	private static final String headerContentType = ConfigConstants.headerContentType;
+	private static final String headerContentTypeValue = ConfigConstants.headerContentTypeValue;
+	private static final String paperUrl = ConfigConstants.paperUrl;
+	private static final String realtimeUrl = ConfigConstants.realtimeUrl;
+	private static final String activeVersion = ConfigConstants.activeVersion;
+	private static final String inactiveVersion = ConfigConstants.inactiveVersion;
+	private static final String ordersEndpoint = ConfigConstants.ordersEndpoint;
+	private static final String accountEndpoint = ConfigConstants.accountEndpoint;
+	private static final String lastQuoteEndpoint = ConfigConstants.lastQuoteEndpoint;
+	private static final String lastTradeEndpoint = ConfigConstants.lastTradeEndpoint;
+	private static final String positionsEndpoint = ConfigConstants.positionsEndpoint;
+	private static final String assetsEndpoint = ConfigConstants.assetsEndpoint;
+	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
-
-	static Double qty = 0.5;
+	
+	static Double qty = 0.1;
 	static Double maxQty = 100.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
@@ -75,7 +75,7 @@ public class Buy_Single_Account_Strategy_PLUG {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 52.98;
+	static Double stableHighPrice = 27.694;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 	static List<Double> potentialBuyPrices = new ArrayList<Double>();
