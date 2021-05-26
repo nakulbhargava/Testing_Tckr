@@ -48,7 +48,7 @@ public class Buy_Single_Account_Strategy_BNGO {
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 	
-	static Double qty = 0.5;
+	static Double qty = 0.25;
 	static Double maxQty = 200.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
@@ -75,7 +75,7 @@ public class Buy_Single_Account_Strategy_BNGO {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 5.8;
+	static Double stableHighPrice = ConfigConstants.BNGO_stablePrice;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 	static List<Double> potentialBuyPrices = new ArrayList<Double>();

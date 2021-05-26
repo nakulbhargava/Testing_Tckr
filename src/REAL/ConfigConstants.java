@@ -34,4 +34,20 @@ public class ConfigConstants {
 	public static final String positionsEndpoint = "/positions";
 	public static final String assetsEndpoint = "/assets";
 	public static final String clockEndpoint = "/clock";
+	
+	public static final Double XPEV_stablePrice = 29.10;
+	public static final Double UBER_stablePrice = 50.77;
+	public static final Double SNAP_stablePrice = 59.36;
+	public static final Double PLUG_stablePrice = 27.83;
+	public static final Double NIO_stablePrice = 36.09;
+	public static final Double MRO_stablePrice = 11.77;
+	public static final Double LYFT_stablePrice = 53.32;
+	public static final Double GPS_stablePrice = 32.79;
+	public static final Double GOTU_stablePrice = 20.12;
+	public static final Double DKNG_stablePrice = 48.10;
+	public static final Double CCL_stablePrice = 28.6;
+	public static final Double BNGO_stablePrice = 5.52;
+	public static final Double AMWL_stablePrice = 11.8;
+	public static final Double ACAD_stablePrice = 21.39;
+	
 }

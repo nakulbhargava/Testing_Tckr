@@ -49,7 +49,7 @@ public class Buy_Single_Account_Strategy_GOTU {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 	
 	static Double qty = 0.2;
-	static Double maxQty = 50.0;
+	static Double maxQty = 51.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
 
@@ -75,7 +75,7 @@ public class Buy_Single_Account_Strategy_GOTU {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableHighPrice = 22.75;
+	static Double stableHighPrice = ConfigConstants.GOTU_stablePrice;
 	static Double totalBuyCount = 0.0;
 	static List<Double> filledBuyPrices = new ArrayList<Double>();	
 	static List<Double> potentialBuyPrices = new ArrayList<Double>();

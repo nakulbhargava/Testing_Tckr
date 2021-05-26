@@ -49,7 +49,7 @@ public class Short_Sell_Single_Account_Strategy_CCL {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
 	static Double qty = 1.0;
-	static Double maxQty = 30.0;
+	static Double maxQty = 32.0;
 
 	static Double pointZeroOneFactor = 1.0;
 
@@ -75,7 +75,7 @@ public class Short_Sell_Single_Account_Strategy_CCL {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 27.2;
+	static Double stableLowPrice = ConfigConstants.CCL_stablePrice;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	

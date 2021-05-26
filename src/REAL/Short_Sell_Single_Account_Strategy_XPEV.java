@@ -76,7 +76,7 @@ public class Short_Sell_Single_Account_Strategy_XPEV {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 52.9;
+	static Double stableLowPrice = ConfigConstants.XPEV_stablePrice;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	

@@ -76,7 +76,7 @@ public class Short_Sell_Single_Account_Strategy_LYFT {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 52.07;
+	static Double stableLowPrice = ConfigConstants.LYFT_stablePrice;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	

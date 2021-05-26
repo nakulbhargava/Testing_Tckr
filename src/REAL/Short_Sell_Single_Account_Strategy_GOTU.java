@@ -75,7 +75,7 @@ public class Short_Sell_Single_Account_Strategy_GOTU {
 	static Double lastBuyOrderPrice = 0.00;
 	static Double lastSellOrderPrice = 0.00;
 	//Below value to be driven from ExtractingHighLowTimeframe
-	static Double stableLowPrice = 24.5;
+	static Double stableLowPrice = ConfigConstants.GOTU_stablePrice;
 
 	static Double totalSellCount = 0.0;
 	static List<Double> filledSellPrices = new ArrayList<Double>();	

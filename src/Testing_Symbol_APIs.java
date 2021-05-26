@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.AssetsPojo;
 import alpacaPojo.LastQuoteV2;
+import alpacaPojo.LastTradePojoV2;
+import alpacaPojo.LastTradeV2;
+import alpacaPojo.SnapshotPojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -42,12 +46,17 @@ public class Testing_Symbol_APIs {
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 
 		String symbol = "ARKK";
+		String symbols = "ARKK,AAPL";
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
 		
 		AssetsPojo assets[] = alpacaAccount.getAssets();
 		String startTime = "2021-05-21T13:35:08Z";
 		String endTime = "2021-05-21T13:35:09Z";
 		LastQuoteV2 lastQuote = alpacaAccount.getQuoteV2(symbol, startTime, endTime);
+		LastTradePojoV2 lastTrade = alpacaAccount.getLastTradeV2(symbol);
+		LastTradeV2 trades = alpacaAccount.getTradesV2(symbol, startTime, endTime);
+		SnapshotPojo snapshot = alpacaAccount.getSnapshot(symbol);
+		SnapshotPojo[] snapshots = alpacaAccount.getSnapshots(symbols);
 		File file = new File("C:\\Users\\nakul\\Documents\\outputAssets - " + localTime + ".txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
 		FileOutputStream fo = new FileOutputStream(file);

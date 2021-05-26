@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -397,6 +398,40 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 
 		return getJsonObject(response.body(), LastTrade.class);
 	}
+	public LastTradePojoV2 getLastTradeV2(String symbol) throws IOException, InterruptedException {
+		HttpClient client = HttpClient.newHttpClient();
+
+		// Create HTTP request object
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create(realtimeUrl + activeVersion + "/stocks/" + symbol + "/trades/latest"))
+				.GET()
+				.header(alpacaKey, alpacaKeyValue)
+				.header(headerContentType, headerContentTypeValue)
+				.header(secretId, secretIdValue)
+				.build();
+		// Send HTTP request
+		HttpResponse<String> response = client.send(request,
+				HttpResponse.BodyHandlers.ofString());
+
+		return getJsonObject(response.body(), LastTradePojoV2.class);
+	}
+	public LastQuotePojoV2 getLastQuoteV2(String symbol) throws IOException, InterruptedException {
+		HttpClient client = HttpClient.newHttpClient();
+
+		// Create HTTP request object
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create(realtimeUrl + activeVersion + "/stocks/" + symbol + "/quotes/latest"))
+				.GET()
+				.header(alpacaKey, alpacaKeyValue)
+				.header(headerContentType, headerContentTypeValue)
+				.header(secretId, secretIdValue)
+				.build();
+		// Send HTTP request
+		HttpResponse<String> response = client.send(request,
+				HttpResponse.BodyHandlers.ofString());
+
+		return getJsonObject(response.body(), LastQuotePojoV2.class);
+	}
 	@SuppressWarnings("static-access")
 	public LastQuote getQuote(String symbol) throws IOException, InterruptedException {
 		HttpClient client = HttpClient.newHttpClient();
@@ -432,6 +467,24 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 				HttpResponse.BodyHandlers.ofString());
 
 		return getJsonObject(response.body(), LastQuoteV2.class);
+	}
+	@SuppressWarnings("static-access")
+	public LastTradeV2 getTradesV2(String symbol, String startTime, String endTime) throws IOException, InterruptedException {
+		HttpClient client = HttpClient.newHttpClient();
+
+		// Create HTTP request object
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create(realtimeUrl + activeVersion + "/stocks/" + symbol + "/trades?start=" + startTime + "&end=" + endTime))
+				.GET()
+				.header(alpacaKey, alpacaKeyValue)
+				.header(headerContentType, headerContentTypeValue)
+				.header(secretId, secretIdValue)
+				.build();
+		// Send HTTP request
+		HttpResponse<String> response = client.send(request,
+				HttpResponse.BodyHandlers.ofString());
+
+		return getJsonObject(response.body(), LastTradeV2.class);
 	}
 	@SuppressWarnings("static-access")
 	public OrdersPojo getOrderDetails(String orderId) throws IOException, InterruptedException {
@@ -762,7 +815,48 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 
 		return getJsonObjectArray(response.body(), AssetsPojo[].class);
 	}
+	public SnapshotPojo getSnapshot(String symbol) throws IOException, InterruptedException {
+		HttpClient client = HttpClient.newHttpClient();
 
+		// Create HTTP request object
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create(realtimeUrl + activeVersion + "/stocks/" + symbol + "/snapshot"))
+				.GET()
+				.header(alpacaKey, alpacaKeyValue)
+				.header(headerContentType, headerContentTypeValue)
+				.header(secretId, secretIdValue)
+				.build();
+		// Send HTTP request
+		HttpResponse<String> response = client.send(request,
+				HttpResponse.BodyHandlers.ofString());
+
+		return getJsonObject(response.body(), SnapshotPojo.class);
+	}
+	public SnapshotPojo[] getSnapshots(String symbols) throws IOException, InterruptedException {
+		HttpClient client = HttpClient.newHttpClient();
+		
+		// Create HTTP request object
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create(realtimeUrl + activeVersion + "/stocks/snapshots?symbols=" + symbols))
+				.GET()
+				.header(alpacaKey, alpacaKeyValue)
+				.header(headerContentType, headerContentTypeValue)
+				.header(secretId, secretIdValue)
+				.build();
+		// Send HTTP request
+		HttpResponse<String> response = client.send(request,
+				HttpResponse.BodyHandlers.ofString());
+		Map<String, String> snapshotMaps = getJsonObjectMap(response.body(), Object.class);
+		SnapshotPojo[] snapshots = new SnapshotPojo[snapshotMaps.size()];
+		int i = 0;
+		for (Map.Entry<String, String> entry : snapshotMaps.entrySet()) {
+			SnapshotPojo snapshot = getJsonObjectConvertor(entry.getValue(), SnapshotPojo.class);
+			snapshot.setSymbol(entry.getKey());
+			snapshots[i] = snapshot;
+			i++;
+		}
+		return snapshots;
+	}
 	public <T> T getJsonObject(String jsonString, Class objectClass) throws JsonParseException, JsonMappingException, IOException{
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -773,7 +867,23 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 	public <T> T[] getJsonObjectArray(String jsonString, Class objectClass) throws JsonParseException, JsonMappingException, IOException{
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		mapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
 		T[]  responseObject = (T[]) mapper.readValue(jsonString,  objectClass);
+		return responseObject;
+	}
+	
+	public <T> T getJsonObjectMap(String jsonString, Class objectClass) throws JsonParseException, JsonMappingException, IOException{
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
+		T  responseObject = (T) mapper.readValue(jsonString,  objectClass);
+		return responseObject;
+	}
+	public <T> T getJsonObjectConvertor(Object jsonObject, Class objectClass) throws JsonParseException, JsonMappingException, IOException{
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.USE_JAVA_ARRAY_FOR_JSON_ARRAY, true);
+		T  responseObject = (T) mapper.convertValue(jsonObject,  objectClass);
 		return responseObject;
 	}
 }

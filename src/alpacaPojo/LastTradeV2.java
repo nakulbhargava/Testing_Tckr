@@ -4,18 +4,18 @@ import alpacaPojo.LastTradePojoV2;
 
 public class LastTradeV2 {
 	private String symbol;
-	private LastTradePojoV2 trade;
+	private LastTradePojoV2[] trades;
+	public LastTradePojoV2[] getTrades() {
+		return trades;
+	}
+	public void setTrades(LastTradePojoV2[] trades) {
+		this.trades = trades;
+	}
 	public String getSymbol() {
 		return symbol;
 	}
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
-	}
-	public LastTradePojoV2 getTrade() {
-		return trade;
-	}
-	public void setTrade(LastTradePojoV2 trade) {
-		this.trade = trade;
 	}
 
 }
