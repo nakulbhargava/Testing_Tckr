@@ -1,6 +1,4 @@
 package REAL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class ConfigConstants {
 	public static final String alpacaKey = "APCA-API-KEY-ID";
@@ -49,5 +47,4 @@ public class ConfigConstants {
 	public static final Double BNGO_stablePrice = 5.52;
 	public static final Double AMWL_stablePrice = 11.8;
 	public static final Double ACAD_stablePrice = 21.39;
-	
 }

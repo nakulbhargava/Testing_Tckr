@@ -1,5 +1,8 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -18,11 +21,11 @@ public class Extract_Daily_Tickers{
 	//PP
 	private static final String alpacaKeyValue = "PKSSSGEQK3GXOMY3J6O0";
 	private static final String secretIdValue = "OzGxMmmEYJVvv65jYbG08cSaPJ3MqE41UkI2AI0U";
-	
+
 	//Nakul
-//	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-//	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
-	
+	//	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
+	//	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
+
 	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
 	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
 	private static final String headerContentType = "Content-Type";
@@ -39,7 +42,7 @@ public class Extract_Daily_Tickers{
 	private static final String assetsEndpoint = "/assets";
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
-	
+
 	static AlpacaApiCaller alpacaAccount;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
 	static File file = new File("C:\\Users\\nakul\\Documents\\outputDailyTicks - " + localTime + ".txt");
@@ -48,7 +51,7 @@ public class Extract_Daily_Tickers{
 	static Double localMaxima = 0.00;
 	static Double localMinima = 0.00;
 	static Double currentPrice = 0.00;
-	
+
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
@@ -81,15 +84,36 @@ public class Extract_Daily_Tickers{
 				Thread.sleep(500);
 			}while(LocalDateTime.now().isBefore(marketCloseTime));
 		}
+		File ConstFile = new File("C:\\Users\\nakul\\eclipse-workspace\\TCKR\\src\\REAL\\ConfigConstants.java");
+		BufferedReader reader = new BufferedReader(new FileReader(ConstFile));
+		String line = "", newtext = "";
+		while((line = reader.readLine()) != null)
+		{
+			boolean tickerFound = false;
+			for (int i = 0 ; i< openPositions.length; i++) {
+				if(line.contains(openPositions[i].getSymbol())) {
+					tickerFound = true;
+				}
+			}
+			if (!tickerFound && !line.contains("}")) {
+				newtext += line + "\r\n";
+			}
+		}
+		reader.close();
 		for (int i = 0 ; i< openPositions.length; i++) {
 			List<Double> ticks = tickerPrices.get(openPositions[i].getSymbol());
 			Double totalSum = 0.0;
 			for(Double tick: ticks) {
 				totalSum = totalSum + tick;
 			}
+			String tickerConstant = "\tpublic static final Double " + openPositions[i].getSymbol() + "_stablePrice = " +  totalSum/ticks.size() + ";\r\n";
+			newtext += tickerConstant;
 			System.out.println(openPositions[i].getSymbol() + " Average Value:\t" + totalSum/ticks.size());
 			pw.write(openPositions[i].getSymbol() + " Average Value:\t" + totalSum/ticks.size());
 		}
+		newtext += "}";
+		FileWriter writer = new FileWriter("C:\\Users\\nakul\\eclipse-workspace\\TCKR\\src\\REAL\\ConfigConstants.java");
+        writer.write(newtext);writer.close();
 		pw.close();
 	}
 }
