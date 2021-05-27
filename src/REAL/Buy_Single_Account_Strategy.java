@@ -20,12 +20,12 @@ public class Buy_Single_Account_Strategy {
 	private static final String secretId = ConfigConstants.secretId;
 
 	//Nakul
-//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
-//		private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
+	//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
+	//		private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
 
 	//Vaishali
-//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
-//		private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
+	//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
+	//		private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
 
 	//Distorted
 	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
@@ -47,7 +47,7 @@ public class Buy_Single_Account_Strategy {
 	private static final String assetsEndpoint = ConfigConstants.assetsEndpoint;
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
-	
+
 	static Double qty = 0.05;
 	static Double maxQty = 57.0;
 
@@ -103,7 +103,7 @@ public class Buy_Single_Account_Strategy {
 					potentialBuyPrices.add(currentPrice);
 				}
 			}while(LocalDateTime.now().isBefore(marketCloseTime));
-			
+
 			System.out.println("List of Buy Orders: " + filledBuyPrices.toString());
 			pw.write("List of Buy Orders: " + filledBuyPrices.toString() + "\n");			
 			Double totalBuyStockForTheDay = Double.valueOf(filledBuyPrices.size())*qty;
@@ -116,7 +116,7 @@ public class Buy_Single_Account_Strategy {
 					maxPlacedOrder = filledBuyPrice;
 				}
 			}
-			
+
 			Double potentialAverageBuyPrice = 0.0;
 			for (Double potentialBuyPrice: potentialBuyPrices) {
 				potentialAverageBuyPrice = potentialAverageBuyPrice + potentialBuyPrice;
@@ -127,22 +127,24 @@ public class Buy_Single_Account_Strategy {
 			pw.write("Max Placed Buy Order Price: " + maxPlacedOrder + "\tAverageFilledPrice: " + filledAveragePrice + "\tFor Stocks: " + filledBuyPrices.size() + "\n");	
 			System.out.println("Trying to place Sell Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor);
 			pw.write("Trying to place Sell Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor + "\n");
-			placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, Double.valueOf(wholeNumber), filledAveragePrice*profitFactor);
-			Thread.sleep(100);
-			placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
-			pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
-					"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
-			System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
-					"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
-//			for (Double filledBuyPrice: filledBuyPrices) {
-//				placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, qty, filledBuyPrice*profitFactor);
-//				Thread.sleep(100);
-//				placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
-//				pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
-//						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
-//				System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
-//						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
-//			}
+			if (wholeNumber > 0) {
+				placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, Double.valueOf(wholeNumber), filledAveragePrice*profitFactor);
+				Thread.sleep(100);
+				placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
+				pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
+				System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
+			}
+			//			for (Double filledBuyPrice: filledBuyPrices) {
+			//				placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, qty, filledBuyPrice*profitFactor);
+			//				Thread.sleep(100);
+			//				placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
+			//				pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+			//						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
+			//				System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+			//						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
+			//			}
 			nextDayPotentialStablePrice = (maxStockPrice + maxStockPrice/profitFactor + minStockPrice + minStockPrice*profitFactor)/4;
 			System.out.println("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "\tMinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice);
 			pw.write("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "\tMinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice + "\n");
@@ -196,6 +198,10 @@ public class Buy_Single_Account_Strategy {
 		OrdersPojo placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
 		while (!"filled".equals(placedBuyOrder.getStatus()))
 		{
+			if (placedBuyOrder.getId() == null) {
+				Thread.sleep(60000);
+				placeBuyOrder = alpacaAccount.buySymbolQuantity(symbol, pointZeroOneFactor);
+			}
 			placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
 		}
 		currentPrice = Double.valueOf(placedBuyOrder.getFilled_avg_price());

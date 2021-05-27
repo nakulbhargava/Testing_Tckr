@@ -33,18 +33,18 @@ public class ConfigConstants {
 	public static final String assetsEndpoint = "/assets";
 	public static final String clockEndpoint = "/clock";
 	
-	public static final Double XPEV_stablePrice = 29.10;
-	public static final Double UBER_stablePrice = 50.77;
-	public static final Double SNAP_stablePrice = 59.36;
-	public static final Double PLUG_stablePrice = 27.83;
-	public static final Double NIO_stablePrice = 36.09;
-	public static final Double MRO_stablePrice = 11.77;
-	public static final Double LYFT_stablePrice = 53.32;
-	public static final Double GPS_stablePrice = 32.79;
-	public static final Double GOTU_stablePrice = 20.12;
-	public static final Double DKNG_stablePrice = 48.10;
-	public static final Double CCL_stablePrice = 28.6;
-	public static final Double BNGO_stablePrice = 5.52;
-	public static final Double AMWL_stablePrice = 11.8;
-	public static final Double ACAD_stablePrice = 21.39;
+	public static final Double XPEV_stablePrice = 31.447486175119707;
+	public static final Double UBER_stablePrice = 51.014993375579;
+	public static final Double SNAP_stablePrice = 60.694535138255;
+	public static final Double PLUG_stablePrice = 29.45608813364167;
+	public static final Double NIO_stablePrice = 37.42835282257892;
+	public static final Double MRO_stablePrice = 11.844185771890666;
+	public static final Double LYFT_stablePrice = 54.634633352540945;
+	public static final Double GPS_stablePrice = 34.20486837557891;
+	public static final Double GOTU_stablePrice = 18.22383899769723;
+	public static final Double DKNG_stablePrice = 49.26289458525386;
+	public static final Double CCL_stablePrice = 29.140931739633626;
+	public static final Double BNGO_stablePrice = 5.98794383640441;
+	public static final Double AMWL_stablePrice = 12.170527649771074;
+	public static final Double ACAD_stablePrice = 21.47716791474944;
 }
