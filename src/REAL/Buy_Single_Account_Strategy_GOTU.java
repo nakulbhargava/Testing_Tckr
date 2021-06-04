@@ -48,8 +48,8 @@ public class Buy_Single_Account_Strategy_GOTU {
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
-	static Double qty = 0.2;
-	static Double maxQty = 60.0;
+	static Double qty = 0.1;
+	static Double maxQty = 75.0;
 
 	static Double pointZeroOneFactor = maxQty/500;
 

@@ -32,22 +32,22 @@ public class Short_Sell_Single_Account_Strategy {
 		private static final String secretIdValue = "yoxhLKh4FXtxNl1LLHaUpAtoDkaKHCOHBopo0baS";
 
 	//V
-	private static final String alpacaKeyRealTime = "AK9ZHVFUWYEX1FZHA8BR";
-	private static final String secretIdRealTime = "D1vIlMOdotpYB5uU4laEEICTxJTzlihtc42Wq85S";
-	private static final String headerContentType = "Content-Type";
-	private static final String headerContentTypeValue = "application/json";
-	private static final String paperUrl = "https://paper-api.alpaca.markets";
-	private static final String realtimeUrl = "https://api.alpaca.markets";
-	private static final String activeVersion = "/v2";
-	private static final String inactiveVersion = "/v1";
-	private static final String ordersEndpoint = "/orders";
-	private static final String accountEndpoint = "/account";
-	private static final String lastQuoteEndpoint = "/last_quote/stocks";
-	private static final String lastTradeEndpoint = "/last/stocks";
-	private static final String positionsEndpoint = "/positions";
-	private static final String assetsEndpoint = "/assets";
-	private static final String clockEndpoint = "/clock";
-	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(14,59);
+		private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeVaishali;
+		private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeVaishali;
+		private static final String headerContentType = ConfigConstants.headerContentType;
+		private static final String headerContentTypeValue = ConfigConstants.headerContentTypeValue;
+		private static final String paperUrl = ConfigConstants.paperUrl;
+		private static final String realtimeUrl = ConfigConstants.realtimeUrl;
+		private static final String activeVersion = ConfigConstants.activeVersion;
+		private static final String inactiveVersion = ConfigConstants.inactiveVersion;
+		private static final String ordersEndpoint = ConfigConstants.ordersEndpoint;
+		private static final String accountEndpoint = ConfigConstants.accountEndpoint;
+		private static final String lastQuoteEndpoint = ConfigConstants.lastQuoteEndpoint;
+		private static final String lastTradeEndpoint = ConfigConstants.lastTradeEndpoint;
+		private static final String positionsEndpoint = ConfigConstants.positionsEndpoint;
+		private static final String assetsEndpoint = ConfigConstants.assetsEndpoint;
+		private static final String clockEndpoint = ConfigConstants.clockEndpoint;
+		private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
 	static Double qty = 1.0;
 	static Double maxQty = 10.0;
