@@ -54,7 +54,7 @@ public class Short_Sell_Single_Account_Strategy_AMWL {
 	static Double pointZeroOneFactor = maxQty/10000;
 
 	//Below to be extracted from Extract Calibrating factor 5
-	static Double profitFactor = .929;
+	static Double profitFactor = .939;
 	static Double upTrendFactor = 1.004;
 	static Double downTrendFactor = .999;
 

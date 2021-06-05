@@ -54,7 +54,7 @@ public class Short_Sell_Single_Account_Strategy_CCL {
 	static Double pointZeroOneFactor = 1.0;
 
 	//Below to be extracted from Extract Calibrating factor 5
-	static Double profitFactor = .92;
+	static Double profitFactor = .95;
 	static Double upTrendFactor = 1.006;
 	static Double downTrendFactor = .999;
 

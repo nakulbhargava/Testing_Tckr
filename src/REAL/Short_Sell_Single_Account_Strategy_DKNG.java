@@ -56,7 +56,7 @@ public class Short_Sell_Single_Account_Strategy_DKNG {
 	static Double pointZeroOneFactor = maxQty/10000;
 
 	//Below to be extracted from Extract Calibrating factor 5
-	static Double profitFactor = .969;
+	static Double profitFactor = .949;
 	static Double upTrendFactor = 1.004;
 	static Double downTrendFactor = .999;
 

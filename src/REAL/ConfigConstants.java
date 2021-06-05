@@ -33,18 +33,18 @@ public class ConfigConstants {
 	public static final String assetsEndpoint = "/assets";
 	public static final String clockEndpoint = "/clock";
 	
-	public static final Double XPEV_stablePrice = 36.21451569640398;
-	public static final Double UBER_stablePrice = 49.02819690045472;
-	public static final Double SNAP_stablePrice = 60.57153486985763;
-	public static final Double PLUG_stablePrice = 30.70211702761814;
-	public static final Double NIO_stablePrice = 41.39193622094123;
-	public static final Double MRO_stablePrice = 13.97592439896695;
-	public static final Double LYFT_stablePrice = 56.653342439897955;
-	public static final Double GPS_stablePrice = 31.874338863499283;
-	public static final Double GOTU_stablePrice = 14.827529306576398;
-	public static final Double DKNG_stablePrice = 50.18824160540379;
-	public static final Double CCL_stablePrice = 30.715016391813617;
-	public static final Double BNGO_stablePrice = 6.351001887542874;
-	public static final Double AMWL_stablePrice = 12.959606596462313;
-	public static final Double ACAD_stablePrice = 23.250869759586262;
+	public static final Double XPEV_stablePrice = 37.02487871560757;
+	public static final Double UBER_stablePrice = 49.83139782443918;
+	public static final Double SNAP_stablePrice = 61.05513931708376;
+	public static final Double PLUG_stablePrice = 31.143347681926837;
+	public static final Double NIO_stablePrice = 41.925068931418245;
+	public static final Double MRO_stablePrice = 13.798877319527469;
+	public static final Double LYFT_stablePrice = 57.11160839974338;
+	public static final Double GPS_stablePrice = 31.112211040661272;
+	public static final Double GOTU_stablePrice = 14.122602524576877;
+	public static final Double DKNG_stablePrice = 50.17121284392916;
+	public static final Double CCL_stablePrice = 30.584291198883886;
+	public static final Double BNGO_stablePrice = 6.804050375196408;
+	public static final Double AMWL_stablePrice = 12.705856552847669;
+	public static final Double ACAD_stablePrice = 23.417093828166962;
 }

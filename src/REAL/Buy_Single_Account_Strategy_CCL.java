@@ -54,7 +54,7 @@ public class Buy_Single_Account_Strategy_CCL {
 	static Double pointZeroOneFactor = maxQty/500;
 
 	//Below to be extracted from Extract Calibrating factor 5
-	static Double profitFactor = 1.08;
+	static Double profitFactor = 1.053;
 	static Double upTrendFactor = 1.001;
 	static Double downTrendFactor = .9955;
 
