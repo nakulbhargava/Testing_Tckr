@@ -550,9 +550,9 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint + "/" + orderId))
 				.DELETE()
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		// Send HTTP request
 		HttpResponse<String> response = client.send(request,
@@ -618,7 +618,7 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpClient client = HttpClient.newHttpClient();
 		// Create HTTP request object
 		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(paperUrl + activeVersion + ordersEndpoint + "?status=open&symbol="+symbol))
+				.uri(URI.create(paperUrl + activeVersion + ordersEndpoint + "?status=open&symbols="+symbol))
 				.GET()
 				.header(alpacaKey, alpacaKeyValue)
 				.header(headerContentType, headerContentTypeValue)
@@ -635,7 +635,7 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 		HttpClient client = HttpClient.newHttpClient();
 		// Create HTTP request object
 		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint + "?status=open&symbol="+symbol))
+				.uri(URI.create(realtimeUrl + activeVersion + ordersEndpoint + "?status=open&symbols="+symbol))
 				.GET()
 				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)

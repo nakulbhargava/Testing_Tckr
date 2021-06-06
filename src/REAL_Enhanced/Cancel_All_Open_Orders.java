@@ -62,6 +62,7 @@ public class Cancel_All_Open_Orders {
 		OrdersPojo openOrders[] = alpacaAccount.getRealOpenOrders(symbol);
 		if(openOrders != null && openOrders.length !=0) {
 			for (OrdersPojo openOrder : openOrders) {
+				pw.write(openOrder.toString() + "\n");
 				alpacaAccount.deleteRealOrder(openOrder.getClient_order_id());
 			}
 		}
