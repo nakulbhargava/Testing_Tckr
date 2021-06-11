@@ -94,7 +94,7 @@ public class AlpacaCommonClass {
 		System.out.println("Buy Order filled: " + placedBuyOrder.getSymbol() + "\t" + placedBuyOrder.getQty()+ "\t" + placedBuyOrder.getId() + 
 				"\t" + placedBuyOrder.getFilled_avg_price() + "\t" + LocalDateTime.now().toString());
 		totalBuyCount = totalBuyCount + qty;
-		filledBuyPrices.add(Double.valueOf(placeBuyOrder.getFilled_avg_price()));
+		filledBuyPrices.add(Double.valueOf(placedBuyOrder.getFilled_avg_price()));
 		return placedBuyOrder;
 	}
 	

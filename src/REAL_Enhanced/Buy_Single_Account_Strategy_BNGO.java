@@ -49,7 +49,7 @@ public class Buy_Single_Account_Strategy_BNGO {
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.091;
 	static Double upTrendFactor = 1.001;
-	static Double downTrendFactor = .9955;
+	static Double downTrendFactor = .99;
 
 	static String symbol = "BNGO";
 

@@ -49,11 +49,15 @@ public class Testing_Symbol_Assets_Timeframe {
 		File fileLowVol = new File("C:\\Users\\nakul\\Documents\\outputLowVol - " + localTime + ".txt");
 		File fileHighVolHighPrice = new File("C:\\Users\\nakul\\Documents\\outputHighVolHighPrice - " + localTime + ".txt");
 		File fileUltraLowVol = new File("C:\\Users\\nakul\\Documents\\outputUltraLowVol - " + localTime + ".txt");
+		File fileLowCost = new File("C:\\Users\\nakul\\Documents\\outputLowCost - " + localTime + ".txt");
+		File filePennyStocks = new File("C:\\Users\\nakul\\Documents\\outputPennyStocks - " + localTime + ".txt");
 		PrintWriter pw1 = new PrintWriter(new FileOutputStream(filetrue, true));
 		PrintWriter pw2 = new PrintWriter(new FileOutputStream(fileHighVol, true));
 		PrintWriter pw3 = new PrintWriter(new FileOutputStream(fileLowVol, true));
 		PrintWriter pw4 = new PrintWriter(new FileOutputStream(fileHighVolHighPrice, true));
 		PrintWriter pw5 = new PrintWriter(new FileOutputStream(fileUltraLowVol, true));
+		PrintWriter pw6 = new PrintWriter(new FileOutputStream(fileLowCost, true));
+		PrintWriter pw7 = new PrintWriter(new FileOutputStream(filePennyStocks, true));
 		int assetTotalList = assets.length;
 		pw1.write("Exchange" + "\t" + "Symbol" + "\t" + "Fractionable" 
 				+ "\t" + "Shortable" + "\t" + "Tradable" + "\t"+ "Date" + "\t\t\t" + "Open"
@@ -70,10 +74,16 @@ public class Testing_Symbol_Assets_Timeframe {
 		pw5.write("Exchange" + "\t" + "Symbol" + "\t" + "Fractionable" 
 				+ "\t" + "Shortable" + "\t" + "Tradable" + "\t"+ "Date" + "\t\t\t" + "Open"
 				+ "\t" + "Close" + "\t" + "HIGH" + "\t" + "LOW" + "\t"+ "HL%" + "\t" + "Volume"+  "\t" + "Name" + "\n");
+		pw6.write("Exchange" + "\t" + "Symbol" + "\t" + "Fractionable" 
+				+ "\t" + "Shortable" + "\t" + "Tradable" + "\t"+ "Date" + "\t\t\t" + "Open"
+				+ "\t" + "Close" + "\t" + "HIGH" + "\t" + "LOW" + "\t"+ "HL%" + "\t" + "Volume"+  "\t" + "Name" + "\n");
+		pw7.write("Exchange" + "\t" + "Symbol" + "\t" + "Fractionable" 
+				+ "\t" + "Shortable" + "\t" + "Tradable" + "\t"+ "Date" + "\t\t\t" + "Open"
+				+ "\t" + "Close" + "\t" + "HIGH" + "\t" + "LOW" + "\t"+ "HL%" + "\t" + "Volume"+  "\t" + "Name" + "\n");
 		for (int i = 0; i < assetTotalList; i++){
 			if("active".equals(assets[i].getStatus()) && assets[i].isFractionable() && assets[i].isMarginable() && assets[i].isShortable() && assets[i].isEasy_to_borrow() && assets[i].isTradable()) {
 //			if("active".equals(assets[i].getStatus())) {
-				TimeframePojo timeframe = alpacaAccount.getTimeframe(assets[i].getSymbol(), "2021-05-24", "2021-05-24", "1Day");
+				TimeframePojo timeframe = alpacaAccount.getTimeframe(assets[i].getSymbol(), "2021-06-08", "2021-06-08", "1Day");
 				if (timeframe.getBars() == null || timeframe.getBars().length == 0) {
 					System.out.println("Error getting Bar for symbol: " + assets[i].getSymbol());
 					continue;
@@ -90,8 +100,8 @@ public class Testing_Symbol_Assets_Timeframe {
 						+ assets[i].isFractionable() + "\t\t" + assets[i].isShortable() + "\t\t" 
 						+ assets[i].isTradable()  + "\t\t" + bars.getTime() + "\t" 
 						+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 
-						+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\t" + assets[i].getName());
-				if(highLowPercent.compareTo(3.00)>0 && Double.valueOf(bars.getClosePrice()).compareTo(60.0) < 0 && Double.valueOf(bars.getVolume()).compareTo(3000000.0) > 0)
+						+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\t" + assets[i].getName() + "\n");
+				if(highLowPercent.compareTo(3.00)>0 && Double.valueOf(bars.getClosePrice()).compareTo(100.0) < 0 && Double.valueOf(bars.getVolume()).compareTo(3000000.0) > 0)
 				{
 					pw2.write(assets[i].getExchange() + "\t\t" + assets[i].getSymbol() + "\t"
 							+ assets[i].isFractionable() + "\t\t" + assets[i].isShortable() + "\t\t" 
@@ -123,6 +133,41 @@ public class Testing_Symbol_Assets_Timeframe {
 							+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 
 							+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\t" + assets[i].getName() + "\n");
 				}
+				if(highLowPercent.compareTo(3.00)>0 && Double.valueOf(bars.getClosePrice()).compareTo(10.0) < 0 && Double.valueOf(bars.getVolume()).compareTo(3000000.0) > 0)
+				{
+					pw6.write(assets[i].getExchange() + "\t\t" + assets[i].getSymbol() + "\t"
+							+ assets[i].isFractionable() + "\t\t" + assets[i].isShortable() + "\t\t" 
+							+ assets[i].isTradable()  + "\t\t" + bars.getTime() + "\t" 
+							+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 
+							+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\t" + assets[i].getName() + "\n");
+				}
+				if(Double.valueOf(bars.getClosePrice()).compareTo(7.0) < 0)
+				{
+					pw7.write(assets[i].getExchange() + "\t\t" + assets[i].getSymbol() + "\t"
+							+ assets[i].isFractionable() + "\t\t" + assets[i].isShortable() + "\t\t" 
+							+ assets[i].isTradable()  + "\t\t" + bars.getTime() + "\t" 
+							+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 
+							+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\t" + assets[i].getName() + "\n");
+				}
+				continue;
+			}
+			if("active".equals(assets[i].getStatus()) && assets[i].isMarginable() && assets[i].isShortable() && assets[i].isEasy_to_borrow() && assets[i].isTradable()) {
+				TimeframePojo timeframe = alpacaAccount.getTimeframe(assets[i].getSymbol(), "2021-06-08", "2021-06-08", "1Day");
+				if (timeframe.getBars() == null || timeframe.getBars().length == 0) {
+					System.out.println("Error getting Bar for symbol: " + assets[i].getSymbol());
+					continue;
+				}
+				BarsPojo bars = timeframe.getBars()[0];
+				Double highLowPercent = (Double.valueOf(bars.getHighPrice()) - Double.valueOf(bars.getLowPrice()))*100/Double.valueOf(bars.getClosePrice());
+				DecimalFormat df = new DecimalFormat("#.##");
+				if(Double.valueOf(bars.getClosePrice()).compareTo(7.0) < 0)
+				{
+					pw7.write(assets[i].getExchange() + "\t\t" + assets[i].getSymbol() + "\t"
+							+ assets[i].isFractionable() + "\t\t" + assets[i].isShortable() + "\t\t" 
+							+ assets[i].isTradable()  + "\t\t" + bars.getTime() + "\t" 
+							+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 
+							+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\t" + assets[i].getName() + "\n");
+				}
 			}
 		}
 		pw1.close();
@@ -130,5 +175,7 @@ public class Testing_Symbol_Assets_Timeframe {
 		pw3.close();
 		pw4.close();
 		pw5.close();
+		pw6.close();
+		pw7.close();
 	}
 }

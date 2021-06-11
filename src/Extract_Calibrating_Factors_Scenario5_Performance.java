@@ -50,7 +50,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 		//Not to have entryAt more than 10 as the number of occurrence will reduce, 
 		//we can assume that a stock price wont be changed by 1.5 times and hence exitAt count is 500
 						for(int k =1 ; k < 7; k++) {
-							for (int i = 5 ; i < 20; i=i+5)
+							for (int i = 5 ; i < 150; i=i+10)
 							{
 								for(int j = 4; j < 90; j=j+6) {
 									entryMultiplier = 1 + Double.valueOf(i)/10000;
@@ -59,7 +59,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 									totalLoss = 0.00; totalProfit = 0.00; releaseQuantity = 0; totalCount = 0; totalReleaseQuantity = 0; stableHighPrice = 200.00;
 								}
 							}
-							downTrendMultiplier = downTrendMultiplier - 0.001;
+							downTrendMultiplier = downTrendMultiplier - 0.005;
 						}
 
 //		returnMultiplierProfitLoss();
@@ -69,7 +69,7 @@ public class Extract_Calibrating_Factors_Scenario5_Performance {
 	} 
 
 	private List<String> readFileAsList() {
-		String fileName = "/test/US1.MRO_210101_210515.txt";
+		String fileName = "/test/ZYNE_190101_210609.txt";
 
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();

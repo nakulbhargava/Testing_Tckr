@@ -43,7 +43,7 @@ public class Short_Sell_Single_Account_Strategy_BNGO {
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 
 	static Double qty = 1.0;
-	static Double maxQty = 60.0;
+	static Double maxQty = 100.0;
 
 	static long secondsTimer = 140000;
 

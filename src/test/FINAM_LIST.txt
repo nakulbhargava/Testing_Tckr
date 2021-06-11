@@ -1,0 +1,1640 @@
+US1.MRVL
+US1.FTCI
+US1.COUR
+US1.CPNG
+US1.LI
+US1.SAP
+US1.VZIO
+US1.SQSP
+US1.ZIP
+US1.AFMD
+US1.ALEC
+US1.ALXO
+US1.AMTI
+US1.APPH
+US1.ASO
+US1.AWH
+US1.BLNK
+US1.BNGO
+US1.CLOV
+US1.CLSK
+US1.COWN
+US1.CVM
+US1.DMTK
+US1.EAR
+US1.GDRX
+US1.GEVO
+US1.HYLN
+US1.INSG
+US1.KOPN
+US1.LAZR
+US1.MVIS
+US1.NFE
+US1.NRIX
+US1.NVCR
+US1.POSH
+US1.PRAX
+US1.PRTA
+US1.PRTS
+US1.QS
+US1.RIDE
+US1.SAVA
+US1.SI
+US1.SKLZ
+US1.SLDB
+US1.TBIO
+US1.TRIT
+US1.TTCF
+US1.U
+US1.VLDR
+US1.VMEO
+US1.VUZI
+US1.VXRT
+US1.WKHS
+US1.STE
+US1.OGN
+US1.MQ
+1-800 FLOWERS.COM, Inc.
+10x Genomics, Inc.
+2U, Inc.
+3M co
+51job, Inc.
+8x8 Inc
+A.O. Smith Corporation
+AAON, Inc.
+AAR Corp.
+ABIOMED, Inc.
+ACADIA Pharmaceuticals Inc.
+ACI Worldwide, Inc.
+ACM Research, Inc.
+AECOM
+AFLAC Incorporated
+AGCO Corporation
+AIRBNB INC
+AMC Networks Inc.
+AMERISAFE, Inc.
+AMETEK, Inc.
+AMN Healthcare Services Inc AMN Healthcare Services Inc
+ANGI Homeservices Inc.
+ANI Pharmaceuticals, Inc.
+ANSYS, Inc.
+ARCUTIS BIOTHERAPEUTICS INC
+ASGN Incorporated
+AT&T Inc
+ATN International, Inc.
+Aaron's, Inc.
+AbbVie Inc.
+Abbott Laboratories
+Abercrombie & Fitch Company
+Acacia Communications, Inc.
+Acceleron Pharma Inc.
+Accenture plc
+Activision Blizzard Inc
+Acuity Brands, Inc.
+Adaptive Biotechnologies Corporation
+Addus HomeCare Corporation
+Adobe Systems Inc.
+Adtalem Global Education Inc.
+AdvanSix Inc.
+Advance Auto Parts Inc Advance Auto Parts Inc W/I
+Advanced Energy Industries, Inc.
+Advanced Micro Devices, Inc.
+Aerie Pharmaceuticals, Inc.
+AeroVironment, Inc.
+Aerojet Rocketdyne Holdings, Inc.
+Affiliated Managers Group, Inc.
+Agilent Technologies, Inc.
+Agios Pharmaceuticals, Inc.
+Aimmune Therapeutics, Inc.
+Air Products and Chemicals, Inc.
+Akamai Technologies, Inc.
+Alamo Group, Inc.
+Alarm.com Holdings, Inc.
+Alaska Air Group, Inc.
+Albany International Corporation
+Albemarle Corporation
+Alcoa Inc
+Alexandria Real Estate Equities, Inc.
+Alexion Pharmaceuticals, Inc.
+Alibaba Group Holding Limited
+Align Technology, Inc.
+Allakos Inc.
+Alleghany Corporation
+Allegiant Travel Company
+Allegion plc
+Allergan plc
+Allete, Inc.
+Alliance Data Systems Corporation
+Alliant Energy Corporation
+Allianz SE
+Allison Transmission Holdings, Inc.
+Allogene Therapeutics, Inc.
+Allscripts Healthcare Solutions, Inc.
+Ally Financial Inc.
+Alnylam Pharmaceuticals, Inc.
+Alphabet Inc.
+Alphabet Inc.
+Altaba Inc.
+Altair Engineering Inc.
+Alteryx, Inc.
+Altice USA, Inc.
+Aluminum Corporation of China Limited
+Amazon.com, Inc.
+Amedisys Inc
+Ameren Corporation
+America's Car-Mart, Inc.
+American Airlines Group, Inc.
+American Eagle Outfitters, Inc.
+American Electric Power Company, Inc.
+American Express
+American Financial Group, Inc.
+American Intl Group Inc
+American Outdoor Brands Corporation
+American Outdoor Brands, Inc.
+American Public Education, Inc.
+American States Water Company
+American Tower Corp. Cl A
+American Water Works Company, Inc.
+American Woodmark Corporation
+Americold Realty Trust
+Ameriprise Financial, Inc.
+AmerisourceBergen Corporation
+Amgen Inc.
+Amicus Therapeutics, Inc.
+Amphenol Corporation
+Anadarko Petroleum Corporation
+Analog Devices, Inc.
+Anaplan, Inc.
+AnaptysBio, Inc.
+Anheuser-Busch Inbev SA Sponsored
+Anika Therapeutics Inc.
+Anixter International Inc.
+Anterix Inc.
+Anthem, Inc.
+Aon plc
+Apache Corporation
+Apartment Income REIT Corp.
+Apartment Investment and Management Company
+Apergy Corporation
+AppFolio, Inc.
+Appian Corporation
+Apple Hospitality REIT, Inc.
+Apple Inc.
+Applied Industrial Technologies, Inc.
+Applied Materials Inc.
+Applied Therapeutics, Inc.
+AptarGroup, Inc.
+Aptiv PLC
+Aqua America Inc
+Aramark
+Archer Daniels Midland Co.
+Arconic Inc.
+Arcturus Therapeutics Holdings Inc.
+Arena Pharmaceuticals, Inc.
+Ares Capital Corporation
+Arista Networks Inc
+Armstrong World Industries Inc
+Arrow Electronics, Inc.
+Arrowhead Pharmaceuticals, Inc.
+Arthur J. Gallagher & Co.
+Arvinas, Inc.
+Asbury Automotive Group Inc
+Ashland Global Holdings Inc.
+Aspen Technology, Inc.
+Assurant, Inc.
+Astronics Corporation
+Atara Biotherapeutics, Inc.
+Atkore International Group Inc.
+AtriCure, Inc.
+Atrion Corporation
+Audentes Therapeutics, Inc.
+AutoNation, Inc.
+AutoZone, Inc.
+Autodesk, Inc.
+Autoliv, Inc.
+Automatic Data Processing, Inc.
+Avalara, Inc.
+AvalonBay Communities, Inc.
+Avanos Medical, Inc.
+Avantor, Inc.
+Avedro, Inc
+Avery Dennison Corporation
+Avista Corporation
+Avnet, Inc.
+Avon Products, Inc.
+Axogen, Inc.
+Axon Enterprise, Inc.
+Axon Enterprise, Inc.
+Axos Financial, Inc.
+Axsome Therapeutics, Inc.
+B&G Foods, Inc. B&G Foods, Inc.
+BB&T Corporation
+BENEFYTT TECHNOLOGIES INC
+BILL COM HLDGS INC
+BJ's Restaurants, Inc.
+BJ's Wholesale Club Holdings, Inc.
+BLACK DIAMOND THERAPEUTICS INC
+BMC Stock Holdings, Inc.
+BOK Financial Corporation
+BWX Technologies, Inc.
+Badger Meter, Inc.
+Baidu.com Inc
+Baker Hughes Company
+Baker Hughes, a GE company
+Balchem Corporation
+Ball Corporation
+Bandwidth Inc.
+Bank of America
+Bank of Hawaii Corporation
+Bank of New York Mellon Corporation (The)
+BankUnited, Inc.
+Baozun Inc.
+Barrett Business Services, Inc.
+Baxter International Inc.
+Beacon Roofing Supply, Inc.
+Becton, Dickinson and Company
+Bed Bath & Beyond Inc.
+Belden Inc
+Berry Global Group, Inc.
+Best Buy Co Inc
+Beyond Meat, Inc.
+Big Lots, Inc.
+Biglari Holdings Inc.
+Bilibili Inc.
+Bio-Rad Laboratories, Inc.
+Bio-Techne Corp
+BioMarin Pharmaceutical Inc.
+BioTelemetry, Inc.
+BioXcel Therapeutics, Inc.
+Biogen Inc.
+Black Knight, Inc.
+BlackLine, Inc.
+BlackRock, Inc.
+Blackbaud, Inc.
+Bloomin' Brands, Inc.
+Blueprint Medicines Corporation
+Boeing Co
+Booking Holdings Inc. Common Stock
+Boot Barn Holdings, Inc.
+Booz Allen Hamilton Holding Corporation
+BorgWarner Inc.
+Boston Beer Company, Inc. (The)
+Boston Properties, Inc.
+Boston Scientific Corporation
+Bottomline Technologies, Inc.
+Box, Inc.
+Brady Corporation
+BridgeBio Pharma, Inc.
+Bright Horizons Family Solutions Inc.
+Brighthouse Financial, Inc.
+Brinker International, Inc.
+Brinks Company (The)
+Bristol-Myers Squibb Company
+British American Tobacco Industries, p.l.c.
+Brixmor Property Group Inc.
+Broadcom Inc.
+Broadridge Financial Solutions, Inc.
+Brooks Automation, Inc.
+Brown & Brown, Inc.
+Bruker Corporation
+Brunswick Corporation
+Builders FirstSource, Inc.
+Burlington Stores, Inc.
+C.H. Robinson Worldwide, Inc.
+CA Inc.
+CANAAN INC SPON ADS EACH REP 15 ORD SHS CL A
+CARRIER GLOBAL CORPORATION
+CBRE Group Inc
+CBS Corporation
+CDK Global, Inc.
+CDW Corporation
+CEVA, Inc.
+CF Industries Holdings, Inc.
+CHAMPIONX CORPORATION
+CHOICEONE FINANCIAL SERVICES INC
+CME Group Inc.
+CMS Energy Corporation
+COINBASE GLOBAL INC
+CONMED Corporation
+CONSOL Energy Inc
+CONTEXTLOGIC INC
+CSG Systems International, Inc.
+CSW Industrials, Inc.
+CSX Corporation
+CVS Health Corporation
+Cable One, Inc.
+Cabot Microelectronics Corporation
+Cabot Oil & Gas Corporation
+Cactus, Inc. Class A Common Stock
+Cadence Design Systems, Inc.
+Cal-Maine Foods, Inc.
+Calavo Growers, Inc.
+California Water Service Group
+Cambrex Corporation
+Campbell Soup Company
+Cantel Medical Corp.
+Capital One Financial Corporation
+Capri Holdings Limited
+CarGurus, Inc.
+CarMax Inc
+Cara Therapeutics, Inc.
+Cardinal Health, Inc.
+Cardiovascular Systems, Inc.
+Cardlytics, Inc. Common Stock
+Care.com, Inc.
+CareDx, Inc.
+Carlisle Companies Incorporated
+Carnival Corporation
+Carpenter Technology Corporation
+Cars.com Inc.
+Carter's, Inc.
+Carvana Co.
+Casella Waste Systems, Inc.
+Caseys General Stores, Inc.
+Catalent, Inc.
+Caterpillar Inc
+Cavco Industries, Inc.
+Cboe Global Markets, Inc.
+Celanese Corporation Celanese Corporation
+Celgene Corporation
+Centene Corporation
+CenterPoint Energy, Inc (Holding Co)
+Central Garden & Pet Company
+Central Garden & Pet Company
+CenturyLink, Inc.
+CenturyLink, Inc.
+Cerner Corporation
+Change Healthcare Inc.
+Changyou.com Limited
+Charles River Laboratories International, Inc.
+Charles Schwab Corporation (The)
+Chart Industries, Inc.
+Charter Communications, Inc.
+Chatham Lodging Trust (REIT)
+Check Point Software Technolog
+Chegg, Inc.
+Chemed Corp
+ChemoCentryx, Inc.
+Chemours Company (The)
+Chesapeake Energy Corporation
+Chevron
+Chewy, Inc.
+Children's Place, Inc. (The)
+China Biologic Products Holdings, Inc.
+China Eastern Airlines Corporation Ltd.
+China Life Insurance Company Limited
+China Mobile Limited
+China Southern Airlines Company Limited
+China Telecom Corp Ltd
+Chipotle Mexican Grill, Inc.
+Choice Hotels International, Inc.
+Chubb Limited
+Church & Dwight Company, Inc.
+Churchill Downs, Incorporated
+Ciena Corporation
+Cigna Corporation
+Cimarex Energy Co
+Cincinnati Financial Corporation
+Cinemark Holdings Inc Cinemark Holdings, Inc.
+Cintas Corporation
+Cirrus Logic, Inc.
+Cisco Systems Inc.
+Citigroup Inc
+Citizens Financial Group, Inc.
+Citrix Systems, Inc.
+City Holding Company
+Claymore/BNY BRIC (EEB)
+Clean Harbors, Inc.
+Cleveland-Cliffs Inc.
+Clorox Company (The)
+Cloudera, Inc.
+Cloudflare, Inc.
+CoStar Group, Inc.
+Coca-Cola Consolidated, Inc.
+Coca-Cola co
+Cogent Communications Holdings, Inc.
+Cognex Corporation
+Cognizant Technology Solutions Corporation
+Cognyte Software Ltd.
+Cohen & Steers Inc
+Coherent, Inc.
+Colfax Corporation
+Colgate-Palmolive Company
+Columbia Sportswear Company
+Columbus McKinnon Corporation
+Comcast Corporation
+Comerica Incorporated
+Commerce Bancshares, Inc.
+Commercial Metals Company
+Community Bank System, Inc.
+Commvault Systems, Inc.
+Compass Minerals Intl Inc
+Compugen Ltd.
+ConAgra Brands, Inc.
+Concentrix Corporation
+Concho Resources Inc.
+ConocoPhillips
+Consolidated Edison, Inc.
+Constellation Brands, Inc.
+Constellation Pharmaceuticals, Inc.
+Continental Building Products, Inc.
+Continental Resources, Inc.
+Cooper Tire & Rubber Company
+Cooper-Standard Holdings Inc.
+Copart, Inc.
+CorEnergy Infrastructure Trust, Inc.
+CorVel Corp.
+Corcept Therapeutics Incorporated
+CoreLogic, Inc.
+CoreSite Realty Corporation
+Cornerstone OnDemand, Inc.
+Corning Inc.
+Corteva, Inc.
+Cortexyme, Inc.
+Costco Wholesale Corporation
+Coty Inc.
+Coupa Software Incorporated
+Covetrus, Inc.
+Cracker Barrel Old Country Store, Inc.
+Crane Co.
+Credit Acceptance Corporation
+Cree, Inc.
+Crocs, Inc.
+CrowdStrike Holdings, Inc.
+Crown Castle International Corp. (REIT)
+Crown Holdings, Inc.
+Cullen/Frost Bankers, Inc.
+Cummins Inc
+Curtiss-Wright Corporation
+Cypress Semiconductor Corporation
+CyrusOne Inc
+D.R. Horton, Inc.
+DENTSPLY SIRONA Inc.
+DIAMONDS DJIA (DIA)
+DISH Network Corporation
+DOORDASH INC
+DTE Energy Company
+DXC Technology Company
+DaVita Inc.
+Dana Inc
+Danaher Corporation
+Darden Restaurants, Inc.
+Darling Ingredients Inc.
+Datadog, Inc.
+Dave & Buster's Entertainment, Inc.
+Deciphera Pharmaceuticals, Inc.
+Deckers Outdoor Corporation
+Deere & Company
+Delek US Holdings, Inc.
+Delphi Technologies PLC
+Delta Air Lines, Inc.
+Deluxe Corporation
+Denali Therapeutics Inc.
+Devon Energy Corporation
+DexCom, Inc.
+Diamondback Energy, Inc. - Commmon Stock
+Dicerna Pharmaceuticals, Inc.
+Dick's Sporting Goods Inc
+Digital Realty Trust, Inc.
+Digital Turbine, Inc.
+Dillard's, Inc.
+Diodes Incorporated
+Direxion Daily 20 Year Plus Tr
+Discover Financial Services
+Discovery, Inc. - Series A
+Discovery, Inc. - Series B
+Discovery, Inc. - Series C
+DocuSign, Inc.
+Dolby Laboratories
+Dollar General Corporation
+Dollar Tree, Inc.
+Dominion Energy, Inc.
+Domino's Pizza Inc
+Domtar Corporation (NEW)
+Donaldson Company, Inc.
+Dorman Products, Inc.
+Dover Corporation
+Dow Inc.
+DowDuPont Inc.
+Dr. Reddy's Laboratories Ltd
+DraftKings Inc.
+Dril-Quip, Inc.
+Dropbox, Inc.
+DuPont
+Duke Realty Corporation
+Duluth Holdings Inc.
+Dun & Bradstreet Corporation (The)
+Dunkin' Brands Group, Inc.
+Dycom Industries, Inc.
+Dynatrace, Inc.
+E*TRADE Financial Corporation
+EBANG INTERNATIONAL HLDGS INC
+EMC Corp.
+EMCOR Group, Inc.
+EOG Resources, Inc.
+EPAM Systems, Inc.
+EQT Corporation
+ESCO Technologies Inc.
+ESSENTIAL UTILITIES INC
+ETFMG Prime Cyber Security ETF
+ETFS Physical Palladium Shares
+ETFS Physical Platinum Shares
+Eagle Materials Inc
+Eagle Pharmaceuticals, Inc.
+East West Bancorp, Inc.
+EastGroup Properties, Inc.
+Eastman Chemical Company
+Eaton Corp PLC
+Eaton Vance Corporation
+Echo Global Logistics, Inc.
+Ecolab Inc.
+Edgewell Personal Care Company
+Edison International
+Editas Medicine, Inc.
+Edwards Lifesciences Corporation
+Elanco Animal Health Incorporated
+Electronic Arts Inc.
+Eli Lilly and Company
+Ellie Mae, Inc.
+Emergent Biosolutions, Inc.
+Emerson Electric Company
+Enanta Pharmaceuticals, Inc.
+Encana Corporation
+Encore Capital Group Inc
+Encore Wire Corporation
+Endo International plc
+EnerSys
+Energizer Holdings, Inc.
+Energy Transfer LP
+Enphase Energy, Inc.
+Entegris, Inc.
+Entergy Corporation
+Envestnet, Inc
+Equifax, Inc.
+Equinix, Inc.
+Equitrans Midstream Corporation
+Equity Lifestyle Properties, Inc.
+Erie Indemnity Company
+Esperion Therapeutics, Inc.
+Essex Property Trust, Inc.
+Estee Lauder Companies, Inc. (The)
+Etsy, Inc.
+Euronet Worldwide, Inc.
+EverQuote, Inc.
+Everbridge, Inc.
+Evercore Inc.
+Everest Re Group, Ltd.
+Evergy, Inc.
+Eversource Energy (D/B/A)
+Evolent Health, Inc
+Exact Sciences Corporation
+Exelixis, Inc.
+Exelon Corp
+ExlService Holdings, Inc.
+Expedia Group, Inc.
+Expeditors International of Washington, Inc.
+Exponent, Inc.
+Extra Space Storage Inc
+Exxon Mobil
+F5 Networks, Inc.
+FARO Technologies, Inc.
+FLIR Systems, Inc.
+FMC Corporation
+FNF Group of Fidelity National Financial, Inc.
+FRP Holdings, Inc.
+FTI Consulting, Inc.
+Facebook, Inc.
+FactSet Research Systems Inc.
+Fair Isaac Corproation
+Farfetch Limited
+Fastenal Company
+Fastly, Inc.
+Fate Therapeutics, Inc.
+FedEx Corporation
+Ferrari N.V.
+Ferro Corporation
+FibroGen, Inc
+Fidelity National Information Services, Inc.
+Fifth Third Bancorp
+Financial Select Sector SPDR F
+First Citizens BancShares, Inc.
+First Financial Bankshares, Inc.
+First Solar Inc.
+FirstCash, Inc.
+FirstEnergy Corp.
+Fiserv, Inc.
+Five Below, Inc.
+Five9, Inc.
+FleetCor Technologies, Inc.
+Floor & Decor Holdings, Inc.
+Flowers Foods, Inc.
+Flowserve Corporation
+Fluor Corporation
+Focus Financial Partners Inc.
+Foot Locker, Inc.
+Ford Motor Co
+ForeScout Technologies, Inc.
+FormFactor, Inc.
+Forrester Research, Inc.
+Fortinet, Inc.
+Fortive Corporation
+Fortune Brands Home & Security, Inc.
+Forward Air Corporation
+Fox Factory Holding Corp.
+Franklin Electric Co., Inc.
+Franklin Resources, Inc.
+Freedom Holding Corp.
+Freeport-McMoRan, Inc.
+Freshpet, Inc.
+Frontier Communications Corporation
+Funko, Inc.
+G1 Therapeutics, Inc.
+GATX Corporation
+GCI Liberty, Inc.
+GCP Applied Technologies Inc.
+GE
+GM
+GMS Inc.
+GRAYSCALE BITCOIN TRUST BTC
+Gaming and Leisure Properties, Inc.
+Gap, Inc. (The)
+Garmin Ltd.
+Garrett Motion Inc.
+Gartner, Inc.
+Generac Holdlings Inc.
+General Dynamics Corporation
+General Mills, Inc.
+Genesco Inc.
+Genesee & Wyoming Inc.
+Genomic Health, Inc.
+Gentex Corporation
+Gentherm Inc
+Genuine Parts Company
+Gibraltar Industries, Inc.
+Gilead Sciences Inc
+Glacier Bancorp, Inc.
+Glaukos Corporation
+Global Blood Therapeutics, Inc.
+Global Net Lease, Inc.
+Global Payments Inc.
+Global X Silver Miners ETF
+Globe Life Inc.
+Globus Medical, Inc.
+GoDaddy Inc.
+Goldman Sachs Group Inc
+Goosehead Insurance, Inc.
+Gossamer Bio, Inc.
+Graco Inc.
+Graham Holdings Company
+Grand Canyon Education, Inc.
+Granite Construction Incorporated
+Gray Television, Inc.
+Green Dot Corporation
+GreenSky, Inc.
+Greenbrier Companies, Inc. (The)
+Greif Inc.
+Grocery Outlet Holding Corp.
+Group 1 Automotive, Inc.
+GrubHub Inc.
+Guangshen Railway Company Limited
+Guardant Health, Inc.
+Guggenheim China Technology ET
+Guidewire Software, Inc.
+H&R Block, Inc.
+H. B. Fuller Company
+HCA Healthcare Inc
+HCP, Inc.
+HD Supply Holdings, Inc.
+HOWMET AEROSPACE INC
+Haemonetics Corporation
+Halliburton Company
+Halozyme Therapeutics, Inc.
+Hamilton Lane Incorporated
+Hanesbrands Inc.
+Hanover Insurance Group Inc
+Harley-Davidson, Inc.
+Harris Corporation
+Harsco Corporation
+Hartford Financial Services Group, Inc. (The)
+Hasbro, Inc.
+Hawaiian Electric Industries, Inc.
+Hawaiian Holdings, Inc.
+HeadHunter Group PLC
+Health Insurance Innovations, Inc.
+HealthEquity, Inc.
+Healthcare Services Group, Inc.
+Healthcare Trust of America, Inc.
+Healthpeak Properties, Inc.
+Heico Corporation
+Helmerich & Payne, Inc.
+Henry Schein, Inc.
+Heritage-Crystal Clean, Inc.
+Herman Miller, Inc.
+Heron Therapeutics, Inc.
+Heska Corporation
+Hess Corporation
+Hewlett Packard Enterprise Company
+Hewlett-Packard
+Hexcel Corporation
+Hibbett Sports, Inc.
+Hill-Rom Holdings Inc
+Hilton Grand Vacations Inc.
+Hilton Worldwide Holdings Inc.
+HollyFrontier Corporation
+Hologic, Inc.
+Home Depot
+Horizon Pharma Plc
+Hormel Foods Corporation
+Host Hotels & Resorts, Inc.
+Hostess Brands, Inc.
+Houlihan Lokey, Inc.
+Howard Hughes Corporation (The)
+Huaneng Power Intl
+Huazhu Group Limited
+Hub Group, Inc.
+HubSpot, Inc.
+Hubbell Inc
+Humana Inc.
+Huntington Bancshares Incorporated
+Huntington Ingalls Industries, Inc.
+Huron Consulting Group Inc.
+Hyatt Hotels Corporation
+IAA, Inc.
+IAC/InterActiveCorp
+IBM
+ICF International, Inc.
+ICICI Bank Limited
+ICU Medical, Inc.
+IDACORP, Inc.
+IDEX Corporation
+IDEXX Laboratories, Inc.
+IGM Biosciences, Inc.
+IHS Markit Ltd.
+II-VI Incorporated
+INARI MEDICAL INC
+IPG Photonics Corporation
+IQVIA Holdings, Inc.
+ITT Inc.
+Illinois Tool Works Inc.
+Illumina, Inc.
+Immunomedics, Inc.
+InMode Ltd.
+Incyte Corporation
+Independent Bank Corp.
+Independent Bank Group, Inc
+Ingersoll-Rand plc (Ireland)
+Ingevity Corporation
+Ingredion Incorporated
+Innospec Inc.
+Innovative Industrial Properties, Inc.
+Inogen, Inc
+Inphi Corporation
+Insight Enterprises, Inc.
+Insperity, Inc.
+Inspire Medical Systems, Inc.
+Installed Building Products, Inc.
+Instructure, Inc.
+Insulet Corporation
+Int.Paper
+Integer Holdings Corporation
+Integra LifeSciences Holdings Corporation
+Intel Corp
+Intellia Therapeutics, Inc.
+Inter Parfums, Inc.
+InterDigital, Inc.
+Interactive Brokers Group, Inc.
+Intercept Pharmaceuticals, Inc.
+Intercontinental Exchange Inc.
+Internationa Flavors & Fragrances, Inc.
+Interpublic Group of Companies, Inc. (The)
+Intra-Cellular Therapies Inc.
+Intuit Inc.
+Intuitive Surgical, Inc.
+Invesco Ltd
+Invitae Corporation
+Invitation Homes Inc.
+Ionis Pharmaceuticals, Inc.
+Iovance Biotherapeutics, Inc.
+Iridium Communications Inc
+Iron Mountain Incorporated (Delaware)
+Itron, Inc.
+J & J Snack Foods Corp.
+J.B. Hunt Transport Services, Inc.
+J.M. Smucker Company (The) New
+JACOBS ENGINEERING GROUP INC
+JD.com, Inc.
+JELD-WEN Holding, Inc.
+JPMorgan Chase&Co
+Jabil Inc.
+Jack Henry & Associates, Inc.
+Jack In The Box Inc.
+Jefferies Financial Group Inc.
+John B. Sanfilippo & Son, Inc.
+John Bean Technologies Corporation
+Johnson & Johnson
+Johnson Controls International plc
+Johnson Outdoors Inc.
+Jones Lang LaSalle Incorporated
+Juniper Networks Inc
+K12 Inc
+KB Home
+KKR & Co LP
+KLA-Tencor Corporation
+Kadant Inc
+Kaiser Aluminum Corporation
+Kansas City Southern
+Karuna Therapeutics, Inc.
+Kellogg Company
+Kemper Corporation
+Kennametal Inc.
+Keurig Dr Pepper Inc.
+KeyCorp
+Keysight Technologies Inc.
+Kimberly-Clark Corporation
+Kimco Realty Corporation
+Kinder Morgan, Inc.
+Kinsale Capital Group, Inc.
+Kirby Corporation
+Kite Realty Group Trust
+Knight-Swift Transportation Holdings Inc.
+Kodiak Sciences Inc
+Kontoor Brands, Inc.
+Korea Electric Power Corporation
+Korn Ferry
+KraneShares CSI China Internet
+Kroger Company (The)
+Krystal Biotech, Inc.
+L Brands, Inc.
+L3 Technologies, Inc.
+L3Harris Technologies, Inc.
+LCI Industries
+LG Display Co, Ltd AMERICAN DEPOSITORY SHARES
+LGI Homes, Inc.
+LHC Group
+LKQ Corporation
+LPL Financial Holdings Inc.
+Laboratory Corporation of America Holdings
+Lam Research Corporation
+Lamb Weston Holdings, Inc.
+Lancaster Colony Corporation
+Landstar System, Inc.
+Lantheus Holdings, Inc.
+Las Vegas Sands Corp.
+Lattice Semiconductor Corporation
+Lear Corporation
+Legacy Housing Corporation
+Legg Mason, Inc.
+Leggett & Platt, Incorporated
+Leidos Holdings, Inc.
+LendingTree, Inc.
+Lennar Corporation
+Lennox International, Inc.
+Levi Strauss & Co
+Liberty Broadband Corporation
+Liberty Interactive Corporation - Series A QVC Group Common Stock
+Ligand Pharmaceuticals Incorporated
+Lincoln Electric Holdings, Inc.
+Linde plc
+Lindsay Corporation
+Lithia Motors, Inc.
+Littelfuse, Inc.
+Live Nation Entertainment, Inc.
+LivePerson, Inc.
+LiveRamp Holdings, Inc.
+Livent Corporation
+Livongo Health, Inc.
+Lockheed Martin Corp
+Loews Corporation
+LogMeIn, Inc.
+Louisiana-Pacific Corporation
+Lowe's Companies, Inc.
+Lumentum Holdings Inc.
+Lyft, Inc.
+Lyon William Homes
+LyondellBasell Industries NV
+M&T Bank Corporation
+M/I Homes, Inc.
+MADISON SQUARE GARDEN ENTMT CORP
+MADISON SQUARE GARDEN SPORTS CORP
+MDU Resources Group, Inc.
+MEDIFAST INC
+MGIC Investment Corporation
+MGM Resorts International
+MKS Instruments, Inc.
+MRC Global Inc.
+MSA Safety Incorporated
+MSC Industrial Direct Company, Inc.
+MSCI Inc
+MSG Networks Inc.
+MTS Systems Corporation
+MYR Group, Inc.
+Macerich Company (The)
+Macy's Inc
+Madrigal Pharmaceuticals, Inc.
+Magellan Health, Inc.
+Magnolia Oil & Gas Corporation
+Malibu Boats, Inc.
+Mallinckrodt plc
+ManTech International Corporation
+Manchester
+Manhattan Associates, Inc.
+ManpowerGroup
+Marathon Oil Corporation
+Marathon Patent Group, Inc.
+Marathon Petroleum Corporation
+Marcus & Millichap, Inc.
+Markel Corporation
+Market Vectors Russia ETF Trust (RSX)
+MarketAxess Holdings, Inc.
+Marriott International
+Marriott Vacations Worldwide Corporation
+Marsh & McLennan Companies, Inc.
+Martin Marietta Materials, Inc.
+Masco Corporation
+Masimo Corporation
+Mastercard Inc
+Match Group, Inc.
+Materion Corporation
+Matson, Inc.
+Mattel, Inc.
+MaxLinear, Inc.
+Maxim Integrated Products, Inc.
+Maximus, Inc.
+McCormick & Company, Incorporated
+McDonald's Corporation
+McDonalds
+McGrath RentCorp
+McKesson Corporation
+Medallia, Inc.
+Medidata Solutions, Inc.
+Mednax, Inc.
+Medpace Holdings, Inc.
+Medtronic PLC
+Melco Resorts & Entertainment Limited
+MercadoLibre, Inc.
+Merck & Co
+Merit Medical Systems, Inc.
+Meritage Homes Corporation
+Meritor, Inc.
+Mesa Laboratories, Inc.
+MetLife, Inc.
+Methode Electronics, Inc.
+Mettler-Toledo International, Inc.
+Micro Focus Intl PLC
+MicroStrategy Incorporated
+Microchip Technology Incorporated
+Micron Technology Inc
+Microsoft Corp
+Mid-America Apartment Communities, Inc.
+Middlesex Water Company
+Minerals Technologies Inc.
+Mirati Therapeutics, Inc.
+Mobile Mini, Inc.
+Mobile TeleSystems PJSC
+Moderna, Inc.
+Moelis & Company
+Mohawk Industries, Inc.
+Molina Healthcare Inc
+Molson Coors Brewing Company
+Momo Inc.
+Monarch Casino & Resort, Inc.
+Mondelez International, Inc.
+MongoDB, Inc.
+Monolithic Power Systems, Inc.
+Monro, Inc.
+Monster Beverage Corporation
+Moody's Corporation
+Morgan Stanley
+Morningstar, Inc.
+Mosaic Company (The)
+Motorola Solutions, Inc.
+Movado Group Inc.
+Murphy Oil Corporation
+Murphy USA Inc.
+Mylan N.V.
+MyoKardia, Inc.
+Myriad Genetics, Inc.
+NATURA &CO HOLDING S.A. SPON ADS EACH REP 2 COM SHS WI
+NCR Corporation
+NETGEAR, Inc.
+NMI Holdings Inc
+NOW Inc.
+NRG Energy, Inc.
+NV5 Global, Inc.
+NVIDIA Corp
+NVR, Inc.
+NXP Semiconductors N.V.
+Nanometrics Incorporated
+Nasdaq, Inc.
+Natera, Inc.
+National Beverage Corp.
+National Fuel Gas Company
+National Instruments Corporation
+National Oilwell Varco, Inc.
+National Presto Industries, Inc.
+National Vision Holdings, Inc.
+National Western Life Group, Inc.
+Natus Medical Incorporated
+Natus Medical Incorporated
+Navient Corporation
+Neenah, Inc.
+Nektar Therapeutics
+NeoGenomics, Inc.
+Neogen Corporation
+NetApp, Inc.
+NetEase, Inc.
+NetScout Systems, Inc.
+Netflix, Inc.
+Neurocrine Biosciences, Inc.
+Nevro Corp.
+New Relic, Inc.
+New York Times Company (The)
+NewJersey Resources Corporation
+NewMarket Corp
+Newell Brands Inc.
+Newfield Exploration Company
+Newmont Mining Corporation
+News Corporation
+News Corporation
+Nexstar Media Group, Inc.
+NextEra Energy Inc
+Nicolet Bankshares Inc.
+Nielsen N.V.
+Nike, Inc.
+Noble Energy Inc.
+Nokia Corporation Sponsored
+Nordson Corporation
+Nordstrom, Inc.
+Norfolk Southern Corp
+NorthWestern Corporation
+Northern Trust Corporation
+Northrop Grumman Corporation
+NortonLifeLock Inc.
+Novartis AG
+Nu Skin Enterprises, Inc.
+NuVasive, Inc.
+Nucor Corporation
+Nutanix, Inc.
+O'Reilly Automotive, Inc.
+OGE Energy Corp
+ON Semiconductor Corporation
+ONE Gas, Inc.
+ONEOK, Inc.
+OSI Systems, Inc.
+OTIS WORLDWIDE CORP
+OVINTIV INC
+OZON HLDGS PLC SPN ADS EACH REP 1 ORD SHS
+Occidental Petroleum Corporation
+Oceaneering International, Inc.
+Oil States International, Inc.
+Okta, Inc.
+Old Dominion Freight Line, Inc.
+Ollie's Bargain Outlet Holdings, Inc.
+Omega Healthcare Investors, Inc.
+Omnicell, Inc.
+Omnicom Group Inc.
+Onto Innovation Inc.
+OraSure Technologies, Inc.
+Ormat Technologies Inc
+OrthoPediatrics Corp.
+Oshkosh Corporation (Holding Company)
+Owens Corning Inc
+Owens-Illinois, Inc.
+PACCAR Inc.
+PALANTIR TECH INC
+PBF Energy Inc.
+PC Connection, Inc.
+PGT Innovations, Inc.
+PIPER SANDLER COMPANIES
+PJT Partners Inc.
+PNC Financial Services Group, Inc. (The)
+PPG Industries, Inc.
+PPL Corporation
+PRA Group, Inc.
+PRA Health Sciences, Inc.
+PROG Holdings, Inc,
+PTC Inc.
+PTC Therapeutics, Inc.
+PVH Corp.
+Pacific Gas & Electric Co.
+Pacira BioSciences, Inc.
+Packaging Corporation of America
+PagSeguro Digital Ltd.
+PagerDuty, Inc.
+Palo Alto Networks Inc
+Papa John's International, Inc.
+Parker-Hannifin Corporation
+Parsons Corporation
+Patrick Industries, Inc.
+Pattern Energy Group Inc
+Patterson Companies, Inc.
+PayPal Holdings, Inc.
+Paycom Software, Inc.
+Paylocity Holding Corporation
+Pegasystems Inc.
+Peloton Interactive, Inc.
+Penumbra, Inc.
+People's
+Pepsico, Inc.
+Perficient, Inc.
+Performance Food Group Company
+PerkinElmer, Inc.
+Perspecta Inc.
+PetIQ, Inc.
+PetroChina Company Limited
+Pfizer Inc
+Philip Morris International Inc
+Phillips 66
+Pilgrim's Pride Corporation
+Pinnacle Financial Partners, Inc.
+Pinterest, Inc.
+Pioneer Natural Resources Company
+Pitney Bowes Inc.
+Planet Fitness, Inc.
+Plexus Corp.
+Pluralsight, Inc.
+Polaris Industries Inc.
+PolyOne Corporation
+PolyOne Corporation
+Pool Corporation
+Portland General Electric Co
+Post Holdings, Inc.
+Power Integrations, Inc.
+PowerShares Chinese Yuan Dim S
+PowerShares Water Resources Po
+Premier, Inc.
+Prestige Consumer Healthcare Inc.
+PriceSmart, Inc.
+Primerica, Inc.
+Principal Financial Group Inc
+Principia Biopharma Inc.
+ProPetro Holding Corp.
+Procter & Gamble
+Progress Software Corporation
+Progressive Corporation (The)
+Progyny, Inc.
+Prologis, Inc.
+Proofpoint, Inc.
+Prosperity Bancshares, Inc.
+Proto Labs, Inc.
+Prudential Financial, Inc.
+Public Service Enterprise Group Incorporated
+Public Storage
+PulteGroup, Inc.
+Pure Storage, Inc.
+PureFunds ISE Junior Silver Sm
+Q2 Holdings, Inc.
+QAD Inc.
+QTS Realty Trust, Inc.
+Qorvo, Inc.
+Quaker Chemical Corporation
+Qualys, Inc.
+Quanta Services, Inc.
+Quantenna Communications, Inc.
+Quest Diagnostics Incorporated
+Quidel Corporation
+QuinStreet, Inc.
+Quotient Technology Inc.
+RAYTHEON TECHNOLOGIES CORPORATION
+RBC Bearings Incorporated
+REGENXBIO Inc.
+REX American Resources Corporation
+REYNOLDS CONSUMER PRODUCTS INC
+RH
+ROBO Global Robotics and Autom
+RPM International Inc.
+Ra Pharmaceuticals, Inc.
+Ralph Lauren Corporation
+Range Resources Corporation
+Rapid7, Inc.
+Raven Industries, Inc.
+Raymond James Financial, Inc.
+Rayonier Inc. REIT
+Raytheon Company
+RealPage, Inc.
+Realty Income Corporation
+Reata Pharmaceuticals, Inc.
+Red Hat, Inc.
+Red River Bancshares, Inc.
+Red Robin Gourmet Burgers, Inc.
+Redfin Corporation
+Regal Beloit Corporation
+Regency Centers Corporation
+Regeneron Pharmaceuticals, Inc.
+Regions Financial Corporation
+Reinsurance Group of America, Incorporated
+Reliance Steel & Aluminum Co.
+Renewable Energy Group, Inc.
+Repligen Corporation
+Republic Services, Inc.
+ResMed Inc.
+Resideo Technologies, Inc.
+Revolve Group, Inc.
+Rexnord Corporation
+Rhythm Pharmaceuticals, Inc.
+Ringcentral, Inc.
+Riot Blockchain, Inc
+Robert Half International Inc.
+Rockwell Automation, Inc.
+Rogers Corporation
+Roku, Inc.
+Rollins, Inc.
+Roper Technologies, Inc.
+Ross Stores, Inc.
+Royal Caribbean Cruises Ltd
+Royal Gold, Inc.
+Ryder System, Inc.
+S&P Global Inc.
+SBA Communications Corporation
+SCHRODINGER INC
+SCIENCE APPLICATIONS INTERNATIONAL CORPORATION
+SEI Investments Company
+SINOPEC Shangai Petrochemical Company, Ltd.
+SJW Group
+SK Telecom Co., Ltd.
+SL Green Realty Corp
+SMITH AND WESSON BRANDS INC
+SP Plus Corporation
+SPDR Bloomberg Barclays Conver
+SPDR S&P 500 Index Fund (SPY)
+SPS Commerce, Inc.
+SPX FLOW, Inc.
+SS&C Technologies Holdings, Inc.
+STAAR Surgical Company
+SVB Financial Group
+Sabra Health Care REIT, Inc.
+Sage Therapeutics, Inc.
+Saia, Inc.
+SailPoint Technologies Holdings, Inc.
+Salesforce.com Inc
+Sally Beauty Holdings, Inc. (Name to be changed from Sally Holdings, Inc.)
+Sanderson Farms, Inc.
+Sanofi
+Sarepta Therapeutics, Inc.
+ScanSource, Inc.
+Schlumberger N.V.
+Scotts Miracle-Gro Company (The)
+Seacoast Banking Corporation of Florida
+Seagate Technology
+Sealed Air Corporation
+Seattle Genetics, Inc.
+Select Energy Services, Inc.
+Selective Insurance Group, Inc.
+Semiconductor Manufacturing International Corporation
+Sempra Energy
+Semtech Corporation
+Sensient Technologies Corporation
+Service Corporation International
+ServiceMaster Global Holdings, Inc.
+ServiceMaster Global Holdings, Inc.
+ServiceNow, Inc.
+Shake Shack, Inc.
+Shenandoah Telecommunications Co
+Sherwin-Williams Company (The)
+ShockWave Medical, Inc.
+Shutterstock, Inc.
+Signet Jewelers Limited
+Silgan Holdings Inc.
+Silicon Laboratories, Inc.
+Simon Property Group, Inc.
+Simpson Manufacturing Company, Inc.
+Simulations Plus, Inc.
+Sinclair Broadcast Group, Inc.
+SiteOne Landscape Supply, Inc.
+Skechers U.S.A., Inc.
+Skyworks Solutions, Inc.
+Slack Technologies, Inc.
+Sleep Number Corporation
+Smartsheet Inc.
+Snap Inc.
+Snap-On Incorporated
+SolarEdge Technologies, Inc.
+SolarWinds Corporation
+Sonoco Products Company
+Sonos, Inc.
+Sony Corporation
+Sotheby's
+South Jersey Industries, Inc.
+Southern Company (The)
+Southern Copper Corporation
+Southwest Airlines Company
+Southwest Gas Holdings, Inc.
+Southwestern Energy Company
+Spire Inc.
+Spirit Aerosystems Holdings, Inc.
+Spirit Airlines, Inc.
+Spirit Realty Capital, Inc.
+Splunk Inc.
+Spotify Technology S.A.
+Sprouts Farmers Market, Inc.
+Square, Inc.
+Stag Industrial, Inc.
+Stamps.com Inc.
+Standex International Corporation
+Stanley Black & Decker, Inc.
+Starbucks Corp
+State Street Corporation
+Steel Dynamics, Inc.
+Stepan Company
+Stericycle, Inc.
+Steven Madden, Ltd.
+Stifel Financial Corporation
+Stoneridge, Inc.
+Strategic Education, Inc.
+Stryker Corporation
+Sturm, Ruger & Company, Inc.
+Supernus Pharmaceuticals, Inc.
+Surmodics, Inc.
+Switch, Inc.
+Sykes Enterprises, Incorporated
+Synaptics Incorporated
+Synchrony Financial
+Syneos Health, Inc.
+Synnex Corporation
+Synopsys, Inc.
+Sysco Corporation
+T-Mobile US, Inc.
+T. Rowe Price Group, Inc.
+TAL Education Group
+TCR2 Therapeutics Inc.
+TE Connectivity Ltd. New Switzerland Registered Shares
+TEGNA Inc
+TJX Companies, Inc. (The)
+TPI Composites, Inc.
+TRANE TECHNOLOGIES PLC
+TRI Pointe Group, Inc.
+TRUIST FINANCIAL CORPORATION
+TTM Technologies, Inc.
+Tableau Software, Inc.
+Tabula Rasa HealthCare, Inc.
+Tactile Systems Technology, Inc.
+Taiwan Semiconductor Manufacturing Company Ltd.
+Take-Two Interactive Software, Inc.
+Takeda Pharmaceutical Company Limited
+Tandem Diabetes Care, Inc.
+Tapestry, Inc.
+Target Corporation
+Tata Motors Ltd Tata Motors Limited
+Taylor Morrison Home Corporation
+Tech Data Corporation
+TechnipFMC plc
+Teladoc Health, Inc.
+Teledyne Technologies Incorporated
+Teleflex Incorporated
+Telephone and Data Systems, Inc.
+Tempur Sealy International, Inc.
+Tenable Holdings, Inc.
+Tennant Company
+Teradata Corporation
+Teradyne, Inc.
+Terreno Realty Corporation
+Tesla, Inc.
+Tetra Tech, Inc.
+Texas Capital Bancshares, Inc.
+Texas Roadhouse, Inc.
+Textron Inc.
+The AES Corporation
+The Andersons, Inc.
+The Blackstone Group Inc.
+The Chefs' Warehouse, Inc.
+The Cooper Companies, Inc.
+The Ensign Group, Inc.
+The Goodyear Tire & Rubber Company
+The Hain Celestial Group, Inc.
+The Hershey Company
+The Kraft Heinz Company
+The Madison Square Garden Company
+The Middleby Corporation
+The Pennant Group, Inc.
+The Providence Service Corporation
+The Providence Service Corporation
+The Simply Good Foods Company
+The Trade Desk, Inc.
+The Ultimate Software Group, Inc.
+Thermo Fisher Scientific Inc
+Thor Industries, Inc.
+Tiffany & Co.
+Timken Company (The)
+Toll Brothers, Inc.
+TopBuild Corp.
+Torchmark Corporation
+Toro Company (The)
+Total S.A.
+Total System Services, Inc.
+Toyota Motor Corporation
+Tractor Supply Company
+Tradeweb Markets Inc.
+TransUnion
+Transdigm Group Incorporated Transdigm Group Inc.
+Transocean Ltd (Switzerland)
+Travelers Comp.
+Treehouse Foods, Inc.
+Trex Company, Inc.
+TriNet Group, Inc.
+Trimble Inc.
+TripAdvisor, Inc.
+Trupanion, Inc.
+Tucows Inc.
+Turning Point Therapeutics, Inc.
+Turtle Beach Corporation
+Twenty-First Century Fox, Inc.
+Twenty-First Century Fox, Inc.
+Twilio Inc.
+Twitter, Inc.
+Tyler Technologies, Inc.
+Tyson Foods, Inc.
+U.S. Bancorp
+U.S. Physical Therapy, Inc.
+UDR, Inc.
+UGI Corporation
+UMB Financial Corporation
+UNITIL Corporation
+US Foods Holding Corp.
+USANA Health Sciences, Inc.
+Uber Technologies, Inc.
+Ubiquiti Inc.
+Ubiquiti Networks, Inc.
+Ulta Beauty, Inc.
+Ultra Clean Holdings, Inc.
+Ultragenyx Pharmaceutical Inc.
+Under Armour, Inc.
+Under Armour, Inc.
+Unifirst Corporation
+Union Pacific Corporation
+United Bankshares, Inc.
+United Continental Holdings, Inc.
+United Parcel Service, Inc.
+United Rentals, Inc.
+United States Cellular Corporation
+United Technologies
+United Therapeutics Corporation
+UnitedHealth Group Incorporated
+Univar Solutions Inc.
+Universal Display Corporation
+Universal Forest Products, Inc.
+Universal Health Services, Inc.
+Unum Group
+Upwork Inc.
+Urban Outfitters, Inc.
+V.F. Corporation
+VALE S.A.
+VEON Ltd.
+VIACOMCBS INC
+Vail Resorts, Inc.
+Valero Energy Corp
+Valmont Industries, Inc.
+VanEck Vectors Gold Miners ETF
+VanEck Vectors Investment Grad
+Vanda Pharmaceuticals Inc.
+Vanguard Consumer Discretionary ETF (VCR)
+Vanguard REIT ETF (VNQ)
+Vanguard Total Stock Market ETF (VTI)
+Varex Imaging Corporation
+Varian Medical Systems, Inc.
+Varonis Systems, Inc.
+Vectrus, Inc.
+Veeva Systems Inc.
+Ventas, Inc.
+Veoneer, Inc.
+Veracyte, Inc.
+VeriSign, Inc.
+Vericel Corporation
+Verint Systems Inc.
+Verisk Analytics Inc
+Veritiv Corporation
+Verizon Communications
+Vertex Pharmaceuticals Incorporated
+ViaSat, Inc.
+Viacom Inc.
+Viatris Inc.
+Vicor Corporation
+Viela Bio, Inc.
+Vipshop Holdings Limited
+Vir Biotechnology, Inc.
+Virgin Galactic Holdings, Inc.
+Virtu Financial, Inc.
+Virtus Investment Partners, Inc.
+Virtusa Corporation
+Visa Inc.
+Vishay Precision Group, Inc.
+Visteon Corporation
+Vmware, Inc.
+Vocera Communications, Inc.
+Vonage Holdings Corp.
+Vontier Corporation
+Vornado Realty Trust
+Vulcan Materials Company (Holding Company)
+W.R. Berkley Corporation
+W.R. Grace & Co.
+W.W. Grainger, Inc.
+WD-40 Company
+WEC Energy Group, Inc.
+WESCO International, Inc.
+WEX Inc.
+WW International, Inc.
+Wabco Holdings Inc.
+Wal-Mart Stores
+Walgreens Boots Alliance, Inc.
+Walt Disney
+Washington Federal, Inc.
+Waste Management, Inc.
+Waters Corporation
+Watsco, Inc.
+Watts Water Technologies, Inc.
+Wayfair Inc.
+Webster Financial Corporation
+Weibo Corporation
+Wellcare Health Plans, Inc.
+Wells Fargo
+Welltower Inc.
+Werner Enterprises, Inc.
+West Pharmaceutical Services, Inc.
+Westamerica Bancorporation
+Western Alliance Bancorporation
+Western Digital Corporation
+Western Union Company (The)
+Westinghouse Air Brake Technologies Corporation
+Westlake Chemical Corporation
+Westrock Company
+Weyerhaeuser Company
+Whirlpool Corporation
+WillScot Corporation
+Williams Companies, Inc. (The)
+Williams-Sonoma, Inc.
+Willis Towers Watson Public Limited Company
+Wingstop Inc.
+Winnebago Industries, Inc.
+Wintrust Financial Corporation
+Wolverine World Wide, Inc.
+Woodward, Inc.
+Workday, Inc.
+Workiva Inc.
+World Acceptance Corporation
+World Wrestling Entertainment, Inc.
+Worthington Industries, Inc.
+Wyndham Destinations, Inc.
+Wyndham Destinations, Inc.
+Wyndham Hotels & Resorts, Inc.
+Wynn Resorts, Limited
+XP INC
+XPO Logistics, Inc.
+Xcel Energy Inc.
+Xencor, Inc.
+Xilinx, Inc.
+Xylem Inc.
+YETI Holdings, Inc.
+YY Inc.
+Yahoo INC
+Yelp Inc.
+Yext, Inc.
+Yum China Holdings, Inc.
+Yum! Brands, Inc.
+ZOOMINFO TECHNOLOGIES INC
+Zebra Technologies Corporation
+Zendesk, Inc.
+Zillow Group, Inc.
+Zillow Group, Inc.
+Zimmer Biomet Holdings, Inc.
+Zions Bancorporation N.A.
+Zoetis Inc.
+Zogenix, Inc.
+Zoom Video Communications, Inc.
+Zscaler, Inc.
+Zumiez Inc.
+Zuora, Inc.
+Zynerba Pharmaceuticals, Inc.
+Zynex, Inc.
+bluebird bio, Inc.
+eBay Inc.
+eHealth, Inc.
+ePlus inc.
+frontdoor, inc.
+iRhythm Technologies, Inc.
+iRobot Corporation
+iShares Barclays 7-10 Year Treasury Bond Fund
+iShares Barclays Aggregate Bond Fund
+iShares Barclays TIPS Bond Fund
+iShares China Large-Cap ETF
+iShares Cohen & Steers Realty Majors Index Fund (ICF)
+iShares Floating Rate Bond ETF
+iShares Global Clean Energy ET
+iShares Gold Trust
+iShares MSCI Canada Index Fund (EWC)
+iShares MSCI EAFE Index Fund (EFA)
+iShares MSCI Emerging Markets Index Fund (EEM)
+iShares MSCI Hong Kong ETF
+iShares MSCI South Africa Index Fund (EZA)
+iShares MSCI Taiwan Capped ETF
+iShares Nasdaq Biotechnology E
+iShares Russell 1000 Growth Index Fund (IWF)
+iShares Russell 2000 Growth ET
+iShares Russell 2000 Value Index Fund (IWN)
+iShares Russell 3000 Index Fund (IWV)
+iShares S&P GSSI™ Natural Resources Index Fund of iShares
+iShares S&P GSTI™ Networking Index Fund of iShares Trust
+iShares S&P MidCap 400 Index Fund (IJH)
+iShares S&P SmallCap 600 Index Fund (IJR)
+iShares Silver Trust (SLV)
+j2 Global, Inc.
+lululemon athletica inc.
+nLIGHT, Inc.

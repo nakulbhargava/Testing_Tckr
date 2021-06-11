@@ -1,0 +1,569 @@
+Exchange	Symbol	Fractionable	Shortable	Tradable	Date			Open	Close	HIGH	LOW	HL%	Volume	Name
+NYSE		LCI	false		true		true		2021-06-08T04:00:00Z	5.07	5.33	5.62	5	11.63	4212396	Lannett Company, Inc.
+AMEX		LCTX	false		true		true		2021-06-08T04:00:00Z	2.87	2.75	2.899	2.71	6.87	1436576	Lineage Cell Therapeutics, Inc.
+NASDAQ		ADAP	false		true		true		2021-06-08T04:00:00Z	4.7	4.69	4.73	4.56	3.62	613396	Adaptimmune Therapeutics plc American Depositary Shares
+NASDAQ		ALACR	false		true		true		2021-06-08T04:00:00Z	0.425	0.43	0.43	0.43	0	2164	Alberton Acquisition Corporation Rights exp April 26, 2021
+NASDAQ		ALYA	false		true		true		2021-06-08T04:00:00Z	2.73	2.78	2.82	2.73	3.24	71125	Alithya Group inc. Class A Subordinate Voting Shares
+NASDAQ		ALJJ	false		true		true		2021-06-08T04:00:00Z	1.64	1.67	1.69	1.63	3.59	99644	ALJ Regional Holdings, Inc. Common Stock
+NASDAQ		ALNA	false		true		true		2021-06-08T04:00:00Z	1.21	1.22	1.23	1.18	4.1	451995	Allena Pharmaceuticals, Inc. Common Stock
+NASDAQ		APRE	false		true		true		2021-06-08T04:00:00Z	5	4.91	5.13	4.81	6.52	408065	Aprea Therapeutics, Inc. Common stock
+NYSE		ARCO	false		true		true		2021-06-08T04:00:00Z	6.57	6.57	6.64	6.53	1.67	546978	ARCOS DORADOS HOLDINGS INC.
+NASDAQ		ARLP	false		true		true		2021-06-08T04:00:00Z	6.25	6.55	6.59	6.2	5.95	890884	Alliance Resource Partners, L.P. Common Units representing Limited Partners Interests
+AMEX		AMPE	false		true		true		2021-06-08T04:00:00Z	1.8	1.79	1.85	1.77	4.47	863612	Ampio Pharmaceuticals, Inc
+NYSE		AMRX	false		true		true		2021-06-08T04:00:00Z	5.71	5.71	5.77	5.64	2.28	558424	Amneal Pharmaceuticals, Inc. Class A Common Stock
+NASDAQ		APWC	false		true		true		2021-06-08T04:00:00Z	4.5	4.39	4.58	4.24	7.74	148688	Asia Pacific Wire & Cable Corporation, Ltd. Ordinary Shares (Bermuda)
+NASDAQ		AQB	false		true		true		2021-06-08T04:00:00Z	6.23	6.19	6.25	5.93	5.17	1386802	AquaBounty Technologies, Inc. Common Stock
+NASDAQ		AQST	false		true		true		2021-06-08T04:00:00Z	3.97	3.93	3.98	3.77	5.34	391390	Aquestive Therapeutics, Inc. Common Stock
+NASDAQ		ARAV	false		true		true		2021-06-08T04:00:00Z	5.47	5.45	5.53	5.36	3.12	75304	Aravive, Inc. Common Stock
+NASDAQ		AUUD	false		true		true		2021-06-08T04:00:00Z	2.47	2.57	2.67	2.4191	9.76	44332	Auddia Inc. Common Stock
+NASDAQ		ARTW	false		true		true		2021-06-08T04:00:00Z	3.52	3.52	3.5493	3.4	4.24	26839	Art's-Way Manufacturing Co., Inc. Common Stock
+NYSE		ASC	false		true		true		2021-06-08T04:00:00Z	4.28	4.32	4.39	4.25	3.24	170745	ARDMORE SHIPPING CORPORATION
+NASDAQ		ASLN	false		true		true		2021-06-08T04:00:00Z	3.05	2.99	3.1	2.9118	6.29	274357	ASLAN Pharmaceuticals Limited American Depositary Shares
+NASDAQ		ASRV	false		true		true		2021-06-08T04:00:00Z	4.1	4.11	4.17	4.05	2.92	4350	AmeriServ Financial Inc. Common Stock
+NYSE		AUD	false		true		true		2021-06-08T04:00:00Z	4.56	4.47	4.56	4.4	3.58	509131	Audacy, Inc.
+NYSE		BEST	false		true		true		2021-06-08T04:00:00Z	1.5	1.62	1.62	1.43	11.73	4809991	BEST Inc. American Depositary Shares, each representing one Class A Ordinary Share
+NASDAQ		ASPS	false		true		true		2021-06-08T04:00:00Z	7.07	6.82	7.07	6.68	5.72	89695	Altisource Portfolio Solutions S.A. Common Stock
+NASDAQ		BDSI	false		true		true		2021-06-08T04:00:00Z	3.72	3.64	3.75	3.61	3.85	528452	BioDelivery Sciences International, Inc. Common Stock
+NYSE		BBAR	false		true		true		2021-06-08T04:00:00Z	3.91	3.84	3.96	3.84	3.13	711054	Banco BBVA Argentina S.A.
+NYSE		BBD	false		true		true		2021-06-08T04:00:00Z	5.52	5.61	5.67	5.5	3.03	29058587	Banco Bradesco S.A. American Depositary Shares (Each representing one Preferred Shares)
+NYSE		BKD	false		true		true		2021-06-08T04:00:00Z	6.8	6.88	7	6.77	3.34	1450573	Brookdale Senior Living, Inc.
+NYSE		BHR	false		true		true		2021-06-08T04:00:00Z	6.22	6.4	6.44	6.15	4.53	1514559	Braemar Hotels & Resorts Inc. Common Stock
+NASDAQ		BKEP	false		true		true		2021-06-08T04:00:00Z	4.13	3.94	4.149	3.88	6.83	310499	Blueknight Energy Partners L.P. Common Units
+NASDAQ		BKCC	false		true		true		2021-06-08T04:00:00Z	4.32	4.34	4.365	4.3	1.5	457626	BlackRock Capital Investment Corporation Common Stock
+NASDAQ		BLCM	false		true		true		2021-06-08T04:00:00Z	3.06	3.18	3.19	2.95	7.55	217572	Bellicum Pharmaceuticals, Inc. Common Stock
+NASDAQ		BSQR	false		true		true		2021-06-08T04:00:00Z	2.73	2.63	2.78	2.53	9.51	346612	BSQUARE Corporation Common Stock
+NASDAQ		BRY	false		true		true		2021-06-08T04:00:00Z	6.78	6.91	7	6.5	7.24	303137	Berry Corporation (bry) Common Stock
+NYSE		CANG	false		true		true		2021-06-08T04:00:00Z	5.47	5.73	5.86	5.46	6.98	705092	Cango Inc. American Depositary Shares,  each representing two (2) Class A Ordinary Shares
+NASDAQ		CATB	false		true		true		2021-06-08T04:00:00Z	2.16	2.16	2.1901	2.04	6.95	519701	Catabasis Pharmaceuticals, Inc. Common Stock
+NASDAQ		CBAY	false		true		true		2021-06-08T04:00:00Z	5	4.67	5.03	4.6	9.21	1034580	CymaBay Therapeutics Inc. Common Stock
+NYSE		CAAP	false		true		true		2021-06-08T04:00:00Z	5.79	5.69	5.84	5.65	3.34	97820	Corporacion America Airports S.A.
+NASDAQ		CASI	false		true		true		2021-06-08T04:00:00Z	1.75	1.65	1.75	1.63	7.27	1142813	CASI Pharmaceuticals, Inc. Common Stock
+AMEX		CDOR	false		true		true		2021-06-08T04:00:00Z	4.97	4.89	5.1	4.89	4.29	114585	Condor Hospitality Trust, Inc. Common Stock
+NASDAQ		CDTX	false		true		true		2021-06-08T04:00:00Z	2.12	2.17	2.17	2.111	2.72	162352	Cidara Therapeutics, Inc. Common Stock
+NASDAQ		CERS	false		true		true		2021-06-08T04:00:00Z	5.57	5.64	5.68	5.53	2.66	1450660	Cerus Corporation Common Stock
+NASDAQ		CDEV	false		true		true		2021-06-08T04:00:00Z	6.3	6.46	6.6	6.11	7.59	8899662	Centennial Resource Development, Inc. Class A Common Stock
+NYSE		CEPU	false		true		true		2021-06-08T04:00:00Z	2.78	2.65	2.8	2.63	6.42	729345	Central Puerto S.A. American Depositary Shares (each represents ten Common Shares)
+NASDAQ		CFRX	false		true		true		2021-06-08T04:00:00Z	4.35	4.25	4.35	4.13	5.18	245775	ContraFect Corporation Common Stock
+NASDAQ		CHMA	false		true		true		2021-06-08T04:00:00Z	4.2	4.17	4.21	4.125	2.04	591664	Chiasma, Inc. Common Stock
+NYSE		CHS	false		true		true		2021-06-08T04:00:00Z	6.17	6.3	6.48	5.6	13.97	3628555	Chicos FAS, Inc.
+NASDAQ		CLSN	false		true		true		2021-06-08T04:00:00Z	1.24	1.25	1.25	1.19	4.8	1522792	Celsion Corporation Common Stock
+NYSE		CHRA	false		true		true		2021-06-08T04:00:00Z	5.91	5.92	6.03	5.6813	5.89	105730	Charah Solutions, Inc Common Stock
+NASDAQ		CIH	false		true		true		2021-06-08T04:00:00Z	1.96	1.95	1.97	1.93	2.05	14734	China Index Holdings Limited American Depository Shares
+NASDAQ		CLXT	false		true		true		2021-06-08T04:00:00Z	4.82	4.54	4.9595	4.43	11.66	179660	Calyxt, Inc. Common Stock
+NYSE		CMCM	false		true		true		2021-06-08T04:00:00Z	2.34	2.64	2.68	2.31	14.02	855477	CHEETAH MOBILE INC.
+NASDAQ		CPRX	true		true		true		2021-06-08T04:00:00Z	5.76	5.62	5.7955	5.49	5.44	1265279	Catalyst Pharmaceuticals, Inc. Common Stock
+NASDAQ		CRBP	false		true		true		2021-06-08T04:00:00Z	2.06	2.2	2.2	2.04	7.27	2422055	Corbus Pharmaceuticals Holdings, Inc. Common Stock
+NYSE		CIA	false		true		true		2021-06-08T04:00:00Z	5.1	5.03	5.17	5.01	3.18	97091	Citizens, Inc.
+NASDAQ		COMS	false		true		true		2021-06-08T04:00:00Z	2.54	2.51	2.55	2.42	5.18	255545	ComSovereign Holding Corp. Common Stock
+NASDAQ		CPIX	false		true		true		2021-06-08T04:00:00Z	2.93	2.97	3.03	2.89	4.71	19602	Cumberland Pharmaceuticals Inc. Common Stock
+NYSE		CORR	false		true		true		2021-06-08T04:00:00Z	6.83	6.83	7.13	6.73	5.86	355895	CorEnergy Infrastructure Trust, Inc. (NEW
+NASDAQ		CRKN	false		true		true		2021-06-08T04:00:00Z	4.02	4.12	4.15	3.76	9.47	190177	Crown Electrokinetics Corp. Common Stock
+NASDAQ		CRNT	false		true		true		2021-06-08T04:00:00Z	3.72	3.81	3.85	3.6601	4.98	932399	Ceragon Networks Ltd. Ordinary Shares
+NASDAQ		CTHR	false		true		true		2021-06-08T04:00:00Z	2.72	2.73	2.79	2.7	3.3	109404	Charles & Colvard Ltd Common Stock
+NASDAQ		CXDC	false		true		true		2021-06-08T04:00:00Z	0.64	0.6315	0.64	0.6116	4.5	251931	China XD Plastics Company Limited Common Stock
+NASDAQ		DAIO	false		true		true		2021-06-08T04:00:00Z	6.15	5.95	6.16	5.9107	4.19	25401	Data I/O Corporation Common Stock
+NYSE		CSLT	false		true		true		2021-06-08T04:00:00Z	2.08	2.08	2.15	2.06	4.33	1034239	CASTLIGHT HEALTH, INC.
+NASDAQ		CXDO	false		true		true		2021-06-08T04:00:00Z	5.32	5.32	5.46	5.2	4.89	62244	Crexendo, Inc. Common Stock
+NASDAQ		DAKT	false		true		true		2021-06-08T04:00:00Z	6.69	6.86	6.94	6.69	3.64	179542	Daktronics, Inc. Common Stock
+AMEX		CVU	false		true		true		2021-06-08T04:00:00Z	3.83	3.82	3.86	3.8	1.57	24231	CPI Aerostructures, Inc.
+NASDAQ		DBVT	false		true		true		2021-06-08T04:00:00Z	5.68	5.68	5.74	5.5715	2.97	74929	DBV Technologies S.A. American Depositary Shares
+NYSE		DHT	false		true		true		2021-06-08T04:00:00Z	6.27	6.34	6.36	6.22	2.21	1606924	DHT HOLDINGS, INC.
+NASDAQ		DHC	false		true		true		2021-06-08T04:00:00Z	3.75	3.98	4.005	3.71	7.41	1914246	Diversified Healthcare Trust Common Shares of Beneficial Interest
+NASDAQ		DRRX	false		true		true		2021-06-08T04:00:00Z	1.75	1.74	1.7899	1.695	5.45	345444	DURECT Corporation Common Stock
+NASDAQ		DRTT	false		true		true		2021-06-08T04:00:00Z	3.39	3.5	3.52	3.38	4	44483	DIRTT Environmental Solutions Ltd. Common Shares
+NASDAQ		DWSN	false		true		true		2021-06-08T04:00:00Z	2.49	2.58	2.6	2.45	5.81	61040	Dawson Geophysical Company Common Stock
+NASDAQ		DYAI	false		true		true		2021-06-08T04:00:00Z	3.89	3.86	3.979	3.78	5.16	133043	Dyadic International, Inc. Common Stock
+NYSE		ENIA	true		true		true		2021-06-08T04:00:00Z	6.88	6.8	6.888	6.795	1.37	853099	Enel Americas S.A. American Depositary Shares (Each representing 50 shares of Common Stock)
+NYSE		EGY	false		true		true		2021-06-08T04:00:00Z	3.24	3.35	3.39	3.1601	6.86	543952	Vaalco Energy, Inc.
+NYSE		ENLC	false		true		true		2021-06-08T04:00:00Z	6.08	5.94	6.12	5.94	3.03	3595845	ENLINK MIDSTREAM, LLC
+NYSE		ESGC	false		true		true		2021-06-08T04:00:00Z	1.23	1.25	1.3	1.21	7.2	10587032	Eros STX Global Corporation
+NYSE		EEX	false		true		true		2021-06-08T04:00:00Z	5.5	5.49	5.532	5.42	2.04	75820	Emerald Holding, Inc.
+AMEX		EMAN	false		true		true		2021-06-08T04:00:00Z	3.4	3.51	3.53	3.33	5.7	782706	eMagin Corporation
+NASDAQ		EVOL	false		true		true		2021-06-08T04:00:00Z	2.06	2.15	2.19	2.051	6.47	83488	Evolving Systems, Inc. Common Stock
+NYSE		FI	false		true		true		2021-06-08T04:00:00Z	3.25	3.14	3.3	3.08	7.01	2319982	FRANK'S INTERNATIONAL N.V.
+NASDAQ		FENC	false		true		true		2021-06-08T04:00:00Z	7.11	6.97	7.24	6.93	4.45	114783	Fennec Pharmaceuticals Inc. Common Stock
+NASDAQ		FNHC	false		true		true		2021-06-08T04:00:00Z	4.52	4.36	4.61	4.33	6.42	84402	FedNat Holding Company Common Stock
+NASDAQ		FIXX	false		true		true		2021-06-08T04:00:00Z	6.81	6.85	6.99	6.58	5.99	587308	Homology Medicines, Inc. Common Stock
+NASDAQ		FLNT	false		true		true		2021-06-08T04:00:00Z	3.09	3.05	3.14	3.005	4.43	451631	Fluent, Inc. Common Stock
+NASDAQ		FLDM	false		true		true		2021-06-08T04:00:00Z	5.7	5.6	5.78	5.51	4.82	788528	Fluidigm Corporation Common Stock
+NASDAQ		FLMN	false		true		true		2021-06-08T04:00:00Z	5.06	5.1	5.18	4.95	4.51	397521	Falcon Minerals Corporation Class A Common Stock
+NASDAQ		FPAY	false		true		true		2021-06-08T04:00:00Z	2.95	2.85	2.97	2.81	5.61	78431	FlexShopper, Inc. Common Stock
+NASDAQ		FRBK	false		true		true		2021-06-08T04:00:00Z	4.27	4.3	4.36	4.09	6.28	186295	Republic First Bancorp, Inc. Common Stock
+AMEX		FSP	false		true		true		2021-06-08T04:00:00Z	5.48	5.61	5.67	5.47	3.57	214609	Franklin Street Properties Corp
+AMEX		FSI	false		true		true		2021-06-08T04:00:00Z	3.34	3.41	3.42	3.34	2.35	15198	Flexible Solutions International, Inc.
+NYSE		FSM	false		true		true		2021-06-08T04:00:00Z	6.8	6.64	6.85	6.63	3.31	2636456	FORTUNA Silver Mines Inc.
+NASDAQ		FTFT	false		true		true		2021-06-08T04:00:00Z	3.24	3.28	3.37	3.18	5.79	1244848	Future FinTech Group Inc. Common Stock
+NYSE		FTK	false		true		true		2021-06-08T04:00:00Z	2.1	2.02	2.1325	1.9902	7.04	320787	Flotek Industries, Inc.
+NASDAQ		FVE	false		true		true		2021-06-08T04:00:00Z	5.97	6.15	6.15	5.925	3.66	78095	Five Star Senior Living Inc. Common Stock
+AMEX		GAU	false		true		true		2021-06-08T04:00:00Z	1.26	1.26	1.28	1.25	2.38	491049	Galiano Gold Inc.
+NYSE		GCI	false		true		true		2021-06-08T04:00:00Z	5.16	5.26	5.32	5.09	4.37	1092300	Gannett Co., Inc.
+NYSE		GEO	false		true		true		2021-06-08T04:00:00Z	6.11	6.36	6.43	6.02	6.45	9071452	The GEO Group, Inc.
+NASDAQ		GECC	false		true		true		2021-06-08T04:00:00Z	3.85	3.84	3.85	3.78	1.82	293958	Great Elm Capital Corp. Common Stock
+NASDAQ		GEG	false		true		true		2021-06-08T04:00:00Z	2.83	2.78	2.8535	2.78	2.64	15359	Great Elm Group, Inc. Common Stock
+NYSE		GIM	false		true		true		2021-06-08T04:00:00Z	5.63	5.64	5.69	5.61	1.42	571339	Templeton Global Income Fund (Delaware)
+NYSE		GGB	false		true		true		2021-06-08T04:00:00Z	6.34	6.23	6.39	6.22	2.73	9289268	Gerdau S.A.
+NASDAQ		GNPX	false		true		true		2021-06-08T04:00:00Z	3.94	3.9	4.04	3.77	6.92	533228	Genprex, Inc. Common Stock
+NASDAQ		GNCA	false		true		true		2021-06-08T04:00:00Z	2.44	2.52	2.55	2.42	5.16	157552	Genocea Biosciences, Inc. Common Stock
+NYSE		GNT	false		true		true		2021-06-08T04:00:00Z	5.89	5.93	5.96	5.86	1.69	92262	GAMCO Natural Resources, Gold & Income Trust
+NASDAQ		GNLN	false		true		true		2021-06-08T04:00:00Z	4	4.03	4.12	3.93	4.71	601531	Greenlane Holdings, Inc. Class A Common Stock
+AMEX		GORO	false		true		true		2021-06-08T04:00:00Z	2.92	2.82	2.94	2.81	4.61	1102732	Gold Resource Corporation
+NASDAQ		GSM	false		true		true		2021-06-08T04:00:00Z	5.55	5.97	6	5.46	9.05	2250549	Ferroglobe PLC Ordinary Shares
+AMEX		GTE	false		true		true		2021-06-08T04:00:00Z	0.71	0.7036	0.7198	0.6843	5.05	3607041	Gran Tierra Energy Inc.
+NASDAQ		HEPA	false		true		true		2021-06-08T04:00:00Z	1.9	1.9	1.92	1.8321	4.63	1541587	Hepion Pharmaceuticals, Inc. Common Stock
+NASDAQ		GROW	false		true		true		2021-06-08T04:00:00Z	6.06	5.99	6.115	5.81	5.09	193491	U.S. Global Investors, Inc. Class A Common Stock
+NASDAQ		GTYH	false		true		true		2021-06-08T04:00:00Z	6.01	6.38	6.48	5.83	10.19	346174	GTY Technology Holdings, Inc. Common Stock
+NASDAQ		HBP	false		true		true		2021-06-08T04:00:00Z	5.96	6.12	6.2	5.96	3.92	60884	Huttig Building Products, Inc. Common Stock
+NASDAQ		GTIM	false		true		true		2021-06-08T04:00:00Z	3.94	3.95	4.0616	3.9	4.09	57995	Good Times Restaurants Inc. Common Stock
+NYSE		HIL	false		true		true		2021-06-08T04:00:00Z	2.59	2.59	2.62	2.58	1.54	543205	Hill International, Inc. Common Stock
+NYSE		HLX	false		true		true		2021-06-08T04:00:00Z	6.13	6.3	6.37	6.04	5.24	1564307	Helix Energy Solutions Group, Inc.
+NASDAQ		HMPT	false		true		true		2021-06-08T04:00:00Z	6.53	6.63	6.79	6.41	5.73	117860	Home Point Capital, Inc Common Stock
+NASDAQ		HNRG	false		true		true		2021-06-08T04:00:00Z	2.72	2.76	2.83	2.65	6.52	170417	Hallador Energy Company Common Stock
+NYSE		HMY	true		true		true		2021-06-08T04:00:00Z	4.85	4.75	4.87	4.73	2.95	7024284	Harmony Gold Mining Company Limited
+NASDAQ		HSTO	false		true		true		2021-06-08T04:00:00Z	1	0.982	1.0185	0.98	3.92	5215745	Histogen Inc. Common Stock
+NASDAQ		HTGM	false		true		true		2021-06-08T04:00:00Z	4.14	4.2	4.28	4	6.67	72216	HTG Molecular Diagnostics, Inc. Common Stock
+NASDAQ		HWCC	false		true		true		2021-06-08T04:00:00Z	5.28	5.28	5.29	5.27	0.38	27008	Houston Wire & Cable Company Common Stock
+AMEX		ID	false		true		true		2021-06-08T04:00:00Z	6	6.16	6.3	6	4.87	51282	PARTS iD, Inc.
+NASDAQ		IDRA	false		true		true		2021-06-08T04:00:00Z	1.32	1.31	1.35	1.28	5.34	1592146	Idera Pharmaceuticals, Inc. Common Stock
+AMEX		AMS	false		true		true		2021-06-08T04:00:00Z	3.32	3.26	3.3823	3.13	7.74	1348291	American Shared Hospital Services
+NASDAQ		ICMB	false		true		true		2021-06-08T04:00:00Z	5.69	5.77	5.77	5.69	1.39	110535	Investcorp Credit Management BDC, Inc. Common Stock
+NASDAQ		CYRN	false		true		true		2021-06-08T04:00:00Z	0.8091	0.7862	0.8111	0.72	11.59	6153090	CYREN Ltd. Ordinary Shares
+NYSE		AP	false		true		true		2021-06-08T04:00:00Z	6.43	6.54	6.65	6.25	6.12	67295	Ampco-Pittsburgh Corp.
+NASDAQ		III	false		true		true		2021-06-08T04:00:00Z	5.83	5.69	5.9	5.62	4.92	227368	Information Services Group, Inc. Information Services Group Inc. Common Stock
+NASDAQ		INFI	false		true		true		2021-06-08T04:00:00Z	3.34	3.47	3.51	3.32	5.48	1190850	Infinity Pharmaceuticals, Inc. Common Stock
+AMEX		IMH	false		true		true		2021-06-08T04:00:00Z	1.97	1.96	2.01	1.96	2.55	114233	Impac Mortgage Holdings Inc.
+NASDAQ		IPA	false		true		true		2021-06-08T04:00:00Z	7.12	6.55	7.12	6.54	8.85	70417	ImmunoPrecise Antibodies Ltd. Common Stock
+NASDAQ		IMGN	false		true		true		2021-06-08T04:00:00Z	6.1116	6.27	6.32	5.91	6.54	2703947	ImmunoGen, Inc. Common Stock
+AMEX		INUV	false		true		true		2021-06-08T04:00:00Z	0.84	0.8385	0.8699	0.82	5.95	1206723	Inuvo, Inc.
+NYSE		IRS	false		true		true		2021-06-08T04:00:00Z	4.13	4	4.18	3.96	5.5	133094	IRSA Inversiones y Representaciones S.A. Global Depositary Shares
+NASDAQ		ISEE	false		true		true		2021-06-08T04:00:00Z	6.65	6.6	6.7	6.55	2.27	1306541	IVERIC bio, Inc. Common Stock
+AMEX		ISR	false		true		true		2021-06-08T04:00:00Z	0.929	0.8611	0.9379	0.854	9.74	2684837	IsoRay, Inc.
+NYSE		IVR	true		true		true		2021-06-08T04:00:00Z	3.43	3.54	3.57	3.41	4.52	12532523	Invesco Mortgage Capital Inc.
+NYSE		ITCB	false		true		true		2021-06-08T04:00:00Z	4.69	4.72	4.7943	4.67	2.63	8521	Itau CorpBanca
+NYSE		ITUB	false		true		true		2021-06-08T04:00:00Z	6.41	6.53	6.567	6.34	3.48	77926497	Itau Unibanco Holding S.A. American Depositary Shares
+NASDAQ		IVAC	false		true		true		2021-06-08T04:00:00Z	6.49	6.31	6.53	6.27	4.12	100915	Intevac, Inc. Common Stock
+NASDAQ		ITI	false		true		true		2021-06-08T04:00:00Z	6.86	6.9	6.97	6.785	2.68	98832	Iteris, Inc. Common Stock
+NASDAQ		KRMD	false		true		true		2021-06-08T04:00:00Z	4.44	4.72	4.75	4.39	7.63	341219	Repro Med Systems, Inc. Common Stock
+NASDAQ		LIFE	false		true		true		2021-06-08T04:00:00Z	4.73	4.7	4.77	4.56	4.47	189787	aTyr Pharma, Inc. Common Stock
+NASDAQ		LJPC	false		true		true		2021-06-08T04:00:00Z	5.24	5.14	5.3299	5.12	4.08	187696	La Jolla Pharmaceutical Company Common Stock
+NASDAQ		LLNW	false		true		true		2021-06-08T04:00:00Z	3.19	3.28	3.28	3.155	3.81	1972136	Limelight Networks, Inc. Common Stock
+NASDAQ		LGVN	false		true		true		2021-06-08T04:00:00Z	7	6.65	7.1999	6.2846	13.76	510373	Longeveron Inc. Class A Common Stock
+NASDAQ		LIQT	false		true		true		2021-06-08T04:00:00Z	7.03	6.91	7.0918	6.91	2.63	58007	LiqTech International, Inc. Common Stock
+NASDAQ		LIVX	false		true		true		2021-06-08T04:00:00Z	5.23	5.29	5.35	5.05	5.67	846551	LiveXLive Media, Inc. Common Stock
+NYSE		CPG	false		true		true		2021-06-08T04:00:00Z	4.71	4.64	4.7	4.505	4.2	3872646	CRESCENT POINT ENERGY CORP.
+NASDAQ		AGRX	false		true		true		2021-06-08T04:00:00Z	1.53	1.53	1.55	1.5	3.27	581861	Agile Therapeutics, Inc. Common Stock
+AMEX		AIM	false		true		true		2021-06-08T04:00:00Z	2.21	2.17	2.24	2.145	4.38	452812	AIM ImmunoTech Inc.
+AMEX		LOV	false		true		true		2021-06-08T04:00:00Z	5.56	5.26	5.59	5.25	6.46	53422	Spark Networks SE American Depositary Shares (each representing one-tenth of an Ordinary Share)
+NASDAQ		AGFS	false		true		true		2021-06-08T04:00:00Z	2.17	2.18	2.2	2.145	2.52	69994	AgroFresh Solutions, Inc. Common Stock
+NASDAQ		ATRS	false		true		true		2021-06-08T04:00:00Z	4.42	4.39	4.45	4.321	2.94	936895	Antares Pharma, Inc. Common Stock
+AMEX		AWX	false		true		true		2021-06-08T04:00:00Z	4.48	4.7	4.83	4.48	7.45	135618	Avalon Holdings Corp.
+NYSE		CCM	false		true		true		2021-06-08T04:00:00Z	3.46	2.69	3.46	2.67	29.37	154243	Concord Medical Services Holding Limited
+NASDAQ		CALA	false		true		true		2021-06-08T04:00:00Z	2.31	2.25	2.32	2.21	4.89	723766	Calithera Biosciences, Inc. Common Stock
+NYSE		ENZ	false		true		true		2021-06-08T04:00:00Z	3.08	3.19	3.25	3.07	5.64	234062	Enzo Biochem, Inc.
+NASDAQ		CTMX	false		true		true		2021-06-08T04:00:00Z	7.09	6.98	7.208	6.8	5.85	518246	CytomX Therapeutics, Inc. Common Stock
+NASDAQ		EBON	false		true		true		2021-06-08T04:00:00Z	3.26	3.4	3.4	3.21	5.59	5164446	Ebang International Holdings Inc. Class A Ordinary Shares
+NYSE		ELP	false		true		true		2021-06-08T04:00:00Z	6.06	6.01	6.08	6.01	1.16	364773	Companhia Paranaense de Energia American Depositary Shares (each representing one Unit consisting o
+NYSE		DHX	false		true		true		2021-06-08T04:00:00Z	3.19	3.29	3.3399	3.19	4.56	98471	DHI Group, Inc.
+NYSE		ENIC	false		true		true		2021-06-08T04:00:00Z	2.92	2.92	2.93	2.87	2.05	751074	Enel Chile S.A. American Depositary Shares Representing Common Stock (Each representing 50 shares of
+NASDAQ		LWAY	false		true		true		2021-06-08T04:00:00Z	5.67	5.52	5.62	5.45	3.08	8878	Lifeway Foods, Inc. Common Stock
+NASDAQ		LXRX	false		true		true		2021-06-08T04:00:00Z	4.89	4.83	4.98	4.69	6	967085	Lexicon Pharmaceuticals, Inc. Common Stock
+NYSE		EVC	false		true		true		2021-06-08T04:00:00Z	4.63	4.72	4.735	4.59	3.07	260063	Entravision Communication
+NASDAQ		FBIO	false		true		true		2021-06-08T04:00:00Z	4.18	4.15	4.21	4.03	4.34	710407	Fortress Biotech, Inc. Common Stock
+NYSE		FEDU	false		true		true		2021-06-08T04:00:00Z	0.95	0.988	1.02	0.93001	9.11	606602	Four Seasons Education (Cayman) Inc. American depositary shares, each two ADSs representing one ordi
+NASDAQ		EVFM	false		true		true		2021-06-08T04:00:00Z	1.1	1.01	1.12	0.9855	13.32	26091831	Evofem Biosciences, Inc. Common Stock
+NASDAQ		AGLE	false		true		true		2021-06-08T04:00:00Z	6.75	6.8	6.93	6.68	3.68	282536	Aeglea BioTherapeutics, Inc. Common Stock
+NASDAQ		ESSCR	false		true		true		2021-06-08T04:00:00Z	0.33	0.3291	0.3398	0.3006	11.91	12986	East Stone Acquisition Corporation Right
+AMEX		FAX	false		true		true		2021-06-08T04:00:00Z	4.33	4.35	4.38	4.33	1.15	479986	Aberdeen Asia-Pacific Income Fund, Inc.
+NYSE		FGB	false		true		true		2021-06-08T04:00:00Z	4.33	4.3499	4.38	4.33	1.15	64521	First Trust Specialty Finance and Financial Opportunities Fund
+AMEX		GROY	false		true		true		2021-06-08T04:00:00Z	4.71	4.69	4.765	4.68	1.81	42863	Gold Royalty Corp.
+NASDAQ		GSIT	false		true		true		2021-06-08T04:00:00Z	6.1	5.93	6.1	5.83	4.55	52129	GSI Technology Common Stock
+NASDAQ		GLMD	false		true		true		2021-06-08T04:00:00Z	3.82	3.57	3.85	3.5	9.8	958326	Galmed Pharmaceuticals Ltd. Ordinary Shares
+NYSE		GNE	false		true		true		2021-06-08T04:00:00Z	6.23	6.25	6.29	6.23	0.96	36653	GENIE ENERGY LTD
+AMEX		GSS	false		true		true		2021-06-08T04:00:00Z	3.41	3.39	3.42	3.34	2.36	350249	Golden Star Resources Ltd.
+NASDAQ		AGBAR	false		true		true		2021-06-08T04:00:00Z	0.3316	0.3363	0.3371	0.3316	1.64	2222	AGBA Acquisition Limited Right
+NASDAQ		MACK	false		true		true		2021-06-08T04:00:00Z	6.47	6.35	6.49	6.35	2.2	17926	Merrimack Pharmaceuticals, Inc. Common Stock
+NASDAQ		GNSS	false		true		true		2021-06-08T04:00:00Z	5.21	5.31	5.37	5.13	4.52	304733	Genasys Inc. Common Stock
+NASDAQ		HDSN	false		true		true		2021-06-08T04:00:00Z	3.02	2.96	3.11	2.89	7.43	460593	Hudson Technologies, Inc. Common Stock
+NYSE		HCHC	false		true		true		2021-06-08T04:00:00Z	4.48	4.48	4.5	4.25	5.58	491657	HC2 Holdings, Inc. Common Stock
+NASDAQ		APTX	false		true		true		2021-06-08T04:00:00Z	2.7	2.88	3.3999	2.68	25	4967536	Aptinyx Inc. Common Stock
+NASDAQ		AWRE	false		true		true		2021-06-08T04:00:00Z	3.94	3.94	3.9873	3.91	1.96	18733	Aware, Inc. Common Stock
+NYSE		CO	false		true		true		2021-06-08T04:00:00Z	5.96	5.84	5.96	5.81	2.57	182389	Global Cord Blood Corporation
+NASDAQ		CPSS	false		true		true		2021-06-08T04:00:00Z	4.99	4.92	4.98	4.89	1.83	6302	Consumer Portfolio Services, Inc. Common Stock
+NASDAQ		ALTO	false		true		true		2021-06-08T04:00:00Z	6.29	6.43	6.55	6.22	5.13	2123647	Alto Ingredients, Inc. Common Stock
+NASDAQ		HFFG	false		true		true		2021-06-08T04:00:00Z	6.05	6.08	6.14	5.94	3.29	97081	HF Foods Group Inc. Common Stock
+NASDAQ		CTIC	false		true		true		2021-06-08T04:00:00Z	2.48	2.41	2.5125	2.38	5.5	717377	CTI BioPharma Corp. (DE) Common Stock
+NASDAQ		MIND	false		true		true		2021-06-08T04:00:00Z	2.12	2.1	2.14	2.09	2.38	74630	MIND Technology, Inc. Common Stock (DE)
+NASDAQ		MBII	false		true		true		2021-06-08T04:00:00Z	1.53	1.66	1.68	1.5	10.84	892201	Marrone Bio Innovations, Inc. Common Stock
+AMEX		MCF	false		true		true		2021-06-08T04:00:00Z	6.9	5.08	6.94	5.02	37.8	7274202	Contango Oil & Gas Co.
+NYSE		MIN	false		true		true		2021-06-08T04:00:00Z	3.72	3.72	3.72	3.71	0.27	426776	MFS Intermediate Income Trust
+NASDAQ		MEIP	false		true		true		2021-06-08T04:00:00Z	3.11	3.12	3.18	3.05	4.17	325087	MEI Pharma, Inc. Common Stock
+NASDAQ		MKD	false		true		true		2021-06-08T04:00:00Z	0.8052	0.9392	0.9446	0.80275	15.1	4115780	Molecular Data Inc. American Depositary Shares
+NASDAQ		AMRN	false		true		true		2021-06-08T04:00:00Z	4.85	4.89	4.96	4.77	3.89	3840394	Amarin Corporation plc
+NYSE		MITT	false		true		true		2021-06-08T04:00:00Z	4.4	4.79	4.82	4.38	9.19	2618077	AG MORTGAGE INVESTMENT TRUST, INC.
+NASDAQ		MNDO	false		true		true		2021-06-08T04:00:00Z	3.25	3.23	3.25	3.2	1.55	58238	MIND C.T.I. Ltd. Ordinary Shares
+NYSE		AEG	true		true		true		2021-06-08T04:00:00Z	4.56	4.56	4.58	4.53	1.1	890024	AEGON N.V.
+NASDAQ		MIST	false		true		true		2021-06-08T04:00:00Z	5.49	5.36	5.6	5.32	5.22	55514	Milestone Pharmaceuticals Inc. Common Shares
+NASDAQ		ASPU	false		true		true		2021-06-08T04:00:00Z	5.92	6.04	6.13	5.89	3.97	97862	Aspen Group Inc. Common Stock
+AMEX		MMX	false		true		true		2021-06-08T04:00:00Z	5.74	5.65	5.78	5.63	2.65	90307	Maverix Metals Inc. Common Shares
+NYSE		ARLO	false		true		true		2021-06-08T04:00:00Z	6.7	6.98	7.12	6.73	5.59	952014	Arlo Technologies, Inc.
+NASDAQ		ABUS	false		true		true		2021-06-08T04:00:00Z	3.37	3.44	3.47	3.2	7.85	2526986	Arbutus Biopharma Corporation Common Stock
+NASDAQ		ADXS	false		true		true		2021-06-08T04:00:00Z	0.5263	0.5096	0.5263	0.4852	8.07	8761877	Advaxis, Inc. Common Stock
+NASDAQ		MOTS	false		true		true		2021-06-08T04:00:00Z	1.14	1.18	1.22	1.09	11.02	2520811	Motus GI Holdings, Inc. Common Stock
+NASDAQ		MOVE	false		true		true		2021-06-08T04:00:00Z	4.93	4.965	5	4.91	1.81	35461	Movano Inc. Common Stock
+NYSE		NEW	false		true		true		2021-06-08T04:00:00Z	1.84	1.86	1.87	1.71	8.6	871592	Puxin Limited American Depositary Shares, each representing two Ordinary Shares
+NASDAQ		ADMA	false		true		true		2021-06-08T04:00:00Z	1.76	1.81	1.83	1.75	4.42	2753817	ADMA Biologics Inc Common Stock
+NASDAQ		MRAM	false		true		true		2021-06-08T04:00:00Z	6.5	6.4	6.5187	6.2201	4.67	126509	Everspin Technologies, Inc. Common Stock
+AMEX		MSN	false		true		true		2021-06-08T04:00:00Z	1.3	1.27	1.3	1.25	3.94	44086	Emerson Radio Corp.
+NASDAQ		NBSE	false		true		true		2021-06-08T04:00:00Z	5.28	5.19	5.51	5.1	7.9	720856	NeuBase Therapeutics, Inc.  Common Stock
+NASDAQ		NH	false		true		true		2021-06-08T04:00:00Z	2.71	2.71	2.77	2.65	4.43	198595	NantHealth, Inc. Common Stock
+NYSE		NMR	true		true		true		2021-06-08T04:00:00Z	5.56	5.52	5.56	5.5	1.09	136037	Nomura Holdings, Inc
+NASDAQ		NCMI	false		true		true		2021-06-08T04:00:00Z	5.1	5.16	5.19	5.03	3.1	365684	National CineMedia, Inc. Common Stock
+NYSE		NGL	false		true		true		2021-06-08T04:00:00Z	2.33	2.26	2.4099	2.25	7.08	2565261	NGL ENERGY PARTNERS LP
+NYSE		NR	false		true		true		2021-06-08T04:00:00Z	3.8	3.85	3.9	3.68	5.71	437388	Newpark Resources, Inc.
+NYSE		NOK	true		true		true		2021-06-08T04:00:00Z	5.57	5.58	5.69	5.54	2.69	48659499	Nokia Corporation
+NASDAQ		NTWK	false		true		true		2021-06-08T04:00:00Z	4.95	4.91	5.07	4.79	5.7	52487	NetSol Technologies Inc. Common  Stock
+NASDAQ		NYMT	false		true		true		2021-06-08T04:00:00Z	4.64	4.76	4.78	4.63	3.15	5501714	New York Mortgage Trust, Inc. Common Stock
+AMEX		NTIP	false		true		true		2021-06-08T04:00:00Z	3.63	3.66	3.8	3.59	5.74	96697	Network-1 Technologies, Inc.
+NYSE		NWHM	false		true		true		2021-06-08T04:00:00Z	6.24	6.3	6.34	6.17	2.7	11359	THE NEW HOME COMPANY INC.
+NASDAQ		OCSL	false		true		true		2021-06-08T04:00:00Z	6.82	6.83	6.86	6.805	0.81	664163	Oaktree Specialty Lending Corporation Common Stock
+NYSE		NWG	false		true		true		2021-06-08T04:00:00Z	5.93	5.92	5.96	5.9	1.01	1245874	NatWest Group plc American Depositary Shares, (Each representing 2 ordinary shares)
+NASDAQ		OCC	false		true		true		2021-06-08T04:00:00Z	3.35	3.31	3.35	3.2701	2.41	9023	Optical Cable Corporation Common Stock
+NASDAQ		OCX	false		true		true		2021-06-08T04:00:00Z	4.86	4.76	5	4.74	5.46	344044	OncoCyte Corporation Common Stock
+NASDAQ		ODT	false		true		true		2021-06-08T04:00:00Z	3.85	3.9	3.95	3.81	3.59	535643	Odonate Therapeutics, Inc. Common Stock
+NYSE		ORC	true		true		true		2021-06-08T04:00:00Z	5.58	5.62	5.63	5.55	1.42	3745230	Orchid Island Capital, Inc.
+NYSE		ORN	false		true		true		2021-06-08T04:00:00Z	5.88	5.82	5.88	5.79	1.55	78251	Orion Group Holdings, Inc
+NASDAQ		OVID	false		true		true		2021-06-08T04:00:00Z	4.5	4.44	4.58	4.35	5.18	807826	Ovid Therapeutics Inc. Common Stock
+NASDAQ		OXSQ	false		true		true		2021-06-08T04:00:00Z	5.03	5.12	5.13	5	2.54	252665	Oxford Square Capital Corp. Common Stock
+NYSE		ONE	false		true		true		2021-06-08T04:00:00Z	1.55	1.5	1.57	1.48	6	381444	OneSmart International Education Group Limited
+NASDAQ		OPHC	false		true		true		2021-06-08T04:00:00Z	4.13	4.06	4.2	3.835	8.99	100642	OptimumBank Holdings, Inc. Common Stock
+NASDAQ		OPTN	false		true		true		2021-06-08T04:00:00Z	3.44	3.52	3.53	3.33	5.68	197681	OptiNose, Inc. Common Stock
+NASDAQ		ORTX	false		true		true		2021-06-08T04:00:00Z	5.25	5.19	5.26	5.13	2.5	509715	Orchard Therapeutics plc American Depositary Shares
+NYSE		OSG	false		true		true		2021-06-08T04:00:00Z	2.21	2.21	2.23	2.2	1.36	231658	Overseas Shipholding Group Inc.
+NASDAQ		PANL	false		true		true		2021-06-08T04:00:00Z	4.15	4.1	4.17	4.0565	2.77	218722	Pangaea Logistics Solutions Ltd. Common Shares
+AMEX		BTN	false		true		true		2021-06-08T04:00:00Z	5.01	4.96	5.09	4.94	3.02	122948	Ballantyne Strong, Inc
+NASDAQ		PAYS	false		true		true		2021-06-08T04:00:00Z	3.43	3.48	3.56	3.42	4.02	244405	Paysign, Inc. Common Stock
+NASDAQ		PCTI	false		true		true		2021-06-08T04:00:00Z	6.77	6.87	6.9	6.77	1.89	86326	PCTEL, Inc. Common Stock
+NASDAQ		PESI	false		true		true		2021-06-08T04:00:00Z	6.96	6.94	7	6.9311	0.99	8785	Perma-Fix Environmental Services, Inc. Common Stock
+NASDAQ		PFMT	false		true		true		2021-06-08T04:00:00Z	5.05	4.24	5.05	4.21	19.81	1052478	Performant Financial Corporation Common Stock
+NASDAQ		PFIN	false		true		true		2021-06-08T04:00:00Z	6.36	6.73	6.84	6.33	7.58	17266	P & F Industries, Inc. Class A Common Stock
+NASDAQ		PHAS	false		true		true		2021-06-08T04:00:00Z	3.81	3.78	3.87	3.69	4.76	163000	PhaseBio Pharmaceuticals, Inc. Common Stock
+NYSE		PHX	false		true		true		2021-06-08T04:00:00Z	3.31	3.45	3.56	3.2	10.43	374427	PHX Minerals Inc.
+NASDAQ		PFIE	false		true		true		2021-06-08T04:00:00Z	1.15	1.14	1.1529	1.13	2.01	106319	Profire Energy, Inc. Common Stock
+NASDAQ		PRPH	false		true		true		2021-06-08T04:00:00Z	5.4	5.29	5.41	5.16	4.73	51151	ProPhase Labs, Inc. Common Stock (DE)
+NASDAQ		PPIH	false		true		true		2021-06-08T04:00:00Z	7	6.89	7.0892	6.89	2.89	8687	Perma-Pipe International Holdings, Inc. Common Stock
+NASDAQ		PRQR	false		true		true		2021-06-08T04:00:00Z	6.5	6.59	6.63	6.31	4.86	507404	ProQR Therapeutics N.V. Ordinary Shares
+NASDAQ		PNNT	false		true		true		2021-06-08T04:00:00Z	6.83	6.85	6.87	6.79	1.17	203299	PennantPark Investment Corporation Common Stock
+AMEX		PZG	false		true		true		2021-06-08T04:00:00Z	1.05	1.03	1.06	1.03	2.91	130434	Paramount Gold Nevada Corp.
+AMEX		PTN	false		true		true		2021-06-08T04:00:00Z	0.57	0.5904	0.6	0.57	5.08	1765583	Palatin Technologies, Inc.
+NASDAQ		PTPI	false		true		true		2021-06-08T04:00:00Z	3.14	3.09	3.19	3.04	4.85	51140	Petros Pharmaceuticals, Inc. Common Stock
+NASDAQ		PTMN	false		true		true		2021-06-08T04:00:00Z	2.41	2.41	2.42	2.35	2.9	496871	Portman Ridge Finance Corporation Common Stock
+NASDAQ		PWFL	false		true		true		2021-06-08T04:00:00Z	6.9	6.96	7.04	6.89	2.16	182860	PowerFleet, Inc. Common Stock
+ARCA		PXJ	false		true		true		2021-06-08T04:00:00Z	4.16	4.19	4.22	4.09	3.1	465193	Invesco Dynamic Oil & Gas Services ETF
+NASDAQ		REFR	false		true		true		2021-06-08T04:00:00Z	2.44	2.48	2.55	2.42	5.24	64000	Research Frontiers Incorporated Common Stock
+NASDAQ		REED	false		true		true		2021-06-08T04:00:00Z	1.032	1.05	1.1	1.03	6.67	1816876	Reeds, Inc. Common Stock
+AMEX		REI	false		true		true		2021-06-08T04:00:00Z	2.56	2.6	2.66	2.46	7.69	2809516	Ring Energy Inc.
+NASDAQ		RVSB	false		true		true		2021-06-08T04:00:00Z	7.03	6.93	7.06	6.85	3.03	55151	Riverview Bancorp Inc Common Stock
+NYSE		RRD	false		true		true		2021-06-08T04:00:00Z	6.64	6.59	6.715	6.49	3.41	899799	RR Donnelley & Sons Co.
+NASDAQ		SCOR	false		true		true		2021-06-08T04:00:00Z	4.91	4.73	4.9335	4.67	5.57	858141	comScore, Inc. Common Stock
+NASDAQ		SBT	false		true		true		2021-06-08T04:00:00Z	4.66	4.75	4.78	4.66	2.53	44192	Sterling Bancorp, Inc. Common Stock
+AMEX		SACH	false		true		true		2021-06-08T04:00:00Z	5.09	5.11	5.15	5.09	1.17	219632	Sachem Capital Corp. Common Shares
+NYSE		SAN	true		true		true		2021-06-08T04:00:00Z	4.14	4.16	4.18	4.12	1.44	2584971	Banco Santander S.A.
+NASDAQ		SBBP	false		true		true		2021-06-08T04:00:00Z	2.77	2.84	2.9	2.77	4.58	942042	Strongbridge Biopharma plc Ordinary Shares
+NASDAQ		SELF	false		true		true		2021-06-08T04:00:00Z	6.42	6.525	6.65	6.31	5.21	68966	Global Self Storage, Inc. Common Stock
+NASDAQ		SANW	false		true		true		2021-06-08T04:00:00Z	3.7	3.62	3.75	3.61	3.87	69361	S&W Seed Company Common Stock (NV)
+NASDAQ		SCPH	false		true		true		2021-06-08T04:00:00Z	5.75	5.7	5.8608	5.64	3.87	37040	scPharmaceuticals Inc. Common Stock
+NASDAQ		SELB	false		true		true		2021-06-08T04:00:00Z	4.67	4.71	4.75	4.55	4.25	1103558	Selecta Biosciences, Inc. Common Stock
+NASDAQ		SIEB	false		true		true		2021-06-08T04:00:00Z	4.7	4.39	4.79	4.3	11.16	331588	Siebert Financial Corp. Common Stock
+NASDAQ		SEAC	false		true		true		2021-06-08T04:00:00Z	1.18	1.18	1.2	1.15	4.24	771432	SeaChange International, Inc. Common Stock
+NASDAQ		SIGA	false		true		true		2021-06-08T04:00:00Z	6.75	6.59	6.76	6.57	2.88	298413	SIGA Technologies Inc. Common Stock
+NYSE		SMHI	false		true		true		2021-06-08T04:00:00Z	4.34	4.27	4.34	4.12	5.15	30959	SEACOR Marine Holdings Inc. Common Stock
+NASDAQ		SONM	false		true		true		2021-06-08T04:00:00Z	0.7006	0.65	0.795	0.6052	29.2	47338904	Sonim Technologies, Inc. Common Stock
+NASDAQ		SPPI	false		true		true		2021-06-08T04:00:00Z	4.32	4.24	4.4	4.06	8.02	3878064	Spectrum Pharmaceuticals, Inc.Common Stock
+NASDAQ		STSA	false		true		true		2021-06-08T04:00:00Z	5.14	5.37	5.39	5.1	5.4	64259	Satsuma Pharmaceuticals, Inc. Common Stock
+NASDAQ		SOLO	true		true		true		2021-06-08T04:00:00Z	4.7	4.62	4.74	4.48	5.63	6248857	Electrameccanica Vehicles Corp. Ltd. Common Stock
+NYSE		SUPV	false		true		true		2021-06-08T04:00:00Z	2.38	2.22	2.41	2.22	8.56	821998	Grupo Supervielle S.A.
+NASDAQ		SSKN	false		true		true		2021-06-08T04:00:00Z	1.46	1.47	1.54	1.45	6.12	65140	Strata Skin Sciences, Inc. Common Stock
+NASDAQ		SVRA	false		true		true		2021-06-08T04:00:00Z	1.8085	1.82	1.8699	1.7901	4.38	1240418	Savara Inc. Common Stock
+AMEX		SVM	false		true		true		2021-06-08T04:00:00Z	6.25	6.21	6.32	6.17	2.42	730996	Silvercorp Metals Inc. Common Shares
+NASDAQ		SYBX	false		true		true		2021-06-08T04:00:00Z	3.5	3.56	3.59	3.36	6.46	238582	Synlogic, Inc. Common Stock
+NASDAQ		SYRS	false		true		true		2021-06-08T04:00:00Z	6.31	6.3	6.39	6.05	5.4	1308049	Syros Pharmaceuticals, Inc. Common Stock
+NASDAQ		BRLIR	false		true		true		2021-06-08T04:00:00Z	0.339	0.339	0.339	0.339	0	150	Brilliant Acquisition Corporation Rights
+AMEX		ELA	false		true		true		2021-06-08T04:00:00Z	5.44	5.39	5.75	5.27	8.91	166872	Envela Corporation
+NASDAQ		TAIT	false		true		true		2021-06-08T04:00:00Z	6.35	6.11	6.35	5.95	6.55	169338	Taitron Components Incorporated Class A Common Stock
+NASDAQ		AKU	false		true		true		2021-06-08T04:00:00Z	2.78	2.76	2.84	2.76	2.9	1034695	Akumin Inc. Common Shares
+NASDAQ		AKBA	false		true		true		2021-06-08T04:00:00Z	3.43	3.6	3.6	3.4	5.56	4006768	Akebia Therapeutics, Inc. Common Stock
+NYSE		CMO	false		true		true		2021-06-08T04:00:00Z	6.62	6.75	6.77	6.6	2.52	694316	Capstead Mortgage Corp.
+NYSE		TEF	true		true		true		2021-06-08T04:00:00Z	4.84	4.87	4.89	4.81	1.64	1552302	Telefonica, S.A.
+NASDAQ		TGA	false		true		true		2021-06-08T04:00:00Z	1.92	1.95	1.96	1.874	4.41	308114	TransGlobe Energy Corporation Ordinary Shares (Canada)
+NASDAQ		TAST	false		true		true		2021-06-08T04:00:00Z	5.97	6.04	6.31	5.952	5.93	381488	Carrols Restaurant Group, Inc. Common Stock
+AMEX		TGB	false		true		true		2021-06-08T04:00:00Z	2.41	2.44	2.45	2.368	3.36	1113658	Taseko Mines Limited
+NASDAQ		TRUE	false		true		true		2021-06-08T04:00:00Z	5.5	5.35	5.59	5.325	4.95	1019201	TrueCar, Inc. Common Stock
+NASDAQ		TUEM	false		true		true		2021-06-08T04:00:00Z	4.56	4.49	4.66	4.4	5.79	345562	Tuesday Morning Corp. Common Stock
+NASDAQ		FSTX	false		true		true		2021-06-08T04:00:00Z	6.91	6.95	7.0394	6.9	2.01	113104	F-star Therapeutics, Inc. Common Stock
+NASDAQ		TNXP	false		true		true		2021-06-08T04:00:00Z	1.42	1.36	1.42	1.26	11.76	14130928	Tonix Pharmaceuticals Holding Corp. Common Stock
+NASDAQ		TRMT	false		true		true		2021-06-08T04:00:00Z	5.98	6.02	6.03	5.97	1	10810	Tremont Mortgage Trust Common Shares of Beneficial Interest
+NASDAQ		TRVN	false		true		true		2021-06-08T04:00:00Z	1.98	1.98	2.03	1.885	7.32	2960490	Trevena, Inc. Common Stock
+NASDAQ		TOMZ	false		true		true		2021-06-08T04:00:00Z	2.93	2.9	2.995	2.82	6.03	105602	TOMI Environmental Solutions, Inc. Common Stock
+AMEX		TPHS	false		true		true		2021-06-08T04:00:00Z	1.83	1.91	1.99	1.8	9.95	150602	Trinity Place Holdings Inc.com
+AMEX		TRT	false		true		true		2021-06-08T04:00:00Z	6.53	6.62	6.75	6.23	7.85	407089	Trio-Tech International
+NASDAQ		TRVG	false		true		true		2021-06-08T04:00:00Z	3.75	3.87	3.87	3.7	4.39	1210821	trivago N.V. American Depositary Shares
+NASDAQ		TYME	false		true		true		2021-06-08T04:00:00Z	1.63	1.57	1.6373	1.515	7.79	2762858	Tyme Technologies, Inc. Common Stock
+NASDAQ		USOI	false		true		true		2021-06-08T04:00:00Z	5.15	5.15	5.16	5.08	1.55	1088822	Credit Suisse AG Credit Suisse X-Links Crude Oil Shares Covered Call ETN
+NASDAQ		UBX	false		true		true		2021-06-08T04:00:00Z	4.97	4.72	5.0499	4.51	11.44	646701	Unity Biotechnology, Inc. Common Stock
+AMEX		UEC	false		true		true		2021-06-08T04:00:00Z	3.53	3.29	3.54	3.213	9.94	5074783	Uranium Energy Corp.
+NASDAQ		UK	false		true		true		2021-06-08T04:00:00Z	2.35	2.49	2.51	2.32	7.63	124378	Ucommune International Ltd Ordinary Shares
+NASDAQ		VIRI	false		true		true		2021-06-08T04:00:00Z	5.57	5.62	5.81	5.43	6.76	111255	Virios Therapeutics, Inc. Common Stock
+NASDAQ		VLON	false		true		true		2021-06-08T04:00:00Z	4.33	4.2	4.35	4.1967	3.65	19584	Vallon Pharmaceuticals Inc. Common Stock
+NYSE		VHC	false		true		true		2021-06-08T04:00:00Z	4.9	4.97	4.99	4.86	2.62	282582	VirnetX Holding Corporation
+NASDAQ		VIRC	false		true		true		2021-06-08T04:00:00Z	3.5	3.49	3.62	3.475	4.15	6366	Virco Manufacturing Corporation Common Stock
+NYSE		VIST	false		true		true		2021-06-08T04:00:00Z	4.08	4.1	4.1393	3.98	3.89	443480	Vista Oil & Gas, S.A.B. de C.V.
+NASDAQ		VRNA	false		true		true		2021-06-08T04:00:00Z	6.11	6.42	6.42	6.11	4.83	59803	Verona Pharma plc American Depositary Share
+NASDAQ		VSTM	false		true		true		2021-06-08T04:00:00Z	4.26	4.16	4.27	4.1	4.09	2087021	Verastem, Inc. Common Stock
+NASDAQ		VTGN	false		true		true		2021-06-08T04:00:00Z	2.618	2.7	2.71	2.61	3.7	1696078	VistaGen Therapeutics, Inc. Common Stock
+NYSE		VVR	false		true		true		2021-06-08T04:00:00Z	4.32	4.31	4.33	4.29	0.93	614294	Invesco  Senior Income Trust
+NASDAQ		VTSI	false		true		true		2021-06-08T04:00:00Z	5.8	5.88	5.9799	5.8	3.06	292616	VirTra, Inc. Common Stock
+NASDAQ		WATT	false		true		true		2021-06-08T04:00:00Z	3.06	2.98	3.09	2.87	7.38	1079181	Energous Corporation Common Stock
+ARCA		WEAT	false		true		true		2021-06-08T04:00:00Z	6.92	6.9	6.99	6.85	2.03	262815	Teucrium Wheat Fund
+NYSE		WTI	false		true		true		2021-06-08T04:00:00Z	4.45	4.56	4.58	4.28	6.58	3128273	W&T Offshore, Inc.
+NYSE		XIN	false		true		true		2021-06-08T04:00:00Z	2.53	2.56	2.64	2.4722	6.55	118302	Xinyuan Real Estate Co. LTD
+NYSE		WMC	false		true		true		2021-06-08T04:00:00Z	3.6	3.67	3.68	3.59	2.45	957934	WESTERN ASSET MORTGAGE CAPITAL CORPORATION
+NASDAQ		WPRT	false		true		true		2021-06-08T04:00:00Z	5.81	5.9	5.91	5.57	5.76	3563440	Westport Fuel Systems Inc Common Shares
+AMEX		WTT	false		true		true		2021-06-08T04:00:00Z	1.86	1.8	1.86	1.7801	4.44	34390	Wireless Telecom Group, Inc.
+NYSE		WTTR	false		true		true		2021-06-08T04:00:00Z	6.72	6.81	6.88	6.65	3.38	312762	Select Energy Services, Inc.
+NASDAQ		YELL	false		true		true		2021-06-08T04:00:00Z	6.2	6.51	6.6	6.1219	7.34	1161459	Yellow Corporation Common Stock
+AMEX		YCBD	false		true		true		2021-06-08T04:00:00Z	3.28	3.22	3.28	3.15	4.04	177285	cbdMD, Inc. Common Stock
+AMEX		ZOM	false		true		true		2021-06-08T04:00:00Z	1.01	0.9705	1.02	0.9408	8.16	45564410	Zomedica Corp.
+NASDAQ		ZVO	false		true		true		2021-06-08T04:00:00Z	2.74	2.68	2.78	2.62	5.97	255867	Zovio Inc. Common Stock
+NASDAQ		ZIOP	false		true		true		2021-06-08T04:00:00Z	3.03	2.93	3.04	2.88	5.46	1886531	ZIOPHARM Oncology Inc Common Stock
+NASDAQ		CNCE	false		true		true		2021-06-08T04:00:00Z	4.14	4.24	4.34	4.05	6.84	247323	Concert Pharmaceuticals, Inc. Common Stock
+NYSE		ELVT	false		true		true		2021-06-08T04:00:00Z	3.77	3.82	3.9492	3.69	6.79	265077	Elevate Credit, Inc.
+NASDAQ		ZGYHR	false		true		true		2021-06-08T04:00:00Z	0.37	0.37	0.37	0.37	0	300	Yunhong International Right
+NASDAQ		ZYNE	false		true		true		2021-06-08T04:00:00Z	5.4	5.63	5.68	5.19	8.7	2191441	Zynerba Pharmaceuticals, Inc. Common Stock
+NASDAQ		KIN	false		true		true		2021-06-08T04:00:00Z	6.65	6.74	6.97	6.5501	6.23	692624	Kindred Biosciences, Inc. Common Stock
+NASDAQ		MDWD	false		true		true		2021-06-08T04:00:00Z	3.53	3.7	3.83	3.53	8.11	241801	MediWound Ltd. Ordinary Shares
+NASDAQ		MCHX	false		true		true		2021-06-08T04:00:00Z	2.57	2.57	2.6	2.51	3.5	79284	Marchex, Inc. Class B Common Stock
+NYSE		BSMX	false		true		true		2021-06-08T04:00:00Z	6.1	6.19	6.19	6.08	1.78	1721854	Banco Santander Mexico, S, A., Institucion de Banca Multiple, Grupo Financiero Santander Mexico
+NASDAQ		MHLD	false		true		true		2021-06-08T04:00:00Z	3.6	3.52	3.6	3.5	2.84	138485	Maiden Holdings, Ltd.
+NASDAQ		QRHC	false		true		true		2021-06-08T04:00:00Z	5.63	5.72	5.87	5.53	5.94	169203	Quest Resource Holding Corporation Common Stock
+NYSE		NCZ	false		true		true		2021-06-08T04:00:00Z	5.14	5.18	5.18	5.11	1.35	735015	Virtus AllianzGI Convertible & Income Fund II
+NYSE		DVD	false		true		true		2021-06-08T04:00:00Z	2.31	2.27	2.32	2.27	2.2	19618	Dover Motorsports
+NASDAQ		QUMU	false		true		true		2021-06-08T04:00:00Z	4.63	4.52	4.67	4.51	3.54	63169	Qumu Corporation Common Stock
+AMEX		PHGE	false		true		true		2021-06-08T04:00:00Z	6	6.04	6.0873	5.9631	2.06	9471	BiomX Inc.
+NASDAQ		RAIL	false		true		true		2021-06-08T04:00:00Z	6.38	6.23	6.62	6.18	7.06	744111	FreightCar America, Inc. Common Stock
+NASDAQ		QUIK	false		true		true		2021-06-08T04:00:00Z	6.97	6.92	7.09	6.6704	6.06	71743	QuickLogic Corporation Common Stock
+NASDAQ		RDI	false		true		true		2021-06-08T04:00:00Z	6.48	6.37	6.6711	6.34	5.2	62765	Reading International Inc Class A Common Stock
+NASDAQ		SNCR	false		true		true		2021-06-08T04:00:00Z	3.18	3.21	3.2399	3.11	4.05	186433	Synchronoss Technologies, Inc. Common Stock
+NASDAQ		OTIC	false		true		true		2021-06-08T04:00:00Z	2.37	2.38	2.4241	2.3147	4.6	145331	Otonomy, Inc. Common Stock
+NYSE		JP	false		true		true		2021-06-08T04:00:00Z	1.36	1.5	1.5494	1.35	13.29	512439	Jupai Holdings Limited American depositary shares, each representing six ordinary shares
+NASDAQ		SMSI	false		true		true		2021-06-08T04:00:00Z	5.36	5.44	5.51	5.34	3.12	325981	Smith Micro Software, Inc. Common Stock
+NASDAQ		JVA	false		true		true		2021-06-08T04:00:00Z	6.13	6.16	6.225	6.1	2.03	51538	Coffee Holding Co., Inc. Common Stock
+NASDAQ		STCN	false		true		true		2021-06-08T04:00:00Z	2.19	2.09	2.1915	2.08	5.33	210324	Steel Connect, Inc. Common Stock
+NYSE		JT	false		true		true		2021-06-08T04:00:00Z	2.63	2.71	2.83	2.63	7.38	126560	Jianpu Technology Inc. American Depositary Shares, each representing twenty Class A Ordinary Shares
+NASDAQ		UEPS	false		true		true		2021-06-08T04:00:00Z	5.07	5	5.14	4.96	3.6	141830	Net 1 UEPS Technologies, Inc. Common Stock
+NASDAQ		KMDA	false		true		true		2021-06-08T04:00:00Z	5.88	5.9	5.9197	5.83	1.52	55497	Kamada Ltd. Ordinary Shares
+NASDAQ		USWS	false		true		true		2021-06-08T04:00:00Z	1.05	1.02	1.07	1	6.86	4240878	U.S. Well Services, Inc. Class A Common Stock
+NASDAQ		VYNE	false		true		true		2021-06-08T04:00:00Z	4.15	4.11	4.24	3.985	6.2	971529	VYNE Therapeutics Inc. Common Stock
+NASDAQ		WINT	false		true		true		2021-06-08T04:00:00Z	2.7	2.54	2.73	2.5	9.06	3049555	Windtree Therapeutics, Inc. Common Stock
+NASDAQ		XERS	false		true		true		2021-06-08T04:00:00Z	3.87	3.9	3.97	3.76	5.38	4491121	Xeris Pharmaceuticals, Inc. Common Stock
+NASDAQ		XNET	false		true		true		2021-06-08T04:00:00Z	4.89	5	5.0242	4.8	4.48	364151	Xunlei Limited American Depositary Receipts
+NASDAQ		YQ	false		true		true		2021-06-08T04:00:00Z	3.9646	4.18	4.19	3.83	8.61	2207009	17 Education & Technology Group Inc. American Depositary Shares
+NYSE		YPF	false		true		true		2021-06-08T04:00:00Z	5.7	5.51	5.71	5.43	5.08	1323501	YPF Sociedad Anonima
+NASDAQ		YTRA	false		true		true		2021-06-08T04:00:00Z	2.11	2.24	2.25	2.08	7.59	245469	Yatra Online, Inc. Ordinary Shares
+NASDAQ		KRKR	false		true		true		2021-06-08T04:00:00Z	2.42	2.37	2.42	2.31	4.64	113412	36Kr Holdings Inc. American Depositary Shares
+NASDAQ		LQDA	false		true		true		2021-06-08T04:00:00Z	2.74	2.76	2.8	2.67	4.71	409150	Liquidia Corporation Common Stock
+NASDAQ		KDMN	false		true		true		2021-06-08T04:00:00Z	4.04	4.03	4.11	3.93	4.47	2167589	Kadmon Holdings, Inc. Common Stock
+AMEX		EPM	false		true		true		2021-06-08T04:00:00Z	4.55	4.74	4.75	4.515	4.96	228965	Evolution Petroleum Corporation
+NASDAQ		LOGC	false		true		true		2021-06-08T04:00:00Z	4.6	4.68	4.7	4.47	4.91	242324	LogicBio Therapeutics, Inc. Common Stock
+AMEX		ORLA	false		true		true		2021-06-08T04:00:00Z	4.4	4.39	4.56	4.38	4.1	117451	Orla Mining Ltd.
+NASDAQ		GSKY	false		true		true		2021-06-08T04:00:00Z	6.16	6.09	6.24	6.09	2.46	275501	GreenSky, Inc. Class A Common Stock
+NYSE		LYG	false		true		true		2021-06-08T04:00:00Z	2.75	2.75	2.76	2.73	1.09	2923290	Lloyds Banking Group PLC
+AMEX		JOB	false		true		true		2021-06-08T04:00:00Z	0.592	0.6026	0.6149	0.5812	5.59	7949054	GEE Group Inc.
+NASDAQ		LTRX	false		true		true		2021-06-08T04:00:00Z	5.69	5.55	5.75	5.55	3.6	146836	Lantronix, Inc. Common Stock
+NASDAQ		GVP	false		true		true		2021-06-08T04:00:00Z	1.86	1.81	1.93	1.81	6.63	107123	GSE Systems, Inc. Common Stock
+NASDAQ		PXLW	false		true		true		2021-06-08T04:00:00Z	3.63	3.77	3.83	3.565	7.03	1545774	Pixelworks, Inc.  Common Stock
+NASDAQ		MTCR	false		true		true		2021-06-08T04:00:00Z	4.08	4.07	4.18	4.0001	4.42	79942	Metacrine, Inc. Common Stock
+NASDAQ		GRNVR	false		true		true		2021-06-08T04:00:00Z	0.609899	0.5905	0.609899	0.5905	3.29	400	GreenVision Acquisition Corp Rights
+NYSE		MTL	false		true		true		2021-06-08T04:00:00Z	2.19	2.23	2.24	2.13	4.93	567480	Mechel PAO American Depository Shares, each representing two ordinary shares (ADSs)
+AMEX		MTNB	false		true		true		2021-06-08T04:00:00Z	0.85	0.8338	0.86	0.82	4.8	1203845	Matinas BioPharma Holdings, Inc.
+NASDAQ		SINT	false		true		true		2021-06-08T04:00:00Z	1.73	1.68	1.74	1.6398	5.96	571555	SiNtx Technologies, Inc. Common Stock
+NASDAQ		VYGR	false		true		true		2021-06-08T04:00:00Z	4.47	4.61	4.68	4.35	7.16	646476	Voyager Therapeutics, Inc. Common Stock
+AMEX		VNRX	false		true		true		2021-06-08T04:00:00Z	3.59	3.62	3.64	3.55	2.49	122963	VolitionRX Limited Common Stock
+AMEX		SMTS	false		true		true		2021-06-08T04:00:00Z	3.44	3.34	3.44	3.28	4.79	493628	Sierra Metals Inc. Common Stock
+NASDAQ		TRIB	false		true		true		2021-06-08T04:00:00Z	3.3	3.22	3.39	3.22	5.28	87347	Trinity Biotech plc American Depositary Shares
+NYSE		UTI	false		true		true		2021-06-08T04:00:00Z	5.82	5.78	5.825	5.73	1.64	99268	Universal Technical Institute, Inc.
+NASDAQ		TUSK	false		true		true		2021-06-08T04:00:00Z	3.86	3.79	3.94	3.68	6.86	60428	Mammoth Energy Services, Inc. Common Stock
+NYSE		VNTR	false		true		true		2021-06-08T04:00:00Z	4.74	4.85	4.8699	4.58	5.98	363763	Venator Materials PLC
+NASDAQ		XCUR	false		true		true		2021-06-08T04:00:00Z	1.74	1.72	1.78	1.68	5.81	199025	Exicure, Inc. Common Stock
+NYSE		YRD	false		true		true		2021-06-08T04:00:00Z	3.86	3.81	3.9	3.75	3.94	32378	Yiren Digital Ltd.
+NASDAQ		WETF	false		true		true		2021-06-08T04:00:00Z	6.82	6.91	6.95	6.78	2.46	518422	WisdomTree Investments, Inc. Common Stock
+NYSE		RES	false		true		true		2021-06-08T04:00:00Z	5.91	6.14	6.175	5.81	5.94	737967	RPC, Inc.
+AMEX		NES	false		true		true		2021-06-08T04:00:00Z	2.25	2.16	2.3377	2.11	10.54	14068	Nuverra Environmental Solutions, Inc. Common Stock
+AMEX		XXII	false		true		true		2021-06-08T04:00:00Z	5.24	5	5.25	4.83	8.4	2864202	22nd Century Group Inc.
+NASDAQ		ISSC	false		true		true		2021-06-08T04:00:00Z	6.09	6.17	6.25	6.07	2.92	24874	Innovative Solutions and Support, Inc. Common Stock
+NASDAQ		KFFB	false		true		true		2021-06-08T04:00:00Z	7.08	6.95	6.96	6.95	0.14	1170	Kentucky First Federal Bancorp Common Stock
+NASDAQ		NCNA	false		true		true		2021-06-08T04:00:00Z	2.85	2.73	2.89	2.68	7.69	1350668	NuCana plc American Depositary Share
+NYSE		MUFG	false		true		true		2021-06-08T04:00:00Z	5.78	5.81	5.84	5.78	1.03	2297129	Mitsubishi UFJ Financial Group, Inc.
+NASDAQ		MLND	false		true		true		2021-06-08T04:00:00Z	1.37	1.43	1.44	1.35	6.29	2192022	Millendo Therapeutics, Inc. Common Stock
+NASDAQ		GASS	false		true		true		2021-06-08T04:00:00Z	3.01	2.99	3.02	2.9552	2.17	28198	StealthGas, Inc. Common Stock
+NASDAQ		REPH	false		true		true		2021-06-08T04:00:00Z	2.3	2.3	2.32	2.22	4.35	681411	Recro Pharma, Inc. Common Stock
+NYSE		SD	false		true		true		2021-06-08T04:00:00Z	6.37	6.45	6.54	6.12	6.51	362690	SandRidge Energy, Inc.
+NASDAQ		MRKR	false		true		true		2021-06-08T04:00:00Z	3.17	3.2	3.225	3.04	5.78	1028182	Marker Therapeutics, Inc. Common Stock
+NASDAQ		RMTI	false		true		true		2021-06-08T04:00:00Z	0.99	0.976	1.03	0.95	8.2	1791912	Rockwell Medical, Inc. (DE) Common Stock
+ARCA		RJI	false		true		true		2021-06-08T04:00:00Z	6.23	6.27	6.29	6.23	0.96	59927	AB Svensk Ekportkredit ELEMENTS Linked to the Rogers International Commodity Index-Total Return
+AMEX		TMQ	false		true		true		2021-06-08T04:00:00Z	3	2.86	3	2.84	5.59	200806	Trilogy Metals Inc
+NASDAQ		UIHC	false		true		true		2021-06-08T04:00:00Z	5.78	6.04	6.09	5.78	5.13	102033	United Insurance Holdings Corp. Common Stock
+NASDAQ		PCSA	false		true		true		2021-06-08T04:00:00Z	6.68	6.65	6.94	6.65	4.36	62203	Processa Pharmaceuticals, Inc. Common Stock
+NASDAQ		POWW	false		true		true		2021-06-08T04:00:00Z	6.76	6.74	6.88	6.58	4.45	1168122	AMMO, Inc. Common Stock
+NASDAQ		SIOX	false		true		true		2021-06-08T04:00:00Z	2.23	2.28	2.3	2.2	4.39	397656	Sio Gene Therapies Inc. Common Stock
+NASDAQ		SRGA	false		true		true		2021-06-08T04:00:00Z	1.73	1.6	1.75	1.59	10	3021351	Surgalign Holdings, Inc. Common Stock
+NASDAQ		RNWK	false		true		true		2021-06-08T04:00:00Z	2.7	2.62	2.715	2.565	5.73	602016	RealNetworks, Inc. Common Stock
+NASDAQ		RSSS	false		true		true		2021-06-08T04:00:00Z	2.42	2.41	2.46	2.4	2.49	73218	Research Solutions, Inc Common Stock
+NASDAQ		RMCF	false		true		true		2021-06-08T04:00:00Z	6.75	6.84	6.9	6.68	3.22	28021	Rocky Mountain Chocolate Factory, Inc. Common Stock
+NASDAQ		RCMT	false		true		true		2021-06-08T04:00:00Z	3.68	3.78	3.86	3.64	5.82	191072	RCM Technologies, Inc. Common Stock
+NYSE		SB	false		true		true		2021-06-08T04:00:00Z	3.7	3.74	3.79	3.66	3.48	1076410	Safe Bulkers, Inc.
+NASDAQ		PYR	false		true		true		2021-06-08T04:00:00Z	6.04	5.83	6.1	5.65	7.72	131396	PyroGenesis Canada Inc. Common Shares
+NASDAQ		SREV	false		true		true		2021-06-08T04:00:00Z	1.21	1.19	1.22	1.18	3.36	308465	ServiceSource International, Inc. Common Stock
+NASDAQ		QTT	false		true		true		2021-06-08T04:00:00Z	1.91	1.91	1.94	1.87	3.66	2053441	Qutoutiao Inc. American Depositary Shares
+NASDAQ		STRM	false		true		true		2021-06-08T04:00:00Z	1.89	1.85	1.9175	1.81	5.81	152457	Streamline Health Solutions, Inc. Common Stock
+NASDAQ		QTNT	false		true		true		2021-06-08T04:00:00Z	4.27	4.35	4.4	4.23	3.91	350138	Quotient Limited Ordinary Shares
+NASDAQ		SALM	false		true		true		2021-06-08T04:00:00Z	2.7	2.83	2.83	2.5846	8.67	266914	Salem Media Group, Inc. Class A Common Stock
+NASDAQ		UNAM	false		true		true		2021-06-08T04:00:00Z	4.6	4.51	4.51	4.51	0	238	Unico American Corporation Common Stock
+NASDAQ		RMNI	false		true		true		2021-06-08T04:00:00Z	6.67	6.76	6.7899	6.58	3.11	569641	Rimini Street, Inc. (DE) Common Stock
+NYSE		USDP	false		true		true		2021-06-08T04:00:00Z	6.9	6.6	6.9	6.47	6.52	150496	USD PARTNERS LP
+NASDAQ		TH	false		true		true		2021-06-08T04:00:00Z	4.41	4.13	4.42	4.04	9.2	393748	Target Hospitality Corp. Common Stock
+NASDAQ		TOUR	false		true		true		2021-06-08T04:00:00Z	2.67	2.95	2.95	2.66	9.83	499337	Tuniu Corporation American Depositary Shares
+NASDAQ		SLNO	false		true		true		2021-06-08T04:00:00Z	1.15	1.12	1.16	1.11	4.46	1391264	Soleno Therapeutics, Inc. Common Stock
+NASDAQ		SLDB	false		true		true		2021-06-08T04:00:00Z	3.89	4.06	4.1	3.87	5.67	654329	Solid Biosciences Inc. Common Stock
+NASDAQ		NBEV	false		true		true		2021-06-08T04:00:00Z	2.5	2.52	2.54	2.46	3.17	823428	NewAge, Inc. Common Stock (Delaware)
+NASDAQ		NMTR	false		true		true		2021-06-08T04:00:00Z	1.41	1.47	1.48	1.32	10.88	4886009	9 Meters Biopharma, Inc. Common Stock
+NASDAQ		MOHO	false		true		true		2021-06-08T04:00:00Z	1.59	1.54	1.58	1.5	5.19	109875	ECMOHO Limited American Depositary Shares
+NASDAQ		NURO	false		true		true		2021-06-08T04:00:00Z	3.49	3.35	3.49	3.22	8.06	255108	NeuroMetrix, Inc. Common Stock
+NASDAQ		USIO	false		true		true		2021-06-08T04:00:00Z	6.74	6.6	6.8	6.51	4.39	68053	Usio, Inc. Common Stock
+AMEX		UFAB	false		true		true		2021-06-08T04:00:00Z	3.35	3.36	3.37	3.35	0.6	23775	Unique Fabricating, Inc.
+NYSE		MFG	false		true		true		2021-06-08T04:00:00Z	3.13	3.13	3.14	3.1	1.28	204050	Mizuho Financial Group, Inc. American Depositary Shares (Each representing one-fifth of an Ordinary
+AMEX		WLMS	false		true		true		2021-06-08T04:00:00Z	5.7	5.93	6.11	5.5438	9.55	865833	Williams Industrial Services Group Inc.
+NYSE		AVAL	false		true		true		2021-06-08T04:00:00Z	5.94	5.91	5.98	5.9	1.35	90010	GRUPO AVAL ACCIONES Y VALORES S.A.
+AMEX		VOLT	false		true		true		2021-06-08T04:00:00Z	3.73	3.66	3.75	3.65	2.73	35830	Volt Information Sciences, Inc.
+NASDAQ		CMPI	false		true		true		2021-06-08T04:00:00Z	6.78	6.74	6.9399	6.64	4.45	43069	Checkmate Pharmaceuticals, Inc. Common Stock
+NASDAQ		GERN	false		true		true		2021-06-08T04:00:00Z	1.5042	1.48	1.52	1.43	6.08	1500805	Geron Corporation Common Stock
+NYSE		LITB	false		true		true		2021-06-08T04:00:00Z	2.45	2.41	2.48	2.4	3.32	503575	LIGHTINTHEBOX HOLDING CO., LTD.
+NASDAQ		ABIO	false		true		true		2021-06-08T04:00:00Z	3.68	3.73	3.75	3.58	4.56	219551	ARCA biopharma, Inc. Common Stock
+NASDAQ		CFMS	false		true		true		2021-06-08T04:00:00Z	0.88	0.9182	0.9299	0.8798	5.46	2192678	Conformis, Inc. Common Stock
+NYSE		NAT	false		true		true		2021-06-08T04:00:00Z	3.53	3.52	3.545	3.4586	2.45	1484118	Nordic American Tanker
+NASDAQ		MNKD	false		true		true		2021-06-08T04:00:00Z	3.91	3.87	3.94	3.76	4.65	2234390	MannKind Corporation Common Stock
+NYSE		EXPR	false		true		true		2021-06-08T04:00:00Z	5.91	5.71	6.26	5.4	15.06	20652884	Express, Inc.
+NASDAQ		CEMI	false		true		true		2021-06-08T04:00:00Z	3.27	3.22	3.35	3.12	7.14	477969	Chembio Diagnostics, Inc. Common Stock
+NYSE		ABEV	false		true		true		2021-06-08T04:00:00Z	3.88	3.9	3.95	3.87	2.05	34228943	AMBEV S.A.
+NASDAQ		ASRT	false		true		true		2021-06-08T04:00:00Z	1.85	1.86	1.87	1.77	5.38	1178089	Assertio Holdings, Inc. Common Stock
+NASDAQ		EXFO	false		true		true		2021-06-08T04:00:00Z	5.96	5.95	5.98	5.93	0.84	1547732	EXFO Inc
+NASDAQ		GLYC	false		true		true		2021-06-08T04:00:00Z	2.61	2.68	2.71	2.61	3.73	567045	GlycoMimetics, Inc. Common Stock
+NASDAQ		ADVM	false		true		true		2021-06-08T04:00:00Z	3.54	3.53	3.575	3.45	3.54	1837065	Adverum Biotechnologies, Inc. Common Stock
+NYSE		AHT	false		true		true		2021-06-08T04:00:00Z	5.44	6.27	6.35	5.05	20.73	101795852	Ashford Hospitality Trust, Inc.
+AMEX		DNN	false		true		true		2021-06-08T04:00:00Z	1.46	1.4	1.49	1.38	7.86	13649589	Denison Mines Corp
+NASDAQ		EYEN	false		true		true		2021-06-08T04:00:00Z	5.38	5.38	5.45	5.25	3.72	58202	Eyenovia, Inc. Common Stock
+NASDAQ		SNDL	false		true		true		2021-06-08T04:00:00Z	1.22	1.16	1.22	1.11	9.48	177881314	Sundial Growers Inc. Common Shares
+NASDAQ		VKTX	false		true		true		2021-06-08T04:00:00Z	5.55	5.6	5.62	5.42	3.57	774122	Viking Therapeutics, Inc. Common Stock
+NASDAQ		TELL	false		true		true		2021-06-08T04:00:00Z	5.03	5.32	5.34	4.92	7.89	19626510	Tellurian Inc. Common Stock
+NASDAQ		CTRM	false		true		true		2021-06-08T04:00:00Z	3.34	3.35	3.38	3.2	5.37	5620909	Castor Maritime Inc. Common Shares
+NASDAQ		JAGX	false		true		true		2021-06-08T04:00:00Z	1.89	1.83	1.89	1.72	9.29	11380668	Jaguar Health, Inc. Common Stock
+NASDAQ		KNDI	false		true		true		2021-06-08T04:00:00Z	6.12	6.19	6.405	5.9	8.16	2773157	Kandi Technologies Group, Inc Common Stock
+NASDAQ		ENG	false		true		true		2021-06-08T04:00:00Z	2.8	2.89	3.16	2.65	17.65	4096750	ENGlobal Corporation Common Stock
+NYSE		IAG	false		true		true		2021-06-08T04:00:00Z	3.66	3.66	3.705	3.64	1.78	3206252	IAMGold Corporation
+NASDAQ		FRSX	false		true		true		2021-06-08T04:00:00Z	4.76	4.95	5.04	4.71	6.67	2229187	Foresight Autonomous Holdings Ltd. American Depositary Shares
+NASDAQ		SEEL	false		true		true		2021-06-08T04:00:00Z	3.38	3.3	3.38	3.19	5.76	3731576	Seelos Therapeutics, Inc. Common Stock
+NASDAQ		OPK	false		true		true		2021-06-08T04:00:00Z	3.83	3.8	3.87	3.68	5	3445308	OPKO Health, Inc. Common Stock
+NYSE		STON	false		true		true		2021-06-08T04:00:00Z	2.2	2.38	2.44	2.1	14.29	725056	StoneMor Inc.
+NASDAQ		AUTL	false		true		true		2021-06-08T04:00:00Z	7	6.86	7.18	6.64	7.87	1923801	Autolus Therapeutics plc American Depositary Share
+NASDAQ		NERV	false		true		true		2021-06-08T04:00:00Z	3.02	3.04	3.12	2.98	4.61	401451	Minerva Neurosciences, Inc Common Stock
+NASDAQ		MDCA	false		true		true		2021-06-08T04:00:00Z	5.15	5.28	5.3	5.09	3.98	428594	MDC Partners Inc. CL A Subordinate Voting Shares
+NYSE		NEX	false		true		true		2021-06-08T04:00:00Z	4.94	4.87	5.02	4.76	5.34	1912752	NexTier Oilfield Solutions Inc.
+NYSE		SQNS	false		true		true		2021-06-08T04:00:00Z	5.7	6.3	6.84	5.46	21.9	778774	Sequans Communications S.A. American Depositary Shares, each representing four Ordinary Shares
+NASDAQ		CERC	false		true		true		2021-06-08T04:00:00Z	3.25	3.33	3.33	3.11	6.61	1274224	Cerecor Inc. Common Stock
+NASDAQ		LKCO	false		true		true		2021-06-08T04:00:00Z	1.6011	1.6	1.68	1.56	7.5	6882714	Luokung Technology Corp Ordinary Shares
+AMEX		ASXC	false		true		true		2021-06-08T04:00:00Z	3.66	3.37	3.75	3.13	18.4	15368538	Asensus Surgical, Inc.
+NYSE		MUX	false		true		true		2021-06-08T04:00:00Z	1.46	1.46	1.49	1.45	2.74	2305862	MCEWEN MINING, INC.
+NASDAQ		ENDP	false		true		true		2021-06-08T04:00:00Z	5.64	5.66	5.695	5.57	2.21	3321642	Endo International plc Ordinary Shares
+NASDAQ		VRAY	false		true		true		2021-06-08T04:00:00Z	6.44	6.12	6.44	5.9	8.82	1969597	ViewRay, Inc. Common Stock
+NASDAQ		ORGS	false		true		true		2021-06-08T04:00:00Z	5.2	5.04	5.3577	5	7.1	140695	Orgenesis Inc. Common Stock
+NASDAQ		CLVS	false		true		true		2021-06-08T04:00:00Z	5.57	5.71	5.83	5.495	5.87	11294656	Clovis Oncology, Inc. Common Stock
+NYSE		RIG	false		true		true		2021-06-08T04:00:00Z	4.07	4.15	4.28	4.01	6.51	24422440	Transocean LTD.
+NASDAQ		UXIN	false		true		true		2021-06-08T04:00:00Z	5.0153	4.56	5.33	4.36	21.27	12856148	Uxin Limited ADS
+NASDAQ		ATNX	false		true		true		2021-06-08T04:00:00Z	4.94	5.04	5.09	4.831	5.14	1438982	Athenex, Inc. Common Stock
+NASDAQ		TTOO	false		true		true		2021-06-08T04:00:00Z	1.35	1.4	1.44	1.31	9.29	5029706	T2 Biosystems, Inc. Common Stock
+NYSE		CIG	false		true		true		2021-06-08T04:00:00Z	2.71	2.7	2.725	2.675	1.85	4359141	Companhia Energetica De Minas Gerais-CEMIG
+NYSE		EXTN	false		true		true		2021-06-08T04:00:00Z	5	5.06	5.13	4.87	5.14	367788	Exterran Corporation
+AMEX		GSAT	false		true		true		2021-06-08T04:00:00Z	1.23	1.26	1.3	1.2	7.94	27425004	Globalstar, Inc.
+AMEX		NGD	false		true		true		2021-06-08T04:00:00Z	2.11	2.05	2.12	2.05	3.41	3609432	New Gold Inc.
+NASDAQ		CYCN	false		true		true		2021-06-08T04:00:00Z	3.62	4.1	4.4	3.42	23.9	20736607	Cyclerion Therapeutics, Inc. Common Stock
+NYSE		QD	false		true		true		2021-06-08T04:00:00Z	2.12	2.1	2.13	2.04	4.29	2513087	Qudian Inc. American Depositary Shares, each representing one Class A Ordinary Share
+NASDAQ		VEON	false		true		true		2021-06-08T04:00:00Z	1.82	1.75	1.82	1.725	5.43	23347497	VEON Ltd. ADS
+NYSE		BBVA	true		true		true		2021-06-08T04:00:00Z	6.39	6.42	6.47	6.365	1.64	1430229	Banco Bilbao Vizcaya Argentaria, S.A.
+NYSE		SWN	false		true		true		2021-06-08T04:00:00Z	5.35	5.54	5.62	5.29	5.96	10755228	Southwestern Energy Company
+NYSE		CCO	false		true		true		2021-06-08T04:00:00Z	2.39	2.38	2.43	2.36	2.94	2221371	Clear Channel Outdoor Holdings, Inc. Common Stock
+NASDAQ		ELOX	false		true		true		2021-06-08T04:00:00Z	1.94	1.82	1.9573	1.71	13.59	2094988	Eloxx Pharmaceuticals, Inc. Common Stock
+NYSE		AAIC	true		true		true		2021-06-08T04:00:00Z	4.11	4.18	4.2	4.09	2.63	252223	Arlington Asset Investment Corp.
+NASDAQ		AAME	false		true		true		2021-06-08T04:00:00Z	4.12	4.27	4.37	4.1	6.32	104536	Atlantic American Corporation Common Stock
+NASDAQ		ABEO	false		true		true		2021-06-08T04:00:00Z	1.79	1.79	1.798	1.73	3.8	973777	Abeona Therapeutics Inc. Common Stock
+NASDAQ		ADMS	false		true		true		2021-06-08T04:00:00Z	5.03	4.9	5.09	4.87	4.49	209814	Adamas Pharmaceuticals, Inc. Common Stock
+NASDAQ		ACRX	false		true		true		2021-06-08T04:00:00Z	1.57	1.67	1.67	1.545	7.49	2291160	AcelRx Pharmaceuticals, Inc. Common Stock
+NASDAQ		ACTG	false		true		true		2021-06-08T04:00:00Z	5.77	6.52	6.93	5.67	19.33	2444560	Acacia Research Corporation (Acacia Tech) Common Stock
+NASDAQ		AEHR	false		true		true		2021-06-08T04:00:00Z	2.74	2.72	2.82	2.71	4.04	438793	Aehr Test Systems Common Stock
+NYSE		AFI	false		true		true		2021-06-08T04:00:00Z	5.79	5.86	5.94	5.76	3.07	72340	Armstrong Flooring, Inc.
+NASDAQ		AGEN	false		true		true		2021-06-08T04:00:00Z	4.36	4.99	5	4.36	12.83	9994176	Agenus Inc. Common Stock
+NYSE		AENZ	false		true		true		2021-06-08T04:00:00Z	1.58	1.52	1.59	1.51	5.26	147157	Aenza S.A.A.
+NASDAQ		AGTC	false		true		true		2021-06-08T04:00:00Z	4.19	4.17	4.24	4.04	4.8	672695	Applied Genetic Technologies Corporation Common Stock
+NYSE		APRN	false		true		true		2021-06-08T04:00:00Z	5.27	5.5	5.67	5.23	8	499726	Blue Apron Holdings, Inc. Class A Common Stock
+NASDAQ		ANTE	false		true		true		2021-06-08T04:00:00Z	3.3	3.14	3.349	3.13	6.97	113421	AirNet Technology Inc. American Depositary Shares
+NASDAQ		AQMS	false		true		true		2021-06-08T04:00:00Z	3.56	3.63	3.8227	3.3801	12.19	6082668	Aqua Metals, Inc. Common Stock
+NASDAQ		ARAY	false		true		true		2021-06-08T04:00:00Z	4.39	4.33	4.4	4.25	3.46	823155	Accuray Incorporated Common Stock
+NYSE		ARC	false		true		true		2021-06-08T04:00:00Z	2.11	2.15	2.21	2.06	6.98	346429	ARC Document Solutions, Inc.
+NASDAQ		ASMB	false		true		true		2021-06-08T04:00:00Z	4.06	4.1	4.17	4.04	3.17	778700	Assembly Biosciences, Inc. Common Stock
+NASDAQ		ATHX	false		true		true		2021-06-08T04:00:00Z	1.75	1.72	1.77	1.695	4.36	1886362	Athersys, Inc. Common Stock
+NYSE		AUY	false		true		true		2021-06-08T04:00:00Z	5.17	5.12	5.2	5.11	1.76	7219713	Yamana Gold, Inc.
+NASDAQ		AXLA	false		true		true		2021-06-08T04:00:00Z	3.45	3.36	3.45	3.32	3.87	73620	Axcella Health Inc. Common Stock
+NASDAQ		ATXI	false		true		true		2021-06-08T04:00:00Z	4.5	4.4	4.59	4.36	5.23	98850	Avenue Therapeutics, Inc. Common Stock
+NASDAQ		AWH	false		true		true		2021-06-08T04:00:00Z	6.18	6.07	6.19	5.81	6.26	525191	Aspira Women's Health Inc. Common Stock
+NASDAQ		AYTU	false		true		true		2021-06-08T04:00:00Z	6.1488	5.51	6.18	5.36	14.88	6645238	Aytu BioPharma, Inc. Common Stock
+NASDAQ		BGCP	false		true		true		2021-06-08T04:00:00Z	6.3	6.25	6.31	6.13	2.88	2467734	BGC Partners, Inc Class A Common Stock
+NASDAQ		BENER	false		true		true		2021-06-08T04:00:00Z	0.36	0.3401	0.364247	0.34	7.13	6468	Benessere Capital Acquisition Corp. Right
+AMEX		BKTI	false		true		true		2021-06-08T04:00:00Z	3.26	3.23	3.4	3.21	5.88	559132	BK Technologies Corporation
+NYSE		BRFS	false		true		true		2021-06-08T04:00:00Z	5.62	5.49	5.63	5.4	4.19	2990850	BRF - Brasil Foods S.A.
+NYSE		DSX	false		true		true		2021-06-08T04:00:00Z	4.95	4.82	4.95	4.73	4.56	719670	Diana Shipping, Inc.
+NYSE		DS	false		true		true		2021-06-08T04:00:00Z	3.47	3.54	3.58	3.3885	5.41	1972201	Drive Shack Inc.
+NASDAQ		GNFT	false		true		true		2021-06-08T04:00:00Z	4.15	4.17	4.23	4.15	1.92	15399	GENFIT S.A. American Depositary Shares
+NASDAQ		GNUS	false		true		true		2021-06-08T04:00:00Z	2.02	1.98	2.02	1.88	7.07	14631746	Genius Brands International, Inc. Common Stock
+NASDAQ		HALL	false		true		true		2021-06-08T04:00:00Z	4.56	4.45	4.56	4.39	3.82	67438	Hallmark Financial Services, Inc. Common Stock
+NYSE		JMP	false		true		true		2021-06-08T04:00:00Z	5.68	5.65	5.7822	5.5065	4.88	12569	JMP Group LLC
+NYSE		LFT	false		true		true		2021-06-08T04:00:00Z	3.9	3.98	4	3.8909	2.74	99664	Lument Finance Trust, Inc.
+NASDAQ		LTRPA	false		true		true		2021-06-08T04:00:00Z	4.33	4.34	4.38	4.17	4.84	652375	Liberty TripAdvisor Holdings, Inc. Series A Common Stock
+NASDAQ		MBIO	false		true		true		2021-06-08T04:00:00Z	3.69	3.75	3.77	3.51	6.93	3892833	Mustang Bio, Inc. Common Stock
+AMEX		NXE	false		true		true		2021-06-08T04:00:00Z	4.88	4.85	4.99	4.76	4.74	1226417	NexGen Energy Ltd. Common Shares
+NYSE		OIBR.C	false		true		true		2021-06-08T04:00:00Z	1.56	1.56	1.59	1.53	3.85	591743	OI S.A. American Depositary Shares, each representing five shares of common stock
+NASDAQ		PAVM	false		true		true		2021-06-08T04:00:00Z	6.31	6.28	6.565	5.71	13.61	3338353	PAVmed Inc. Common Stock
+NASDAQ		RESN	false		true		true		2021-06-08T04:00:00Z	3.85	3.79	3.9	3.52	10.03	1593690	Resonant Inc. Common Stock
+NASDAQ		SGMA	false		true		true		2021-06-08T04:00:00Z	4.86	4.93	5.01	4.86	3.04	9563	SigmaTron International, Inc. Common Stock
+NASDAQ		SOHO	false		true		true		2021-06-08T04:00:00Z	3.91	4.04	4.17	3.85	7.92	271710	Sotherly Hotels Inc. Common Stock
+NASDAQ		STRR	false		true		true		2021-06-08T04:00:00Z	2.69	2.7	2.75	2.66	3.33	167472	Star Equity Holdings, Inc. Common Stock
+NASDAQ		TCDA	false		true		true		2021-06-08T04:00:00Z	4.77	4.75	4.95	4.69	5.47	184955	Tricida, Inc. Common Stock
+NYSE		TEO	false		true		true		2021-06-08T04:00:00Z	6.26	6.23	6.29	6.145	2.33	610977	Telecom Argentina S.A.
+NYSE		UGP	true		true		true		2021-06-08T04:00:00Z	4.24	4.24	4.27	4.18	2.12	1122166	Ultrapar Participacoes S.A.
+NASDAQ		ALRN	false		true		true		2021-06-08T04:00:00Z	1.27	1.33	1.34	1.26	6.02	589721	Aileron Therapeutics, Inc. Common Stock
+NASDAQ		ANDAR	false		true		true		2021-06-08T04:00:00Z	0.7501	0.77	0.77	0.7501	2.58	2560	Andina Acquisition Corp. III Right
+NYSE		CRK	false		true		true		2021-06-08T04:00:00Z	5.93	6.05	6.08	5.83	4.13	3164975	Comstock Resources, Inc.
+NASDAQ		OESX	false		true		true		2021-06-08T04:00:00Z	6	5.96	6.02	5.89	2.18	166553	Orion Energy Systems, Inc. Common Stock
+NASDAQ		ALSK	false		true		true		2021-06-08T04:00:00Z	3.35	3.33	3.35	3.33	0.6	320102	Alaska Communications Systems Group, Inc. Common Stock
+NYSE		AMPY	false		true		true		2021-06-08T04:00:00Z	3.79	3.78	3.91	3.68	6.08	383148	Amplify Energy Corp.
+NYSE		BEDU	false		true		true		2021-06-08T04:00:00Z	4	4.05	4.05	3.89	3.95	53314	Bright Scholar Education Holdings Limited American Depositary Shares, each representing one Class A
+NASDAQ		CLSD	false		true		true		2021-06-08T04:00:00Z	3.2	3.13	3.27	3.0101	8.3	296171	Clearside Biomedical, Inc. Common Stock
+NASDAQ		EPSN	false		true		true		2021-06-08T04:00:00Z	4.16	4.12	4.18	4.07	2.67	33253	Epsilon Energy Ltd. Common Share
+NASDAQ		GIFI	false		true		true		2021-06-08T04:00:00Z	5.01	4.98	5.02	4.9	2.41	28880	Gulf Island Fabrication, Inc. Common Stock
+NASDAQ		SND	false		true		true		2021-06-08T04:00:00Z	2.98	3.18	3.29	2.96	10.38	418085	Smart Sand, Inc. Common Stock
+NASDAQ		DXYN	false		true		true		2021-06-08T04:00:00Z	2.64	2.62	2.7342	2.61	4.74	56673	Dixie Group, Inc. (The) Common Stock
+AMEX		BTG	true		true		true		2021-06-08T04:00:00Z	4.97	4.92	4.99	4.91	1.63	3340487	B2Gold Corp.
+NASDAQ		KZR	false		true		true		2021-06-08T04:00:00Z	5.74	5.64	5.75	5.63	2.13	88172	Kezar Life Sciences, Inc. Common Stock
+NYSE		QUAD	false		true		true		2021-06-08T04:00:00Z	3.66	3.69	3.735	3.59	3.93	372951	QUAD/GRAPHICS, INC.
+NYSE		TK	false		true		true		2021-06-08T04:00:00Z	3.97	4	4	3.89	2.75	815095	Teekay Corporation
+NASDAQ		AEY	false		true		true		2021-06-08T04:00:00Z	2.56	2.58	2.59	2.4981	3.56	33563	ADDvantage Technologies Group, Inc. Common Stock
+NASDAQ		CBIO	false		true		true		2021-06-08T04:00:00Z	4.33	4.37	4.45	4.23	5.03	220049	Catalyst Biosciences, Inc. Common Stock
+AMEX		XPL	false		true		true		2021-06-08T04:00:00Z	0.7012	0.72	0.735	0.7012	4.69	897163	Solitario Zinc Corp
+NASDAQ		METC	false		true		true		2021-06-08T04:00:00Z	5.89	6.01	6.09	5.8	4.83	127245	Ramaco Resources, Inc. Common Stock
+NYSE		MFA	false		true		true		2021-06-08T04:00:00Z	4.62	4.7	4.72	4.56	3.4	4697363	MFA Financial, Inc

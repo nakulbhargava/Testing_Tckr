@@ -84,7 +84,8 @@ public class Extract_Daily_Tickers{
 				Thread.sleep(500);
 			}while(LocalDateTime.now().isBefore(marketCloseTime));
 		}
-		File ConstFile = new File("C:\\Users\\nakul\\eclipse-workspace\\TCKR\\src\\REAL\\ConfigConstants.java");
+		File ConstFile = new File("C:\\Users\\nakul\\eclipse-workspace\\TCKR\\src\\REAL_Enhanced\\ConfigConstants.java");
+		//File ConstFile = new File("C:\\Users\\nakul\\eclipse-workspace\\TCKR\\src\\REAL\\ConfigConstants.java");
 		BufferedReader reader = new BufferedReader(new FileReader(ConstFile));
 		String line = "", newtext = "";
 		while((line = reader.readLine()) != null)
@@ -112,7 +113,7 @@ public class Extract_Daily_Tickers{
 			pw.write(openPositions[i].getSymbol() + " Average Value:\t" + totalSum/ticks.size());
 		}
 		newtext += "}";
-		FileWriter writer = new FileWriter("C:\\Users\\nakul\\eclipse-workspace\\TCKR\\src\\REAL\\ConfigConstants.java");
+		FileWriter writer = new FileWriter("C:\\Users\\nakul\\eclipse-workspace\\TCKR\\src\\REAL_Enhanced\\ConfigConstants.java");
         writer.write(newtext);writer.close();
 		pw.close();
 	}
