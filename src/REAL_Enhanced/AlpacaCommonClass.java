@@ -14,25 +14,25 @@ import alpacaPojo.PositionsPojo;
 
 public class AlpacaCommonClass {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
-	AlpacaApiCaller alpacaAccount;
+	public AlpacaApiCaller alpacaAccount;
 	OrdersPojo placeBuyOrder;
 	OrdersPojo placedBuyOrder;
 	OrdersPojo placeSellOrder;
 	OrdersPojo placedSellOrder;
-	Double lastBuyOrderPrice = 0.0;
-	Double lastSellOrderPrice = 0.0;
-	Double currentPrice = 0.0;
-	String symbol;
-	Double qty;
-	PrintWriter pw; 
-	Double maxStockPrice = 0.0;
-	Double minStockPrice = 4000.0;
-	Double profitFactor;
-	Double upTrendFactor;
-	Double downTrendFactor;
-	Double stableHighPrice;
-	Double stableLowPrice;
-	Double totalBuyCount = 0.0;
+	protected Double lastBuyOrderPrice = 0.0;
+	protected Double lastSellOrderPrice = 0.0;
+	protected Double currentPrice = 0.0;
+	public String symbol;
+	public Double qty;
+	public PrintWriter pw; 
+	protected Double maxStockPrice = 0.0;
+	protected Double minStockPrice = 4000.0;
+	public Double profitFactor;
+	public Double upTrendFactor;
+	public Double downTrendFactor;
+	public Double stableHighPrice;
+	public Double stableLowPrice;
+	protected Double totalBuyCount = 0.0;
 	List<Double> filledBuyPrices = new ArrayList<Double>();
 	List<Double> potentialBuyPrices = new ArrayList<Double>();
 	Double totalSellCount = 0.0;
@@ -41,8 +41,8 @@ public class AlpacaCommonClass {
 	Double nextDayPotentialStablePrice = 0.0;
 	Double maxPlacedOrder = 0.0;
 	Double minPlacedOrder = 0.0;
-	Double maxQty;
-	long secondsTimer;
+	public Double maxQty;
+	protected long secondsTimer;
 	
 	public OrdersPojo placeBuyOrderWithLimitSell() throws IOException, InterruptedException {
 		placeBuyOrder = alpacaAccount.buySymbolQuantity(symbol, qty);

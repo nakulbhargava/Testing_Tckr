@@ -81,9 +81,9 @@ public class Testing_Symbol_Assets_Timeframe {
 				+ "\t" + "Shortable" + "\t" + "Tradable" + "\t"+ "Date" + "\t\t\t" + "Open"
 				+ "\t" + "Close" + "\t" + "HIGH" + "\t" + "LOW" + "\t"+ "HL%" + "\t" + "Volume"+  "\t" + "Name" + "\n");
 		for (int i = 0; i < assetTotalList; i++){
-			if("active".equals(assets[i].getStatus()) && assets[i].isFractionable() && assets[i].isMarginable() && assets[i].isShortable() && assets[i].isEasy_to_borrow() && assets[i].isTradable()) {
-//			if("active".equals(assets[i].getStatus())) {
-				TimeframePojo timeframe = alpacaAccount.getTimeframe(assets[i].getSymbol(), "2021-06-08", "2021-06-08", "1Day");
+//			if("active".equals(assets[i].getStatus()) && assets[i].isFractionable() && assets[i].isMarginable() && assets[i].isShortable() && assets[i].isEasy_to_borrow() && assets[i].isTradable()) {
+			if("active".equals(assets[i].getStatus()) && assets[i].isTradable()) {
+				TimeframePojo timeframe = alpacaAccount.getTimeframe(assets[i].getSymbol(), "2021-06-22", "2021-06-22", "1Day");
 				if (timeframe.getBars() == null || timeframe.getBars().length == 0) {
 					System.out.println("Error getting Bar for symbol: " + assets[i].getSymbol());
 					continue;
@@ -141,7 +141,7 @@ public class Testing_Symbol_Assets_Timeframe {
 							+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 
 							+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\t" + assets[i].getName() + "\n");
 				}
-				if(Double.valueOf(bars.getClosePrice()).compareTo(7.0) < 0)
+				if(Double.valueOf(bars.getClosePrice()).compareTo(4.0) < 0)
 				{
 					pw7.write(assets[i].getExchange() + "\t\t" + assets[i].getSymbol() + "\t"
 							+ assets[i].isFractionable() + "\t\t" + assets[i].isShortable() + "\t\t" 

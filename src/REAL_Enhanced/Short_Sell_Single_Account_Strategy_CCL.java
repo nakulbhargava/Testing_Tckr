@@ -43,7 +43,7 @@ public class Short_Sell_Single_Account_Strategy_CCL {
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 
 	static Double qty = 1.0;
-	static Double maxQty = 32.0;
+	static Double maxQty = 7.0;
 
 	static long secondsTimer = 450000;
 

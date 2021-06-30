@@ -727,8 +727,13 @@ public class AlpacaApiCaller extends AlpacaRestParams {
 				.header(secretId, secretIdValue)
 				.build();
 		// Send HTTP request
-		HttpResponse<String> response = client.send(request,
+		HttpResponse<String> response;
+		try {
+			response = client.send(request,
 				HttpResponse.BodyHandlers.ofString());
+		}catch(Exception e) {
+			return new PositionsPojo();
+		}
 
 		return getJsonObject(response.body(), PositionsPojo.class);
 	}

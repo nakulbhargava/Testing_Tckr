@@ -74,7 +74,7 @@ public class Buy_Single_Account_Strategy_SNDL {
 		alpacaBaap.upTrendFactor = upTrendFactor;
 		alpacaBaap.downTrendFactor = downTrendFactor;
 		alpacaBaap.symbol = symbol;
-		alpacaBaap.stableHighPrice = 1.2;
+		alpacaBaap.stableHighPrice = stableHighPrice;
 		alpacaBaap.performContinousBuyOperations();		
 	}
 }

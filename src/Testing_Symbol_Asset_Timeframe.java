@@ -43,7 +43,7 @@ public class Testing_Symbol_Asset_Timeframe {
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 
-		String symbol = "SNDL";
+		String symbol = "SOLO";
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 		AssetsPojo asset = alpacaAccount.getAssetSymbol(symbol);
 

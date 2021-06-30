@@ -26,8 +26,8 @@ public class Extract_Daily_Tickers{
 	//	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
 	//	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
 
-	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
-	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
+	private static final String alpacaKeyRealTime = "";
+	private static final String secretIdRealTime = "";
 	private static final String headerContentType = "Content-Type";
 	private static final String headerContentTypeValue = "application/json";
 	private static final String paperUrl = "https://paper-api.alpaca.markets";
@@ -48,9 +48,7 @@ public class Extract_Daily_Tickers{
 	static File file = new File("C:\\Users\\nakul\\Documents\\outputDailyTicks - " + localTime + ".txt");
 	static PrintWriter pw; 
 	static FileOutputStream fo;
-	static Double localMaxima = 0.00;
-	static Double localMinima = 0.00;
-	static Double currentPrice = 0.00;
+	static Double leverage = 1.0075;
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -107,14 +105,18 @@ public class Extract_Daily_Tickers{
 			for(Double tick: ticks) {
 				totalSum = totalSum + tick;
 			}
-			String tickerConstant = "\tpublic static final Double " + openPositions[i].getSymbol() + "_stablePrice = " +  totalSum/ticks.size() + ";\r\n";
+			String tickerConstant = "\tpublic static final Double " + openPositions[i].getSymbol() + "_stablePrice = " +  totalSum*leverage/ticks.size() + ";\r\n";
 			newtext += tickerConstant;
 			System.out.println(openPositions[i].getSymbol() + " Average Value:\t" + totalSum/ticks.size());
+			System.out.println(openPositions[i].getSymbol() + " Average Value*leverage:\t" + totalSum*leverage/ticks.size());
 			pw.write(openPositions[i].getSymbol() + " Average Value:\t" + totalSum/ticks.size());
+			pw.write(openPositions[i].getSymbol() + " Average Value*leverage:\t" + totalSum*leverage/ticks.size());
 		}
 		newtext += "}";
 		FileWriter writer = new FileWriter("C:\\Users\\nakul\\eclipse-workspace\\TCKR\\src\\REAL_Enhanced\\ConfigConstants.java");
+//		FileWriter writer1 = new FileWriter("C:\\Users\\nakul\\eclipse-workspace\\TCKR\\src\\REAL\\ConfigConstants.java");
         writer.write(newtext);writer.close();
+//        writer1.write(newtext);writer1.close();
 		pw.close();
 	}
 }

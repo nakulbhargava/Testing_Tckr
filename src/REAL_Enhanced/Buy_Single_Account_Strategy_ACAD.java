@@ -43,8 +43,8 @@ public class Buy_Single_Account_Strategy_ACAD {
 	private static final String assetsEndpoint = ConfigConstants.assetsEndpoint;
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 
-	static Double qty = 0.1;
-	static Double maxQty = 51.0;
+	static Double qty = 0.05;
+	static Double maxQty = 10.0;
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.045;

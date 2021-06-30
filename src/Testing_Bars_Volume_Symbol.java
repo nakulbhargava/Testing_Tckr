@@ -53,7 +53,8 @@ public class Testing_Bars_Volume_Symbol {
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
 
 		String[] symbols = new String[]{ "XPEV", "UBER", "SNAP", "PLUG", "NIO", "MRO", "LYFT", "GPS", "GOTU", "DKNG", "CCL", "BNGO", "AMWL", "ACAD", "LCTX",
-				 "CLSN", "CMCM", "CPRX", "CRBP", "SOLO", "CYRN", "SNDL", "ISR", "EVFM", "HDSN", "REI", "NXE", "UUUU"};
+				 "CLSN", "CMCM", "CPRX", "CRBP", "SOLO", "CYRN", "SNDL", "ISR", "EVFM", "HDSN", "REI", "NXE", "UUUU", 
+				 "NGD", "GSAT", "NMTR", "STAF", "SRGA", "WTER", "CWBR", "DARE", "GERN", "IDRA"};
 		File file = new File("C:\\Users\\nakul\\Documents\\outputTimeframe - " + localTime + ".txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
 		FileOutputStream fo = new FileOutputStream(file);
@@ -61,7 +62,7 @@ public class Testing_Bars_Volume_Symbol {
 		//				AssetsPojo assets = alpacaAccount.getAssetSymbol(symbol);
 		PositionsPojo[] openPositions = alpacaAccount.getOpenPositions();
 		for (String symbol : symbols) {
-			TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, "2019-05-29", "2021-06-08", "1Day");
+			TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, "2019-05-29", "2021-06-30", "1Day");
 			BarsPojo bars[] = timeframe.getBars();
 			Double sumHighLow = 0.00;
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
