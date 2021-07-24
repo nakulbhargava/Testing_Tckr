@@ -16,16 +16,16 @@ public class Buy_Single_Account_Strategy_CMCM {
 	private static final String secretId = ConfigConstants.secretId;
 
 	//Nakul
-	//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
-	//		private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
+	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
+	private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
 
 	//Vaishali
 	//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
 	//		private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
 
 	//Distorted
-	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
-	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
+	//	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
+	//	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
 
 	private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeNakul;
 	private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeNakul;
@@ -62,7 +62,7 @@ public class Buy_Single_Account_Strategy_CMCM {
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		AlpacaCommonClass alpacaBaap = new AlpacaCommonClass();
-		
+
 		alpacaBaap.alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);

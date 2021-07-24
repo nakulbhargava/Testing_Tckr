@@ -28,8 +28,8 @@ public class Buy_Single_Account_Strategy_SRGA {
 	//	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
 	//	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
 
-	private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeNakul;
-	private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeNakul;
+	private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeVaishali;
+	private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeVaishali;
 	private static final String headerContentType = ConfigConstants.headerContentType;
 	private static final String headerContentTypeValue = ConfigConstants.headerContentTypeValue;
 	private static final String paperUrl = ConfigConstants.paperUrl;
@@ -45,7 +45,7 @@ public class Buy_Single_Account_Strategy_SRGA {
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 
 	static Double qty = 1.0;
-	static Double maxQty = 75.0;
+	static Double maxQty = 150.0;
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.06;
@@ -62,7 +62,7 @@ public class Buy_Single_Account_Strategy_SRGA {
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		AlpacaCommonClass alpacaBaap = new AlpacaCommonClass();
-		
+
 		alpacaBaap.alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);

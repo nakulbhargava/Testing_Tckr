@@ -20,12 +20,12 @@ public class Buy_Single_Account_Strategy_NIO {
 	private static final String secretId = ConfigConstants.secretId;
 
 	//Nakul
-	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
-	private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
+	//	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
+	//	private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
 
 	//Vaishali
-	//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
-	//		private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
+	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
+	private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
 
 	//Distorted
 	//	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
@@ -48,7 +48,7 @@ public class Buy_Single_Account_Strategy_NIO {
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 
 	static Double qty = 0.05;
-	static Double maxQty = 10.0;
+	static Double maxQty = 60.0;
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.06;
@@ -65,7 +65,7 @@ public class Buy_Single_Account_Strategy_NIO {
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		AlpacaCommonClass alpacaBaap = new AlpacaCommonClass();
-		
+
 		alpacaBaap.alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);

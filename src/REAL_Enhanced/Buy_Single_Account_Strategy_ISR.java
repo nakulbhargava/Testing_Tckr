@@ -20,12 +20,12 @@ public class Buy_Single_Account_Strategy_ISR {
 	//		private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
 
 	//Vaishali
-	//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
-	//		private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
+	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
+	private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
 
 	//Distorted
-	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
-	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
+	//	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
+	//	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
 
 	private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeNakul;
 	private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeNakul;
@@ -48,8 +48,8 @@ public class Buy_Single_Account_Strategy_ISR {
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.08;
-	static Double upTrendFactor = 1.01;
-	static Double downTrendFactor = .95;
+	static Double upTrendFactor = 1.0075;
+	static Double downTrendFactor = .975;
 
 	static String symbol = "ISR";
 
@@ -62,7 +62,7 @@ public class Buy_Single_Account_Strategy_ISR {
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		AlpacaCommonClass alpacaBaap = new AlpacaCommonClass();
-		
+
 		alpacaBaap.alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);

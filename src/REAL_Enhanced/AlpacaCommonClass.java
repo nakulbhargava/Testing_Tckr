@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import alpacaPojo.AccountsPojo;
 import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.OrdersPojo;
 import alpacaPojo.PositionsPojo;
@@ -15,6 +16,7 @@ import alpacaPojo.PositionsPojo;
 public class AlpacaCommonClass {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 	public AlpacaApiCaller alpacaAccount;
+	
 	OrdersPojo placeBuyOrder;
 	OrdersPojo placedBuyOrder;
 	OrdersPojo placeSellOrder;
@@ -43,7 +45,8 @@ public class AlpacaCommonClass {
 	Double minPlacedOrder = 0.0;
 	public Double maxQty;
 	protected long secondsTimer;
-	
+	protected boolean cancelBeforeStart = false;
+
 	public OrdersPojo placeBuyOrderWithLimitSell() throws IOException, InterruptedException {
 		placeBuyOrder = alpacaAccount.buySymbolQuantity(symbol, qty);
 		placedBuyOrder = alpacaAccount.getOrderDetails(placeBuyOrder.getId());
@@ -97,7 +100,7 @@ public class AlpacaCommonClass {
 		filledBuyPrices.add(Double.valueOf(placedBuyOrder.getFilled_avg_price()));
 		return placedBuyOrder;
 	}
-	
+
 	public OrdersPojo placeSellOrderWithLimitBuy() throws IOException, InterruptedException {
 		placeSellOrder = alpacaAccount.sellSymbolQuantity(symbol, qty);
 		placedSellOrder = alpacaAccount.getOrderDetails(placeSellOrder.getId());
@@ -150,7 +153,7 @@ public class AlpacaCommonClass {
 		filledSellPrices.add(Double.valueOf(placedSellOrder.getFilled_avg_price()));
 		return placedSellOrder;
 	}
-	
+
 	//Returning Current price from paper account
 	public Double returnCurrentPrice() throws IOException, InterruptedException {
 		PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
@@ -182,9 +185,12 @@ public class AlpacaCommonClass {
 		currentPrice = Double.valueOf(placedSellOrder.getFilled_avg_price());
 		return currentPrice;
 	}
-	
+
 	public boolean isUpTrend() throws IOException, InterruptedException {
 		Double testPrice = returnCurrentPrice();
+		Double lastPrice = testPrice;
+		System.out.println("Initial Price: \t" + testPrice + "\tCurrent Price: \t" + lastPrice + "\t" + LocalDateTime.now().toString());
+		pw.write("Initial Price: " + testPrice + "\tCurrent Price: " + lastPrice + "\t" + LocalDateTime.now().toString() + "\n");
 		if(testPrice.compareTo(maxStockPrice) > 0) {
 			maxStockPrice = testPrice;
 		}
@@ -192,16 +198,19 @@ public class AlpacaCommonClass {
 			minStockPrice = testPrice;
 		}
 		do {
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			currentPrice = returnCurrentPrice();
+
 			if(currentPrice.compareTo(maxStockPrice) > 0) {
 				maxStockPrice = currentPrice;
 			}
 			if(currentPrice.compareTo(minStockPrice) < 0) {
 				minStockPrice = currentPrice;
 			}
-			System.out.println("Initial Price: \t" + testPrice + "\tCurrent Price: \t" + currentPrice + "\t" + LocalDateTime.now().toString());
-			pw.write("Initial Price: " + testPrice + "\tCurrent Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
+			if (!(testPrice.compareTo(currentPrice) == 0)) {
+				System.out.println("Initial Price: \t" + testPrice + "\tCurrent Price: \t" + currentPrice + "\t" + LocalDateTime.now().toString());
+				pw.write("Initial Price: " + testPrice + "\tCurrent Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
+			}
 			if (testPrice*downTrendFactor > currentPrice) {
 				pw.write("Returning Downtrend to do nothing - Initial Price: " + testPrice + "\t Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString() + "\n");
 				System.out.println("Returning Downtrend to do nothing - Initial Price: \t" + testPrice + "\t Current Price: " + currentPrice + "\t" + LocalDateTime.now().toString());
@@ -215,7 +224,7 @@ public class AlpacaCommonClass {
 		}while(LocalDateTime.now().isBefore(marketCloseTime));
 		return false;
 	}	
-	
+
 	public boolean isDownTrend(long timer) throws IOException, InterruptedException {
 		Double testPrice = returnCurrentPrice();
 		System.out.println("Initial Price: \t" + testPrice);
@@ -249,9 +258,36 @@ public class AlpacaCommonClass {
 		}while(LocalDateTime.now().isBefore(marketCloseTime));
 		return false;
 	}	
-	
+
 	public void performContinousBuyOperations() throws NumberFormatException, IOException, InterruptedException {
+		OrdersPojo[] ordersToCancel = null;
 		if(alpacaAccount.getClock().isIs_open()) {
+			AccountsPojo accountDetails = alpacaAccount.getRealAccountDetails();
+			if(Double.valueOf(accountDetails.getEquity()).compareTo(25000.00) < 0) {
+				cancelBeforeStart = true;
+				ordersToCancel = alpacaAccount.getRealOpenOrders(symbol);
+				for(OrdersPojo orderToCancel: ordersToCancel) {
+					alpacaAccount.deleteRealOrder(orderToCancel.getId());
+					Thread.sleep(1000);
+				}
+				if (alpacaAccount.getRealOpenOrders(symbol).length != 0) {
+					System.out.println("Manual Intervention Needed! List of Orders cancelled/To be cancelled:\n ");
+					pw.write("Manual Intervention Needed! List of Orders cancelled/To be cancelled: " + "\n");
+					for(OrdersPojo order : ordersToCancel) {
+						System.out.println(symbol + "\t" + order.getLimit_price() + "\t" + order.getQty() + "\n" );
+						pw.write(symbol + "\t" + order.getLimit_price() + "\t" + order.getQty() + "\n" );
+					}
+					return;
+				}
+				else {
+					System.out.println("Orders cancelled:\n ");
+					pw.write("Orders cancelled: " + "\n");
+					for(OrdersPojo order : ordersToCancel) {
+						System.out.println(symbol + "\t" + order.getLimit_price() + "\t" + order.getQty() + "\n" );
+						pw.write(symbol + "\t" + order.getLimit_price() + "\t" + order.getQty() + "\n" );
+					}
+				}
+			}
 			do {
 				boolean isUpTrend = isUpTrend();
 				PositionsPojo openPosition = alpacaAccount.getRealSymbolPosition(symbol);
@@ -288,15 +324,28 @@ public class AlpacaCommonClass {
 			pw.write("Max Placed Buy Order Price: " + maxPlacedOrder + "\tAverageFilledPrice: " + filledAveragePrice + "\tFor Stocks: " + filledBuyPrices.size() + "\n");	
 			System.out.println("Trying to place Sell Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor);
 			pw.write("Trying to place Sell Order for Shares: " + wholeNumber + "\tWith Limit Price: " + filledAveragePrice*profitFactor + "\n");
+			nextDayPotentialStablePrice = (maxStockPrice + maxStockPrice/profitFactor + minStockPrice + minStockPrice*profitFactor)/4;
+			System.out.println("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "\tMinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice);
+			pw.write("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "\tMinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice + "\n");
+			System.out.println("Another Potential Stable High Price: " + potentialAverageBuyPrice);
+			pw.write("Another Potential Stable High Price: " + potentialAverageBuyPrice + "\n");
+			Thread.sleep(28810000);
 			if (wholeNumber > 0) {
 				placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, Double.valueOf(wholeNumber), filledAveragePrice*profitFactor);
 				Thread.sleep(100);
-				placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
-				pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
-						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
-				System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
-						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
+				if (placeSellOrder.getId() != null) {
+					placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
+					pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+							"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
+					System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+							"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
+				}
+				else {
+					pw.write("\nFAILURE IN PLACING EOD SELL ORDER DUE TO PDT\n");
+					System.out.println("\nFAILURE IN PLACING EOD SELL ORDER DUE TO PDT\n");
+				}
 			}
+
 			//			for (Double filledBuyPrice: filledBuyPrices) {
 			//				placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, qty, filledBuyPrice*profitFactor);
 			//				Thread.sleep(100);
@@ -305,16 +354,28 @@ public class AlpacaCommonClass {
 			//						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
 			//				System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
 			//						"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
-			//			}
-			nextDayPotentialStablePrice = (maxStockPrice + maxStockPrice/profitFactor + minStockPrice + minStockPrice*profitFactor)/4;
-			System.out.println("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "\tMinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice);
-			pw.write("MaxStock: " + maxStockPrice + "\tMaxStockPrice/ProfitFactor: " + maxStockPrice/profitFactor + "\tMin Stock Price: " + minStockPrice + "\tMinStockPrice*ProfitFactor: " + minStockPrice*profitFactor + "\tNextDayPotentialStableHighPrice: " + nextDayPotentialStablePrice + "\n");
-			System.out.println("Another Potential Stable High Price: " + potentialAverageBuyPrice);
-			pw.write("Another Potential Stable High Price: " + potentialAverageBuyPrice + "\n");	
+			//			}	
 			pw.close();
 		}
+		if (cancelBeforeStart) {
+			for(OrdersPojo reorder : ordersToCancel) {
+				placeSellOrder = alpacaAccount.sellRealSymbolLimitOrder(symbol, Double.valueOf(reorder.getQty()), Double.valueOf(reorder.getLimit_price()));
+				Thread.sleep(1000);
+				if (placeSellOrder.getId() != null) {
+					placedSellOrder = alpacaAccount.getRealOrderDetails(placeSellOrder.getId());
+					pw.write("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+							"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString() + "\n");
+					System.out.println("Sell Order Executed with following Details: " + placedSellOrder.getSymbol() + "\t" + placedSellOrder.getQty()+ "\t" + placedSellOrder.getId() + 
+							"\t" + placedSellOrder.getLimit_price() + "\t" + LocalDateTime.now().toString());
+				}
+				else {
+					pw.write("\nFAILURE IN PLACING EOD SELL ORDER DUE TO PDT\n" + reorder.getQty() + reorder.getLimit_price() + "\n");
+					System.out.println("\nFAILURE IN PLACING EOD SELL ORDER DUE TO PDT\n" + reorder.getQty() + reorder.getLimit_price() + "\n");
+				}
+			}
+		}
 	}
-	
+
 	public void performContinousSellOperations() throws NumberFormatException, IOException, InterruptedException {
 		if(alpacaAccount.getClock().isIs_open()) {
 			do {

@@ -49,8 +49,8 @@ public class Buy_Single_Account_Strategy_EVFM {
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.06;
-	static Double upTrendFactor = 1.005;
-	static Double downTrendFactor = .9755;
+	static Double upTrendFactor = 1.001;
+	static Double downTrendFactor = .985;
 
 	static String symbol = "EVFM";
 

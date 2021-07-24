@@ -49,7 +49,7 @@ public class Buy_Single_Account_Strategy_DARE {
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.05;
-	static Double upTrendFactor = 1.01;
+	static Double upTrendFactor = 1.007;
 	static Double downTrendFactor = .9855;
 
 	static String symbol = "DARE";

@@ -15,16 +15,16 @@ public class Buy_Single_Account_Strategy_XPEV {
 	private static final String secretId = ConfigConstants.secretId;
 
 	//Nakul
-	//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
-	//		private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
+			private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueNakulPaper;
+			private static final String secretIdValue = ConfigConstants.secretIdValueNakulPaper;
 
 	//Vaishali
-	//		private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
-	//		private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
+//			private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueVaishaliPaper;
+//			private static final String secretIdValue = ConfigConstants.secretIdValueVaishaliPaper;
 
 	//Distorted
-	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
-	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
+//	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
+//	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
 
 	private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeNakul;
 	private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeNakul;
@@ -42,8 +42,8 @@ public class Buy_Single_Account_Strategy_XPEV {
 	private static final String assetsEndpoint = ConfigConstants.assetsEndpoint;
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 
-	static Double qty = 0.02;
-	static Double maxQty = 10.0;
+	static Double qty = 0.05;
+	static Double maxQty = 20.0;
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.08;

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import alpacaPojo.AlpacaApiCaller;
 
 //This is enhanced lazy limit strategy
+//Finam
 public class Buy_Single_Account_Strategy_DKNG {
 
 	private static final String alpacaKey = ConfigConstants.alpacaKey;
@@ -48,7 +49,7 @@ public class Buy_Single_Account_Strategy_DKNG {
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.07;
 	static Double upTrendFactor = 1.001;
-	static Double downTrendFactor = .9955;
+	static Double downTrendFactor = .994;
 
 	static String symbol = "DKNG";
 

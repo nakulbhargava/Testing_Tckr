@@ -49,7 +49,7 @@ public class Buy_Single_Account_Strategy_REI {
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.08;
 	static Double upTrendFactor = 1.005;
-	static Double downTrendFactor = .9755;
+	static Double downTrendFactor = .9855;
 
 	static String symbol = "REI";
 

@@ -27,8 +27,8 @@ public class Cancel_All_Open_Orders {
 	private static final String alpacaKeyValue = ConfigConstants.alpacaKeyValueDistPaper;
 	private static final String secretIdValue = ConfigConstants.secretIdValueDistPaper;
 
-	private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeNakul;
-	private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeNakul;
+	private static final String alpacaKeyRealTime = ConfigConstants.alpacaKeyRealTimeVaishali;
+	private static final String secretIdRealTime = ConfigConstants.secretIdRealTimeVaishali;
 	private static final String headerContentType = ConfigConstants.headerContentType;
 	private static final String headerContentTypeValue = ConfigConstants.headerContentTypeValue;
 	private static final String paperUrl = ConfigConstants.paperUrl;
@@ -44,7 +44,7 @@ public class Cancel_All_Open_Orders {
 	private static final String clockEndpoint = ConfigConstants.clockEndpoint;
 //	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,00);
 
-	static String symbol = "SNAP";
+	static String symbol = "ISR";
 
 	static AlpacaApiCaller alpacaAccount;
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
@@ -64,7 +64,7 @@ public class Cancel_All_Open_Orders {
 		if(openOrders != null && openOrders.length !=0) {
 			for (OrdersPojo openOrder : openOrders) {
 				pw.write(openOrder.toString() + "\n");
-				alpacaAccount.deleteRealOrder(openOrder.getClient_order_id());
+				alpacaAccount.deleteRealOrder(openOrder.getId());
 			}
 		}
 

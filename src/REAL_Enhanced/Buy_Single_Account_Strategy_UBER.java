@@ -47,7 +47,7 @@ public class Buy_Single_Account_Strategy_UBER {
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.044;
-	static Double upTrendFactor = 1.001;
+	static Double upTrendFactor = 1.0005;
 	static Double downTrendFactor = .9955;
 
 	static String symbol = "UBER";

@@ -48,8 +48,8 @@ public class Buy_Single_Account_Strategy_SOLO {
 
 	//Below to be extracted from Extract Calibrating factor 5
 	static Double profitFactor = 1.08;
-	static Double upTrendFactor = 1.005;
-	static Double downTrendFactor = .9855;
+	static Double upTrendFactor = 1.001;
+	static Double downTrendFactor = .985;
 
 	static String symbol = "SOLO";
 
