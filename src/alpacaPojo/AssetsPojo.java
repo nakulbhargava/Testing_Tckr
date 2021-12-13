@@ -9,13 +9,6 @@ public class AssetsPojo {
 	private String exchange;
 	private String symbol;
 	private String status;
-	private String name;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	private boolean tradable;
 	private boolean marginable;
 	private boolean shortable;
