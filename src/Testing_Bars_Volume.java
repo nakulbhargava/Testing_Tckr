@@ -3,16 +3,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 
-import alpacaPojo.AccountsPojo;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers.DateDeserializer;
+
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.AssetsPojo;
 import alpacaPojo.BarsPojo;
-import alpacaPojo.LastQuotePojo;
-import alpacaPojo.LastTradePojo;
-import alpacaPojo.OrdersPojo;
+import alpacaPojo.PositionsPojo;
 import alpacaPojo.TimeframePojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,8 +28,8 @@ public class Testing_Bars_Volume {
 	private static final String secretId = "APCA-API-SECRET-KEY";
 	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
 	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
-	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
-	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
+	private static final String alpacaKeyRealTime = "";
+	private static final String secretIdRealTime = "";
 	private static final String headerContentType = "Content-Type";
 	private static final String headerContentTypeValue = "application/json";
 	private static final String paperUrl = "https://paper-api.alpaca.markets";
@@ -41,27 +45,38 @@ public class Testing_Bars_Volume {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(12,35);
 	private boolean isRealTimeTrading = false;
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException, InterruptedException, ParseException {
 
 		AlpacaApiCaller alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
 
-		String symbol = "GSX";
+//		String symbol = "GOTU";
 		File file = new File("C:\\Users\\nakul\\Documents\\outputTimeframe - " + localTime + ".txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
 		FileOutputStream fo = new FileOutputStream(file);
 
-		AssetsPojo assets = alpacaAccount.getAssetSymbol(symbol);
-		TimeframePojo timeframe = alpacaAccount.getTimeframe(assets.getSymbol(), "2021-03-29", "2021-03-29", "1Min");
-		BarsPojo bars[] = timeframe.getBars();
-		for(BarsPojo bar:bars) {
-			Double highLowPercent = (Double.valueOf(bar.getHighPrice()) - Double.valueOf(bar.getLowPrice()))*100/Double.valueOf(bar.getClosePrice());
-			DecimalFormat df = new DecimalFormat("#.##");
-			pw.write( bar.getTime() + "\t" 
-					+ bar.getOpenPrice() + "\t" + bar.getClosePrice() + "\t" + bar.getHighPrice() + "\t" + bar.getLowPrice() + "\t" 
-					+ df.format(highLowPercent) + "\t" + bar.getVolume() + "\n");
+		//		AssetsPojo assets = alpacaAccount.getAssetSymbol(symbol);
+		PositionsPojo[] openPositions = alpacaAccount.getOpenPositions();
+		for (PositionsPojo openPosition : openPositions) {
+			TimeframePojo timeframe = alpacaAccount.getTimeframe(openPosition.getSymbol(), "2019-05-29", "2021-05-29", "1Day");
+			BarsPojo bars[] = timeframe.getBars();
+			Double sumHighLow = 0.00;
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+			for(BarsPojo bar:bars) {
+				Double highLowPercent = (Double.valueOf(bar.getHighPrice()) - Double.valueOf(bar.getLowPrice()))*100/Double.valueOf(bar.getClosePrice());
+				DecimalFormat df = new DecimalFormat("#.##");
+				pw.write(openPosition.getSymbol() + "\t" + sdf.parse(bar.getTime()) + "\t"
+						+ bar.getOpenPrice() + "\t" + bar.getClosePrice() + "\t" + bar.getHighPrice() + "\t" + bar.getLowPrice() + "\t" 
+						+ df.format(highLowPercent) + "\t" + bar.getVolume() + "\n");
+				System.out.println(openPosition.getSymbol() + "\t" + sdf.parse(bar.getTime()) + "\t"
+						+ bar.getOpenPrice() + "\t" + bar.getClosePrice() + "\t" + bar.getHighPrice() + "\t" + bar.getLowPrice() + "\t" 
+						+ df.format(highLowPercent) + "\t" + bar.getVolume());
+				sumHighLow = sumHighLow + highLowPercent;
+			}
+			pw.write("Weighted Average HighLow: " + sumHighLow/bars.length + "\n" );
+			System.out.println("Weighted Average HighLow: " + sumHighLow/bars.length);
 		}
 		pw.close();
 

@@ -5,14 +5,9 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
-import alpacaPojo.AccountsPojo;
-import alpacaPojo.AssetsPojo;
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.BarsPojo;
-import alpacaPojo.LastQuotePojo;
-import alpacaPojo.LastTradePojo;
-import alpacaPojo.OrdersPojo;
 import alpacaPojo.TimeframePojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,7 +42,7 @@ public class Testing_Timeframes_Bars_Min {
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 
-		String symbol = "GME";
+		String symbol = "BNGO";
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
 
 		File file = new File("C:\\Users\\nakul\\Documents\\outputTimeframe - " + localTime + ".txt");
@@ -55,7 +50,7 @@ public class Testing_Timeframes_Bars_Min {
 		FileOutputStream fo = new FileOutputStream(file);
 
 		//AssetsPojo assets = alpacaAccount.getAssetSymbol(symbol);
-		TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, "2021-03-29T04:00:00Z", "2021-03-31T04:00:00Z", "1Min");
+		TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, "2021-01-01", "2021-05-15", "1Min");
 		BarsPojo bars[] = timeframe.getBars();
 		//Double highLowPercent = (Double.valueOf(bars.getHighPrice()) - Double.valueOf(bars.getLowPrice()))*100/Double.valueOf(bars.getClosePrice());
 		DecimalFormat df = new DecimalFormat("#.##");
@@ -66,13 +61,19 @@ public class Testing_Timeframes_Bars_Min {
 		int i=0;
 		Double sumHighLow = 0.00;
 		Double highestHighLow = 0.00;
+		Double open, close, high, low;
 		for (BarsPojo bar:bars) {
 			i++;
-			highLow = Double.valueOf(bar.getHighPrice()) - Double.valueOf(bar.getLowPrice());
-			openClose = Double.valueOf(bar.getOpenPrice()) - Double.valueOf(bar.getClosePrice());
+			open = Double.valueOf(bar.getOpenPrice());
+			close = Double.valueOf(bar.getClosePrice());
+			high = Double.valueOf(bar.getHighPrice());
+			low = Double.valueOf(bar.getLowPrice());
+			highLow = high - low;
+			openClose = open - close;
+			
 			pw.write(i + "\t" + symbol + "\t" + bar.getTime() + "\t" 
-					+ bar.getOpenPrice() + "\t" + bar.getClosePrice() + "\t" + bar.getHighPrice() + "\t" + bar.getLowPrice() + "\t" 
-					+ df.format(highLow) + "\t" + df.format(openClose) + "\n");
+					+ df.format(open) + "\t" + df.format(close) + "\t" + df.format(high)
+					+ "\t" + df.format(low) + "\t" + df.format(highLow) + "\t" + df.format(openClose) + "\n");
 			if(highestHighLow < highLow) highestHighLow = highLow;
 			sumHighLow = sumHighLow + highLow;
 		}
