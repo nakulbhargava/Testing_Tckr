@@ -5,14 +5,10 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
-import alpacaPojo.AccountsPojo;
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.AssetsPojo;
 import alpacaPojo.BarsPojo;
-import alpacaPojo.LastQuotePojo;
-import alpacaPojo.LastTradePojo;
-import alpacaPojo.OrdersPojo;
 import alpacaPojo.TimeframePojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,17 +43,22 @@ public class Testing_Timeframes_Bars {
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 
-		String symbol = "ARKK";
+		String symbol = "BNGO";
 		File file = new File("C:\\Users\\nakul\\Documents\\outputTimeframe.txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-		FileOutputStream fo = new FileOutputStream(file);
+//		FileOutputStream fo = new FileOutputStream(file);
 
 		AssetsPojo assets = alpacaAccount.getAssetSymbol(symbol);
-		TimeframePojo timeframe = alpacaAccount.getTimeframe(assets.getSymbol(), "2021-03-29", "2021-03-29", "1Day");
+		TimeframePojo timeframe = alpacaAccount.getTimeframe(assets.getSymbol(), "2021-06-03", "2021-06-03", "1Day");
 		BarsPojo bars = timeframe.getBars()[0];
 		Double highLowPercent = (Double.valueOf(bars.getHighPrice()) - Double.valueOf(bars.getLowPrice()))*100/Double.valueOf(bars.getClosePrice());
 		DecimalFormat df = new DecimalFormat("#.##");
 		pw.write(assets.getExchange() + "\t\t" + assets.getSymbol() + "\t"
+				+ assets.isFractionable() + "\t\t" + assets.isShortable() + "\t\t" 
+				+ "\t" + assets.isTradable()  + "\t" + bars.getTime() + "\t" 
+				+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 
+				+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\n");
+		System.out.println(assets.getExchange() + "\t\t" + assets.getSymbol() + "\t"
 				+ assets.isFractionable() + "\t\t" + assets.isShortable() + "\t\t" 
 				+ "\t" + assets.isTradable()  + "\t" + bars.getTime() + "\t" 
 				+ bars.getOpenPrice() + "\t" + bars.getClosePrice() + "\t" + bars.getHighPrice() + "\t" + bars.getLowPrice() + "\t" 

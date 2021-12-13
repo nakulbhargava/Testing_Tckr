@@ -5,9 +5,9 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.AssetsPojo;
 import alpacaPojo.OrdersPojo;
-import alpacaPojo.PositionsPojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -69,7 +69,7 @@ public class Testing_Symbol_AllAssets {
 		AssetsPojo assets[] = alpacaAccount.getAssets();
 		File file = new File("C:\\Users\\nakul\\Documents\\outputAssets - " + localTime + ".txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-		FileOutputStream fo = new FileOutputStream(file);
+//		FileOutputStream fo = new FileOutputStream(file);
 		int datList = assets.length;
 		pw.write("Exchange" + "\t" + "Symbol" + "\t" + "Status" + "\t" + "Fractionable" + "\t" + "Marginable" + "\t" + "Shortable" + "\t" + "ETB" + "\t" + "Tradable" + "\n");
 		for (int i = 0; i < datList; i++){
@@ -79,7 +79,7 @@ public class Testing_Symbol_AllAssets {
 		}
 		File fileTrue = new File("C:\\Users\\nakul\\Documents\\outputTrueAssets - " + localTime + ".txt");
 		PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
-		FileOutputStream fo1 = new FileOutputStream(fileTrue);
+//		FileOutputStream fo1 = new FileOutputStream(fileTrue);
 		int assetTotalList = assets.length;
 		pw1.write("Exchange" + "\t" + "Symbol" + "\t" + "Status" + "\t" + "Fractionable" + "\t" + "Marginable" + "\t" + "Shortable" + "\t" + "ETB" + "\t" + "Tradable" + "\n");
 		for (int i = 0; i < assetTotalList; i++){
@@ -199,6 +199,7 @@ public class Testing_Symbol_AllAssets {
 		//				priceToBuy = Double.valueOf(placedOrder.getFilled_avg_price())*Double.valueOf(sellQty);
 		//			}while(LocalDateTime.now().isBefore(marketCloseTime));
 		pw.close();
+		pw1.close();
 		/*		String getLastQuote = getQuote("TSN");
 		String getLastTrade = getLastTrade("TSN");
 		String getAssets = getAssets();

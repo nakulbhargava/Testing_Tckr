@@ -6,9 +6,8 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import alpacaPojo.AssetsPojo;
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.OrdersPojo;
-import alpacaPojo.PositionsPojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -57,7 +56,7 @@ public class Testing_Symbol_AllOrders_Closed {
 		OrdersPojo orders[] = alpacaAccount.getOrders();
 		File file = new File("C:\\Users\\nakul\\Documents\\outputOrders - " + localTime + ".txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-		FileOutputStream fo = new FileOutputStream(file);
+//		FileOutputStream fo = new FileOutputStream(file);
 		int datList = orders.length;
 		Double totalQuantity = 0.00;
 		Double totalPrice = 0.00;

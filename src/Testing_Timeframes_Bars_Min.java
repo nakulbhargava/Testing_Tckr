@@ -3,16 +3,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
-import alpacaPojo.AccountsPojo;
-import alpacaPojo.AssetsPojo;
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.BarsPojo;
-import alpacaPojo.LastQuotePojo;
-import alpacaPojo.LastTradePojo;
-import alpacaPojo.OrdersPojo;
 import alpacaPojo.TimeframePojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,24 +37,28 @@ public class Testing_Timeframes_Bars_Min {
 	private static final String clockEndpoint = "/clock";
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(12,35);
 	private boolean isRealTimeTrading = false;
-	public static void main(String[] args) throws IOException, InterruptedException {
+	
+	
+	public static void main(String[] args) throws IOException, InterruptedException, ParseException {
 
 		AlpacaApiCaller alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 
-		String symbol = "GME";
+		String symbol = "BNGO";
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
 
 		File file = new File("C:\\Users\\nakul\\Documents\\outputTimeframe - " + localTime + ".txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-		FileOutputStream fo = new FileOutputStream(file);
+//		FileOutputStream fo = new FileOutputStream(file);
 
 		//AssetsPojo assets = alpacaAccount.getAssetSymbol(symbol);
-		TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, "2021-03-29T04:00:00Z", "2021-03-31T04:00:00Z", "1Min");
+		TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, "2021-07-20", "2021-07-21", "1Min");
 		BarsPojo bars[] = timeframe.getBars();
 		//Double highLowPercent = (Double.valueOf(bars.getHighPrice()) - Double.valueOf(bars.getLowPrice()))*100/Double.valueOf(bars.getClosePrice());
 		DecimalFormat df = new DecimalFormat("#.##");
+		Dataframes dataframes = new Dataframes();
+		dataframes = dataframes.populateBars(bars);
 		pw.write("S.No" + "\t" + "Symbol" + "\t"+ "Date" + "\t\t\t" + "Open"
 				+ "\t" + "Close" + "\t" + "HIGH" + "\t" + "LOW" + "\t"+ "H-L" + "\t" + "O-C"+ "\n");
 		Double highLow = 0.00; 
@@ -66,13 +66,19 @@ public class Testing_Timeframes_Bars_Min {
 		int i=0;
 		Double sumHighLow = 0.00;
 		Double highestHighLow = 0.00;
+		Double open, close, high, low;
 		for (BarsPojo bar:bars) {
 			i++;
-			highLow = Double.valueOf(bar.getHighPrice()) - Double.valueOf(bar.getLowPrice());
-			openClose = Double.valueOf(bar.getOpenPrice()) - Double.valueOf(bar.getClosePrice());
+			open = Double.valueOf(bar.getOpenPrice());
+			close = Double.valueOf(bar.getClosePrice());
+			high = Double.valueOf(bar.getHighPrice());
+			low = Double.valueOf(bar.getLowPrice());
+			highLow = high - low;
+			openClose = open - close;
+			
 			pw.write(i + "\t" + symbol + "\t" + bar.getTime() + "\t" 
-					+ bar.getOpenPrice() + "\t" + bar.getClosePrice() + "\t" + bar.getHighPrice() + "\t" + bar.getLowPrice() + "\t" 
-					+ df.format(highLow) + "\t" + df.format(openClose) + "\n");
+					+ df.format(open) + "\t" + df.format(close) + "\t" + df.format(high)
+					+ "\t" + df.format(low) + "\t" + df.format(highLow) + "\t" + df.format(openClose) + "\n");
 			if(highestHighLow < highLow) highestHighLow = highLow;
 			sumHighLow = sumHighLow + highLow;
 		}

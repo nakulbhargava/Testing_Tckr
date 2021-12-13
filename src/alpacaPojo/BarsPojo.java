@@ -11,6 +11,23 @@ public class BarsPojo {
 	private String lowPrice;
 	private String closePrice;
 	private String volume;
+	private String tradeCount;
+	private String vwap;
+	
+	@JsonProperty("n")
+	public String getTradeCount() {
+		return tradeCount;
+	}
+	public void setTradeCount(String tradeCount) {
+		this.tradeCount = tradeCount;
+	}
+	@JsonProperty("vw")
+	public String getVwap() {
+		return vwap;
+	}
+	public void setVwap(String vwap) {
+		this.vwap = vwap;
+	}
 	@Override
     public String toString() {
         return "{" +
@@ -20,6 +37,8 @@ public class BarsPojo {
                 ", lowPrice='" + lowPrice + '\'' +
                 ", closePrice='" + closePrice + '\'' +
                 ", volume='" + volume + '\'' +
+                ", tradeCount='" + tradeCount + '\'' +
+                ", vwap='" + vwap + '\'' +
                 '}';
     }
 	@JsonProperty("t")

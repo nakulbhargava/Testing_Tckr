@@ -4,13 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
-import alpacaPojo.AccountsPojo;
-import alpacaPojo.AssetsPojo;
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.LastQuotePojo;
 import alpacaPojo.LastTradePojo;
-import alpacaPojo.OrdersPojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -47,10 +44,10 @@ public class Testing_Live_Symbol {
 		String symbol = "ARKK";
 		File file = new File("C:\\Users\\nakul\\Documents\\outputTradingQuote.txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-		FileOutputStream fo = new FileOutputStream(file);
+//		FileOutputStream fo = new FileOutputStream(file);
 		File file1 = new File("C:\\Users\\nakul\\Documents\\outputTradingExec.txt");
 		PrintWriter pw1 = new PrintWriter(new FileOutputStream(file1));
-		FileOutputStream fo1 = new FileOutputStream(file1);
+//		FileOutputStream fo1 = new FileOutputStream(file1);
 
 		do {
 			LastQuotePojo quote = alpacaAccount.getQuote(symbol).getLast();
