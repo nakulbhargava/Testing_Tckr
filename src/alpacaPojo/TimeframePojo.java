@@ -4,63 +4,41 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TimeframePojo {
 
-	private String time;
-	private String openPrice;
-	private String highPrice;
-	private String lowPrice;
-	private String closePrice;
-	private String volume;
+	private BarsPojo bars[];
+	private String symbol;
+	private String nextPageToken;
+
 	@Override
     public String toString() {
         return "{" +
-                "time='" + time + '\'' +
-                ", openPrice='" + openPrice + '\'' +
-                ", highPrice='" + highPrice + '\'' +
-                ", lowPrice='" + lowPrice + '\'' +
-                ", closePrice='" + closePrice + '\'' +
-                ", volume='" + volume + '\'' +
+                "bars='" + bars + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", nextPageToken='" + nextPageToken + '\'' +
                 '}';
     }
-	@JsonProperty("t")
-	public String getTime() {
-		return time;
+
+	public BarsPojo[] getBars() {
+		return bars;
 	}
-	public void setTime(String time) {
-		this.time = time;
+
+	public void setBars(BarsPojo[] bars) {
+		this.bars = bars;
 	}
-	@JsonProperty("o")
-	public String getOpenPrice() {
-		return openPrice;
+
+	public String getSymbol() {
+		return symbol;
 	}
-	public void setOpenPrice(String openPrice) {
-		this.openPrice = openPrice;
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
-	@JsonProperty("h")
-	public String getHighPrice() {
-		return highPrice;
+	@JsonProperty("next_page_token")
+	public String getNextPageToken() {
+		return nextPageToken;
 	}
-	public void setHighPrice(String highPrice) {
-		this.highPrice = highPrice;
+
+	public void setNextPageToken(String nextPageToken) {
+		this.nextPageToken = nextPageToken;
 	}
-	@JsonProperty("l")
-	public String getLowPrice() {
-		return lowPrice;
-	}
-	public void setLowPrice(String lowPrice) {
-		this.lowPrice = lowPrice;
-	}
-	@JsonProperty("c")
-	public String getClosePrice() {
-		return closePrice;
-	}
-	public void setClosePrice(String closePrice) {
-		this.closePrice = closePrice;
-	}
-	@JsonProperty("v")
-	public String getVolume() {
-		return volume;
-	}
-	public void setVolume(String volume) {
-		this.volume = volume;
-	}
+	
 }

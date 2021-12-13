@@ -5,9 +5,9 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.AssetsPojo;
 import alpacaPojo.OrdersPojo;
-import alpacaPojo.PositionsPojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
