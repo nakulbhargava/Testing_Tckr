@@ -19,7 +19,7 @@ import java.util.Locale;
 public class BackTestingHighVolatility {
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 	static List<String> ticker = null;
-	static String filename = "DayData - SNAP_2018-08-01_2021-11-05";
+	static String filename = "DayData - AIHS_2018-08-01_2021-11-05";
 	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\" + filename + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;

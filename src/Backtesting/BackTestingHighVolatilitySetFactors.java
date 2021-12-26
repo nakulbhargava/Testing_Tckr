@@ -19,7 +19,7 @@ import java.util.Locale;
 public class BackTestingHighVolatilitySetFactors {
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 	static List<String> ticker = null;
-	static String filename = "DayData - PETZ_2018-08-01_2021-11-05";
+	static String filename = "DayData - AIHS_2018-08-01_2021-11-05";
 	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\" + filename + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
@@ -34,9 +34,9 @@ public class BackTestingHighVolatilitySetFactors {
 	static Date marketStartDate, marketEndDate;
 	static int movingAverageDays = 45;
 	static Double maxAmount = 500.00;
-	static Double oneTimeInvestment = 10.00;
-	static Double profitPercent = 1.13;
-	static Double lossPercent = 0.8;
+	static Double oneTimeInvestment = 20.00;
+	static Double profitPercent = 1.03;
+	static Double lossPercent = 0.95;
 	static Double maxProfit = 0.0;
 	static Double maxRoundProfit = 0.0;
 
