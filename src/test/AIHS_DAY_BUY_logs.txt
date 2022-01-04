@@ -1466,4 +1466,6 @@ Unsold Stocks after selling: [7.7490000000000006, 5.565, 5.25, 2.457, 1.86900000
 Net Profit due to sell: 555.0000000000001
 Total Investment still in the game: 400.0
 Unsold Stocks at profitPrice: [7.7490000000000006, 5.565, 5.25, 2.457, 1.8690000000000002, 1.6485, 1.533, 1.1235000000000002]
+Loss Due to Held Shares: 266.64870688954784
+Net Profit After Liquidating at last Bar: 288.3512931104523
 Max Investment at any point: 700.0

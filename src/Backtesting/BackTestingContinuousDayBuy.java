@@ -82,6 +82,18 @@ public class BackTestingContinuousDayBuy {
 		System.out.println("Net Profit due to sell: " + netProfit);
 		System.out.println("Total Investment still in the game: " + oneTimeInvestment*sellPrices.size());
 		System.out.println("Unsold Stocks at profitPrice: " + sellPrices);
+		Double investedShares = 0.0;
+		for (Double sellPrice : sellPrices) {
+			Double boughtPrice = sellPrice/profitFactor;
+			Double sharesForCurrentSell = oneTimeInvestment/boughtPrice;
+			investedShares = investedShares + sharesForCurrentSell;
+		}
+		TickerOhlc lastTicker = tickerMap.get(tickerDate[tickerDate.length - 1]);
+		Double currentValueOfInvestment = lastTicker.dayAverage*investedShares;
+		Double lossDueToHeldShares = oneTimeInvestment*sellPrices.size() - currentValueOfInvestment;
+		System.out.println("Loss Due to Held Shares: " + lossDueToHeldShares);
+		netProfit = netProfit - lossDueToHeldShares;
+		System.out.println("Net Profit After Liquidating at last Bar: " + netProfit);
 		System.out.println("Max Investment at any point: " + maxBuys*oneTimeInvestment);
 	}
 	private void readFileAsList() {
