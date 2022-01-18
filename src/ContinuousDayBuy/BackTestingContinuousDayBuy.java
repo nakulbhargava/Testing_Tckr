@@ -1,9 +1,10 @@
-package Backtesting;
+package ContinuousDayBuy;
 
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +29,7 @@ public class BackTestingContinuousDayBuy {
 	static SimpleDateFormat format = new SimpleDateFormat(
 			"yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
 	static List<TickerOhlc> tickerData = new ArrayList<TickerOhlc>();
-
+	static DecimalFormat df = new DecimalFormat("#.##"); 
 	static Map<String, TickerOhlc> tickerMap = new HashMap<String, TickerOhlc>();
 	static Double maxInvestment = 10000.00;
 	static Double maxInvestmentperTicker = 500.00;
@@ -39,6 +40,7 @@ public class BackTestingContinuousDayBuy {
 	static Double profitFactor = 1.05;
 	static String[] tickerDate;
 	static int maxBuys = 1;
+	static int totalBuys = 0;
 	public static void main(String args[]) {
 		BackTestingContinuousDayBuy demo = new BackTestingContinuousDayBuy();
 		demo.readFileAsList();
@@ -51,15 +53,17 @@ public class BackTestingContinuousDayBuy {
 			TickerOhlc ticker = tickerMap.get(tickerDate[i]);
 			
 			if(sellPrices.size() == 0 ) {
-				sellPrices.add(ticker.open*profitFactor);
+				sellPrices.add(Double.valueOf(df.format(ticker.open*profitFactor)));
 				System.out.println(/*tickerDate[i] + */ticker.toString());
-				System.out.println("Buying at: " + ticker.open + " & Will be selling this at: " + ticker.open*profitFactor);
+				System.out.println("Buying at: " + ticker.open + " & Will be selling this at: " + df.format(ticker.open*profitFactor));
+				totalBuys++;
 			}
 			else {
 				if(ticker.open < buyAgainFactor*ticker.mean) {
-					sellPrices.add(ticker.open*profitFactor);
+					sellPrices.add(Double.valueOf(df.format(ticker.open*profitFactor)));
 					System.out.println(/*tickerDate[i] + */ticker.toString());
-					System.out.println("Buying again at: " + ticker.open + " & Will be selling this at: " + ticker.open*profitFactor);
+					System.out.println("Buying again at: " + ticker.open + " & Will be selling this at: " + df.format(ticker.open*profitFactor));
+					totalBuys++;
 				}
 			}
 			if(maxBuys < sellPrices.size()) maxBuys = sellPrices.size();
@@ -73,13 +77,13 @@ public class BackTestingContinuousDayBuy {
 				System.out.println(ticker.toString());
 				System.out.println(" Selling a total of " + soldOnes.size() + " Buy Transactions with a total profit of: " + (profitFactor - 1)* oneTimeInvestment * soldOnes.size());
 				netProfit = netProfit + (profitFactor - 1)* oneTimeInvestment * soldOnes.size();
-				System.out.println("Profit So Far: " + netProfit);
+				System.out.println("Profit So Far: " + df.format(netProfit));
 				System.out.println("Unsold Stocks before selling: " + sellPrices);
 				sellPrices.removeAll(soldOnes);
 				System.out.println("Unsold Stocks after selling: " + sellPrices);
 			}
 		}
-		System.out.println("Net Profit due to sell: " + netProfit);
+		System.out.println("Net Profit due to sell: " + df.format(netProfit));
 		System.out.println("Total Investment still in the game: " + oneTimeInvestment*sellPrices.size());
 		System.out.println("Unsold Stocks at profitPrice: " + sellPrices);
 		Double investedShares = 0.0;
@@ -91,10 +95,11 @@ public class BackTestingContinuousDayBuy {
 		TickerOhlc lastTicker = tickerMap.get(tickerDate[tickerDate.length - 1]);
 		Double currentValueOfInvestment = lastTicker.dayAverage*investedShares;
 		Double lossDueToHeldShares = oneTimeInvestment*sellPrices.size() - currentValueOfInvestment;
-		System.out.println("Loss Due to Held Shares: " + lossDueToHeldShares);
+		System.out.println("Loss Due to Held Shares: " + df.format(lossDueToHeldShares));
 		netProfit = netProfit - lossDueToHeldShares;
-		System.out.println("Net Profit After Liquidating at last Bar: " + netProfit);
+		System.out.println("Net Profit After Liquidating at last Bar: " + df.format(netProfit));
 		System.out.println("Max Investment at any point: " + maxBuys*oneTimeInvestment);
+		System.out.println("Total Buys: " + totalBuys);
 	}
 	private void readFileAsList() {
 		String fileName = "/test/" + filename + ".txt";

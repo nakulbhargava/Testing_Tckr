@@ -1,4 +1,4 @@
-package Backtesting;
+package Backtesting.volatility;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -33,7 +33,7 @@ public class BackTestingHighVolatilitySetFactors {
 			"yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
 	static Date marketStartDate, marketEndDate;
 	static int movingAverageDays = 45;
-	static Double maxAmount = 500.00;
+	static Double maxAmount = 50000.00;
 	static Double oneTimeInvestment = 20.00;
 	static Double profitPercent = 1.03;
 	static Double lossPercent = 0.95;
@@ -79,7 +79,7 @@ public class BackTestingHighVolatilitySetFactors {
 				totalShares = totalShares + sharesInvestedNow;
 				numberOfInvestments++;
 				totalInvestment = totalInvestment + oneTimeInvestment;
-				System.out.println("TickerLow: " + tickerLow.get(i) + "AverageInvestedPrice: " + averageInvestedPrice);
+				System.out.println("TickerLow: " + tickerLow.get(i) + " AverageInvestedPrice: " + averageInvestedPrice);
 				System.out.println("Bought again due to loss: " + tickerDate.get(i) + " High: " + tickerHigh.get(i) + " Low: " + tickerLow.get(i) + " Open: " + tickerOpen.get(i) + " Close: " + tickerClose.get(i) + " Buying Price: " + lossPercent*averageInvestedPrice);
 				averageInvestedPrice = ((numberOfInvestments - 1)*averageInvestedPrice + (lossPercent*averageInvestedPrice))/numberOfInvestments;
 			}
@@ -87,6 +87,7 @@ public class BackTestingHighVolatilitySetFactors {
 			if(alreadyInvested && tickerHigh.get(i).compareTo(profitPrice) > 0) {
 				Double profitThisRound = 0.0;
 				profitThisRound = totalShares * (profitPrice - averageInvestedPrice);
+//				profitThisRound = totalShares * (profitPercent - 1)*averageInvestedPrice;
 				netProfit = netProfit + profitThisRound;
 				if(maxInvestment.compareTo(totalInvestment) < 0 ) maxInvestment = totalInvestment;
 				System.out.println("Selling at Profit: "  + tickerDate.get(i) + " High: " + tickerHigh.get(i) + " Low: " + tickerLow.get(i) + " Open: " + tickerOpen.get(i) + " Close: " + tickerClose.get(i) + " Profit Price: " + profitPrice);

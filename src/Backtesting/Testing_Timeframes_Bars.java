@@ -4,8 +4,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 
 import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.AssetsPojo;
@@ -26,7 +29,8 @@ public class Testing_Timeframes_Bars {
 	private static final String headerContentType = "Content-Type";
 	private static final String headerContentTypeValue = "application/json";
 	private static final String paperUrl = "https://paper-api.alpaca.markets";
-	private static final String realtimeUrl = "https://data.alpaca.markets";
+	private static final String realtimeUrl = "https://.alpaca.markets";
+	private static final String dataUrl = "https://data.alpaca.markets";
 	private static final String activeVersion = "/v2";
 	private static final String inactiveVersion = "/v1";
 	private static final String ordersEndpoint = "/orders";
@@ -41,13 +45,13 @@ public class Testing_Timeframes_Bars {
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		AlpacaApiCaller alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
-				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
+				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, dataUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 
 		String symbol = "BNGO";
 		File file = new File("C:\\Users\\nakul\\Documents\\outputTimeframe.txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-//		FileOutputStream fo = new FileOutputStream(file);
+		//		FileOutputStream fo = new FileOutputStream(file);
 
 		AssetsPojo assets = alpacaAccount.getAssetSymbol(symbol);
 		TimeframePojo timeframe = alpacaAccount.getTimeframe(assets.getSymbol(), "2021-06-03", "2021-06-03", "1Day");
@@ -66,5 +70,35 @@ public class Testing_Timeframes_Bars {
 				+ df.format(highLowPercent) + "\t" + bars.getVolume() + "\n");
 		pw.close();
 
+		calculateUpTrend("BNGO", alpacaAccount);
+
+	}
+
+	public static int calculateUpTrend(String symbol, AlpacaApiCaller alpacaAccount) throws IOException, InterruptedException {
+		String pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		LocalDateTime currentDate = LocalDateTime.now();
+		Date dateEnd = Date.from(currentDate.toInstant(ZoneOffset.ofHours(-11)));
+		LocalDateTime startDate = currentDate.minusMinutes(60);
+		Date dateStart = Date.from(startDate.toInstant(ZoneOffset.ofHours(-11)));
+		String end = simpleDateFormat.format(dateEnd);
+		String start = simpleDateFormat.format(dateStart);
+
+		System.out.println("Getting Time Frame for: " + start + " " + end);
+		for (int i = 0; i< 10 ; i++) {
+			TimeframePojo time = alpacaAccount.getTimeframe(symbol, "2022-01-14T14:28:02Z", "2022-01-14T15:28:02Z", "1Min");
+			if(time == null || time.getBars() == null || time.getBars().length == 0) {
+				//returning exception
+				return -1;
+			}
+			BarsPojo[] bars = time.getBars();
+			for(int j = 0; j < bars.length; j++) {
+				System.out.println(bars[j]);
+			}
+			Thread.sleep(1001);
+		}
+
+
+		return 1;
 	}
 }
