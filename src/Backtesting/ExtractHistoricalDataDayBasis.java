@@ -81,7 +81,7 @@ public class ExtractHistoricalDataDayBasis {
 
 		AssetsPojo[] assets = alpacaAccount.getAssets();
 		HashMap<String, List<BarsPojo>> masterHighBar = new HashMap<String, List<BarsPojo>>();
-		
+
 		String symbol;
 		for(int i = 0 ; i < assets.length; i++) {
 			if(!"active".equals(assets[i].getStatus())) continue;
@@ -89,19 +89,26 @@ public class ExtractHistoricalDataDayBasis {
 			symbol = assets[i].getSymbol();
 			//symbol = assets[i].getSymbol();
 			String startDate = "2018-08-01";
-			String endDate = "2021-11-05";
+			String endDate = "2022-01-20";
 			LocalDate start = LocalDate.parse(startDate);
 			LocalDate end = LocalDate.parse(endDate);
 
-			File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalDataDay\\DayData - " + symbol + "_" + startDate + "_" + endDate + ".txt");
+			File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalDataDay_New\\DayData - " + symbol + "_" + startDate + "_" + endDate + ".txt");
 			PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
 
 			pw1.write("Symbol,Date,Open,Close,High,Low,Volume,Trade,VWAP"+ "\n");
 			System.out.println("Symbol,Date,Open,Close,High,Low,Volume,Trade,VWAP");
-
-			TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, start.toString(), end.toString(), "1Day");
-			Thread.sleep(400);
-			BarsPojo bars[] = timeframe.getBars();
+			BarsPojo bars[] = null;
+			try {
+				TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, start.toString(), end.toString(), "1Day");
+				Thread.sleep(300);
+				bars = timeframe.getBars();
+			}
+			catch(Exception e){
+				System.out.println("Data Not found for: " + symbol + " on " + start.minusDays(1));
+				continue;
+			}
+			
 			start = start.plusDays(1);
 			if(bars == null) {
 				System.out.println("Data Not found for: " + symbol + " on " + start.minusDays(1));
@@ -122,7 +129,7 @@ public class ExtractHistoricalDataDayBasis {
 			masterHighBar.put(symbol, highSymbolBars);
 			pw1.close();
 		}
-		File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalDataDay\\MasterHighAllAssets.txt");
+		File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalDataDay_New\\MasterHighAllAssets.txt");
 		PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
 		for(Map.Entry<String, List<BarsPojo>> entry : masterHighBar.entrySet()) {
 			pw1.write("Symbol,Date,Open,Close,High,Low,Volume,Trade,VWAP"+ "\n");

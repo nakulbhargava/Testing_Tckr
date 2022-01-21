@@ -38,11 +38,12 @@ public class HighlyVolatileStocks {
 				List<String> splitLine = Arrays.asList(line.split(",", -1));
 				volatilityCount.put(splitLine.get(0), volatilityCount.getOrDefault(splitLine.get(0), 0) + 1);
 			}
-			System.out.println("Highly Volatile Stocks for Period 2018-08 to 2021-10");
+			System.out.println("Highly Volatile Stocks for Period 2018-08 to 2022-01");
 			
 			for(Map.Entry<String, Integer> entry : volatilityCount.entrySet()) {
 				if(entry.getValue() >= 36 && !entry.getKey().equals("Symbol")) {
-					System.out.println(entry.getKey() + " " + entry.getValue());
+//					System.out.println(entry.getKey() + " " + entry.getValue());
+					System.out.println(entry.getKey() + "=Y");
 					highlyVolatileStocks.add(entry.getKey());
 				}
 					
