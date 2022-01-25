@@ -42,8 +42,11 @@ public class ExtractHistoricalDataDayBasis {
 	private static final String positionsEndpoint = "/positions";
 	private static final String assetsEndpoint = "/assets";
 	private static final String clockEndpoint = "/clock";
-	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,55);
-	private boolean isRealTimeTrading = false;
+	private static final String outputFilePath = "C:\\Users\\nakul\\Documents\\HistoricalDataDay_Vol\\";
+	private static int currentYear = LocalDate.now().getYear();
+	private static int startingYear = LocalDate.now().getYear() - 3;
+	private static String startDate = startingYear + "-" + LocalDate.now().getMonth() + "-" +  LocalDate.now().getDayOfMonth();
+	private static String endDate = currentYear + "-" + LocalDate.now().getMonth() + "-" +  LocalDate.now().getDayOfMonth();
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		AlpacaApiCaller alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
@@ -81,19 +84,22 @@ public class ExtractHistoricalDataDayBasis {
 
 		AssetsPojo[] assets = alpacaAccount.getAssets();
 		HashMap<String, List<BarsPojo>> masterHighBar = new HashMap<String, List<BarsPojo>>();
+		HashMap<String, List<BarsPojo>> masterVolatileBar = new HashMap<String, List<BarsPojo>>();
+		HashMap<String, List<BarsPojo>> masterOkVolatileBar = new HashMap<String, List<BarsPojo>>();
 
 		String symbol;
 		for(int i = 0 ; i < assets.length; i++) {
 			if(!"active".equals(assets[i].getStatus())) continue;
 			List<BarsPojo> highSymbolBars = new ArrayList<BarsPojo>();
+			List<BarsPojo> volatileSymbolBars = new ArrayList<BarsPojo>();
+			List<BarsPojo> okVolatileSymbolBars = new ArrayList<BarsPojo>();
 			symbol = assets[i].getSymbol();
 			//symbol = assets[i].getSymbol();
-			String startDate = "2018-08-01";
-			String endDate = "2022-01-20";
+			
 			LocalDate start = LocalDate.parse(startDate);
 			LocalDate end = LocalDate.parse(endDate);
 
-			File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalDataDay_New\\DayData - " + symbol + "_" + startDate + "_" + endDate + ".txt");
+			File fileTrue = new File(outputFilePath + "DayData - " + symbol + "_" + startDate + "_" + endDate + ".txt");
 			PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
 
 			pw1.write("Symbol,Date,Open,Close,High,Low,Volume,Trade,VWAP"+ "\n");
@@ -122,14 +128,16 @@ public class ExtractHistoricalDataDayBasis {
 				Double highPrice = Double.valueOf(bar.getHighPrice());
 				Double lowPrice = Double.valueOf(bar.getLowPrice());
 				Double dailySpread = (highPrice-lowPrice)*100/lowPrice;
-				if(dailySpread.compareTo(25.0) > 0) {
-					highSymbolBars.add(bar);
-				}
+				if(dailySpread.compareTo(25.0) > 0) highSymbolBars.add(bar);
+				if(dailySpread.compareTo(15.0) > 0 && dailySpread.compareTo(25.0) < 0) volatileSymbolBars.add(bar);
+				if(dailySpread.compareTo(8.0) > 0 && dailySpread.compareTo(15.0) < 0) okVolatileSymbolBars.add(bar);
 			}
 			masterHighBar.put(symbol, highSymbolBars);
+			masterVolatileBar.put(symbol, volatileSymbolBars);
+			masterOkVolatileBar.put(symbol, okVolatileSymbolBars);
 			pw1.close();
 		}
-		File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalDataDay_New\\MasterHighAllAssets.txt");
+		File fileTrue = new File(outputFilePath + "MasterHighAllAssets.txt");
 		PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
 		for(Map.Entry<String, List<BarsPojo>> entry : masterHighBar.entrySet()) {
 			pw1.write("Symbol,Date,Open,Close,High,Low,Volume,Trade,VWAP"+ "\n");
@@ -140,5 +148,29 @@ public class ExtractHistoricalDataDayBasis {
 			}
 		}
 		pw1.close();
+		
+		File fileTrue1 = new File(outputFilePath + "MasterVolatileAssets.txt");
+		PrintWriter pw2 = new PrintWriter(new FileOutputStream(fileTrue1));
+		for(Map.Entry<String, List<BarsPojo>> entry : masterVolatileBar.entrySet()) {
+			pw2.write("Symbol,Date,Open,Close,High,Low,Volume,Trade,VWAP"+ "\n");
+			System.out.println("Symbol,Date,Open,Close,High,Low,Volume,Trade,VWAP");
+			for(BarsPojo bar: entry.getValue()) {
+				pw2.write(entry.getKey() + "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + "," + bar.getHighPrice() + "," + bar.getLowPrice() + "," + bar.getVolume() + "," + bar.getTradeCount() + "," + bar.getVwap() + "\n" );
+				System.out.println(entry.getKey() + "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + "," + bar.getHighPrice() + "," + bar.getLowPrice() + "," + bar.getVolume() + "," + bar.getTradeCount() + "," + bar.getVwap());
+			}
+		}
+		pw2.close();
+		
+		File fileTrue2 = new File(outputFilePath + "MasterOkVolatileAssets.txt");
+		PrintWriter pw3 = new PrintWriter(new FileOutputStream(fileTrue2));
+		for(Map.Entry<String, List<BarsPojo>> entry : masterOkVolatileBar.entrySet()) {
+			pw3.write("Symbol,Date,Open,Close,High,Low,Volume,Trade,VWAP"+ "\n");
+			System.out.println("Symbol,Date,Open,Close,High,Low,Volume,Trade,VWAP");
+			for(BarsPojo bar: entry.getValue()) {
+				pw3.write(entry.getKey() + "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + "," + bar.getHighPrice() + "," + bar.getLowPrice() + "," + bar.getVolume() + "," + bar.getTradeCount() + "," + bar.getVwap() + "\n" );
+				System.out.println(entry.getKey() + "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + "," + bar.getHighPrice() + "," + bar.getLowPrice() + "," + bar.getVolume() + "," + bar.getTradeCount() + "," + bar.getVwap());
+			}
+		}
+		pw3.close();
 	}
 }
