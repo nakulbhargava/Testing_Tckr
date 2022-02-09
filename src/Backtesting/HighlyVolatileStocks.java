@@ -26,7 +26,7 @@ public class HighlyVolatileStocks {
 	} 
 
 	private List<String> readAndWriteFileAsList() {
-		String fileName = "/test/MasterHighAllAssets.txt";
+		String fileName = "/test/MasterOkVolatileAssets.txt";
 		List<String> highlyVolatileStocks = new ArrayList<String>();
 		try {
 			URI uri = this.getClass().getResource(fileName).toURI();
@@ -38,10 +38,10 @@ public class HighlyVolatileStocks {
 				List<String> splitLine = Arrays.asList(line.split(",", -1));
 				volatilityCount.put(splitLine.get(0), volatilityCount.getOrDefault(splitLine.get(0), 0) + 1);
 			}
-			System.out.println("Highly Volatile Stocks for Period 2018-08 to 2022-01");
+			System.out.println("Highly Volatile Stocks for Period of 3 years");
 			
 			for(Map.Entry<String, Integer> entry : volatilityCount.entrySet()) {
-				if(entry.getValue() >= 36 && !entry.getKey().equals("Symbol")) {
+				if(entry.getValue() >= 160 && !entry.getKey().equals("Symbol")) {
 //					System.out.println(entry.getKey() + " " + entry.getValue());
 					System.out.println(entry.getKey() + "=Y");
 					highlyVolatileStocks.add(entry.getKey());

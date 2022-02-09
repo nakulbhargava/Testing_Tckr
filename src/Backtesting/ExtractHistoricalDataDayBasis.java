@@ -42,11 +42,11 @@ public class ExtractHistoricalDataDayBasis {
 	private static final String positionsEndpoint = "/positions";
 	private static final String assetsEndpoint = "/assets";
 	private static final String clockEndpoint = "/clock";
-	private static final String outputFilePath = "C:\\Users\\nakul\\Documents\\HistoricalDataDay_Vol\\";
+	private static final String outputFilePath = "C:\\Users\\nakul\\Documents\\HistoricalDataDay_New\\";
 	private static int currentYear = LocalDate.now().getYear();
 	private static int startingYear = LocalDate.now().getYear() - 3;
-	private static String startDate = startingYear + "-" + LocalDate.now().getMonth() + "-" +  LocalDate.now().getDayOfMonth();
-	private static String endDate = currentYear + "-" + LocalDate.now().getMonth() + "-" +  LocalDate.now().getDayOfMonth();
+	private static String startDate = startingYear + "-0" + LocalDate.now().getMonthValue() + "-" +  LocalDate.now().getDayOfMonth();
+	private static String endDate = currentYear + "-0" + LocalDate.now().getMonthValue() + "-" +  LocalDate.now().getDayOfMonth();
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		AlpacaApiCaller alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
