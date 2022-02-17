@@ -107,7 +107,7 @@ public class ExtractHistoricalDataDayBasis {
 			BarsPojo bars[] = null;
 			try {
 				TimeframePojo timeframe = alpacaAccount.getTimeframe(symbol, start.toString(), end.toString(), "1Day");
-				Thread.sleep(300);
+				Thread.sleep(150);
 				bars = timeframe.getBars();
 			}
 			catch(Exception e){
