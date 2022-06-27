@@ -3,14 +3,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import alpacaPojo.AlpacaApiCaller;
-import alpacaPojo.AssetsPojo;
 import alpacaPojo.BarsPojo;
 import alpacaPojo.TimeframePojo;
 

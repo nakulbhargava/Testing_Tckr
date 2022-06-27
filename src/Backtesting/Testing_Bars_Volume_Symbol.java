@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 
 import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.BarsPojo;
-import alpacaPojo.PositionsPojo;
 import alpacaPojo.TimeframePojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;

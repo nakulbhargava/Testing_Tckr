@@ -6,12 +6,7 @@ import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
-import alpacaPojo.AccountsPojo;
-import alpacaPojo.AssetsPojo;
-import alpacaPojo.LastQuotePojo;
-import alpacaPojo.LastTradePojo;
 import alpacaPojo.OrdersPojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;

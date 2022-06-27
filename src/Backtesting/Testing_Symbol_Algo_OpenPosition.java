@@ -5,12 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 
-import alpacaPojo.AccountsPojo;
-import alpacaPojo.AssetsPojo;
-import alpacaPojo.LastQuotePojo;
-import alpacaPojo.LastTradePojo;
 import alpacaPojo.OrdersPojo;
 import alpacaPojo.PositionsPojo;
 
@@ -63,7 +58,7 @@ public class Testing_Symbol_Algo_OpenPosition {
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
 		File file = new File("C:\\Users\\nakul\\Documents\\output - " + symbol + " - " + localTime + ".txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-		FileOutputStream fo = new FileOutputStream(file);
+//		FileOutputStream fo = new FileOutputStream(file);
 		placeOrder = alpacaAccount.buySymbolQuantity(symbol, pointZeroOneFactor);
 		placedOrder = alpacaAccount.getOrderDetails(placeOrder.getId());
 		while (!"filled".equals(placedOrder.getStatus()))
