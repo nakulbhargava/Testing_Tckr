@@ -839,7 +839,7 @@ public class AlpacaApiCaller extends AlpacaRestParams implements Cloneable {
 		HttpClient client = HttpClient.newHttpClient();
 		// Create HTTP request object
 		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(dataUrl + activeVersion + "/stocks/" + symbol + "/bars?start=" + startTime + "&end=" + endTime + "&timeframe=" + timeframe))
+				.uri(URI.create(dataUrl + activeVersion + "/stocks/" + symbol + "/bars?limit=10000&start=" + startTime + "&end=" + endTime + "&timeframe=" + timeframe))
 				.GET()
 				.header(alpacaKey, alpacaKeyValue)
 				.header(headerContentType, headerContentTypeValue)

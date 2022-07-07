@@ -24,6 +24,7 @@ public class BacktestingBlocksStrategy {
 	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\" + filename + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
+	static String symbol = "";
 	static List<Double> tickerOpen = new ArrayList<Double>();
 	static List<Double> tickerClose = new ArrayList<Double>();
 	static List<Double> tickerLow = new ArrayList<Double>();
@@ -68,17 +69,17 @@ public class BacktestingBlocksStrategy {
 					}
 					if(buys.size() > maxBuys) maxBuys = buys.size();
 					while(tickerHigh.get(i).compareTo(correspondingSells.peek()) > 0) {
+						totalSell++;
 						Double sellPrice = correspondingSells.pop();
 						Double buyPrice = buys.pop();
+//						System.out.println("Sell Performed at: " + tickerDate.get(i) + " with sell price: " + sellPrice + " for correspondingBuy: " + buyPrice);
 						if(correspondingSells.isEmpty() || buys.isEmpty()) break;
-						totalSell++;
-						//				System.out.println("Sell Performed at: " + tickerDate.get(i) + " with sell price: " + sellPrice + " for correspondingBuy: " + buyPrice);
+						
 					}
 
 				}
-				System.out.println("Profit Factor: " + profitPercent + " Buy Back Factor: " + lossPercent + " Total Buys: " + totalBuy + " Total Sells: " + totalSell);
-				System.out.println("Remaining Buys: " + buys);
-				System.out.println("Max Buys: " + maxBuys);
+				System.out.println(symbol + " - Profit Factor: " + profitPercent + " Buy Back Factor: " + lossPercent + " Total Buys: " + totalBuy + " Total Sells: " + totalSell);
+				System.out.println(symbol + " - Remaining Buys: " + buys + " Max Buys: " + maxBuys);
 
 				Iterator<Double> buysIterator = buys.iterator();
 
@@ -94,7 +95,7 @@ public class BacktestingBlocksStrategy {
 				Double profitDueToSell = (profitPercent - 1.0)*totalSell*oneTimeInvestment;
 				Double netProfit = profitDueToSell + lossDueToHoldingShares;
 
-				System.out.println("Net Profit: " + netProfit + " Profit Due to Sell: " + profitDueToSell + " Loss Due to Holding: " + lossDueToHoldingShares + "\n");
+				System.out.println(symbol + " - Net Profit: " + netProfit + " Profit Due to Sell: " + profitDueToSell + " Loss Due to Holding: " + lossDueToHoldingShares + "\n");
 				remainingInvestedAmount = 0.0;
 				netProfit = 0.0;
 				totalSell = 0; 
@@ -118,9 +119,9 @@ public class BacktestingBlocksStrategy {
 					firstLine = true;
 					continue;
 				}
-
+				
 				List<String> splitLine = Arrays.asList(line.split(",", -1));
-				Date date = format.parse(splitLine.get(1));
+				symbol = splitLine.get(0);
 				tickerDate.add(splitLine.get(1));
 				tickerOpen.add(Double.valueOf(splitLine.get(2)));
 				tickerClose.add(Double.valueOf(splitLine.get(3)));

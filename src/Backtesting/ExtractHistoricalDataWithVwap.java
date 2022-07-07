@@ -1,10 +1,14 @@
 package Backtesting;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Properties;
 
 import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.BarsPojo;
@@ -17,17 +21,17 @@ public class ExtractHistoricalDataWithVwap {
 
 	private static final String alpacaKey = "APCA-API-KEY-ID";
 	private static final String secretId = "APCA-API-SECRET-KEY";
-	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
-	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
-	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
+	private static final String alpacaKeyValue = "PKPL0FAP4W1PZD4YTYCV";
+	private static final String secretIdValue = "uKGltPfNuRTn9KYaidNkCKndfnBioA426hPwC7HJ";
+	private static final String alpacaKeyRealTime = "PKPL0FAP4W1PZD4YTYCV";
+	private static final String secretIdRealTime = "uKGltPfNuRTn9KYaidNkCKndfnBioA426hPwC7HJ";
 	private static final String headerContentType = "Content-Type";
 	private static final String headerContentTypeValue = "application/json";
 	private static final String paperUrl = "https://paper-api.alpaca.markets";
 	private static final String realtimeUrl = "https://data.alpaca.markets";
 	private static final String dataUrl = "https://data.alpaca.markets";
-//	private static final String activeVersion = "/v2";
-	private static final String activeVersion = "/v1beta1";
+	private static final String activeVersion = "/v2";
+//	private static final String activeVersion = "/v1beta1";
 	private static final String inactiveVersion = "/v1";
 	private static final String ordersEndpoint = "/orders";
 	private static final String accountEndpoint = "/account";
@@ -36,14 +40,18 @@ public class ExtractHistoricalDataWithVwap {
 	private static final String positionsEndpoint = "/positions";
 	private static final String assetsEndpoint = "/assets";
 	private static final String clockEndpoint = "/clock";
+
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,55);
 	private boolean isRealTimeTrading = false;
+	static Properties switchConfig = new Properties();
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		AlpacaApiCaller alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, dataUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
-
+		InputStream inputStream = new FileInputStream("resources/volatileDTSwitchConfig.properties");
+		switchConfig.load(inputStream);
+		inputStream.close();
 		//String symbol = "DARE";
 		//		String[] symbols = new String[]{"", "" , "", "" , "", "", "", "", "", "" , "", "" , "", "", "", "", "", "" , "", "" , "", "", "", ""};
 //		String symbols[] = new String[]{ "XPEV", "UBER", "SNAP", "PLUG", "NIO", "MRO", "LYFT", "GPS", "GOTU", "DKNG", "CCL", "BNGO", "AMWL", "ACAD", "LCTX",
@@ -75,28 +83,30 @@ public class ExtractHistoricalDataWithVwap {
 		
 //		String symbols[] = new String[]{"ADXS"};
 
-		String symbols[] = new String[]{"LTCUSD"};
+		
+		Object[] symbols = switchConfig.keySet().toArray();
 		for(int i = 0 ; i < symbols.length; i++) {
 
-			String startDate = "2020-08-01";
-			String endDate = "2021-11-20";
+			String startDate = "2021-06-01";
+			String endDate = "2022-06-28";
 			LocalDate start = LocalDate.parse(startDate);
 			LocalDate end = LocalDate.parse(endDate);
 
-			File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalData - VWAP\\MinData - " + symbols[i] + "_" + startDate + "_" + endDate + ".txt");
+			File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalData_VWAP\\MinData - " + symbols[i] + "_" + startDate + "_" + endDate + ".txt");
 			PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
 
 			pw1.write("Symbol,Date,Open,Close,High,Low,Volume,TradeCount,VWAP"+ "\n");
 			System.out.println("Symbol,Date,Open,Close,High,Low,Volume,TradeCount,VWAP");
 
 			while(end.isAfter(start)) {
-//				TimeframePojo timeframe = alpacaAccount.getTimeframe(symbols[i], start.toString(), start.toString(), "1Min");
-				TimeframePojo timeframe = alpacaAccount.getCryptoTimeframe(symbols[i], start.toString(), start.toString(), "1Day");
-				Thread.sleep(350);
+//				if(start.getDayOfWeek() == DayOfWeek.SATURDAY || start.getDayOfWeek() == DayOfWeek.SUNDAY) continue;
+				TimeframePojo timeframe = alpacaAccount.getTimeframe(symbols[i].toString(), start.toString(), start.plusDays(19).toString(), "1Min");
+				start = start.plusDays(20);
+//				TimeframePojo timeframe = alpacaAccount.getCryptoTimeframe(symbols[i], start.toString(), start.toString(), "1Day");
+//				Thread.sleep(335);
 				BarsPojo bars[] = timeframe.getBars();
-				start = start.plusDays(1);
 				if(bars == null) {
-					System.out.println("Data Not found for: " + symbols[i] + " on " + start.minusDays(1));
+					System.out.println("Data Not found for: " + symbols[i] + " on " + start);
 					continue;
 				}
 
