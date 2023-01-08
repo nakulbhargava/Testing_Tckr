@@ -5,6 +5,9 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.java_websocket.client.WebSocketClient;
@@ -20,6 +23,7 @@ public class AlpacaApiCaller extends AlpacaRestParams implements Cloneable {
 	protected String realtimeUrl;
 	protected String activeVersion;
 	protected String inactiveVersion;
+	protected String activeCryptoVersion;
 	protected String ordersEndpoint;
 	protected String accountEndpoint;
 	protected String lastQuoteEndpoint;
@@ -63,10 +67,83 @@ public class AlpacaApiCaller extends AlpacaRestParams implements Cloneable {
 		this.assetsEndpoint = assetsEndpoint;
 		this.clockEndpoint = clockEndpoint;
 	}
+	public AlpacaApiCaller(String alpacaKey, String secretId, String alpacaKeyValue, String secretIdValue,
+			String headerContentType, String headerContentTypeValue, String alpacaKeyRealTime, String secretIdRealTime, String paperUrl, String realtimeUrl,
+			String dataUrl, String activeVersion, String activeCryptoVersion, String inactiveVersion, String ordersEndpoint, String accountEndpoint,
+			String lastQuoteEndpoint, String lastTradeEndpoint, String positionsEndpoint, String assetsEndpoint, String clockEndpoint) {
+		super(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType, headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime);
+		this.alpacaKey = alpacaKey;
+		this.secretId = secretId;
+		this.alpacaKeyValue = alpacaKeyValue;
+		this.secretIdValue = secretIdValue;
+		this.headerContentType = headerContentType;
+		this.headerContentTypeValue = headerContentTypeValue;
+		this.alpacaKeyRealTime = alpacaKeyRealTime;
+		this.secretIdRealTime = secretIdRealTime;
+		this.paperUrl = paperUrl;
+		this.realtimeUrl = realtimeUrl;
+		this.dataUrl = dataUrl;
+		this.activeVersion = activeVersion;
+		this.activeCryptoVersion = activeCryptoVersion;
+		this.inactiveVersion = inactiveVersion;
+		this.ordersEndpoint = ordersEndpoint;
+		this.accountEndpoint = accountEndpoint;
+		this.lastQuoteEndpoint = lastQuoteEndpoint;
+		this.lastTradeEndpoint = lastTradeEndpoint;
+		this.positionsEndpoint = positionsEndpoint;
+		this.assetsEndpoint = assetsEndpoint;
+		this.clockEndpoint = clockEndpoint;
+	}
 	public Object clone() throws CloneNotSupportedException
     {
         return super.clone();
     }
+	
+	public List<TimeframePojo> getMultiTimeframe(String symbols, String startTime, String endTime, String timeframe, String pageToken){
+		HttpClient client = HttpClient.newHttpClient();
+
+		// Create HTTP request object
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create(dataUrl + activeVersion + "/stocks/bars?symbols=" + symbols + "&start=" + startTime + "&end=" + endTime + "&timeframe=" + timeframe + "&limit=10000&adjustment=all" + "&page_token=" + pageToken))
+				.GET()
+				.header(alpacaKey, alpacaKeyRealTime)
+				.header(headerContentType, headerContentTypeValue)
+				.header(secretId, secretIdRealTime)
+				.build();
+		// Send HTTP request
+//		System.out.println("Timeframe Request! - " + LocalDateTime.now());
+		try {
+			HttpResponse<String> response = client.send(request,
+					HttpResponse.BodyHandlers.ofString());
+//			System.out.println("Timeframe Response! - " + LocalDateTime.now());
+			Map<String, String> timeframeMaps = getJsonObjectMap(response.body(), Object.class);
+			List<TimeframePojo> timeframes = new ArrayList<TimeframePojo>();
+			for (Map.Entry<String, String> entry : timeframeMaps.entrySet()) {
+				if(entry.getKey().equals("bars")) {
+//					Map<String, Object> barMaps = entry.getValue().toString();
+
+					Map<String, String> barMaps = getJsonObjectConvertor(entry.getValue(), Object.class);
+					for(Map.Entry<String, String> barEntry : barMaps.entrySet()) {
+						BarsPojo[] bars = getJsonObjectConvertor(barEntry.getValue(), BarsPojo[].class);
+						TimeframePojo time = new TimeframePojo();
+						time.setSymbol(barEntry.getKey().toString());
+						time.setBars(bars);
+						
+						timeframes.add(time);
+					}
+				}
+				if(entry.getKey().equals("next_page_token") && entry.getValue() != null) {
+					timeframes.addAll(getMultiTimeframe(symbols, startTime, endTime, timeframe, entry.getValue()));
+				}
+				
+			}
+			return timeframes;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public AccountsPojo getAccountDetails() throws IOException, InterruptedException {
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder()
@@ -80,6 +157,7 @@ public class AlpacaApiCaller extends AlpacaRestParams implements Cloneable {
 				HttpResponse.BodyHandlers.ofString()); 
 		return getJsonObject(response.body(), AccountsPojo.class);
 	}
+	
 	public AccountsPojo getRealAccountDetails() throws IOException, InterruptedException {
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder()
@@ -834,22 +912,37 @@ public class AlpacaApiCaller extends AlpacaRestParams implements Cloneable {
 
 		return getJsonObject(response.body(), AssetsPojo.class);
 	}
+
 	@SuppressWarnings("static-access")
-	public TimeframePojo getTimeframe(String symbol, String startTime, String endTime, String timeframe) throws IOException, InterruptedException {
+	public TimeframePojo getTimeframe(String symbol, String startTime, String endTime, String timeframe){
 		HttpClient client = HttpClient.newHttpClient();
 		// Create HTTP request object
 		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(dataUrl + activeVersion + "/stocks/" + symbol + "/bars?limit=10000&start=" + startTime + "&end=" + endTime + "&timeframe=" + timeframe))
+				.uri(URI.create(dataUrl + activeVersion + "/stocks/" + symbol + "/bars?start=" + startTime + "&end=" + endTime + "&timeframe=" + timeframe + "&limit=10000&adjustment=all"))
 				.GET()
-				.header(alpacaKey, alpacaKeyValue)
+				.header(alpacaKey, alpacaKeyRealTime)
 				.header(headerContentType, headerContentTypeValue)
-				.header(secretId, secretIdValue)
+				.header(secretId, secretIdRealTime)
 				.build();
 		// Send HTTP request
-		HttpResponse<String> response = client.send(request,
-				HttpResponse.BodyHandlers.ofString());
-
-		return getJsonObject(response.body(), TimeframePojo.class);
+		HttpResponse<String> response;
+		try {
+			response = client.send(request,
+					HttpResponse.BodyHandlers.ofString());
+			if(response == null || response.statusCode() != 200) {
+				System.out.println("Timeframe Error:" + response.body()); 
+				return null;
+			}
+			return getJsonObject(response.body(), TimeframePojo.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@SuppressWarnings("static-access")
@@ -874,7 +967,7 @@ public class AlpacaApiCaller extends AlpacaRestParams implements Cloneable {
 		HttpClient client = HttpClient.newHttpClient();
 		// Create HTTP request object
 		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(paperUrl + activeVersion + assetsEndpoint))
+				.uri(URI.create(paperUrl + activeVersion + assetsEndpoint + "?status=active"))
 				.GET()
 				.header(alpacaKey, alpacaKeyValue)
 				.header(headerContentType, headerContentTypeValue)

@@ -20,7 +20,7 @@ import java.util.Stack;
 public class BacktestingBlocksStrategy {
 	static String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());		
 	static List<String> ticker = null;
-	static String filename = "MinData - ENVB_2020-08-01_2021-09-17";
+	static String filename = "MinData - AU_2021-06-01_2022-11-21";
 	static File fileTrue = new File("C:\\Users\\nakul\\Documents\\" + filename + " - " + localTime + ".txt");
 	static PrintWriter pw;
 	static FileOutputStream fo;
@@ -37,7 +37,7 @@ public class BacktestingBlocksStrategy {
 	static SimpleDateFormat format = new SimpleDateFormat(
 			"yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
 
-	static int oneTimeInvestment = 50;
+	static int oneTimeInvestment = 1000;
 	static Double profitPercent = 1.02;
 	static Double lossPercent = 0.95;
 
@@ -45,8 +45,9 @@ public class BacktestingBlocksStrategy {
 		// TODO Auto-generated method stub
 		BacktestingBlocksStrategy demo = new BacktestingBlocksStrategy();
 		demo.readFileAsList();
-		for(lossPercent = 0.975; lossPercent > 0.845; lossPercent = lossPercent - 0.025) {
-			for(profitPercent = 1.02; profitPercent < 1.051 ; profitPercent = profitPercent + 0.005) {
+		System.out.println("Symbol,Open,Close,Profit_Factor,Buy_Back_Factor,Total_Buys,Total_Sells,Max_Buys,Net_Profit,Sell_Profit,Holding_Loss,Falling,Profitable,RemainingBuys");
+		for(lossPercent = 0.975; lossPercent > 0.815; lossPercent = lossPercent - 0.025) {
+			for(profitPercent = 1.005; profitPercent < 1.11 ; profitPercent = profitPercent + 0.005) {
 				for(int i = 0; i < tickerOpen.size(); i++) {
 					if(buys.isEmpty()) {
 						buys.push(tickerOpen.get(i));
@@ -78,8 +79,8 @@ public class BacktestingBlocksStrategy {
 					}
 
 				}
-				System.out.println(symbol + " - Profit Factor: " + profitPercent + " Buy Back Factor: " + lossPercent + " Total Buys: " + totalBuy + " Total Sells: " + totalSell);
-				System.out.println(symbol + " - Remaining Buys: " + buys + " Max Buys: " + maxBuys);
+//				System.out.println(symbol + " - Profit Factor: " + profitPercent + " Buy Back Factor: " + lossPercent + " Total Buys: " + totalBuy + " Total Sells: " + totalSell);
+//				System.out.println(symbol + " - Remaining Buys: " + buys + " Max Buys: " + maxBuys);
 
 				Iterator<Double> buysIterator = buys.iterator();
 
@@ -95,7 +96,14 @@ public class BacktestingBlocksStrategy {
 				Double profitDueToSell = (profitPercent - 1.0)*totalSell*oneTimeInvestment;
 				Double netProfit = profitDueToSell + lossDueToHoldingShares;
 
-				System.out.println(symbol + " - Net Profit: " + netProfit + " Profit Due to Sell: " + profitDueToSell + " Loss Due to Holding: " + lossDueToHoldingShares + "\n");
+//				System.out.println(symbol + " - Net Profit: " + netProfit + " Profit Due to Sell: " + profitDueToSell + " Loss Due to Holding: " + lossDueToHoldingShares + "\n");
+				int falling, profitable;
+				if(netProfit.compareTo(0.0) > 0) profitable = 1; else profitable = 0;
+				Double difference = tickerOpen.get(0) - tickerClose.get(tickerClose.size()-1);
+				if(difference.compareTo(0.0) > 0) falling = 1; else falling = 0;
+				System.out.println(symbol + "," + tickerOpen.get(0) + "," + tickerClose.get(tickerClose.size()-1) + "," + profitPercent + "," + lossPercent 
+						+ "," + totalBuy + "," + totalSell + "," + maxBuys + "," + netProfit + "," + profitDueToSell + "," + lossDueToHoldingShares 
+						+ "," + falling + "," + profitable + "," + buys);
 				remainingInvestedAmount = 0.0;
 				netProfit = 0.0;
 				totalSell = 0; 

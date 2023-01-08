@@ -13,7 +13,14 @@ public class BarsPojo {
 	private String volume;
 	private String tradeCount;
 	private String vwap;
+	private String symbol;
 	
+	public String getSymbol() {
+		return symbol;
+	}
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
 	@JsonProperty("n")
 	public String getTradeCount() {
 		return tradeCount;

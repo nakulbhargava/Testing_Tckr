@@ -9,6 +9,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Properties;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap.KeySetView;
 
 import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.BarsPojo;
@@ -21,10 +23,10 @@ public class ExtractHistoricalDataWithVwap {
 
 	private static final String alpacaKey = "APCA-API-KEY-ID";
 	private static final String secretId = "APCA-API-SECRET-KEY";
-	private static final String alpacaKeyValue = "PKPL0FAP4W1PZD4YTYCV";
-	private static final String secretIdValue = "uKGltPfNuRTn9KYaidNkCKndfnBioA426hPwC7HJ";
-	private static final String alpacaKeyRealTime = "PKPL0FAP4W1PZD4YTYCV";
-	private static final String secretIdRealTime = "uKGltPfNuRTn9KYaidNkCKndfnBioA426hPwC7HJ";
+	private static final String alpacaKeyValue = "AKV93FDZWBVU2AV4GA8G";
+	private static final String secretIdValue = "0ooYVHmBxeKbxtafzMMFmwmQcBAuPKQddOA3e1Wb";
+	private static final String alpacaKeyRealTime = "AKV93FDZWBVU2AV4GA8G";
+	private static final String secretIdRealTime = "0ooYVHmBxeKbxtafzMMFmwmQcBAuPKQddOA3e1Wb";
 	private static final String headerContentType = "Content-Type";
 	private static final String headerContentTypeValue = "application/json";
 	private static final String paperUrl = "https://paper-api.alpaca.markets";
@@ -44,14 +46,17 @@ public class ExtractHistoricalDataWithVwap {
 	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,55);
 	private boolean isRealTimeTrading = false;
 	static Properties switchConfig = new Properties();
+	static Properties switchConfigReco = new Properties();
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		AlpacaApiCaller alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
 				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, dataUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
 				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
 		InputStream inputStream = new FileInputStream("resources/volatileDTSwitchConfig.properties");
+		InputStream inputStreamReco = new FileInputStream("resources/volatileDTSwitchConfigReco.properties");
 		switchConfig.load(inputStream);
-		inputStream.close();
+		switchConfigReco.load(inputStreamReco);
+		inputStreamReco.close();
 		//String symbol = "DARE";
 		//		String[] symbols = new String[]{"", "" , "", "" , "", "", "", "", "", "" , "", "" , "", "", "", "", "", "" , "", "" , "", "", "", ""};
 //		String symbols[] = new String[]{ "XPEV", "UBER", "SNAP", "PLUG", "NIO", "MRO", "LYFT", "GPS", "GOTU", "DKNG", "CCL", "BNGO", "AMWL", "ACAD", "LCTX",
@@ -85,14 +90,56 @@ public class ExtractHistoricalDataWithVwap {
 
 		
 		Object[] symbols = switchConfig.keySet().toArray();
-		for(int i = 0 ; i < symbols.length; i++) {
-
+		Set symbolsSet = switchConfig.keySet();
+		Object[] symbolsReco = switchConfigReco.keySet().toArray();
+//		Set symbolsRecoSet =  switchConfigReco.keySet();
+//		for(int i = 0 ; i < symbols.length; i++) {
+//
+//			String startDate = "2021-06-01";
+//			String endDate = "2022-11-21";
+//			LocalDate start = LocalDate.parse(startDate);
+//			LocalDate end = LocalDate.parse(endDate);
+//
+//			File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalDataReco_Min\\MinData - " + symbols[i] + "_" + startDate + "_" + endDate + ".txt");
+//			PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
+//
+//			pw1.write("Symbol,Date,Open,Close,High,Low,Volume,TradeCount,VWAP"+ "\n");
+//			System.out.println("Symbol,Date,Open,Close,High,Low,Volume,TradeCount,VWAP");
+//
+//			while(end.isAfter(start)) {
+////				if(start.getDayOfWeek() == DayOfWeek.SATURDAY || start.getDayOfWeek() == DayOfWeek.SUNDAY) continue;
+//				try {
+//				TimeframePojo timeframe = alpacaAccount.getTimeframe(symbols[i].toString(), start.toString(), start.plusDays(19).toString(), "1Min");
+//				start = start.plusDays(20);
+////				TimeframePojo timeframe = alpacaAccount.getCryptoTimeframe(symbols[i], start.toString(), start.toString(), "1Day");
+////				Thread.sleep(335);
+//				BarsPojo bars[] = timeframe.getBars();
+//				if(bars == null) {
+//					System.out.println("Data Not found for: " + symbols[i] + " on " + start);
+//					continue;
+//				}
+//
+//				for(BarsPojo bar: bars) {
+//					pw1.write(symbols[i]+ "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + ","+ bar.getHighPrice() 
+//					+ ","+ bar.getLowPrice() + "," + bar.getVolume() + "," + bar.getTradeCount() + "," + bar.getVwap() + "\n" );
+//					System.out.println(symbols[i]+ "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + ","+ bar.getHighPrice() 
+//					+ ","+ bar.getLowPrice() + "," + bar.getVolume() + "," + bar.getTradeCount() + "," + bar.getVwap());
+//				}
+//				}
+//				catch(Exception e) {
+//					System.out.println("Error!");
+//				}
+//			}
+//			pw1.close();
+//		}
+		for(int i = 0 ; i < symbolsReco.length; i++) {
+			if(symbolsSet.contains(symbolsReco[i])) continue;
 			String startDate = "2021-06-01";
-			String endDate = "2022-06-28";
+			String endDate = "2022-11-21";
 			LocalDate start = LocalDate.parse(startDate);
 			LocalDate end = LocalDate.parse(endDate);
 
-			File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalData_VWAP\\MinData - " + symbols[i] + "_" + startDate + "_" + endDate + ".txt");
+			File fileTrue = new File("C:\\Users\\nakul\\Documents\\HistoricalDataReco_Min\\MinData - " + symbolsReco[i] + "_" + startDate + "_" + endDate + ".txt");
 			PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
 
 			pw1.write("Symbol,Date,Open,Close,High,Low,Volume,TradeCount,VWAP"+ "\n");
@@ -100,21 +147,26 @@ public class ExtractHistoricalDataWithVwap {
 
 			while(end.isAfter(start)) {
 //				if(start.getDayOfWeek() == DayOfWeek.SATURDAY || start.getDayOfWeek() == DayOfWeek.SUNDAY) continue;
-				TimeframePojo timeframe = alpacaAccount.getTimeframe(symbols[i].toString(), start.toString(), start.plusDays(19).toString(), "1Min");
+				try {
+				TimeframePojo timeframe = alpacaAccount.getTimeframe(symbolsReco[i].toString(), start.toString(), start.plusDays(19).toString(), "1Min");
 				start = start.plusDays(20);
 //				TimeframePojo timeframe = alpacaAccount.getCryptoTimeframe(symbols[i], start.toString(), start.toString(), "1Day");
 //				Thread.sleep(335);
 				BarsPojo bars[] = timeframe.getBars();
 				if(bars == null) {
-					System.out.println("Data Not found for: " + symbols[i] + " on " + start);
+					System.out.println("Data Not found for: " + symbolsReco[i] + " on " + start);
 					continue;
 				}
 
 				for(BarsPojo bar: bars) {
-					pw1.write(symbols[i]+ "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + ","+ bar.getHighPrice() 
+					pw1.write(symbolsReco[i]+ "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + ","+ bar.getHighPrice() 
 					+ ","+ bar.getLowPrice() + "," + bar.getVolume() + "," + bar.getTradeCount() + "," + bar.getVwap() + "\n" );
-					System.out.println(symbols[i]+ "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + ","+ bar.getHighPrice() 
+					System.out.println(symbolsReco[i]+ "," + bar.getTime() + "," + bar.getOpenPrice() + "," + bar.getClosePrice() + ","+ bar.getHighPrice() 
 					+ ","+ bar.getLowPrice() + "," + bar.getVolume() + "," + bar.getTradeCount() + "," + bar.getVwap());
+				}
+				}
+				catch(Exception e) {
+					System.out.println("Error!");
 				}
 			}
 			pw1.close();

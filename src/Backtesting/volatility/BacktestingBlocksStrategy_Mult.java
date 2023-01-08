@@ -36,17 +36,17 @@ public class BacktestingBlocksStrategy_Mult {
 	static SimpleDateFormat format = new SimpleDateFormat(
 			"yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
 
-	static int oneTimeInvestment = 50;
+	static int oneTimeInvestment = 1000;
 	static Double profitPercent = 1.02;
 	static Double lossPercent = 0.95;
 
-	static File targetFolder = new File("C:\\Users\\nakul\\Documents\\HistoricalData_VWAP");
+	static File targetFolder = new File("C:\\Users\\nakul\\Documents\\HistoricalDataReco_Min");
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		BacktestingBlocksStrategy_Mult demo = new BacktestingBlocksStrategy_Mult();
 		pw = new PrintWriter(new FileOutputStream(fileTrue, true));
-		pw.write("Symbol,Open,Close,Profit_Factor,Buy_Back_Factor,Total_Buys,Total_Sells,Max_Buys,Net_Profit,Sell_Profit,Holding_Loss,Falling,Profitable\n");
+		pw.write("Symbol,Open,Close,Profit_Factor,Buy_Back_Factor,Total_Buys,Total_Sells,Max_Buys,Net_Profit,Sell_Profit,Holding_Loss,Falling,Profitable,RemainingBuys\n");
 		for(File file : targetFolder.listFiles()) {
 			tickerOpen.clear();
 			tickerClose.clear();
@@ -58,9 +58,10 @@ public class BacktestingBlocksStrategy_Mult {
 		}
 		pw.close();
 	}
+	
 	private void readFileAsList(String file) {
 		//String fileName = "/test/" + filename + ".txt";
-		String fileName = "C:\\Users\\nakul\\Documents\\HistoricalData_VWAP\\" + file;
+		String fileName = "C:\\Users\\nakul\\Documents\\HistoricalDataReco_Min\\" + file;
 		boolean firstLine = false;
 		try {
 			//			URI uri = this.getClass().getResource(fileName).toURI();
@@ -91,9 +92,8 @@ public class BacktestingBlocksStrategy_Mult {
 	}
 
 	private void executeBlocksStrategy() throws FileNotFoundException {
-		
-		for(profitPercent = 1.02; profitPercent < 1.031 ; profitPercent = profitPercent + 0.005) {
-			for(lossPercent = 0.975; lossPercent > 0.92; lossPercent = lossPercent - 0.025) {
+		for(profitPercent = 1.005; profitPercent < 1.051 ; profitPercent = profitPercent + 0.005) {
+			for(lossPercent = 0.975; lossPercent > 0.80; lossPercent = lossPercent - 0.025) {
 				for(int i = 0; i < tickerOpen.size(); i++) {
 					if(buys.isEmpty()) {
 						buys.push(tickerOpen.get(i));
@@ -124,9 +124,9 @@ public class BacktestingBlocksStrategy_Mult {
 					}
 
 				}
-				System.out.println(symbol + " - Profit Factor: " + profitPercent + " Buy Back Factor: " + lossPercent + " Total Buys: " + totalBuy + " Total Sells: " + totalSell);
-				System.out.println(symbol + " - Max Buys: " + maxBuys + " Remaining Buys: " + buys);
-				System.out.println(symbol + " - Starting Price: " + tickerOpen.get(0) + " Closing Price: " + tickerClose.get(tickerClose.size()-1));
+//				System.out.println(symbol + " - Profit Factor: " + profitPercent + " Buy Back Factor: " + lossPercent + " Total Buys: " + totalBuy + " Total Sells: " + totalSell);
+//				System.out.println(symbol + " - Max Buys: " + maxBuys + " Remaining Buys: " + buys);
+//				System.out.println(symbol + " - Starting Price: " + tickerOpen.get(0) + " Closing Price: " + tickerClose.get(tickerClose.size()-1));
 				
 				Iterator<Double> buysIterator = buys.iterator();
 
@@ -146,10 +146,12 @@ public class BacktestingBlocksStrategy_Mult {
 				if(netProfit.compareTo(0.0) > 0) profitable = 1; else profitable = 0;
 				Double difference = tickerOpen.get(0) - tickerClose.get(tickerClose.size()-1);
 				if(difference.compareTo(0.0) > 0) falling = 1; else falling = 0;
-				System.out.println(symbol + " - Net Profit: " + netProfit + " Profit Due to Sell: " + profitDueToSell + " Loss Due to Holding: " + lossDueToHoldingShares + "\n");
+				System.out.println(symbol + "," + tickerOpen.get(0) + "," + tickerClose.get(tickerClose.size()-1) + "," + profitPercent + "," + lossPercent 
+						+ "," + totalBuy + "," + totalSell + "," + maxBuys + "," + netProfit + "," + profitDueToSell + "," + lossDueToHoldingShares 
+						+ "," + falling + "," + profitable + "," + buys);
 				pw.write(symbol + "," + tickerOpen.get(0) + "," + tickerClose.get(tickerClose.size()-1) + "," + profitPercent + "," + lossPercent 
 						+ "," + totalBuy + "," + totalSell + "," + maxBuys + "," + netProfit + "," + profitDueToSell + "," + lossDueToHoldingShares 
-						+ "," + falling + "," + profitable + "\n");
+						+ "," + falling + "," + profitable + "," + buys + "\n");
 				remainingInvestedAmount = 0.0;
 				netProfit = 0.0;
 				totalSell = 0; 
