@@ -15,15 +15,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
+import java.util.Properties;
 
 import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.BarsPojo;
-import alpacaPojo.OrdersPojo;
 import alpacaPojo.TimeframePojo;
 
 public class BlockVolatileStrategy {
 
+	static PrintWriter pw;
 	public static void main(String[] args) throws IOException {
 		/*
 		 * Get Volatile Stocks, could be daily, hourly
@@ -32,21 +32,32 @@ public class BlockVolatileStrategy {
 		 * Sell at a constant/random profit
 		 * Max buy is configurable for the day
 		 */
-		LocalDate start = LocalDate.now().minusMonths(3);
-		LocalDate end = LocalDate.now().minusMonths(0);
-		ExtractVolatileStocks demo = new ExtractVolatileStocks();
+		LocalDate start = LocalDate.now().minusMonths(5);
+		LocalDate end = LocalDate.now().minusMonths(1);
 		AlpacaApiCaller alpacaAccount = TickerUtils.getAlpacaAccountObject();
-		File file = new File("logs/outputReport.txt" + start + "_" + end);
+		File file = new File("logs/outputReport.txt" + start + "_" + end + "_" + LocalDate.now());
+		pw = new PrintWriter(new FileOutputStream(file), true);
+		pw.write("Symbol,Start Date,End Date,Start Price,Close Price,Net Buy,Net Sell,Holding Value,Holding Count,Max Count,Max Daily Count,Net Profit,Holdings\n");
+		Properties movingStocks = TickerUtils.loadProperties("resources/bestMovingStocks.properties");
+//		for(Entry<Object, Object> symbol : movingStocks.entrySet()) {
+//			executeBlock(symbol.getKey().toString(), start, end, alpacaAccount);
+//		}
+		executeBlock("COMS", start, end, alpacaAccount);
+		pw.close();
+
+	}
+
+	private static void executeBlock(String symbol, LocalDate start, LocalDate end, AlpacaApiCaller alpacaAccount) {
 		try {
 			File file1 = new File("logs/output50And3.txt" + LocalDateTime.now().getNano() + LocalDateTime.now().getHour());
 			PrintWriter pw1 = new PrintWriter(new FileOutputStream(file1), true);
-			File file2 = new File("logs/output50And5.txt" + LocalDateTime.now().getNano() + LocalDateTime.now().getMinute());
-			PrintWriter pw2 = new PrintWriter(new FileOutputStream(file2), true);
+//			File file2 = new File("logs/output50And5.txt" + LocalDateTime.now().getNano() + LocalDateTime.now().getMinute());
+//			PrintWriter pw2 = new PrintWriter(new FileOutputStream(file2), true);
 			File file3 = new File("logs/output50And7.txt" + LocalDateTime.now().getNano() + LocalDateTime.now().getSecond());
 			PrintWriter pw3 = new PrintWriter(new FileOutputStream(file3), true);
-			File file4 = new File("logs/output50And10.txt" + LocalDateTime.now().getNano() + LocalDateTime.now().getYear());
-			PrintWriter pw4 = new PrintWriter(new FileOutputStream(file4), true);
-
+//			File file4 = new File("logs/output50And10.txt" + LocalDateTime.now().getNano() + LocalDateTime.now().getYear());
+//			PrintWriter pw4 = new PrintWriter(new FileOutputStream(file4), true);
+			String startPrice = "", endPrice = "";
 			Double maxBuyPrice = 100.0;
 			int maxHolding3 = 0;
 			int maxHolding5 = 0;
@@ -59,37 +70,38 @@ public class BlockVolatileStrategy {
 			int maxDailyBuyCount10 = 0;
 			int totalBuy50And3 = 0;
 			int totalSell50And3 = 0;
-			int totalBuy50And5 = 0;
-			int totalSell50And5 = 0;
+//			int totalBuy50And5 = 0;
+//			int totalSell50And5 = 0;
 			int totalBuy50And7 = 0;
 			int totalSell50And7 = 0;
-			int totalBuy50And10 = 0;
-			int totalSell50And10 = 0;
-			Double profitPercent10 = 1.01;
-			Double profitPercent05 = 1.02;
+//			int totalBuy50And10 = 0;
+//			int totalSell50And10 = 0;
+//			Double profitPercent10 = 1.01;
+//			Double profitPercent05 = 1.02;
 			Double profitPercent03 = 1.015;
 			Double profitPercent07 = 1.03;
 			DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
 			HashMap<String, ArrayList<Double>> sellMap50And3 = new HashMap<String, ArrayList<Double>>();
-			HashMap<String, ArrayList<Double>> sellMap50And5 = new HashMap<String, ArrayList<Double>>();
+//			HashMap<String, ArrayList<Double>> sellMap50And5 = new HashMap<String, ArrayList<Double>>();
 			HashMap<String, ArrayList<Double>> sellMap50And7 = new HashMap<String, ArrayList<Double>>();
-			HashMap<String, ArrayList<Double>> sellMap50And10 = new HashMap<String, ArrayList<Double>>();
+//			HashMap<String, ArrayList<Double>> sellMap50And10 = new HashMap<String, ArrayList<Double>>();
 
 			int totalBuyCount50And3 = 0;
 			int totalBuyCount50And7 = 0;
-			int totalBuyCount50And5 = 0;
-			int totalBuyCount50And10 = 0;
+//			int totalBuyCount50And5 = 0;
+//			int totalBuyCount50And10 = 0;
 			List<String> highlyVolatileStocks = new ArrayList<String>();
-			highlyVolatileStocks.add("GSUN");
-			highlyVolatileStocks.add("FRGT");
-			highlyVolatileStocks.add("WISA");
+			highlyVolatileStocks.add(symbol);
+//			highlyVolatileStocks.add("TOPS");
+//			highlyVolatileStocks.add("HKD");
 //			highlyVolatileStocks.add("EDBL");
-			ArrayList<String> highlyVolatileStocksBackUp = new ArrayList<String>();
+//			ArrayList<String> highlyVolatileStocksBackUp = new ArrayList<String>();
+			LocalDate origStart = start.minusDays(0);
 			while(start.isBefore(end)) {
 				int dailyBuyCount50And3 = 0;
 				int dailyBuyCount50And7 = 0;
-				int dailyBuyCount50And5 = 0;
-				int dailyBuyCount50And10 = 0;
+//				int dailyBuyCount50And5 = 0;
+//				int dailyBuyCount50And10 = 0;
 
 				HashMap<LocalDateTime, ArrayList<BarsPojo>> dailyTimeMap = new HashMap<LocalDateTime, ArrayList<BarsPojo>>();
 				List<TimeframePojo> multiDailyTime = alpacaAccount.getMultiTimeframe(highlyVolatileStocks.toString().substring(1, highlyVolatileStocks.toString().length()-1).replaceAll(" ", ""), start.toString(), start.toString(), "1Min", "");
@@ -104,40 +116,42 @@ public class BlockVolatileStrategy {
 					}
 				}
 				
-				System.out.println("Executing for: " + start);
+//				System.out.println("Executing for: " + start);
 				pw1.write("\nExecuting for: " + start + "\n");
-				pw2.write("\nExecuting for: " + start+ "\n");
-				pw3.write("\nExecuting for: " + start+ "\n");
-				pw4.write("\nExecuting for: " + start+ "\n");
+//				pw2.write("\nExecuting for: " + start+ "\n");
+//				pw3.write("\nExecuting for: " + start+ "\n");
+//				pw4.write("\nExecuting for: " + start+ "\n");
 				ArrayList<LocalDateTime> sortedKeys= new ArrayList<LocalDateTime>(dailyTimeMap.keySet());
 				Collections.sort(sortedKeys);
 				for(LocalDateTime sortedKey : sortedKeys) {
 					ArrayList<BarsPojo> allSymbolBars = dailyTimeMap.get(sortedKey);
 					for(BarsPojo bar: allSymbolBars) {
-						String symbol = bar.getSymbol();
+						if(startPrice == null || "".equals(startPrice)) startPrice = bar.getOpenPrice();
+						endPrice = bar.getClosePrice();
+//						String symbol = bar.getSymbol();
 						Double highPrice = Double.valueOf(bar.getHighPrice());
 						Double lowPrice = Double.valueOf(bar.getLowPrice());
 						Double vwap = Double.valueOf(bar.getVwap());
 						ArrayList<Double> sells50And3 = sellMap50And3.getOrDefault(symbol, new ArrayList<Double>());
 						ArrayList<Double> sells50And7 = sellMap50And7.getOrDefault(symbol, new ArrayList<Double>());
-						ArrayList<Double> sells50And5 = sellMap50And5.getOrDefault(symbol, new ArrayList<Double>());
-						ArrayList<Double> sells50And10 = sellMap50And10.getOrDefault(symbol, new ArrayList<Double>());
+//						ArrayList<Double> sells50And5 = sellMap50And5.getOrDefault(symbol, new ArrayList<Double>());
+//						ArrayList<Double> sells50And10 = sellMap50And10.getOrDefault(symbol, new ArrayList<Double>());
 						ArrayList<Double> sellExecuted50And3 = new ArrayList<Double>();
 						ArrayList<Double> sellExecuted50And7 = new ArrayList<Double>();
-						ArrayList<Double> sellExecuted50And5 = new ArrayList<Double>();
-						ArrayList<Double> sellExecuted50And10 = new ArrayList<Double>();
+//						ArrayList<Double> sellExecuted50And5 = new ArrayList<Double>();
+//						ArrayList<Double> sellExecuted50And10 = new ArrayList<Double>();
 
 						Double lowestSell50And3 = 10000.0;
 						Double lowestSell50And7 = 10000.0;
-						Double lowestSell50And5 = 10000.0;
-						Double lowestSell50And10 = 10000.0;
+//						Double lowestSell50And5 = 10000.0;
+//						Double lowestSell50And10 = 10000.0;
 
 						for(Double sell : sells50And3) {
 							if(sell.compareTo(lowestSell50And3) < 0 ) lowestSell50And3 = sell;
 							if(highPrice.compareTo(sell*profitPercent03) > 0) {
 								sellExecuted50And3.add(sell);
 								System.out.println("50and3Sold " + symbol + " at: " + sell*profitPercent03 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And3);
-								pw1.write("25And5Sold " + symbol + " at: " + sell*profitPercent05 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And3 + "\n");
+								pw1.write("50and3Sold " + symbol + " at: " + sell*profitPercent03 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And3 + "\n");
 								totalSell50And3++;
 								totalBuyCount50And3--;
 							}
@@ -155,7 +169,7 @@ public class BlockVolatileStrategy {
 							totalBuyCount50And3++;
 							if(maxHolding3 < totalBuyCount50And3) maxHolding3 = totalBuyCount50And3;
 							System.out.println("50And3Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And3 + " - " + bar.getTime() + " " + sortedKey);
-							pw1.write("50And3Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And5 + " - " + bar.getTime() + " " + sortedKey + "\n");
+							pw1.write("50And3Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And3 + " - " + bar.getTime() + " " + sortedKey + "\n");
 						}
 						if(!sells50And3.isEmpty())
 							sellMap50And3.put(symbol, sells50And3);
@@ -167,7 +181,7 @@ public class BlockVolatileStrategy {
 							if(highPrice.compareTo(sell*profitPercent07) > 0) {
 								sellExecuted50And7.add(sell);
 								System.out.println("50And7Sold " + symbol + " at: " + sell*profitPercent07 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And7);
-								pw2.write("50And7Sold " + symbol + " at: " + sell*profitPercent07 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And7 + "\n");		
+								pw3.write("50And7Sold " + symbol + " at: " + sell*profitPercent07 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And7 + "\n");		
 								totalSell50And7++;
 								totalBuyCount50And7--;
 							}
@@ -186,122 +200,122 @@ public class BlockVolatileStrategy {
 							if(maxHolding7 < totalBuyCount50And7) maxHolding7 = totalBuyCount50And7;
 							System.out.println("50And7Bought " + symbol + " at: " + vwap + " Low Price: " + 
 									lowPrice + " Daily Buy Count: " + dailyBuyCount50And7 + " - " + bar.getTime() + " " + sortedKey);
-							pw2.write("50And7Bought " + symbol + " at: " + vwap + " Low Price: " + 
+							pw3.write("50And7Bought " + symbol + " at: " + vwap + " Low Price: " + 
 									lowPrice + " Daily Buy Count: " + dailyBuyCount50And7 + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And7 +  "\n");
 						}
 						if(!sells50And7.isEmpty())
 							sellMap50And7.put(symbol, sells50And7);
 						if(sells50And7.isEmpty())
 							sellMap50And7.remove(symbol);
-
-						for(Double sell : sells50And5) {
-							if(sell.compareTo(lowestSell50And5) < 0 ) lowestSell50And5 = sell;
-							if(highPrice.compareTo(sell*profitPercent05) > 0) {
-								sellExecuted50And5.add(sell);
-								System.out.println("50And5Sold " + symbol + " at: " + sell*profitPercent05 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And5);
-								pw3.write("50And5Sold " + symbol + " at: " + sell*profitPercent05 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And5 + "\n");
-								totalSell50And5++;
-								totalBuyCount50And5--;
-							}
-						}
-						sells50And5.removeAll(sellExecuted50And5);
-						//					sellMap.put(symbol, sells);
-						dailyBuyCount50And5 = dailyBuyCount50And5 - sellExecuted50And5.size();
-						if(dailyBuyCount50And5 < 0) dailyBuyCount50And5 =0;
-						//					System.out.println("Daily Buy Count: " + dailyBuyCount);
-						if(dailyBuyCount50And5 < maxDailyBuyCount50 && isBlockCheck(symbol, vwap, sells50And5)) {
-							sells50And5.add(vwap);
-							dailyBuyCount50And5++;
-							if(maxDailyBuyCount5 < dailyBuyCount50And5) maxDailyBuyCount5 = dailyBuyCount50And5;
-							totalBuy50And5++;
-							totalBuyCount50And5++;
-							if(maxHolding5 < totalBuyCount50And5) maxHolding5 = totalBuyCount50And5;
-							System.out.println("50And5Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And5 + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And5);
-							pw3.write("50And5Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And5 + " - " + bar.getTime() + " " + sortedKey  + " Net Count: " + totalBuyCount50And5 + "\n");
-						}
-						if(!sells50And5.isEmpty())
-							sellMap50And5.put(symbol, sells50And5);
-						if(sells50And5.isEmpty())
-							sellMap50And5.remove(symbol);
-
-						for(Double sell : sells50And10) {
-							if(sell.compareTo(lowestSell50And10) < 0 ) lowestSell50And10 = sell;
-							if(highPrice.compareTo(sell*profitPercent10) > 0) {
-								sellExecuted50And10.add(sell);
-								System.out.println("50And10Sold " + symbol + " at: " + sell*profitPercent10 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And10);
-								pw4.write("50And10Sold " + symbol + " at: " + sell*profitPercent10 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And10 + "\n");
-								totalSell50And10++;
-								totalBuyCount50And10--;
-							}
-						}
-						sells50And10.removeAll(sellExecuted50And10);
-						//					sellMap.put(symbol, sells);
-						dailyBuyCount50And10 = dailyBuyCount50And10 - sellExecuted50And10.size();
-						if(dailyBuyCount50And10 < 0) dailyBuyCount50And10 =0;
-						//					System.out.println("Daily Buy Count: " + dailyBuyCount);
-						if(dailyBuyCount50And10 < maxDailyBuyCount50 && isBlockCheck(symbol, vwap, sells50And10)) { 
-							sells50And10.add(vwap);
-							dailyBuyCount50And10++;
-							if(maxDailyBuyCount10 < dailyBuyCount50And10) maxDailyBuyCount10 = dailyBuyCount50And10;
-							totalBuy50And10++;
-							totalBuyCount50And10++;
-							if(maxHolding10 < totalBuyCount50And10) maxHolding10 = totalBuyCount50And10;
-							System.out.println("50And10Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And10 + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And10);
-							pw4.write("50And10Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And10 + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And10 + "\n");
-						}
-						if(!sells50And10.isEmpty())
-							sellMap50And10.put(symbol, sells50And10);
-						if(sells50And10.isEmpty())
-							sellMap50And10.remove(symbol);
+//
+//						for(Double sell : sells50And5) {
+//							if(sell.compareTo(lowestSell50And5) < 0 ) lowestSell50And5 = sell;
+//							if(highPrice.compareTo(sell*profitPercent05) > 0) {
+//								sellExecuted50And5.add(sell);
+//								System.out.println("50And5Sold " + symbol + " at: " + sell*profitPercent05 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And5);
+//								pw2.write("50And5Sold " + symbol + " at: " + sell*profitPercent05 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And5 + "\n");
+//								totalSell50And5++;
+//								totalBuyCount50And5--;
+//							}
+//						}
+//						sells50And5.removeAll(sellExecuted50And5);
+//						//					sellMap.put(symbol, sells);
+//						dailyBuyCount50And5 = dailyBuyCount50And5 - sellExecuted50And5.size();
+//						if(dailyBuyCount50And5 < 0) dailyBuyCount50And5 =0;
+//						//					System.out.println("Daily Buy Count: " + dailyBuyCount);
+//						if(dailyBuyCount50And5 < maxDailyBuyCount50 && isBlockCheck(symbol, vwap, sells50And5)) {
+//							sells50And5.add(vwap);
+//							dailyBuyCount50And5++;
+//							if(maxDailyBuyCount5 < dailyBuyCount50And5) maxDailyBuyCount5 = dailyBuyCount50And5;
+//							totalBuy50And5++;
+//							totalBuyCount50And5++;
+//							if(maxHolding5 < totalBuyCount50And5) maxHolding5 = totalBuyCount50And5;
+//							System.out.println("50And5Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And5 + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And5);
+//							pw2.write("50And5Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And5 + " - " + bar.getTime() + " " + sortedKey  + " Net Count: " + totalBuyCount50And5 + "\n");
+//						}
+//						if(!sells50And5.isEmpty())
+//							sellMap50And5.put(symbol, sells50And5);
+//						if(sells50And5.isEmpty())
+//							sellMap50And5.remove(symbol);
+//
+//						for(Double sell : sells50And10) {
+//							if(sell.compareTo(lowestSell50And10) < 0 ) lowestSell50And10 = sell;
+//							if(highPrice.compareTo(sell*profitPercent10) > 0) {
+//								sellExecuted50And10.add(sell);
+//								System.out.println("50And10Sold " + symbol + " at: " + sell*profitPercent10 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And10);
+//								pw4.write("50And10Sold " + symbol + " at: " + sell*profitPercent10 + " High Price: " + highPrice + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And10 + "\n");
+//								totalSell50And10++;
+//								totalBuyCount50And10--;
+//							}
+//						}
+//						sells50And10.removeAll(sellExecuted50And10);
+//						//					sellMap.put(symbol, sells);
+//						dailyBuyCount50And10 = dailyBuyCount50And10 - sellExecuted50And10.size();
+//						if(dailyBuyCount50And10 < 0) dailyBuyCount50And10 =0;
+//						//					System.out.println("Daily Buy Count: " + dailyBuyCount);
+//						if(dailyBuyCount50And10 < maxDailyBuyCount50 && isBlockCheck(symbol, vwap, sells50And10)) { 
+//							sells50And10.add(vwap);
+//							dailyBuyCount50And10++;
+//							if(maxDailyBuyCount10 < dailyBuyCount50And10) maxDailyBuyCount10 = dailyBuyCount50And10;
+//							totalBuy50And10++;
+//							totalBuyCount50And10++;
+//							if(maxHolding10 < totalBuyCount50And10) maxHolding10 = totalBuyCount50And10;
+//							System.out.println("50And10Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And10 + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And10);
+//							pw4.write("50And10Bought " + symbol + " at: " + vwap + " Low Price: " + lowPrice + " Daily Buy Count: " + dailyBuyCount50And10 + " - " + bar.getTime() + " " + sortedKey + " Net Count: " + totalBuyCount50And10 + "\n");
+//						}
+//						if(!sells50And10.isEmpty())
+//							sellMap50And10.put(symbol, sells50And10);
+//						if(sells50And10.isEmpty())
+//							sellMap50And10.remove(symbol);
 					}
 				}
 				if(start.getDayOfWeek() == DayOfWeek.FRIDAY)start = start.plusDays(2);
 				start = start.plusDays(1);
-				System.out.println("50And3Current Holdings: " + sellMap50And3.entrySet());
-				System.out.println("50And7Current Holdings: "  + sellMap50And7.entrySet());
-				System.out.println("50And5Current Holdings: " + sellMap50And5.entrySet());
-				System.out.println("50And10Current Holdings: " + sellMap50And10.entrySet());
+//				System.out.println("50And3Current Holdings: " + sellMap50And3.entrySet());
+//				System.out.println("50And7Current Holdings: "  + sellMap50And7.entrySet());
+//				System.out.println("50And5Current Holdings: " + sellMap50And5.entrySet());
+//				System.out.println("50And10Current Holdings: " + sellMap50And10.entrySet());
 				pw1.write("50And3Current Holdings: " + sellMap50And3.entrySet() + "\n");
-				pw2.write("50And7Current Holdings: " + sellMap50And7.entrySet() + "\n");
-				pw3.write("50And5Current Holdings: " + sellMap50And5.entrySet() + "\n");
-				pw4.write("50And10Current Holdings: " + sellMap50And10.entrySet() + "\n");
+				pw3.write("50And7Current Holdings: " + sellMap50And7.entrySet() + "\n");
+//				pw2.write("50And5Current Holdings: " + sellMap50And5.entrySet() + "\n");
+//				pw4.write("50And10Current Holdings: " + sellMap50And10.entrySet() + "\n");
 				for(Entry<String, ArrayList<Double>> entry : sellMap50And3.entrySet()) {
-					System.out.println(entry.getKey() + "," + entry.getValue().size());
+//					System.out.println(entry.getKey() + "," + entry.getValue().size());
 					pw1.write(entry.getKey() + "," + entry.getValue().size() + "\n");
 				}
-				for(Entry<String, ArrayList<Double>> entry : sellMap50And7.entrySet()) {
-					System.out.println(entry.getKey() + "," + entry.getValue().size());
-					pw2.write(entry.getKey() + "," + entry.getValue().size() + "\n");
-				}
-				for(Entry<String, ArrayList<Double>> entry : sellMap50And7.entrySet()) {
-					System.out.println(entry.getKey() + "," + entry.getValue().size());
-					pw3.write(entry.getKey() + "," + entry.getValue().size() + "\n");
-				}
-				for(Entry<String, ArrayList<Double>> entry : sellMap50And10.entrySet()) {
-					System.out.println(entry.getKey() + "," + entry.getValue().size());
-					pw4.write(entry.getKey() + "," + entry.getValue().size() + "\n");
-				}
+//				for(Entry<String, ArrayList<Double>> entry : sellMap50And7.entrySet()) {
+//					System.out.println(entry.getKey() + "," + entry.getValue().size());
+//					pw2.write(entry.getKey() + "," + entry.getValue().size() + "\n");
+//				}
+//				for(Entry<String, ArrayList<Double>> entry : sellMap50And7.entrySet()) {
+//					System.out.println(entry.getKey() + "," + entry.getValue().size());
+//					pw3.write(entry.getKey() + "," + entry.getValue().size() + "\n");
+//				}
+//				for(Entry<String, ArrayList<Double>> entry : sellMap50And10.entrySet()) {
+//					System.out.println(entry.getKey() + "," + entry.getValue().size());
+//					pw4.write(entry.getKey() + "," + entry.getValue().size() + "\n");
+//				}
 			}
 
 			Double holdingValue50And3 = 0.0;
 			Double holdingValue50And7 = 0.0;
-			Double holdingValue50And5 = 0.0;
-			Double holdingValue50And10 = 0.0;
+//			Double holdingValue50And5 = 0.0;
+//			Double holdingValue50And10 = 0.0;
 
 			int holdingCount50And3 = 0;
 			int holdingCount50And7 = 0;
-			int holdingCount50And5 = 0;
-			int holdingCount50And10 = 0;
+//			int holdingCount50And5 = 0;
+//			int holdingCount50And10 = 0;
 			HashMap<String, Double> lastPriceMap = new HashMap<String,Double>();
 			List<TimeframePojo> lastPrice = alpacaAccount.getMultiTimeframe(highlyVolatileStocks.toString().substring(1, highlyVolatileStocks.toString().length()-1).replaceAll(" ", ""), end.minusDays(3).toString(), end.toString(), "1Day", "");
 			for(TimeframePojo lastDayFrame : lastPrice) {
-				String symbol = lastDayFrame.getSymbol();
+//				String symbol = lastDayFrame.getSymbol();
 				BarsPojo lastDayBar= lastDayFrame.getBars()[0];
 				lastPriceMap.put(symbol, Double.valueOf(lastDayBar.getClosePrice()));
 			}
 			for (Map.Entry<String, ArrayList<Double>> entry : sellMap50And3.entrySet()) {
 				Double holdingPrice = lastPriceMap.get(entry.getKey());
-				System.out.println(entry.getKey() + "," + holdingPrice);
+//				System.out.println(entry.getKey() + "," + holdingPrice);
 				Double totalShares = 0.0;
 
 				for(Double holding : entry.getValue()) {
@@ -323,59 +337,58 @@ public class BlockVolatileStrategy {
 				holdingValue50And7 = holdingValue50And7 + holdingPrice*totalShares;
 				holdingCount50And7 = holdingCount50And7 + entry.getValue().size();
 			}
-
-			for (Map.Entry<String, ArrayList<Double>> entry : sellMap50And5.entrySet()) {
-				Double holdingPrice = lastPriceMap.get(entry.getKey());
-				System.out.println(entry.getKey() + "," + holdingPrice);
-				Double totalShares = 0.0;
-				for(Double holding : entry.getValue()) {
-					//					Double buyPrice = holding*0.82;
-					totalShares = totalShares + maxBuyPrice/holding;
-				}
-				holdingValue50And5 = holdingValue50And5 + holdingPrice*totalShares;
-				holdingCount50And5 = holdingCount50And5 + entry.getValue().size();
-			}
-
-			for (Map.Entry<String, ArrayList<Double>> entry : sellMap50And10.entrySet()) {
-				Double holdingPrice = lastPriceMap.get(entry.getKey());
-				System.out.println(entry.getKey() + "," + holdingPrice);
-				Double totalShares = 0.0;
-				for(Double holding : entry.getValue()) {
-					//					Double buyPrice = holding*0.82;
-					totalShares = totalShares + maxBuyPrice/holding;
-				}
-				holdingValue50And10 = holdingValue50And10 + holdingPrice*totalShares;
-				holdingCount50And10 = holdingCount50And10 + entry.getValue().size();
-			}
+//
+//			for (Map.Entry<String, ArrayList<Double>> entry : sellMap50And5.entrySet()) {
+//				Double holdingPrice = lastPriceMap.get(entry.getKey());
+//				System.out.println(entry.getKey() + "," + holdingPrice);
+//				Double totalShares = 0.0;
+//				for(Double holding : entry.getValue()) {
+//					//					Double buyPrice = holding*0.82;
+//					totalShares = totalShares + maxBuyPrice/holding;
+//				}
+//				holdingValue50And5 = holdingValue50And5 + holdingPrice*totalShares;
+//				holdingCount50And5 = holdingCount50And5 + entry.getValue().size();
+//			}
+//
+//			for (Map.Entry<String, ArrayList<Double>> entry : sellMap50And10.entrySet()) {
+//				Double holdingPrice = lastPriceMap.get(entry.getKey());
+//				System.out.println(entry.getKey() + "," + holdingPrice);
+//				Double totalShares = 0.0;
+//				for(Double holding : entry.getValue()) {
+//					//					Double buyPrice = holding*0.82;
+//					totalShares = totalShares + maxBuyPrice/holding;
+//				}
+//				holdingValue50And10 = holdingValue50And10 + holdingPrice*totalShares;
+//				holdingCount50And10 = holdingCount50And10 + entry.getValue().size();
+//			}
 
 
 			Double netProfit50And3 = (totalSell50And3*profitPercent03*maxBuyPrice) + holdingValue50And3 - (totalBuy50And3*maxBuyPrice);
 			Double netProfit50And7 = (totalSell50And7*profitPercent07*maxBuyPrice) + holdingValue50And7 - (totalBuy50And7*maxBuyPrice);
-			Double netProfit50And5 = (totalSell50And5*profitPercent05*maxBuyPrice) + holdingValue50And5 - (totalBuy50And5*maxBuyPrice);
-			Double netProfit50And10 = (totalSell50And10*profitPercent10*maxBuyPrice) + holdingValue50And10 - (totalBuy50And10*maxBuyPrice);
+//			Double netProfit50And5 = (totalSell50And5*profitPercent05*maxBuyPrice) + holdingValue50And5 - (totalBuy50And5*maxBuyPrice);
+//			Double netProfit50And10 = (totalSell50And10*profitPercent10*maxBuyPrice) + holdingValue50And10 - (totalBuy50And10*maxBuyPrice);
 
-			System.out.println("50And3Total Buy: " + totalBuy50And3*maxBuyPrice + ", Total Sell: " + totalSell50And3*profitPercent05*maxBuyPrice + ", Holding Value: " + holdingValue50And3 + ", Holding Count: " + holdingCount50And3 + " , NetProfit: " + netProfit50And3);
-			System.out.println("50And7Total Buy: " + totalBuy50And7*maxBuyPrice + ", Total Sell: " + totalSell50And7*profitPercent10*maxBuyPrice + ", Holding Value: " + holdingValue50And7 + ", Holding Count: " + holdingCount50And7 + " , NetProfit: " + netProfit50And7);
-			System.out.println("50And5Total Buy: " + totalBuy50And5*maxBuyPrice + ", Total Sell: " + totalSell50And5*profitPercent05*maxBuyPrice + ", Holding Value: " + holdingValue50And5 + ", Holding Count: " + holdingCount50And5 + " , NetProfit: " + netProfit50And5);
-			System.out.println("50And10Total Buy: " + totalBuy50And10*maxBuyPrice + ", Total Sell: " + totalSell50And10*profitPercent10*maxBuyPrice + ", Holding Value: " + holdingValue50And10 + ", Holding Count: " + holdingCount50And10 + " , NetProfit: " + netProfit50And10);
-			pw1.write("50And3Total Buy: " + totalBuy50And3*maxBuyPrice + ", Total Sell: " + totalSell50And3*profitPercent05*maxBuyPrice + ", Holding Value: " + holdingValue50And3 + ", Holding Count: " + holdingCount50And3 + " , NetProfit: " + netProfit50And3);
-			pw2.write("50And7Total Buy: " + totalBuy50And7*maxBuyPrice + ", Total Sell: " + totalSell50And7*profitPercent10*maxBuyPrice + ", Holding Value: " + holdingValue50And7 + ", Holding Count: " + holdingCount50And7 + " , NetProfit: " + netProfit50And7);
-			pw3.write("50And5Total Buy: " + totalBuy50And5*maxBuyPrice + ", Total Sell: " + totalSell50And5*profitPercent05*maxBuyPrice + ", Holding Value: " + holdingValue50And5 + ", Holding Count: " + holdingCount50And5 + " , NetProfit: " + netProfit50And5);
-			pw4.write("50And10Total Buy: " + totalBuy50And10*maxBuyPrice + ", Total Sell: " + totalSell50And10*profitPercent10*maxBuyPrice + ", Holding Value: " + holdingValue50And10 + ", Holding Count: " + holdingCount50And10 + " , NetProfit: " + netProfit50And10);
+			System.out.println("50And3Total Buy: " + totalBuy50And3*maxBuyPrice + ", Total Sell: " + totalSell50And3*profitPercent03*maxBuyPrice + ", Holding Value: " + holdingValue50And3 + ", Holding Count: " + holdingCount50And3 + " , NetProfit: " + netProfit50And3);
+			System.out.println("50And7Total Buy: " + totalBuy50And7*maxBuyPrice + ", Total Sell: " + totalSell50And7*profitPercent07*maxBuyPrice + ", Holding Value: " + holdingValue50And7 + ", Holding Count: " + holdingCount50And7 + " , NetProfit: " + netProfit50And7);
+//			System.out.println("50And5Total Buy: " + totalBuy50And5*maxBuyPrice + ", Total Sell: " + totalSell50And5*profitPercent05*maxBuyPrice + ", Holding Value: " + holdingValue50And5 + ", Holding Count: " + holdingCount50And5 + " , NetProfit: " + netProfit50And5);
+//			System.out.println("50And10Total Buy: " + totalBuy50And10*maxBuyPrice + ", Total Sell: " + totalSell50And10*profitPercent10*maxBuyPrice + ", Holding Value: " + holdingValue50And10 + ", Holding Count: " + holdingCount50And10 + " , NetProfit: " + netProfit50And10);
+			pw1.write("50And3Total Buy: " + totalBuy50And3*maxBuyPrice + ", Total Sell: " + totalSell50And3*profitPercent03*maxBuyPrice + ", Holding Value: " + holdingValue50And3 + ", Holding Count: " + holdingCount50And3 + " , NetProfit: " + netProfit50And3);
+			pw3.write("50And7Total Buy: " + totalBuy50And7*maxBuyPrice + ", Total Sell: " + totalSell50And7*profitPercent07*maxBuyPrice + ", Holding Value: " + holdingValue50And7 + ", Holding Count: " + holdingCount50And7 + " , NetProfit: " + netProfit50And7);
+//			pw2.write("50And5Total Buy: " + totalBuy50And5*maxBuyPrice + ", Total Sell: " + totalSell50And5*profitPercent05*maxBuyPrice + ", Holding Value: " + holdingValue50And5 + ", Holding Count: " + holdingCount50And5 + " , NetProfit: " + netProfit50And5);
+//			pw4.write("50And10Total Buy: " + totalBuy50And10*maxBuyPrice + ", Total Sell: " + totalSell50And10*profitPercent10*maxBuyPrice + ", Holding Value: " + holdingValue50And10 + ", Holding Count: " + holdingCount50And10 + " , NetProfit: " + netProfit50And10);
 			System.out.println("Max Daily Buy Count: " + maxDailyBuyCount3 + "," + maxDailyBuyCount5 + "," + maxDailyBuyCount7 + "," + maxDailyBuyCount10);
 			System.out.println("Max Holding Count: " + maxHolding3 + "," + maxHolding5 + "," + maxHolding7 + "," + maxHolding10);
-
-			System.out.println();
+			pw.write(symbol + "," + origStart + "," + end + "," + startPrice + "," + endPrice + "," + totalBuy50And3 + "," + totalSell50And3 + "," + holdingValue50And3 + "," + holdingCount50And3 + "," + maxHolding3 + "," + maxDailyBuyCount3 + "," + netProfit50And3 + "," + sellMap50And3.entrySet() + "\n");
+			System.out.println(symbol + "," + origStart + "," + end + "," + startPrice + "," + endPrice + "," + totalBuy50And3 + "," + totalSell50And3 + "," + holdingValue50And3 + "," + holdingCount50And3 + "," + maxHolding3 + "," + maxDailyBuyCount3 + "," + netProfit50And3 + "," + sellMap50And3.entrySet());
 			pw1.close();
-			pw2.close();
+//			pw2.close();
 			pw3.close();
-			pw4.close();
+//			pw4.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Exception Caught: " + e);
 		}
 	}
-
 	private static boolean isBlockCheck(String symbol, Double lastPrice, ArrayList<Double> listOfBuys) {
 		boolean isOnePercentAway = true;
 		int orderCountPerBlock = 20;
