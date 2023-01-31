@@ -1,5 +1,7 @@
 package Backtesting.alpaca.volatility;
 
+import java.time.LocalTime;
+
 public class TickerConstants {
 	public static final String alpacaKey = "alpacaKey";
 	public static final String secretId = "secretId";
@@ -46,7 +48,7 @@ public class TickerConstants {
 	public static final String spacSpread = "spacSpread";
 	public static final String priorityCount = "priorityCount";
 	public static final String volatilityListIndiv = "volatilityListIndiv";
-	
+
 	//Config Files
 	public static final String alpacaConfig = "resources/alpacaConfig.properties";
 	public static final String tickerFactors = "resources/tickerConfig.properties";
@@ -65,11 +67,11 @@ public class TickerConstants {
 	public static final String eodEquity = "resources/eodEquity.properties";
 	public static final String dailyAverageVolumeConfig = "resources/dailyAverageVolumeConfig.properties";
 	public static final String dailyAverageVolume = "dailyAverageVolume";
-	
+
 	public static final String volatileTickerFactors = "resources/tickerVolatileConfig.properties";
 	public static final String trailingPrices = "resources/trailingPrices.properties";
 	public static final String globalSwitch = "globalSwitch";
-	
+
 	//Crypto Config
 	public static final String cryptoFactors = "resources/cryptoConfig.properties";
 	public static final String stablePricesCrypto = "resources/cryptoStablePriceConfig.properties";
@@ -78,37 +80,37 @@ public class TickerConstants {
 	public static final String dtCryptoSwitchVolatileConfig = "resources/volatileDTCryptoSwitchConfig.properties";
 	public static final String dailyCryptoAverageVolumeConfig = "resources/dailyCryptoAverageVolumeConfig.properties";
 	public static final String cryptoDecimalIncrement = "resources/CryptoDecimalFormat.properties";
-	
+
 	//Factors Constant
 	public static final String quantity = ".qty";
 	public static final String maxQuantity = ".maxQty";
 	public static final String profitFactor = ".profitFactor";
 	public static final String upTrendFactor = ".upTrendFactor";
 	public static final String downTrendFactor = ".downTrendFactor";
-	
+
 	public static final String oneTimeTickerAmount = ".oneTimePrice";
 	public static final String volatilityProfit = ".exitFactor";
 	public static final String maxCostBasis = ".maxCostBasis";
 	public static final String volatilityLossFactor = ".buyAgainFactor";
-	
+
 	public static final Double pdtLimit = 25752.00;
 	public static final Double lowLimit = 450.00;
-	
+
 	public static final String atbCbs = "ATB-CBS-";
 	public static final String atbCbTsss = "ATB-CBTSSS-";
 	public static final String atbCbsPdt = "ATB-CBS-PDT-";
 	public static final String atbCbsTssPdt = "ATB-CBTSSS-PDT-";
 	public static final String atbVolPdt = "ATB-VOL-PDT-";
-	
+
 	public static final String acbCrypto = "ACB-CRYPTO-";
-	
+
 	public static final String newStatus = "new";
 	public static final String acceptedStatus = "accepted";
 	public static final String filledStatus = "filled";
 	public static final String replacedStatus = "replaced";
 	public static final String canceledStatus = "canceled";
 	public static final String pendingCancel = "pending_cancel";
-	
+
 	//FINNHUB Constants
 	public static final String finnhubToken = "finnhubToken";
 	public static final String tokenValue = "tokenValue";
@@ -131,14 +133,20 @@ public class TickerConstants {
 	public static final String companyNewsEndpoint = "companyNewsEndpoint";
 	public static final String companyfilingsEndpoint = "companyfilingsEndpoint";
 	public static final String finnhubConfig = "resources/finnhubConfig.properties";
-	
+
 	public static final String assetClassCrypto = "crypto";
 	public static final String assetClassUSStocks = "us_equity";
-	
+
 	public static final String zoneOffset = "zoneOffset";
 	public static final String preMarket = "PreMarket";
 	public static final String morning = "Morning";
 	public static final String afternoon = "Afternoon";
 	public static final String postMarket = "PostMarket";
 	public static final String midDay = "MidDay";
+
+	//Nov 1st week to March 2nd Week
+	public static final LocalTime nonDaylightSavingsDayStart = LocalTime.of(14, 30, 0);
+	public static final LocalTime nonDaylightSavingsDayEnd = LocalTime.of(21, 0, 0);	
+	public static final LocalTime dayLightSavingsDayStart = LocalTime.of(13, 30, 0);
+	public static final LocalTime dayLightSavingsDayEnd = LocalTime.of(20, 0, 0);
 }
