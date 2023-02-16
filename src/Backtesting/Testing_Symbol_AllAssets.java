@@ -17,10 +17,10 @@ public class Testing_Symbol_AllAssets {
 
 	private static final String alpacaKey = "APCA-API-KEY-ID";
 	private static final String secretId = "APCA-API-SECRET-KEY";
-	private static final String alpacaKeyValue = "PKXTC9CIEKM9SXKWR7CN";
-	private static final String secretIdValue = "EWFyZnPGoQyTbSfPAcLO02ao5n6MXSvdbaQr19Y9";
-	private static final String alpacaKeyRealTime = "AK7LQFK01P6RWA5UVNZT";
-	private static final String secretIdRealTime = "CZJaF69oPrGsy2i4gvZsiSNNju6Pdtx9Gmh1tdyD";
+	private static final String alpacaKeyValue = "PKRIJQ5S2NWAR8EY6F0I";
+	private static final String secretIdValue = "ApxbCBxVUMyjIMbr9F25jHCAtbO8B3vdKigNJaOz";
+	private static final String alpacaKeyRealTime = "PKRIJQ5S2NWAR8EY6F0I";
+	private static final String secretIdRealTime = "ApxbCBxVUMyjIMbr9F25jHCAtbO8B3vdKigNJaOz";
 	private static final String headerContentType = "Content-Type";
 	private static final String headerContentTypeValue = "application/json";
 	private static final String paperUrl = "https://paper-api.alpaca.markets";
@@ -62,9 +62,9 @@ public class Testing_Symbol_AllAssets {
 		//		}
 		//		do {
 		//			PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
-		//			pw.write(LocalDateTime.now().toString() + "\t" + openPosition.getSymbol()+ "\t" + openPosition.getCurrent_price()+ "\t" + openPosition.getAvg_entry_price()+ 
-		//					"\t" + openPosition.getLastday_price() + "\t" + openPosition.getMarket_value() + 
-		//					"\t" + openPosition.getSide()+ "\n");
+		//			pw.write(LocalDateTime.now().toString() + "," + openPosition.getSymbol()+ "," + openPosition.getCurrent_price()+ "," + openPosition.getAvg_entry_price()+ 
+		//					"," + openPosition.getLastday_price() + "," + openPosition.getMarket_value() + 
+		//					"," + openPosition.getSide()+ "\n");
 		//		}while(LocalDateTime.now().isBefore(marketCloseTime));
 		//			
 		AssetsPojo assets[] = alpacaAccount.getAssets();
@@ -72,22 +72,22 @@ public class Testing_Symbol_AllAssets {
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
 //		FileOutputStream fo = new FileOutputStream(file);
 		int datList = assets.length;
-		pw.write("Exchange" + "\t" + "Symbol" + "\t" + "Status" + "\t" + "Fractionable" + "\t" + "Marginable" + "\t" + "Shortable" + "\t" + "ETB" + "\t" + "Tradable" + "\n");
+		pw.write("Exchange" + "," + "Symbol" + "," + "Status" + "," + "Fractionable" + "," + "Marginable" + "," + "Shortable" + "," + "ETB" + "," + "Tradable" + "\n");
 		for (int i = 0; i < datList; i++){
-			pw.write(assets[i].getExchange() + "\t\t" + assets[i].getSymbol() + "\t" + assets[i].getStatus() + "\t"
-					+ assets[i].isFractionable() + "\t\t" + assets[i].isMarginable() + "\t\t" + assets[i].isShortable() + "\t\t" 
-					+ assets[i].isEasy_to_borrow() + "\t" + assets[i].isTradable()  + "\n");
+			pw.write(assets[i].getExchange() + "," + assets[i].getSymbol() + "," + assets[i].getStatus() + ","
+					+ assets[i].isFractionable() + "," + assets[i].isMarginable() + "," + assets[i].isShortable() + "," 
+					+ assets[i].isEasy_to_borrow() + "," + assets[i].isTradable()  + "\n");
 		}
 		File fileTrue = new File("C:\\Users\\nakul\\Documents\\outputTrueAssets - " + localTime + ".txt");
 		PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
 //		FileOutputStream fo1 = new FileOutputStream(fileTrue);
 		int assetTotalList = assets.length;
-		pw1.write("Exchange" + "\t" + "Symbol" + "\t" + "Status" + "\t" + "Fractionable" + "\t" + "Marginable" + "\t" + "Shortable" + "\t" + "ETB" + "\t" + "Tradable" + "\n");
+		pw1.write("Exchange" + "," + "Symbol" + "," + "Status" + "," + "Fractionable" + "," + "Marginable" + "," + "Shortable" + "," + "ETB" + "," + "Tradable" + "\n");
 		for (int i = 0; i < assetTotalList; i++){
 			if("active".equals(assets[i].getStatus()) && assets[i].isFractionable() && assets[i].isMarginable() && assets[i].isShortable() && assets[i].isEasy_to_borrow() && assets[i].isTradable()) {
-				pw1.write(assets[i].getExchange() + "\t\t" + assets[i].getSymbol() + "\t" + assets[i].getStatus() + "\t"
-						+ assets[i].isFractionable() + "\t\t" + assets[i].isMarginable() + "\t\t" + assets[i].isShortable() + "\t\t" 
-						+ assets[i].isEasy_to_borrow() + "\t" + assets[i].isTradable()  + "\n");
+				pw1.write(assets[i].getExchange() + "," + assets[i].getSymbol() + "," + assets[i].getStatus() + ","
+						+ assets[i].isFractionable() + "," + assets[i].isMarginable() + "," + assets[i].isShortable() + "," 
+						+ assets[i].isEasy_to_borrow() + "," + assets[i].isTradable()  + "\n");
 			}
 		}
 		//placeOrder = alpacaAccount.buySymbolPrice(symbol, priceToBuy);
@@ -104,9 +104,9 @@ public class Testing_Symbol_AllAssets {
 		//					Thread.sleep(500);
 		//					placedOrder = alpacaAccount.getOrderDetails(placeOrder.getId());
 		//				}
-		//				pw.write(placedOrder.getSymbol() + "\t" + placedOrder.getQty()+ "\t" + placedOrder.getFilled_qty() + 
-		//						"\t" + placedOrder.getSide() + "\t" + placedOrder.getFilled_avg_price() + 
-		//						"\t" + placedOrder.getFilled_at()+ "\n");
+		//				pw.write(placedOrder.getSymbol() + "," + placedOrder.getQty()+ "," + placedOrder.getFilled_qty() + 
+		//						"," + placedOrder.getSide() + "," + placedOrder.getFilled_avg_price() + 
+		//						"," + placedOrder.getFilled_at()+ "\n");
 		//				priceToSell = Double.valueOf(placedOrder.getFilled_avg_price()); 
 		//				do {
 		//					//Thread.sleep(3000);
@@ -118,8 +118,8 @@ public class Testing_Symbol_AllAssets {
 		//							continue;
 		//						}
 		//						else {
-		//							pw.write(quote.getAskprice() + "\t" + quote.getAsksize()+ "\t" + quote.getBidprice() + 
-		//									"\t" + quote.getBidsize() + "\t" + quote.getTimestamp() + "\n");
+		//							pw.write(quote.getAskprice() + "," + quote.getAsksize()+ "," + quote.getBidprice() + 
+		//									"," + quote.getBidsize() + "," + quote.getTimestamp() + "\n");
 		//							break;
 		//						}
 		//					}
@@ -130,8 +130,8 @@ public class Testing_Symbol_AllAssets {
 		//							continue;
 		//						}
 		//						else {
-		//							pw.write(quote.getAskprice() + "\t" + quote.getAsksize()+ "\t" + quote.getBidprice() + 
-		//									"\t" + quote.getBidsize() + "\t" + quote.getTimestamp() + "\n");
+		//							pw.write(quote.getAskprice() + "," + quote.getAsksize()+ "," + quote.getBidprice() + 
+		//									"," + quote.getBidsize() + "," + quote.getTimestamp() + "\n");
 		//							break;
 		//						}
 		//					}*/
@@ -141,7 +141,7 @@ public class Testing_Symbol_AllAssets {
 		//						continue;
 		//					}
 		//					else {
-		//						pw.write(lastTrade.getPrice() + "\t" + lastTrade.getSize()+ "\t" + lastTrade.getTimestamp() + "\n");
+		//						pw.write(lastTrade.getPrice() + "," + lastTrade.getSize()+ "," + lastTrade.getTimestamp() + "\n");
 		//						break;
 		//					}
 		//				}while(true);
@@ -155,9 +155,9 @@ public class Testing_Symbol_AllAssets {
 		//					Thread.sleep(500);
 		//					placedOrder = alpacaAccount.getOrderDetails(placeOrder.getId());
 		//				}
-		//				pw.write(placedOrder.getSymbol() + "\t" + placedOrder.getQty()+ "\t" + placedOrder.getFilled_qty() + 
-		//						"\t" + placedOrder.getSide() + "\t" + placedOrder.getFilled_avg_price() + 
-		//						"\t" + placedOrder.getFilled_at()+ "\n");
+		//				pw.write(placedOrder.getSymbol() + "," + placedOrder.getQty()+ "," + placedOrder.getFilled_qty() + 
+		//						"," + placedOrder.getSide() + "," + placedOrder.getFilled_avg_price() + 
+		//						"," + placedOrder.getFilled_at()+ "\n");
 		//				priceToBuy = Double.valueOf(placedOrder.getFilled_avg_price()); 
 		//				do {
 		//					//Thread.sleep(3000);
@@ -169,8 +169,8 @@ public class Testing_Symbol_AllAssets {
 		//							continue;
 		//						}
 		//						else {
-		//							pw.write(quote.getAskprice() + "\t" + quote.getAsksize()+ "\t" + quote.getBidprice() + 
-		//									"\t" + quote.getBidsize() + "\t" + quote.getTimestamp() + "\n");
+		//							pw.write(quote.getAskprice() + "," + quote.getAsksize()+ "," + quote.getBidprice() + 
+		//									"," + quote.getBidsize() + "," + quote.getTimestamp() + "\n");
 		//							break;
 		//						}
 		//					}
@@ -180,8 +180,8 @@ public class Testing_Symbol_AllAssets {
 		//							continue;
 		//						}
 		//						else {
-		//							pw.write(quote.getAskprice() + "\t" + quote.getAsksize()+ "\t" + quote.getBidprice() + 
-		//									"\t" + quote.getBidsize() + "\t" + quote.getTimestamp() + "\n");
+		//							pw.write(quote.getAskprice() + "," + quote.getAsksize()+ "," + quote.getBidprice() + 
+		//									"," + quote.getBidsize() + "," + quote.getTimestamp() + "\n");
 		//							break;
 		//						}
 		//					}*/
@@ -191,7 +191,7 @@ public class Testing_Symbol_AllAssets {
 		//						continue;
 		//					}
 		//					else {
-		//						pw.write(lastTrade.getPrice() + "\t" + lastTrade.getSize()+ "\t" + lastTrade.getTimestamp() + "\n");
+		//						pw.write(lastTrade.getPrice() + "," + lastTrade.getSize()+ "," + lastTrade.getTimestamp() + "\n");
 		//						break;
 		//					}
 		//				}while(true);

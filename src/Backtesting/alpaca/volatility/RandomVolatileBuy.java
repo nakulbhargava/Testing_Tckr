@@ -29,8 +29,8 @@ public class RandomVolatileBuy {
 		 * Sell at a constant/random profit
 		 * Max buy is configurable for the day
 		 */
-		LocalDate start = LocalDate.now().minusMonths(20);
-		LocalDate end = LocalDate.now().minusMonths(17);
+		LocalDate start = LocalDate.now().minusMonths(6);
+		LocalDate end = LocalDate.now().minusMonths(0);
 		ExtractVolatileStocks demo = new ExtractVolatileStocks();
 		AlpacaApiCaller alpacaAccount = TickerUtils.getAlpacaAccountObject();
 		File file = new File("logs/outputReport.txt" + start + "_" + end);
@@ -38,7 +38,7 @@ public class RandomVolatileBuy {
 		try {
 		for(int i = 0 ; i < 50 ; i++) {
 			pw0.write("Run Instance: " + i+1 + "\n");
-			start = LocalDate.now().minusMonths(20);
+			start = LocalDate.now().minusMonths(6);
 			File file1 = new File("logs/output25And5.txt" + LocalDateTime.now().getNano() + LocalDateTime.now().getHour());
 			PrintWriter pw1 = new PrintWriter(new FileOutputStream(file1), true);
 			File file2 = new File("logs/output25And10.txt" + LocalDateTime.now().getNano() + LocalDateTime.now().getMinute());
@@ -81,17 +81,17 @@ public class RandomVolatileBuy {
 
 			ArrayList<String> highlyVolatileStocksBackUp = new ArrayList<String>();
 			while(start.isBefore(end)) {
-				if(!(start.getDayOfWeek() == DayOfWeek.MONDAY || start.getDayOfWeek() == DayOfWeek.WEDNESDAY)) {
-					System.out.println(start + " is not monday or wednesday!");
-					start = start.plusDays(1);
-					continue;
-				}
+//				if(!(start.getDayOfWeek() == DayOfWeek.MONDAY || start.getDayOfWeek() == DayOfWeek.WEDNESDAY)) {
+//					System.out.println(start + " is not monday or wednesday!");
+//					start = start.plusDays(1);
+//					continue;
+//				}
 				int dailyBuyCount25And5 = 0;
 				int dailyBuyCount25And10 = 0;
 				int dailyBuyCount50And5 = 0;
 				int dailyBuyCount50And10 = 0;
 				List<String> highlyVolatileStocks = new ArrayList<String>();
-				if(start.getDayOfMonth() <=5 || highlyVolatileStocks.isEmpty()) {
+				if(start.getDayOfMonth() <=3 || highlyVolatileStocks.isEmpty()) {
 					highlyVolatileStocks =demo.extractVolatileStocks(start);
 					highlyVolatileStocksBackUp.clear();
 					highlyVolatileStocksBackUp.addAll(highlyVolatileStocks);

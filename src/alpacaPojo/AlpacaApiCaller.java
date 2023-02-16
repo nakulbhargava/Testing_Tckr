@@ -962,6 +962,53 @@ public class AlpacaApiCaller extends AlpacaRestParams implements Cloneable {
 
 		return getJsonObject(response.body(), TimeframePojo.class);
 	}
+	
+	public List<TimeframePojo> getMultiTimeframeCrypto(String symbols, String startTime, String endTime, String timeframe, String pageToken){
+		HttpClient client = HttpClient.newHttpClient();
+
+		// Create HTTP request object
+		HttpRequest request = HttpRequest.newBuilder()
+				.uri(URI.create(dataUrl + activeCryptoVersion + "/bars?symbols=" + symbols + "&start=" + startTime + "&end=" + endTime + "&timeframe=" + timeframe + "&limit=10000" + "&page_token=" + pageToken))
+				.GET()
+				.header(alpacaKey, alpacaKeyRealTime)
+				.header(headerContentType, headerContentTypeValue)
+				.header(secretId, secretIdRealTime)
+				.build();
+		// Send HTTP request
+		System.out.println("Timeframe Request! - " + LocalDateTime.now());
+		try {
+			HttpResponse<String> response = client.send(request,
+					HttpResponse.BodyHandlers.ofString());
+			System.out.println("Timeframe Response! - " + LocalDateTime.now());
+			Map<String, String> timeframeMaps = getJsonObjectMap(response.body(), Object.class);
+			List<TimeframePojo> timeframes = new ArrayList<TimeframePojo>();
+			for (Map.Entry<String, String> entry : timeframeMaps.entrySet()) {
+				if(entry.getKey().equals("bars")) {
+					//					Map<String, Object> barMaps = entry.getValue().toString();
+
+					Map<String, String> barMaps = getJsonObjectConvertor(entry.getValue(), Object.class);
+					for(Map.Entry<String, String> barEntry : barMaps.entrySet()) {
+						BarsPojo[] bars = getJsonObjectConvertor(barEntry.getValue(), BarsPojo[].class);
+						TimeframePojo time = new TimeframePojo();
+						time.setSymbol(barEntry.getKey().toString());
+						time.setBars(bars);
+
+						timeframes.add(time);
+					}
+				}
+				if(entry.getKey().equals("next_page_token") && entry.getValue() != null) {
+					timeframes.addAll(getMultiTimeframe(symbols, startTime, endTime, timeframe, entry.getValue()));
+				}
+
+			}
+			return timeframes;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	@SuppressWarnings("static-access")
 	public AssetsPojo[] getAssets() throws IOException, InterruptedException {
 		HttpClient client = HttpClient.newHttpClient();

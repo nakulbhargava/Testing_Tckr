@@ -32,17 +32,17 @@ public class BlockVolatileStrategy {
 		 * Sell at a constant/random profit
 		 * Max buy is configurable for the day
 		 */
-		LocalDate start = LocalDate.now().minusMonths(55);
-		LocalDate end = LocalDate.now();
+		LocalDate start = LocalDate.now().minusMonths(2);
+		LocalDate end = LocalDate.now().minusMonths(0);
 		AlpacaApiCaller alpacaAccount = TickerUtils.getAlpacaAccountObject();
 		File file = new File("logs/outputReport.txt" + start + "_" + end + "_" + LocalDateTime.now().getNano());
 		pw = new PrintWriter(new FileOutputStream(file), true);
 		pw.write("Symbol,Start Date,End Date,Start Price,Close Price,Net Buy,Net Sell,Holding Value,Holding Count,Max Count,Max Daily Count,Net Profit,Holdings\n");
-//		Properties movingStocks = TickerUtils.loadProperties("resources/bestMovingStocks.properties");
-//		for(Entry<Object, Object> symbol : movingStocks.entrySet()) {
-//			executeBlock(symbol.getKey().toString(), start, end, alpacaAccount);
-//		}
-		executeBlock("AAPL", start, end, alpacaAccount);
+		Properties movingStocks = TickerUtils.loadProperties("resources/volatileBlockStocks.properties");
+		for(Entry<Object, Object> symbol : movingStocks.entrySet()) {
+			executeBlock(symbol.getKey().toString(), start, end, alpacaAccount);
+		}
+//		executeBlock("AAPL", start, end, alpacaAccount);
 		pw.close();
 
 	}
@@ -80,8 +80,8 @@ public class BlockVolatileStrategy {
 			//			int totalSell50And10 = 0;
 			//			Double profitPercent10 = 1.01;
 			//			Double profitPercent05 = 1.02;
-			Double profitPercent03 = 1.015;
-			Double profitPercent07 = 1.025;
+			Double profitPercent03 = 1.03;
+			Double profitPercent07 = 1.03;
 			DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
 			HashMap<String, ArrayList<Double>> sellMap50And3 = new HashMap<String, ArrayList<Double>>();
 			//			HashMap<String, ArrayList<Double>> sellMap50And5 = new HashMap<String, ArrayList<Double>>();
@@ -182,14 +182,14 @@ public class BlockVolatileStrategy {
 						//					System.out.println("Daily Buy Count: " + dailyBuyCount);
 						LocalDate currentDay = sortedKey.toLocalDate();
 						int i = 1;
-						while(dayTimeMap.get(currentDay.minusDays(i)) == null && currentDay.minusDays(i).isAfter(origStart)) i++;
-						Double prevDayClose = dayTimeMap.get(currentDay.minusDays(i)) == null ? 10000.0 : Double.valueOf(dayTimeMap.get(currentDay.minusDays(i)).getClosePrice());
-						i++;
-						while(dayTimeMap.get(currentDay.minusDays(i)) == null && currentDay.minusDays(i).isAfter(origStart)) i++;
-						Double prevPrevDayClose = dayTimeMap.get(currentDay.minusDays(i)) == null ? 10000.0 : Double.valueOf(dayTimeMap.get(currentDay.minusDays(i)).getClosePrice());
-						i++;
-						while(dayTimeMap.get(currentDay.minusDays(i)) == null && currentDay.minusDays(i).isAfter(origStart)) i++;
-						Double prev3DayClose = dayTimeMap.get(currentDay.minusDays(i)) == null ? 10000.0 : Double.valueOf(dayTimeMap.get(currentDay.minusDays(i)).getClosePrice());
+//						while(dayTimeMap.get(currentDay.minusDays(i)) == null && currentDay.minusDays(i).isAfter(origStart)) i++;
+//						Double prevDayClose = dayTimeMap.get(currentDay.minusDays(i)) == null ? 10000.0 : Double.valueOf(dayTimeMap.get(currentDay.minusDays(i)).getClosePrice());
+//						i++;
+//						while(dayTimeMap.get(currentDay.minusDays(i)) == null && currentDay.minusDays(i).isAfter(origStart)) i++;
+//						Double prevPrevDayClose = dayTimeMap.get(currentDay.minusDays(i)) == null ? 10000.0 : Double.valueOf(dayTimeMap.get(currentDay.minusDays(i)).getClosePrice());
+//						i++;
+//						while(dayTimeMap.get(currentDay.minusDays(i)) == null && currentDay.minusDays(i).isAfter(origStart)) i++;
+//						Double prev3DayClose = dayTimeMap.get(currentDay.minusDays(i)) == null ? 10000.0 : Double.valueOf(dayTimeMap.get(currentDay.minusDays(i)).getClosePrice());
 
 //						if(vwap.compareTo(prevDayClose*1.2) > 0 || vwap.compareTo(prevPrevDayClose*1.2) > 0 || vwap.compareTo(prev3DayClose*1.2) > 0) {
 //							System.out.println(symbol + " - Skipping " + sortedKey + " as the price is greater than 20% from prev day close!" + prevDayClose + "," + prevPrevDayClose + "," + vwap);
@@ -394,45 +394,16 @@ public class BlockVolatileStrategy {
 				holdingValue50And7 = holdingValue50And7 + holdingPrice*totalShares;
 				holdingCount50And7 = holdingCount50And7 + entry.getValue().size();
 			}
-			//
-			//			for (Map.Entry<String, ArrayList<Double>> entry : sellMap50And5.entrySet()) {
-			//				Double holdingPrice = lastPriceMap.get(entry.getKey());
-			//				System.out.println(entry.getKey() + "," + holdingPrice);
-			//				Double totalShares = 0.0;
-			//				for(Double holding : entry.getValue()) {
-			//					//					Double buyPrice = holding*0.82;
-			//					totalShares = totalShares + maxBuyPrice/holding;
-			//				}
-			//				holdingValue50And5 = holdingValue50And5 + holdingPrice*totalShares;
-			//				holdingCount50And5 = holdingCount50And5 + entry.getValue().size();
-			//			}
-			//
-			//			for (Map.Entry<String, ArrayList<Double>> entry : sellMap50And10.entrySet()) {
-			//				Double holdingPrice = lastPriceMap.get(entry.getKey());
-			//				System.out.println(entry.getKey() + "," + holdingPrice);
-			//				Double totalShares = 0.0;
-			//				for(Double holding : entry.getValue()) {
-			//					//					Double buyPrice = holding*0.82;
-			//					totalShares = totalShares + maxBuyPrice/holding;
-			//				}
-			//				holdingValue50And10 = holdingValue50And10 + holdingPrice*totalShares;
-			//				holdingCount50And10 = holdingCount50And10 + entry.getValue().size();
-			//			}
 
 
 			Double netProfit50And3 = (totalSell50And3*profitPercent03*maxBuyPrice) + holdingValue50And3 - (totalBuy50And3*maxBuyPrice);
 			Double netProfit50And7 = (totalSell50And7*profitPercent07*maxBuyPrice) + holdingValue50And7 - (totalBuy50And7*maxBuyPrice);
-			//			Double netProfit50And5 = (totalSell50And5*profitPercent05*maxBuyPrice) + holdingValue50And5 - (totalBuy50And5*maxBuyPrice);
-			//			Double netProfit50And10 = (totalSell50And10*profitPercent10*maxBuyPrice) + holdingValue50And10 - (totalBuy50And10*maxBuyPrice);
+
 
 			System.out.println("50And3Total Buy: " + totalBuy50And3*maxBuyPrice + ", Total Sell: " + totalSell50And3*profitPercent03*maxBuyPrice + ", Holding Value: " + holdingValue50And3 + ", Holding Count: " + holdingCount50And3 + " , NetProfit: " + netProfit50And3);
 			System.out.println("50And7Total Buy: " + totalBuy50And7*maxBuyPrice + ", Total Sell: " + totalSell50And7*profitPercent07*maxBuyPrice + ", Holding Value: " + holdingValue50And7 + ", Holding Count: " + holdingCount50And7 + " , NetProfit: " + netProfit50And7);
-			//			System.out.println("50And5Total Buy: " + totalBuy50And5*maxBuyPrice + ", Total Sell: " + totalSell50And5*profitPercent05*maxBuyPrice + ", Holding Value: " + holdingValue50And5 + ", Holding Count: " + holdingCount50And5 + " , NetProfit: " + netProfit50And5);
-			//			System.out.println("50And10Total Buy: " + totalBuy50And10*maxBuyPrice + ", Total Sell: " + totalSell50And10*profitPercent10*maxBuyPrice + ", Holding Value: " + holdingValue50And10 + ", Holding Count: " + holdingCount50And10 + " , NetProfit: " + netProfit50And10);
 			pw1.write("50And3Total Buy: " + totalBuy50And3*maxBuyPrice + ", Total Sell: " + totalSell50And3*profitPercent03*maxBuyPrice + ", Holding Value: " + holdingValue50And3 + ", Holding Count: " + holdingCount50And3 + " , NetProfit: " + netProfit50And3);
 			pw3.write("50And7Total Buy: " + totalBuy50And7*maxBuyPrice + ", Total Sell: " + totalSell50And7*profitPercent07*maxBuyPrice + ", Holding Value: " + holdingValue50And7 + ", Holding Count: " + holdingCount50And7 + " , NetProfit: " + netProfit50And7);
-			//			pw2.write("50And5Total Buy: " + totalBuy50And5*maxBuyPrice + ", Total Sell: " + totalSell50And5*profitPercent05*maxBuyPrice + ", Holding Value: " + holdingValue50And5 + ", Holding Count: " + holdingCount50And5 + " , NetProfit: " + netProfit50And5);
-			//			pw4.write("50And10Total Buy: " + totalBuy50And10*maxBuyPrice + ", Total Sell: " + totalSell50And10*profitPercent10*maxBuyPrice + ", Holding Value: " + holdingValue50And10 + ", Holding Count: " + holdingCount50And10 + " , NetProfit: " + netProfit50And10);
 			System.out.println("Max Daily Buy Count: " + maxDailyBuyCount3 + "," + maxDailyBuyCount5 + "," + maxDailyBuyCount7 + "," + maxDailyBuyCount10);
 			System.out.println("Max Holding Count: " + maxHolding3 + "," + maxHolding5 + "," + maxHolding7 + "," + maxHolding10);
 			pw.write(symbol + "," + origStart + "," + end + "," + startPrice + "," + endPrice + "," + totalBuy50And3 + "," + totalSell50And3 + "," + holdingValue50And3 + "," + holdingCount50And3 + "," + maxHolding3 + "," + maxDailyBuyCount3 + "," + netProfit50And3 + "," + extraBuy3 + "," + profitPercent03 + "\n");

@@ -35,8 +35,8 @@ public class BlockVolatileStrategyDayTrade {
 		
 		AlpacaApiCaller alpacaAccount = TickerUtils.getAlpacaAccountObject();		
 		Properties movingStocks = TickerUtils.loadProperties("resources/volatileBlockStocks.properties");
-		LocalDate start = LocalDate.now().minusMonths(7);
-		LocalDate end = LocalDate.now().minusMonths(3);
+		LocalDate start = LocalDate.now().minusMonths(2);
+		LocalDate end = LocalDate.now().minusMonths(0).plusDays(0);
 		for(Entry<Object, Object> symbol : movingStocks.entrySet()) {
 			File file = new File("logs/outputReport.txt" + start + "_" + end + "_" + LocalDateTime.now().getNano());
 			pw = new PrintWriter(new FileOutputStream(file), true);
@@ -47,7 +47,7 @@ public class BlockVolatileStrategyDayTrade {
 //		File file = new File("logs/outputReport.txt" + start + "_" + end + "_" + LocalDateTime.now().getNano());
 //		pw = new PrintWriter(new FileOutputStream(file), true);
 //		pw.write("Symbol,Start Date,End Date,Start Price,Close Price,Net Buy,Net Sell,Holding Value,Max Count,Net Profit,PP,isGrowing,ActualPP,PositiveProfit\n");
-//		executeBlock("AAPL", start, end, alpacaAccount);
+//		executeBlock("GOTU", start, end, alpacaAccount);
 //		pw.close();
 
 	}
@@ -65,7 +65,7 @@ public class BlockVolatileStrategyDayTrade {
 			
 			Double maxBuyPrice = 100.0;
 			
-			int maxDailyBuyCount50 = 6;
+			int maxDailyBuyCount50 = 60;
 
 			//			int totalBuy50And5 = 0;
 			//			int totalSell50And5 = 0;
@@ -90,18 +90,18 @@ public class BlockVolatileStrategyDayTrade {
 			//			highlyVolatileStocks.add("HKD");
 			//			highlyVolatileStocks.add("EDBL");
 			//			ArrayList<String> highlyVolatileStocksBackUp = new ArrayList<String>();
-			LocalDate origStart = start.minusDays(0);
-			HashMap<LocalDate, BarsPojo> dayTimeMap = new HashMap<LocalDate, BarsPojo>();
-			List<TimeframePojo> multiDayime = alpacaAccount.getMultiTimeframe(highlyVolatileStocks.toString().substring(1, highlyVolatileStocks.toString().length()-1).replaceAll(" ", ""), start.toString(), end.toString(), "1Day", "");
-			for(TimeframePojo dayTime : multiDayime) {
-				BarsPojo[] dayBars = dayTime.getBars();
-				for(BarsPojo bar : dayBars) {
-					bar.setSymbol(dayTime.getSymbol());
-					LocalDate day = LocalDate.parse(bar.getTime(), FORMATTER);
-//					BarsPojo dayBar = dayTimeMap.getOrDefault(day, new BarsPojo());
-					dayTimeMap.put(day, bar);
-				}
-			}
+//			LocalDate origStart = start.minusDays(0);
+//			HashMap<LocalDate, BarsPojo> dayTimeMap = new HashMap<LocalDate, BarsPojo>();
+//			List<TimeframePojo> multiDayime = alpacaAccount.getMultiTimeframe(highlyVolatileStocks.toString().substring(1, highlyVolatileStocks.toString().length()-1).replaceAll(" ", ""), start.toString(), end.toString(), "1Day", "");
+//			for(TimeframePojo dayTime : multiDayime) {
+//				BarsPojo[] dayBars = dayTime.getBars();
+//				for(BarsPojo bar : dayBars) {
+//					bar.setSymbol(dayTime.getSymbol());
+//					LocalDate day = LocalDate.parse(bar.getTime(), FORMATTER);
+////					BarsPojo dayBar = dayTimeMap.getOrDefault(day, new BarsPojo());
+//					dayTimeMap.put(day, bar);
+//				}
+//			}
 			while(start.isBefore(end)) {
 				String startPrice = "", endPrice = "";
 				int totalBuy50And3 = 0;
@@ -218,7 +218,7 @@ public class BlockVolatileStrategyDayTrade {
 						}
 						sells50And7.removeAll(sellExecuted50And7);
 						
-						if(maxHolding7 < maxDailyBuyCount50 && isBlockCheck(symbol, vwap, sells50And7)  && vwap.compareTo(lowPrice) > 0 /* && TickerUtils.calculateUpTrendMinute(uptrendFrame) == 1*/) { 
+						if(maxHolding7 < maxDailyBuyCount50 && isBlockCheck(symbol, vwap, sells50And7)  && vwap.compareTo(lowPrice) > 0 /*&& TickerUtils.calculateUpTrendMinute(uptrendFrame) == 1*/) { 
 							sells50And7.add(vwap);
 
 							totalBuy50And7++;
@@ -387,10 +387,10 @@ public class BlockVolatileStrategyDayTrade {
 		int currentBlockNumber = listOfBuys.size()/orderCountPerBlock;
 		for(Double buyPrice : listOfBuys ) {
 			if(buyPrice.compareTo(maxSellPrice) > 0) maxSellPrice = Double.valueOf(buyPrice);
-			if(lastPrice.compareTo(buyPrice*.97) > 0 && lastPrice.compareTo(buyPrice*1.01) < 0) isOnePercentAway = false;
+			if(lastPrice.compareTo(buyPrice*.98) > 0 && lastPrice.compareTo(buyPrice*1.02) < 0) isOnePercentAway = false;
 		}
 		//		System.out.println(symbol + " - Blocks: " + maxSellPrice*0.9 + "," +  maxSellPrice*0.8 + "," + maxSellPrice*0.7 + "," + maxSellPrice*0.6 + "," +
-		//				maxSellPrice*0.5 + "," + maxSellPrice*0.4 + "," + maxSellPrice*0.3 + "," + maxSellPrice*0.2 + "," + maxSellPrice*0.1);
+		//				maxSellPrice*0.5 + "," + maxSellPrice*0.4 + "," + maxSellPrice*0.3 + "," + maxSellPrices*0.2 + "," + maxSellPrice*0.1);
 		Double higherBlockLowPrice  = maxSellPrice*(1 - currentBlockNumber/10);
 		if((lastPrice.compareTo(higherBlockLowPrice) < 0 || currentBlockNumber == 0) && isOnePercentAway){
 			//			System.out.println(symbol + " - Block Check Passed, " + "Higher Block Low Price: " + higherBlockLowPrice + ", Last Price: " + lastPrice + ", ListOfBuys: " + listOfBuys);
