@@ -50,9 +50,9 @@ public class RandomVolatileBuy {
 			HashMap<String, Double> meanPriceMap = new HashMap<String, Double>();
 			HashMap<String, Double> lastPriceMap = new HashMap<String, Double>();
 			Double maxBuyPrice = 100.0;
-			int maxDailyBuyCount25 = 25;
+			int maxDailyBuyCount25 = 100;
 			int maxDailyBuyCount50 = 50;
-			int maxTotalBuys = 400;
+			int maxTotalBuys = 300;
 			int totalBuy25And5 = 0;
 			int totalSell25And5 = 0;
 			int totalBuy50And5 = 0;
@@ -92,7 +92,7 @@ public class RandomVolatileBuy {
 				int dailyBuyCount50And10 = 0;
 				List<String> highlyVolatileStocks = new ArrayList<String>();
 				if(start.getDayOfMonth() <=3 || highlyVolatileStocks.isEmpty()) {
-					highlyVolatileStocks =demo.extractVolatileStocks(start);
+					highlyVolatileStocks =demo.extractVolatileStocksFromFile("");
 					highlyVolatileStocksBackUp.clear();
 					highlyVolatileStocksBackUp.addAll(highlyVolatileStocks);
 				}

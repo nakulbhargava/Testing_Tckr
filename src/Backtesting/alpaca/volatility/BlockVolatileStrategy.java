@@ -32,13 +32,15 @@ public class BlockVolatileStrategy {
 		 * Sell at a constant/random profit
 		 * Max buy is configurable for the day
 		 */
-		LocalDate start = LocalDate.now().minusMonths(2);
+		LocalDate start = LocalDate.now().minusYears(0).minusMonths(0).minusDays(15);;
 		LocalDate end = LocalDate.now().minusMonths(0);
 		AlpacaApiCaller alpacaAccount = TickerUtils.getAlpacaAccountObject();
 		File file = new File("logs/outputReport.txt" + start + "_" + end + "_" + LocalDateTime.now().getNano());
 		pw = new PrintWriter(new FileOutputStream(file), true);
 		pw.write("Symbol,Start Date,End Date,Start Price,Close Price,Net Buy,Net Sell,Holding Value,Holding Count,Max Count,Max Daily Count,Net Profit,Holdings\n");
 		Properties movingStocks = TickerUtils.loadProperties("resources/volatileBlockStocks.properties");
+//		Properties movingStocks = TickerUtils.loadProperties("resources/fixedContinuousStocks.csv");
+		
 		for(Entry<Object, Object> symbol : movingStocks.entrySet()) {
 			executeBlock(symbol.getKey().toString(), start, end, alpacaAccount);
 		}
@@ -80,8 +82,8 @@ public class BlockVolatileStrategy {
 			//			int totalSell50And10 = 0;
 			//			Double profitPercent10 = 1.01;
 			//			Double profitPercent05 = 1.02;
-			Double profitPercent03 = 1.03;
-			Double profitPercent07 = 1.03;
+			Double profitPercent03 = 1.01;
+			Double profitPercent07 = 1.02;
 			DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
 			HashMap<String, ArrayList<Double>> sellMap50And3 = new HashMap<String, ArrayList<Double>>();
 			//			HashMap<String, ArrayList<Double>> sellMap50And5 = new HashMap<String, ArrayList<Double>>();
@@ -99,17 +101,17 @@ public class BlockVolatileStrategy {
 			//			highlyVolatileStocks.add("EDBL");
 			//			ArrayList<String> highlyVolatileStocksBackUp = new ArrayList<String>();
 			LocalDate origStart = start.minusDays(0);
-			HashMap<LocalDate, BarsPojo> dayTimeMap = new HashMap<LocalDate, BarsPojo>();
-			List<TimeframePojo> multiDayime = alpacaAccount.getMultiTimeframe(highlyVolatileStocks.toString().substring(1, highlyVolatileStocks.toString().length()-1).replaceAll(" ", ""), start.toString(), end.toString(), "1Day", "");
-			for(TimeframePojo dayTime : multiDayime) {
-				BarsPojo[] dayBars = dayTime.getBars();
-				for(BarsPojo bar : dayBars) {
-					bar.setSymbol(dayTime.getSymbol());
-					LocalDate day = LocalDate.parse(bar.getTime(), FORMATTER);
-//					BarsPojo dayBar = dayTimeMap.getOrDefault(day, new BarsPojo());
-					dayTimeMap.put(day, bar);
-				}
-			}
+//			HashMap<LocalDate, BarsPojo> dayTimeMap = new HashMap<LocalDate, BarsPojo>();
+//			List<TimeframePojo> multiDayime = alpacaAccount.getMultiTimeframe(highlyVolatileStocks.toString().substring(1, highlyVolatileStocks.toString().length()-1).replaceAll(" ", ""), start.toString(), end.toString(), "1Day", "");
+//			for(TimeframePojo dayTime : multiDayime) {
+//				BarsPojo[] dayBars = dayTime.getBars();
+//				for(BarsPojo bar : dayBars) {
+//					bar.setSymbol(dayTime.getSymbol());
+//					LocalDate day = LocalDate.parse(bar.getTime(), FORMATTER);
+////					BarsPojo dayBar = dayTimeMap.getOrDefault(day, new BarsPojo());
+//					dayTimeMap.put(day, bar);
+//				}
+//			}
 			while(start.isBefore(end)) {
 				int dailyBuyCount50And3 = 0;
 				int dailyBuyCount50And7 = 0;
@@ -123,12 +125,12 @@ public class BlockVolatileStrategy {
 					for(BarsPojo bar : dailyBars) {
 						bar.setSymbol(dailyTime.getSymbol());
 						LocalDateTime minuteTime = LocalDateTime.parse(bar.getTime(), FORMATTER);
-//						if(TickerUtils.isDaylightSaving(minuteTime) && (minuteTime.toLocalTime().isAfter(TickerConstants.dayLightSavingsDayEnd) || minuteTime.toLocalTime().isBefore(TickerConstants.dayLightSavingsDayStart))) {
-//							continue;
-//						}
-//						if(!TickerUtils.isDaylightSaving(minuteTime) && (minuteTime.toLocalTime().isAfter(TickerConstants.nonDaylightSavingsDayEnd) || minuteTime.toLocalTime().isBefore(TickerConstants.nonDaylightSavingsDayStart))) {
-//							continue;
-//						}
+						if(TickerUtils.isDaylightSaving(minuteTime) && (minuteTime.toLocalTime().isAfter(TickerConstants.dayLightSavingsDayEnd) || minuteTime.toLocalTime().isBefore(TickerConstants.dayLightSavingsDayStart))) {
+							continue;
+						}
+						if(!TickerUtils.isDaylightSaving(minuteTime) && (minuteTime.toLocalTime().isAfter(TickerConstants.nonDaylightSavingsDayEnd) || minuteTime.toLocalTime().isBefore(TickerConstants.nonDaylightSavingsDayStart))) {
+							continue;
+						}
 						ArrayList<BarsPojo> minuteListSoFar = dailyTimeMap.getOrDefault(minuteTime, new ArrayList<BarsPojo>());
 						minuteListSoFar.add(bar);
 						dailyTimeMap.put(minuteTime, minuteListSoFar);

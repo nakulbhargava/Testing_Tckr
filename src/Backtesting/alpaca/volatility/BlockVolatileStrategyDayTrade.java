@@ -24,6 +24,7 @@ import alpacaPojo.TimeframePojo;
 public class BlockVolatileStrategyDayTrade {
 
 	static PrintWriter pw;
+	static PrintWriter pwNet;
 	public static void main(String[] args) throws IOException {
 		/*
 		 * Get Volatile Stocks, could be daily, hourly
@@ -35,8 +36,12 @@ public class BlockVolatileStrategyDayTrade {
 		
 		AlpacaApiCaller alpacaAccount = TickerUtils.getAlpacaAccountObject();		
 		Properties movingStocks = TickerUtils.loadProperties("resources/volatileBlockStocks.properties");
-		LocalDate start = LocalDate.now().minusMonths(2);
+//		Properties movingStocks = TickerUtils.loadProperties("resources/fixedContinuousStocks.csv");
+		LocalDate start = LocalDate.now().minusMonths(0).minusDays(12);
 		LocalDate end = LocalDate.now().minusMonths(0).plusDays(0);
+		File finalFile = new File("logs/snapshotBlockAllSymbols" + start + "_" + end + ".txt");
+		pwNet = new PrintWriter(new FileOutputStream(finalFile), true);
+		pwNet.write("Symbol,Average,Profit\n");
 		for(Entry<Object, Object> symbol : movingStocks.entrySet()) {
 			File file = new File("logs/outputReport.txt" + start + "_" + end + "_" + LocalDateTime.now().getNano());
 			pw = new PrintWriter(new FileOutputStream(file), true);
@@ -44,6 +49,7 @@ public class BlockVolatileStrategyDayTrade {
 			executeBlock(symbol.getKey().toString(), start, end, alpacaAccount);
 			pw.close();
 		}
+		pwNet.close();
 //		File file = new File("logs/outputReport.txt" + start + "_" + end + "_" + LocalDateTime.now().getNano());
 //		pw = new PrintWriter(new FileOutputStream(file), true);
 //		pw.write("Symbol,Start Date,End Date,Start Price,Close Price,Net Buy,Net Sell,Holding Value,Max Count,Net Profit,PP,isGrowing,ActualPP,PositiveProfit\n");
@@ -64,7 +70,9 @@ public class BlockVolatileStrategyDayTrade {
 			//			PrintWriter pw4 = new PrintWriter(new FileOutputStream(file4), true);
 			
 			Double maxBuyPrice = 100.0;
-			
+			Double netProfit = 0.0;
+			Double averageBuys = 0.0;
+			int tradingDays = 0;
 			int maxDailyBuyCount50 = 60;
 
 			//			int totalBuy50And5 = 0;
@@ -74,8 +82,8 @@ public class BlockVolatileStrategyDayTrade {
 			//			int totalSell50And10 = 0;
 			//			Double profitPercent10 = 1.01;
 			//			Double profitPercent05 = 1.02;
-			Double profitPercent03 = 1.015;
-			Double profitPercent07 = 1.025;
+			Double profitPercent03 = 1.01;
+			Double profitPercent07 = 1.02;
 			DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
 			HashMap<String, ArrayList<Double>> sellMap50And3 = new HashMap<String, ArrayList<Double>>();
 			//			HashMap<String, ArrayList<Double>> sellMap50And5 = new HashMap<String, ArrayList<Double>>();
@@ -323,7 +331,13 @@ public class BlockVolatileStrategyDayTrade {
 					holdingValue50And7 = holdingValue50And7 + holdingPrice*totalShares;
 				}
 				Double netProfit50And3 = (totalSell50And3*profitPercent03*maxBuyPrice) + holdingValue50And3 - (totalBuy50And3*maxBuyPrice);
+				netProfit = netProfit + netProfit50And3;
+				averageBuys = averageBuys + maxHolding3;
+				tradingDays++;
 				Double netProfit50And7 = (totalSell50And7*profitPercent07*maxBuyPrice) + holdingValue50And7 - (totalBuy50And7*maxBuyPrice);
+				netProfit = netProfit + netProfit50And7;
+				averageBuys = averageBuys + maxHolding7;
+				tradingDays++;
 				//			Double netProfit50And5 = (totalSell50And5*profitPercent05*maxBuyPrice) + holdingValue50And5 - (totalBuy50And5*maxBuyPrice);
 				//			Double netProfit50And10 = (totalSell50And10*profitPercent10*maxBuyPrice) + holdingValue50And10 - (totalBuy50And10*maxBuyPrice);
 
@@ -345,6 +359,7 @@ public class BlockVolatileStrategyDayTrade {
 				if(start.getDayOfWeek() == DayOfWeek.FRIDAY)start = start.plusDays(2);
 				start = start.plusDays(1);
 			}
+			pwNet.write(symbol + "," + averageBuys/tradingDays + "," + netProfit/2 + "\n");
 			pw1.close();
 			//			pw2.close();
 			pw3.close();

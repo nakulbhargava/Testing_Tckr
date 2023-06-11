@@ -8,6 +8,7 @@ import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -28,7 +29,11 @@ public class PatternRecognitionBacktesting4Point {
 		pw1 = new PrintWriter(new FileOutputStream(file), true);
 		PatternRecognitionBacktesting4Point pr = new PatternRecognitionBacktesting4Point();
 		System.out.println("Symbol,PatternCombination,Occurences,Increase1,Decrease1,%1Increase,%1Decrease,Increase3,Decrease3,%3Increase,%3Decrease,Increase5,Decrease5,%5Increase,%5Decrease");
-		pw1.write("Symbol,PatternCombination,Occurences,Increase1,Decrease1,%1Increase,%1Decrease,Increase3,Decrease3,%3Increase,%3Decrease,Increase5,Decrease5,%5Increase,%5Decrease,Opening,Closing");
+		pw1.write("Symbol,PatternCombination,Occurences,Increase1,Decrease1,%1Increase,%1Decrease,Increase3,Decrease3,%3Increase,%3Decrease,Increase5,Decrease5,%5Increase,%5Decrease,MondayOccurence,mondayIncrease1,mondayDecrease1,mondayIncrease3,mondayDecrease3,mondayIncrease5,mondayDecrease5,"
+				+ "TuesdayOccurance,tuesdayIncrease1,tuesdayDecrease1,tuesdayIncrease3,tuesdayDecrease3,tuesdayIncrease5,tuesdayDecrease5,"
+				+ "WednesdayOccurence,wedIncrease1,wedDecrease1,wedIncrease3,wedDecrease3,wedIncrease5,wedDecrease5,"
+				+ "ThursdayOccurence,thuIncrease1,thurDecrease1,thuIncrease3,thuDecrease3,thuIncrease5,thuDecrease5,"
+				+ "FridayOccurence,friIncrease1,friDecrease1,friIncrease3,friDecrease3,friIncrease5,friDecrease5,Opening,Closing\n");
 		//		ticker = new ArrayList<ArrayList<TickerOhlc>>();
 		//		ticker = pr.readFileAsList("MinData - AADI_2021-06-01_2022-06-28.txt");
 		//		pr.recognizePattern();
@@ -87,14 +92,49 @@ public class PatternRecognitionBacktesting4Point {
 		Pattern postHigh = new Pattern();
 		Pattern postLow = new Pattern();
 		//		System.out.println("Time1, Point1, Time2, Point2, Time3, Point3, Time4, Point4, TimeMax, ValueMax, TimeLow, ValueLow, %Increase, %Decrease");
-		for(int descent1 = -10; descent1 <=10 ; descent1++) {
+		for(int descent1 = -3; descent1 <=3 ; descent1++) {
 			if(descent1 == 0) continue;
-			for(int descent2 = -10; descent2 <=10 ; descent2= descent2+2) {
+			for(int descent2 = -3; descent2 <=3 ; descent2++) {
 				String symbol = ticker.get(0).get(0).symbol;
 				Double open = ticker.get(0).get(0).open;
 				Double close = ticker.get(ticker.size() - 1).get(ticker.get(ticker.size() - 1).size() - 1).close;
-				for(int descent3 = -10; descent3 <=10 ; descent3=descent3+2) {
+				for(int descent3 = -3; descent3 <=3 ; descent3++) {
 					int foundCount = 0;
+					int foundMondays = 0;
+					int foundTuesdays = 0;
+					int foundWednesdays = 0;
+					int foundThursdays = 0;
+					int foundFridays = 0;
+					int mondaysIncrease1 = 0;
+					int mondaysDecrease1 = 0;
+					int mondaysIncrease3 = 0;
+					int mondaysDecrease3 = 0;
+					int mondaysIncrease5 = 0;
+					int mondaysDecrease5 = 0;
+					int tuedaysIncrease1 = 0;
+					int tuedaysDecrease1 = 0;
+					int tuedaysIncrease3 = 0;
+					int tuedaysDecrease3 = 0;
+					int tuedaysIncrease5 = 0;
+					int tuedaysDecrease5 = 0;
+					int weddaysIncrease1 = 0;
+					int weddaysDecrease1 = 0;
+					int weddaysIncrease3 = 0;
+					int weddaysDecrease3 = 0;
+					int weddaysIncrease5 = 0;
+					int weddaysDecrease5 = 0;
+					int thursdaysIncrease1 = 0;
+					int thursdaysDecrease1 = 0;
+					int thursdaysIncrease3 = 0;
+					int thursdaysDecrease3 = 0;
+					int thursdaysIncrease5 = 0;
+					int thursdaysDecrease5 = 0;
+					int fridaysIncrease1 = 0;
+					int fridaysDecrease1 = 0;
+					int fridaysIncrease3 = 0;
+					int fridaysDecrease3 = 0;
+					int fridaysIncrease5 = 0;
+					int fridaysDecrease5 = 0;
 					int decreaseCount1 = 0;
 					int increaseCount1 = 0;
 					int decreaseCount3 = 0;
@@ -192,17 +232,137 @@ public class PatternRecognitionBacktesting4Point {
 							}
 						}
 						if(patternFound) {
+							LocalDateTime foundDate = LocalDateTime.parse(postLow.time, formatter);
 							Double increase = 100*(postHigh.point - pattern[3].point)/pattern[3].point;
 							Double decrease = 100*(postLow.point - pattern[3].point)/pattern[3].point;
 							//							System.out.println(pattern[0].toString() + ", " + pattern[1].toString() + ", " + pattern[2].toString() + ", " 
 							//									+ pattern[3].toString() + ", " + postHigh.toString() + ", " + postLow.toString() + ", " + increase + ", " + decrease);	
 							foundCount++;
-							if(increase.compareTo(1.0) > 0) increaseCount1++;
-							if(decrease.compareTo(-1.0) < 0) decreaseCount1++;
-							if(increase.compareTo(3.0) > 0) increaseCount3++;
-							if(decrease.compareTo(-3.0) < 0) decreaseCount3++;
-							if(increase.compareTo(5.0) > 0) increaseCount5++;
-							if(decrease.compareTo(-5.0) < 0) decreaseCount5++;
+							{
+								if(foundDate.getDayOfWeek() == DayOfWeek.MONDAY) {
+									foundMondays++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.TUESDAY) {
+									foundTuesdays++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+									foundWednesdays++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.THURSDAY) {
+									foundThursdays++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
+									foundFridays++;
+								}
+							}
+							if(increase.compareTo(1.0) > 0) {
+								increaseCount1++;
+								if(foundDate.getDayOfWeek() == DayOfWeek.MONDAY) {
+									mondaysIncrease1++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.TUESDAY) {
+									tuedaysIncrease1++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+									weddaysIncrease1++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.THURSDAY) {
+									thursdaysIncrease1++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
+									fridaysIncrease1++;
+								}
+							}
+							if(decrease.compareTo(-1.0) < 0) {
+								decreaseCount1++;
+								if(foundDate.getDayOfWeek() == DayOfWeek.MONDAY) {
+									mondaysDecrease1++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.TUESDAY) {
+									tuedaysDecrease1++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+									weddaysDecrease1++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.THURSDAY) {
+									thursdaysDecrease1++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
+									fridaysDecrease1++;
+								}
+							}
+							if(increase.compareTo(2.0) >= 0) {
+								increaseCount3++;
+								if(foundDate.getDayOfWeek() == DayOfWeek.MONDAY) {
+									mondaysIncrease3++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.TUESDAY) {
+									tuedaysIncrease3++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+									weddaysIncrease3++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.THURSDAY) {
+									thursdaysIncrease3++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
+									fridaysIncrease3++;
+								}
+							}
+							if(decrease.compareTo(-2.0) <= 0) {
+								decreaseCount3++;
+								if(foundDate.getDayOfWeek() == DayOfWeek.MONDAY) {
+									mondaysDecrease3++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.TUESDAY) {
+									tuedaysDecrease3++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+									weddaysDecrease3++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.THURSDAY) {
+									thursdaysDecrease3++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
+									fridaysDecrease3++;
+								}
+							}
+							if(increase.compareTo(3.0) > 0) {
+								increaseCount5++;
+								if(foundDate.getDayOfWeek() == DayOfWeek.MONDAY) {
+									mondaysIncrease5++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.TUESDAY) {
+									tuedaysIncrease5++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+									weddaysIncrease5++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.THURSDAY) {
+									thursdaysIncrease5++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
+									fridaysIncrease5++;
+								}
+							}
+							if(decrease.compareTo(-3.0) < 0) {
+								decreaseCount5++;
+								if(foundDate.getDayOfWeek() == DayOfWeek.MONDAY) {
+									mondaysDecrease5++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.TUESDAY) {
+									tuedaysDecrease5++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+									weddaysDecrease5++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.THURSDAY) {
+									thursdaysDecrease5++;
+								}
+								if(foundDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
+									fridaysIncrease5++;
+								}
+							}
 						}
 					}
 
@@ -212,15 +372,27 @@ public class PatternRecognitionBacktesting4Point {
 					Double decreasePercent3 = (double)decreaseCount3*100/foundCount;
 					Double increasePercent5 = (double)increaseCount5*100/foundCount;
 					Double decreasePercent5 = (double)decreaseCount5*100/foundCount;
-					if(foundCount > 23 && (increasePercent1.compareTo(94.00) > 0 || increasePercent3.compareTo(84.00) > 0 || increasePercent5.compareTo(74.00) > 0 ||
-							decreasePercent1.compareTo(89.00) > 0 || decreasePercent3.compareTo(84.00) > 0 || decreasePercent5.compareTo(74.00) > 0 )) {
+//					if(foundCount > 23 && (increasePercent1.compareTo(90.0) > 0 || increasePercent3.compareTo(84.00) > 0 || increasePercent5.compareTo(74.00) > 0 ||
+//							decreasePercent1.compareTo(89.00) > 0 || decreasePercent3.compareTo(84.00) > 0 || decreasePercent5.compareTo(74.00) > 0 )) {
 						System.out.println(symbol + "," + descent1 + ";" + descent2 + ";" + descent3 + "," + foundCount + "," + increaseCount1 + "," + decreaseCount1 + "," + increasePercent1 + "," + decreasePercent1
 								+ "," + increaseCount3 + "," + decreaseCount3 + "," + increasePercent3 + "," + decreasePercent3
-								+ "," + increaseCount5 + "," + decreaseCount5 + "," + increasePercent5 + "," + decreasePercent5 + "," + open + "," + close);
+								+ "," + increaseCount5 + "," + decreaseCount5 + "," + increasePercent5 + "," + decreasePercent5 
+								+ "," + foundMondays + "," + mondaysIncrease1 + "," + mondaysDecrease1 + "," + mondaysIncrease3 + "," + mondaysDecrease3 + "," + mondaysIncrease5 + "," + mondaysDecrease5
+								+ "," + foundTuesdays + "," + tuedaysIncrease1 + "," + tuedaysDecrease1 + "," + tuedaysIncrease3 + "," + tuedaysDecrease3 + "," + tuedaysIncrease5 + "," + tuedaysDecrease5
+								+ "," + foundWednesdays + "," + weddaysIncrease1 + "," + weddaysDecrease1 + "," + weddaysIncrease3 + "," + weddaysDecrease3 + "," + weddaysIncrease5 + "," + weddaysDecrease5
+								+ "," + foundThursdays + "," + thursdaysIncrease1 + "," + thursdaysDecrease1 + "," + thursdaysIncrease3 + "," + thursdaysDecrease3 + "," + thursdaysIncrease5 + "," + thursdaysDecrease5
+								+ "," + foundFridays + "," + fridaysIncrease1 + "," + fridaysDecrease1 + "," + fridaysIncrease3 + "," + fridaysDecrease3 + "," + fridaysIncrease5 + "," + fridaysDecrease5
+								+ "," + open + "," + close);
 						pw1.write(symbol + "," + descent1 + ";" + descent2 + ";" + descent3 + "," + foundCount + "," + increaseCount1 + "," + decreaseCount1 + "," + increasePercent1 + "," + decreasePercent1
 								+ "," + increaseCount3 + "," + decreaseCount3 + "," + increasePercent3 + "," + decreasePercent3
-								+ "," + increaseCount5 + "," + decreaseCount5 + "," + increasePercent5 + "," + decreasePercent5 + "," + open + "," + close + "\n");
-					}
+								+ "," + increaseCount5 + "," + decreaseCount5 + "," + increasePercent5 + "," + decreasePercent5 
+								+ "," + foundMondays + "," + mondaysIncrease1 + "," + mondaysDecrease1 + "," + mondaysIncrease3 + "," + mondaysDecrease3 + "," + mondaysIncrease5 + "," + mondaysDecrease5
+								+ "," + foundTuesdays + "," + tuedaysIncrease1 + "," + tuedaysDecrease1 + "," + tuedaysIncrease3 + "," + tuedaysDecrease3 + "," + tuedaysIncrease5 + "," + tuedaysDecrease5
+								+ "," + foundWednesdays + "," + weddaysIncrease1 + "," + weddaysDecrease1 + "," + weddaysIncrease3 + "," + weddaysDecrease3 + "," + weddaysIncrease5 + "," + weddaysDecrease5
+								+ "," + foundThursdays + "," + thursdaysIncrease1 + "," + thursdaysDecrease1 + "," + thursdaysIncrease3 + "," + thursdaysDecrease3 + "," + thursdaysIncrease5 + "," + thursdaysDecrease5
+								+ "," + foundFridays + "," + fridaysIncrease1 + "," + fridaysDecrease1 + "," + fridaysIncrease3 + "," + fridaysDecrease3 + "," + fridaysIncrease5 + "," + fridaysDecrease5
+								+ "," + open + "," + close + "\n");
+//					}
 				}
 			}
 		}
