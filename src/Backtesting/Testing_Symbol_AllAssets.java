@@ -6,9 +6,12 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import Backtesting.alpaca.volatility.TickerUtils;
 import alpacaPojo.AlpacaApiCaller;
 import alpacaPojo.AssetsPojo;
+import alpacaPojo.BarsPojo;
 import alpacaPojo.OrdersPojo;
+import alpacaPojo.TimeframePojo;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,10 +20,10 @@ public class Testing_Symbol_AllAssets {
 
 	private static final String alpacaKey = "APCA-API-KEY-ID";
 	private static final String secretId = "APCA-API-SECRET-KEY";
-	private static final String alpacaKeyValue = "PKRIJQ5S2NWAR8EY6F0I";
-	private static final String secretIdValue = "ApxbCBxVUMyjIMbr9F25jHCAtbO8B3vdKigNJaOz";
-	private static final String alpacaKeyRealTime = "PKRIJQ5S2NWAR8EY6F0I";
-	private static final String secretIdRealTime = "ApxbCBxVUMyjIMbr9F25jHCAtbO8B3vdKigNJaOz";
+	private static final String alpacaKeyValue = "PKSOGC8HQ3NBEPT88Q34";
+	private static final String secretIdValue = "6h0AQc3wdqRfdZjXi1NvlQJEuCuEsgDGXiwROhY8";
+	private static final String alpacaKeyRealTime = "PKSOGC8HQ3NBEPT88Q34";
+	private static final String secretIdRealTime = "6h0AQc3wdqRfdZjXi1NvlQJEuCuEsgDGXiwROhY8";
 	private static final String headerContentType = "Content-Type";
 	private static final String headerContentTypeValue = "application/json";
 	private static final String paperUrl = "https://paper-api.alpaca.markets";
@@ -34,43 +37,17 @@ public class Testing_Symbol_AllAssets {
 	private static final String positionsEndpoint = "/positions";
 	private static final String assetsEndpoint = "/assets";
 	private static final String clockEndpoint = "/clock";
-	private static final LocalDateTime marketCloseTime = LocalDate.now().atTime(15,55);
-	private boolean isRealTimeTrading = false;
+
 	public static void main(String[] args) throws IOException, InterruptedException {
 
-		AlpacaApiCaller alpacaAccount = new AlpacaApiCaller(alpacaKey, secretId, alpacaKeyValue, secretIdValue, headerContentType,
-				headerContentTypeValue, alpacaKeyRealTime, secretIdRealTime, paperUrl, realtimeUrl, activeVersion, inactiveVersion, ordersEndpoint, accountEndpoint, 
-				lastQuoteEndpoint, lastTradeEndpoint, positionsEndpoint, assetsEndpoint, clockEndpoint);
+		AlpacaApiCaller alpacaAccount = TickerUtils.getAlpacaAccountObject();
 
-		String symbol = "ARKK";
-		Double initialPriceToBuy = 2.00;
-		Double priceToBuy = initialPriceToBuy;
-		Double priceToSell = 0.00;
-		OrdersPojo placeOrder;
-		OrdersPojo placedOrder;
-		Double sellQty = 0.00;
 		String localTime = String.valueOf(LocalDateTime.now().getDayOfYear()) + String.valueOf(LocalDateTime.now().getHour()) + String.valueOf(LocalDateTime.now().getMinute()) + String.valueOf(LocalDateTime.now().getSecond());
-		//		File file = new File("C:\\Users\\nakul\\Documents\\output - " + symbol + " - " + localTime + ".txt");
-		//		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-		//		FileOutputStream fo = new FileOutputStream(file);
-		//		placeOrder = alpacaAccount.buySymbolPrice(symbol, priceToBuy);
-		//		placedOrder = alpacaAccount.getOrderDetails(placeOrder.getId());
-		//		while (!"filled".equals(placedOrder.getStatus()))
-		//		{
-		//			Thread.sleep(500);
-		//			placedOrder = alpacaAccount.getOrderDetails(placeOrder.getId());
-		//		}
-		//		do {
-		//			PositionsPojo openPosition = alpacaAccount.getSymbolPosition(symbol);
-		//			pw.write(LocalDateTime.now().toString() + "," + openPosition.getSymbol()+ "," + openPosition.getCurrent_price()+ "," + openPosition.getAvg_entry_price()+ 
-		//					"," + openPosition.getLastday_price() + "," + openPosition.getMarket_value() + 
-		//					"," + openPosition.getSide()+ "\n");
-		//		}while(LocalDateTime.now().isBefore(marketCloseTime));
-		//			
+
 		AssetsPojo assets[] = alpacaAccount.getAssets();
 		File file = new File("C:\\Users\\nakul\\Documents\\outputAssets - " + localTime + ".txt");
 		PrintWriter pw = new PrintWriter(new FileOutputStream(file));
-//		FileOutputStream fo = new FileOutputStream(file);
+		//		FileOutputStream fo = new FileOutputStream(file);
 		int datList = assets.length;
 		pw.write("Exchange" + "," + "Symbol" + "," + "Status" + "," + "Fractionable" + "," + "Marginable" + "," + "Shortable" + "," + "ETB" + "," + "Tradable" + "\n");
 		for (int i = 0; i < datList; i++){
@@ -80,141 +57,24 @@ public class Testing_Symbol_AllAssets {
 		}
 		File fileTrue = new File("C:\\Users\\nakul\\Documents\\outputTrueAssets - " + localTime + ".txt");
 		PrintWriter pw1 = new PrintWriter(new FileOutputStream(fileTrue));
-//		FileOutputStream fo1 = new FileOutputStream(fileTrue);
+		//		FileOutputStream fo1 = new FileOutputStream(fileTrue);
 		int assetTotalList = assets.length;
 		pw1.write("Exchange" + "," + "Symbol" + "," + "Status" + "," + "Fractionable" + "," + "Marginable" + "," + "Shortable" + "," + "ETB" + "," + "Tradable" + "\n");
 		for (int i = 0; i < assetTotalList; i++){
 			if("active".equals(assets[i].getStatus()) && assets[i].isFractionable() && assets[i].isMarginable() && assets[i].isShortable() && assets[i].isEasy_to_borrow() && assets[i].isTradable()) {
-				pw1.write(assets[i].getExchange() + "," + assets[i].getSymbol() + "," + assets[i].getStatus() + ","
-						+ assets[i].isFractionable() + "," + assets[i].isMarginable() + "," + assets[i].isShortable() + "," 
-						+ assets[i].isEasy_to_borrow() + "," + assets[i].isTradable()  + "\n");
+				TimeframePojo frame = alpacaAccount.getTimeframe(assets[i].getSymbol(), LocalDate.now().minusDays(0).toString(), LocalDate.now().minusDays(0).toString(), "1Day");
+				BarsPojo bar = frame.getBars() != null && frame.getBars().length != 0 ? frame.getBars()[0] : null; 
+				if(bar != null) {
+					pw1.write(assets[i].getExchange() + "," + assets[i].getSymbol() + "," + assets[i].getStatus() + ","
+							+ assets[i].isFractionable() + "," + assets[i].isMarginable() + "," + assets[i].isShortable() + "," 
+							+ assets[i].isEasy_to_borrow() + "," + assets[i].isTradable() + "," + bar.getTime() + "," + bar.getOpenPrice()  + "," + bar.getClosePrice()  + "," + bar.getHighPrice()  + "," + bar.getLowPrice() + "," + bar.getTradeCount() + "," + bar.getVolume() + "\n");
+					System.out.println(assets[i].getExchange() + "," + assets[i].getSymbol() + "," + assets[i].getStatus() + ","
+							+ assets[i].isFractionable() + "," + assets[i].isMarginable() + "," + assets[i].isShortable() + "," 
+							+ assets[i].isEasy_to_borrow() + "," + assets[i].isTradable() + "," + bar.getTime() + "," + bar.getOpenPrice()  + "," + bar.getClosePrice()  + "," + bar.getHighPrice()  + "," + bar.getLowPrice() + "," + bar.getTradeCount() + "," + bar.getVolume());
+				}
 			}
 		}
-		//placeOrder = alpacaAccount.buySymbolPrice(symbol, priceToBuy);
-		//System.out.println(placeOrder);
-		//AssetsPojo asset = alpacaAccount.getAssetSymbol(symbol);
-		// Start with investing $1000 on any random stock
-		//		if(alpacaAccount.getClock().isIs_open()) {
-		//			do {
-		//				placeOrder = alpacaAccount.buySymbolPrice(symbol, priceToBuy);
-		//				placedOrder = alpacaAccount.getOrderDetails(placeOrder.getId());
-		//
-		//				while (!"filled".equals(placedOrder.getStatus()))
-		//				{
-		//					Thread.sleep(500);
-		//					placedOrder = alpacaAccount.getOrderDetails(placeOrder.getId());
-		//				}
-		//				pw.write(placedOrder.getSymbol() + "," + placedOrder.getQty()+ "," + placedOrder.getFilled_qty() + 
-		//						"," + placedOrder.getSide() + "," + placedOrder.getFilled_avg_price() + 
-		//						"," + placedOrder.getFilled_at()+ "\n");
-		//				priceToSell = Double.valueOf(placedOrder.getFilled_avg_price()); 
-		//				do {
-		//					//Thread.sleep(3000);
-		//					/*
-		//					LastQuotePojo quote = alpacaAccount.getQuote(symbol).getLast();
-		//					if(quote != null && Integer.parseInt(quote.getAsksize()) > Integer.parseInt(quote.getBidsize())) {
-		//						if (priceToSell < Double.valueOf(quote.getAskprice())) {
-		//							priceToSell =  Double.valueOf(quote.getAskprice());
-		//							continue;
-		//						}
-		//						else {
-		//							pw.write(quote.getAskprice() + "," + quote.getAsksize()+ "," + quote.getBidprice() + 
-		//									"," + quote.getBidsize() + "," + quote.getTimestamp() + "\n");
-		//							break;
-		//						}
-		//					}
-		//					else {
-		//						if(quote == null) continue;
-		//						if(priceToSell < Double.valueOf(quote.getBidprice())) {
-		//							priceToSell =  Double.valueOf(quote.getBidprice());
-		//							continue;
-		//						}
-		//						else {
-		//							pw.write(quote.getAskprice() + "," + quote.getAsksize()+ "," + quote.getBidprice() + 
-		//									"," + quote.getBidsize() + "," + quote.getTimestamp() + "\n");
-		//							break;
-		//						}
-		//					}*/
-		//					LastTradePojo lastTrade = alpacaAccount.getLastTrade(symbol).getLast();
-		//					if(lastTrade!=null && priceToSell < Double.valueOf(lastTrade.getPrice())) {
-		//						priceToSell =  Double.valueOf(lastTrade.getPrice());
-		//						continue;
-		//					}
-		//					else {
-		//						pw.write(lastTrade.getPrice() + "," + lastTrade.getSize()+ "," + lastTrade.getTimestamp() + "\n");
-		//						break;
-		//					}
-		//				}while(true);
-		//				pw.write("Calculated Price To sell: " + priceToSell + "\n");
-		//				sellQty = Double.valueOf(placedOrder.getFilled_qty());
-		//				placeOrder = alpacaAccount.sellSymbolQuantity(symbol, sellQty);
-		//				placedOrder = alpacaAccount.getOrderDetails(placeOrder.getId());
-		//
-		//				while (!"filled".equals(placedOrder.getStatus()))
-		//				{
-		//					Thread.sleep(500);
-		//					placedOrder = alpacaAccount.getOrderDetails(placeOrder.getId());
-		//				}
-		//				pw.write(placedOrder.getSymbol() + "," + placedOrder.getQty()+ "," + placedOrder.getFilled_qty() + 
-		//						"," + placedOrder.getSide() + "," + placedOrder.getFilled_avg_price() + 
-		//						"," + placedOrder.getFilled_at()+ "\n");
-		//				priceToBuy = Double.valueOf(placedOrder.getFilled_avg_price()); 
-		//				do {
-		//					//Thread.sleep(3000);
-		//					/*
-		//					LastQuotePojo quote = alpacaAccount.getQuote(symbol).getLast();
-		//					if(quote != null && Integer.parseInt(quote.getAsksize()) > Integer.parseInt(quote.getBidsize())) {
-		//						if (priceToBuy > Double.valueOf(quote.getAskprice())) {
-		//							priceToBuy =  Double.valueOf(quote.getAskprice());
-		//							continue;
-		//						}
-		//						else {
-		//							pw.write(quote.getAskprice() + "," + quote.getAsksize()+ "," + quote.getBidprice() + 
-		//									"," + quote.getBidsize() + "," + quote.getTimestamp() + "\n");
-		//							break;
-		//						}
-		//					}
-		//					else {
-		//						if(priceToBuy > Double.valueOf(quote.getBidprice())) {
-		//							priceToBuy =  Double.valueOf(quote.getBidprice());
-		//							continue;
-		//						}
-		//						else {
-		//							pw.write(quote.getAskprice() + "," + quote.getAsksize()+ "," + quote.getBidprice() + 
-		//									"," + quote.getBidsize() + "," + quote.getTimestamp() + "\n");
-		//							break;
-		//						}
-		//					}*/
-		//					LastTradePojo lastTrade = alpacaAccount.getLastTrade(symbol).getLast();
-		//					if(lastTrade!=null && priceToBuy > Double.valueOf(lastTrade.getPrice())) {
-		//						priceToBuy =  Double.valueOf(lastTrade.getPrice());
-		//						continue;
-		//					}
-		//					else {
-		//						pw.write(lastTrade.getPrice() + "," + lastTrade.getSize()+ "," + lastTrade.getTimestamp() + "\n");
-		//						break;
-		//					}
-		//				}while(true);
-		//				pw.write("Calculated Price To Buy: " + priceToBuy + "\n");
-		//				//pw.close();
-		//				priceToBuy = Double.valueOf(placedOrder.getFilled_avg_price())*Double.valueOf(sellQty);
-		//			}while(LocalDateTime.now().isBefore(marketCloseTime));
 		pw.close();
 		pw1.close();
-		/*		String getLastQuote = getQuote("TSN");
-		String getLastTrade = getLastTrade("TSN");
-		String getAssets = getAssets();
-		String getOpenPositions = getOpenPositions();
-		String getAccountDetails = getAccountDetails();
-		String getSymbolPosition = getSymbolPosition ("TSN");
-		System.out.println("\n" + getLastQuote);
-		System.out.println("\n" + getLastTrade);
-		//System.out.println("/n" + getAccountDetails);
-		//System.out.println("/n" + buySymbol("TSN"));
-		//System.out.println("\n" + getOrders());
-		//System.out.println("\n" + getOrderDetails("4a57e769-f297-4794-8eed-9c9fd69e444b"));
-		System.out.println("\n" + getSymbolPosition);
-		//System.out.println("\n" + getAssets);
-		//System.out.println("\n" + getAssets());*/
 	}
 }

@@ -82,7 +82,7 @@ public class BlockVolatileStrategyDayTrade {
 			//			int totalSell50And10 = 0;
 			//			Double profitPercent10 = 1.01;
 			//			Double profitPercent05 = 1.02;
-			Double profitPercent03 = 1.01;
+			Double profitPercent03 = 1.02;
 			Double profitPercent07 = 1.02;
 			DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
 			HashMap<String, ArrayList<Double>> sellMap50And3 = new HashMap<String, ArrayList<Double>>();

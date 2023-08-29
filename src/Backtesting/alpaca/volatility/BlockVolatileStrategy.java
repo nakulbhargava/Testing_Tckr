@@ -32,7 +32,7 @@ public class BlockVolatileStrategy {
 		 * Sell at a constant/random profit
 		 * Max buy is configurable for the day
 		 */
-		LocalDate start = LocalDate.now().minusYears(0).minusMonths(0).minusDays(15);;
+		LocalDate start = LocalDate.now().minusYears(0).minusMonths(1).minusDays(0);;
 		LocalDate end = LocalDate.now().minusMonths(0);
 		AlpacaApiCaller alpacaAccount = TickerUtils.getAlpacaAccountObject();
 		File file = new File("logs/outputReport.txt" + start + "_" + end + "_" + LocalDateTime.now().getNano());
@@ -82,8 +82,8 @@ public class BlockVolatileStrategy {
 			//			int totalSell50And10 = 0;
 			//			Double profitPercent10 = 1.01;
 			//			Double profitPercent05 = 1.02;
-			Double profitPercent03 = 1.01;
-			Double profitPercent07 = 1.02;
+			Double profitPercent03 = 1.1;
+			Double profitPercent07 = 1.15;
 			DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
 			HashMap<String, ArrayList<Double>> sellMap50And3 = new HashMap<String, ArrayList<Double>>();
 			//			HashMap<String, ArrayList<Double>> sellMap50And5 = new HashMap<String, ArrayList<Double>>();
